@@ -1,0 +1,2 @@
+ALTER TABLE `item_template_design` CHANGE `designs` `designs` LONGTEXT CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL; 
+ALTER TABLE `item` CHANGE `designs` `designs` LONGTEXT CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL;

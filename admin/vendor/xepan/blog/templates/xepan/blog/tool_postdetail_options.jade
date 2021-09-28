@@ -1,0 +1,114 @@
+.xepan-tool-options(id='{$_name}' style="display:none" for-xepan-component='xepan/blog/Tool_PostDetail')
+	.xepan-cms-group-panel.clearfix
+		//- h3.collapsed(data-toggle="collapse" data-target="#collapse-post-detail" aria-expanded="false")
+		//- 	span|Post Detail Options
+		#collapse-post-detail.xepan-cms-tools-bar-panel.row-fluid.collapse.in
+			.panel-body(style="padding-top:0px;padding-bottom:0px;")
+				.xepan-cms-groups-panel.collapse.in(id="xepan-cms-groups-panel")
+				.xepan-cms-group-panel.clearfix
+					div.panel.panel-heading.panel-primary.collapsed(data-toggle="collapse" data-target="#show-hide-post-detail-option" aria-expanded="false")
+						span Hide/ Show
+						i.fa.fa-chevron-down.pull-right
+				#show-hide-post-detail-option.xepan-cms-tools-bar-panel.row-fluid.collapse
+					table.table.table-condensed.table-hover.xepan-cms-tool-table
+						tr.xepan-tool-option
+							td.xepan-tool-option-title Image
+							td.xepan-tool-option-value 
+								select#show_image(data-attr='show_image' data-defaultvalue="true")
+									option(value="true") Yes
+									option(value="false") No
+						tr.xepan-tool-option
+							td.xepan-tool-option-title Tag
+							td.xepan-tool-option-value 
+								select#show_tag(data-attr='show_tag' data-defaultvalue="true")
+									option(value="true") Yes
+									option(value="false") No
+						tr.xepan-tool-option
+							td.xepan-tool-option-title Comment
+							td.xepan-tool-option-value
+								select#show_comment_list(data-attr='show_comment_list' data-defaultvalue="true")
+									option(value="true") Yes																					
+									option(value="false") No
+						tr.xepan-tool-option
+							td.xepan-tool-option-title Allow Anonymous Comment
+							td.xepan-tool-option-value
+								select#allow_anonymous_comment(data-attr='allow_anonymous_comment' data-defaultvalue="true")
+									option(value="true") true																					
+									option(value="false") false
+						tr.xepan-tool-option
+							td.xepan-tool-option-title Comment Form Position
+							td.xepan-tool-option-value
+								select#comment_form_position(data-attr='comment_form_position')
+									option(value='below') Below
+									option(value='above') Above
+						tr.xepan-tool-option
+							td.xepan-tool-option-title Social Share
+							td.xepan-tool-option-value
+								select#show_socialshare(data-attr='add_socialshare' data-defaultvalue="true" data-togglevalue="true" data-toggleclass=".xepan-blog-postlist-socialshare-option-toggle")
+									option(value="true") Yes
+									option(value="false") No
+						tr.xepan-blog-postlist-socialshare-option-toggle.xepan-tool-option
+							td.xepan-tool-option-value(colspan="2" style="width:100% !important;")
+								select.chosen-select.post-list-option-social-multiselect(id="{$_name}_multiselect" style="width:100% !important;" multiple="" data-attr='include_socialshare' multiselect)
+									option(value="email") Email
+									option(value="facebook") Facebook
+									option(value="googleplus") Googleplus
+									option(value="pinterest") Pinterest
+									option(value="linkedin") Linkedin
+									option(value="stumbleupon") stumbleupon
+									option(value="twitter") Twitter
+									option(value="whatsapp") Whatsapp
+						tr.xepan-blog-postlist-socialshare-option-toggle.xepan-tool-option
+							td.xepan-tool-option-title Theme
+							td.xepan-tool-option-value
+								select(id="{$_name}" data-attr='socialshare_theme' data-defaultvalue="flat")
+									option(value="flat") Flat
+									option(value="classic") Classic
+									option(value="minima") Minima
+									option(value="plain") Plain
+				.xepan-cms-group-panel.clearfix
+					div.panel.panel-heading.panel-primary.collapsed(data-toggle="collapse" data-target="#post-detail-auth-other-options" aria-expanded="false")
+						span Auth Login
+						i.fa.fa-chevron-down.pull-right
+				#post-detail-auth-other-options.xepan-cms-tools-bar-panel.row-fluid.collapse
+					table.table.table-condensed.table-hover.xepan-cms-tool-table
+						tr.xepan-tool-option
+							td.xepan-tool-option-title Login Page
+							td.xepan-tool-option-value
+								input#login_url(data-attr='login_page')
+	<link rel="stylesheet" type="text/css" href="vendor/xepan/commerce/templates/css/chosen.css"/>
+	script(src="vendor/xepan/commerce/templates/js/chosen.jquery.js")
+	script.
+		$('\#{$_name}_multiselect').chosen();
+		$('\#{$_name}_multiselect').chosen({allow_single_deselect: true });
+		
+		$('\#{$_name} [data-attr]').on('change',function(){
+			$(current_selected_component).attr($(this).data('attr'),$(this).val());
+			// show or hide the toggle class
+			if($(this).data('toggleclass')){
+				var value = $(this).data('togglevalue').toString();
+				if($(this).val() === value){
+					$($(this).data('toggleclass')).show();
+				}else
+					$($(this).data('toggleclass')).hide();
+			}
+		});
+
+		$('\#{$_name}').on('show',function(event){
+			$('\#{$_name} [data-attr]').each(function(index,value){
+				var default_value = $(this).attr('data-defaultvalue');
+				if($(current_selected_component).attr($(this).data('attr')))
+					default_value = $(current_selected_component).attr($(this).data('attr'));
+				
+				$(this).val(default_value);
+			});
+	
+			//- chosen multiselect options
+			if(typeof $(current_selected_component).attr('include_socialshare') === 'undefined' ){
+				$("\#{$_name}_multiselect").val("\{\}").trigger("chosen:updated");
+			}else{
+				var str = $(current_selected_component).attr('include_socialshare');
+				$("\#{$_name}_multiselect").val(str.split(',')).trigger("chosen:updated");
+			}	
+		
+		});

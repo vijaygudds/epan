@@ -1,0 +1,1 @@
+ALTER TABLE `commerce_package_item_association` ADD COLUMN `extra_info` text;

@@ -1,0 +1,31 @@
+.xepan-tool-options(id='{$_name}' style="display:none" for-xepan-component='xepan/cms/Tool_HtmlBlock')
+	//- .xepan-cms-group-panel.clearfix
+	//- 	h3.collapsed(data-toggle="collapse" data-target="#html-block" aria-expanded="false")
+	//- 		span Html Block 
+	//- 	#html-block.xepan-cms-tools-bar-panel.row-fluid.collapse.in
+	//- 		.panel-body
+	table.table.table-condensed.table-hover.xepan-cms-tool-table
+		tr
+			td(style='width:100%' class='text-center')
+				textarea(id='xepan_html_code_for_html_block' style='width:100%; font-size:10px' rows='10' placeholder="place html code here")
+		tr
+			td.text-center
+				button(id='xepan_html_code_for_html_block_btn' class='btn btn-default btn-xs') UPDATE
+	script.
+		
+		$('\#{$_name} [data-attr]').on('change',function(){
+			$(current_selected_component).attr($(this).data('attr'),$(this).val());
+		});
+
+		$('\#{$_name}').on('show',function(event){
+			$('\#{$_name} [data-attr]').each(function(index,value){
+				$(this).val($(current_selected_component).attr($(this).data('attr')));				
+			});
+		});
+
+		$('#xepan_html_code_for_html_block_btn').click(function(event) {
+			$(current_selected_component).html($('#xepan_html_code_for_html_block').val());
+		});
+
+		html_text = $(current_selected_component).html();
+		$('#xepan_html_code_for_html_block').val(html_text);

@@ -1,0 +1,188 @@
+#myModal.modal.fade(tabindex='-1', role='dialog', aria-labelledby='myModalLabel', aria-hidden='true')
+  .modal-dialog
+    .modal-content
+      .modal-header
+        button.close(type='button', data-dismiss='modal', aria-hidden='true') ×
+        h4.modal-title Quick Search
+      .modal-body
+        {$quick_search_form}
+        {$quick_search_result}
+      .modal-footer
+        button.btn.btn-default(type='button', data-dismiss='modal') Close
+#theme-wrapper.atk-layout
+      header#header-navbar.navbar
+          .container
+            a#logo.navbar-brand(href='index.php')
+                img.normal-logo.logo-white(src='img/logo3.png', alt='')
+                img.normal-logo.logo-black(src='img/logo3-black.png', alt='')
+                img.small-logo.hidden-xs.hidden-sm.hidden(src='img/logo.png', alt='')
+            .clearfix
+              button.navbar-toggle.pull-left(data-target='.navbar-ex1-collapse', data-toggle='collapse', type='button')
+                span.sr-only Toggle navigation
+                span.fa.fa-bars
+              button.navbar-toggle(data-target='.navbar-ex1-collapse1', data-toggle='collapse', type='button')
+                span.sr-only Toggle navigation
+                span.fa.fa-bars
+              #header-nav.nav-no-collapse.pull-right
+                ul.nav.navbar-nav
+                  li.dropdown.hidden-xs.hidden-sm#messageid{$message_view}
+                    //- a.xepan-comm-message
+                    //-   i.fa.fa-envelope
+                    //-   span.count
+                    //-     {message_count}0{/}
+                  
+                  li.dropdown#notificationid {$notification_view}
+                  li.mobile-search
+                    a.btn(data-toggle="modal", href="#myModal")
+                      i.fa.fa-search
+                  //- li.dropdown.profile-dropdown
+                  //-   a.dropdown-toggle(href='#', data-toggle='dropdown')
+                  //-     //- img(src='img/samples/scarlet-159.png', alt='')
+                  //-     span.hidden-xs {department}Scarlett{/department} / {post}Johansson{/post}
+                  //-     b.caret
+                  //-   ul.dropdown-menu.dropdown-menu-right
+                  //-     li
+                  //-       a(href='?page=xepan_base_generalsetting')
+                  //-         i.fa.fa-user
+                  //-         | General Settings
+                  {User_Menu}    
+                  {/User_Menu}
+                  li.hidden-xxs
+                    a(href="?page=xepan_base_logout" class="btn")
+                      i.fa.fa-power-off      
+              .navbar-ex1-collapse.navbar-left.collapse.navbar-collapse
+                ul.nav.navbar-nav
+                  li
+                    a#make-small-nav.btn.hidden-xs
+                      i.fa.fa-bars
+                  {Main_Menu}
+                  {/Main_Menu}
+                    
+        .container
+          .clearfix
+            
+            //- .nav-no-collapse.navbar-left.pull-left
+            //-   ul.nav.navbar-nav.pull-left
+            //-     li
+            //-       a#make-small-nav.btn
+            //-         i.fa.fa-bars
+            //-     li.dropdown.hidden-xs#notificationid {$notification_view}                      
+            //-     {Main_Menu}
+            //-     {/Main_Menu}
+            
+      #page-wrapper.container.nav-small
+        .row
+          #nav-col
+            section#col-left.col-left-nano
+              #col-left-inner.col-left-nano-content
+                #user-left-box.clearfix.hidden-sm.hidden-xs.dropdown.profile2-dropdown
+                  {avatar}img(alt='', src='{image}img/samples/scarlet-159.png{/}'){/}
+                  .user-box
+                    span.name
+                      a.dropdown-toggle(href='#', data-toggle='dropdown')
+                        | {first_name}Scarlett J.{/} 
+                        i.fa.fa-angle-down
+                      ul.dropdown-menu
+                        li
+                          a(href='?page=xepan_hr_employee_profile')
+                            i.fa.fa-user
+                            | Profile
+                        li
+                          a(href='?page=xepan_hr_employee_setting')
+                            i.fa.fa-cog
+                            | Settings
+                        //- li
+                        //-   a(href='#')
+                        //-     i.fa.fa-envelope-o
+                        //-     | Messages
+                        li
+                          a(href='?page=xepan_base_logout')
+                            i.fa.fa-power-off
+                            | Logout     
+                    span.status
+                      i.fa.fa-circle
+                      |  {status}Online{/}
+                #sidebar-nav.collapse.navbar-collapse.navbar-ex1-collapse1
+                  small.text-muted{$task_status}
+                  hr
+                  ul.nav.nav-pills.nav-stacked
+                    li.nav-header.nav-header-first.hidden-sm.hidden-xs
+                      | xEpan {$xepan_version}
+                    {$Side_Menu}
+            #nav-col-submenu
+          #content-wrapper
+            .row
+              .col-lg-12
+                .row
+                  .col-lg-12
+                    #content-header.clearfix
+                      .pull-left
+                        i.fa.fa-question-circle.run-page-intro
+                      .pull-left
+                        {breadcrumb}
+                        ol.breadcrumb
+                          {rows}{row}
+                          li(class="{$active}")
+                            a(href='{$url}') {title}Home{/title}
+                          {/row}{/rows}
+                        {/breadcrumb}
+                        h1 {page_title}Page_Title{/}
+                      .pull-left
+                        {$page_top_center}
+                      .pull-right
+                        {page_top_right}
+                        {/page_top_right}
+                 {$Content}
+            footer#footer-bar.row
+              p#footer-copyright.col-xs-12
+                | Powered by Xavoc Technocrats Pvt Ltd.
+    #config-tool.closed
+      a#config-tool-cog
+        i.fa.fa-cog
+      #config-tool-options
+        h4 Layout Options
+        ul
+          li
+            .checkbox-nice
+              input#config-fixed-header(type='checkbox')
+              label(for='config-fixed-header')
+                | Fixed Header
+          li
+            .checkbox-nice
+              input#config-fixed-sidebar(type='checkbox')
+              label(for='config-fixed-sidebar')
+                | Fixed Left Menu
+          li
+            .checkbox-nice
+              input#config-fixed-footer(type='checkbox')
+              label(for='config-fixed-footer')
+                | Fixed Footer
+          li
+            .checkbox-nice
+              input#config-boxed-layout(type='checkbox')
+              label(for='config-boxed-layout')
+                | Boxed Layout
+          //- li
+          //-   .checkbox-nice
+          //-     input#config-rtl-layout(type='checkbox')
+          //-     label(for='config-rtl-layout')
+          //-       | Right-to-Left
+        br
+        h4 Skin Color
+        ul#skin-colors.clearfix
+          li
+            a.skin-changer(data-skin='', data-toggle='tooltip', title='Default', style='background-color: #34495e;')
+          li
+            a.skin-changer(data-skin='theme-white', data-toggle='tooltip', title='White/Green', style='background-color: #2ecc71;')
+          li
+            a.skin-changer.blue-gradient(data-skin='theme-blue-gradient', data-toggle='tooltip', title='Gradient')
+          li
+            a.skin-changer(data-skin='theme-turquoise', data-toggle='tooltip', title='Green Sea', style='background-color: #1abc9c;')
+          li
+            a.skin-changer(data-skin='theme-amethyst', data-toggle='tooltip', title='Amethyst', style='background-color: #9b59b6;')
+          li
+            a.skin-changer(data-skin='theme-blue', data-toggle='tooltip', title='Blue', style='background-color: #2980b9;')
+          li
+            a.skin-changer(data-skin='theme-red', data-toggle='tooltip', title='Red', style='background-color: #e74c3c;')
+          li
+            a.skin-changer(data-skin='theme-whbl', data-toggle='tooltip', title='White/Blue', style='background-color: #3498db;')

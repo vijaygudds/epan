@@ -1,0 +1,65 @@
+
+<div id="{$_name}" class="xepan-grid main-box clearfix atk-table atk-table-zebra atk-table-bordered {$class}">{Pannel}
+  <header class="main-box-header clearfix atk-actions {$class}">
+    <div class="row">
+      <div class="col-md-4"><strong>Parent Group : </strong><span>{$parent} </span></div>
+      <div class="col-md-4"><strong>From Date : </strong><span>{$from_date} </span></div>
+      <div class="col-md-4"><strong>To Date : </strong><span>{$to_date}</span></div>
+    </div>
+    <div style="100%" class="filter-block">
+      <div class="pull-right">{$grid_buttons} </div>
+      <div class="form-group pull-right xepan-filter-form"><span class="form-control pull-left">{$quick_search}</span></div>
+    </div>
+  </header>{/Pannel}
+  <div class="main-box-body clearfix table">
+    <table style="width:100%" class="table user-list table-hover">{header}
+      <thead>{cols}{col}
+        <th><span>Name  </span></th>
+        <th><span>Amount DR  </span></th>
+        <th><span>Amount CR</span></th>
+        <th><span>Balance</span></th>{/}{/}
+      </thead>{/}
+            {$subheader}
+      <tbody>{rows}{row}
+        <tr data-id="{$id}" class="{$odd_even}">{cols}
+          <td><span data-id="{$id}" data-type="{$type}" style="cursor:pointer; cursor: hand; max-width:600px;" class="{$class} {$type}">{$name}</span></td>
+          <td><span>{$balancedr}                          </span></td>
+          <td><span>{$balancecr}  </span></td>
+          <td><span>{$balance}                        </span></td>{/}
+        </tr>{/}{/}
+                {not_found}
+        <div class="row">
+          <div role="alert" class="col-md-12 text-center alert alert-warning"><span class="icon-attention fa fa-exclamation-triangle">  {$not_found_message}</span></div>
+        </div>{/}
+      </tbody>{totals}
+      <tfoot>
+        <tr class="totals">{cols}{col}
+          <td {$tdparam}="">{$content}</td>          {/}{/}
+        </tr>
+      </tfoot>{/}
+    </table>
+    <div class="row">
+      <div class="main-box-body clearfix table">
+        <table style="width:100%" class="table user-list table-hover">
+          <thead>
+            <th style="width:40%;"></th>
+            <th style="width:28%;"></th>
+            <th style="width:27%;"></th>
+          </thead>
+          <tbody>
+            <tr data-id="{$id}" class="{$odd_even}">
+              <td></td>
+              <td>{$dr}</td>
+              <td>{$cr}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>{$Paginator}
+  </div>
+</div>
+<style type="text/css">
+  .group {
+  font-weight: bold;
+  }
+</style>

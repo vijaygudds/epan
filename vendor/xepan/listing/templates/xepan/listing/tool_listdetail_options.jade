@@ -1,0 +1,19 @@
+.xepan-tool-options(id='{$_name}' style="display:none" for-xepan-component='xepan/listing/Tool_ListDetail')
+	//- h3 Listing List Detail Options
+	table.table.table-condensed.table-hover.xepan-cms-tool-table
+		tr.xepan-tool-option
+			td.xepan-tool-option-title Show Post Count
+			td.xepan-tool-option-value 
+				select#show_post_count(data-attr='show_post_count')
+					option true
+					option false																							
+	script.
+		$('\#{$_name} [data-attr]').on('change',function(){
+			$(current_selected_component).attr($(this).data('attr'),$(this).val());
+		});
+
+		$('\#{$_name}').on('show',function(event){
+			$('\#{$_name} [data-attr]').each(function(index,value){
+				$(this).val($(current_selected_component).attr($(this).data('attr')));				
+			});
+		})

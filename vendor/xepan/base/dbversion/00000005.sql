@@ -1,0 +1,2 @@
+ALTER TABLE `blog_post` CHANGE COLUMN `description` `description` text CHARACTER SET latin1 NOT NULL after `title`;
+ALTER TABLE `custom_account_entries_templates_transaction_row` ADD COLUMN `code` varchar(255) CHARACTER SET latin1 DEFAULT NULL after `title`;

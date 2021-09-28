@@ -1,0 +1,73 @@
+.xepan-tool-options(id='{$_name}' style="display:none" for-xepan-component='xepan/cms/Tool_ImageWithDescription')
+	.xepan-cms-group-panel.clearfix
+		h3.collapsed(data-toggle="collapse" data-target="#collapse-carousel" aria-expanded="false")
+			span Image With Description
+		#collapse-carousel.xepan-cms-tools-bar-panel.row-fluid.collapse.in
+			.panel-body
+				table.table.table-condensed.table-hover
+					tr
+						td
+							|Mode
+					tr
+						td
+							.btn-group
+								button.btn.btn-default.btn-xs(type="button" id='ImageWithDescription-edit')|Edit Mode
+								button.btn.btn-default.btn-xs(type="button" id='ImageWithDescription-active')|Active Mode
+					tr
+						td
+							|Direction
+					tr
+						td
+							.btn-group
+								button.btn.btn-default.btn-xs(type="button" id="ImageWithDescription-bottom")|Bottom
+								button.btn.btn-default.btn-xs(type="button" id="ImageWithDescription-right" )|Right
+								button.btn.btn-default.btn-xs(type="button" id="ImageWithDescription-top" )|Top
+								button.btn.btn-default.btn-xs(type="button" id="ImageWithDescription-left" )|Left
+
+
+	script.
+
+		$('\#{$_name} [data-attr]').on('change',function(){
+			$(current_selected_component).attr($(this).data('attr'),$(this).val());
+		});
+
+		$('\#{$_name}').on('show',function(event){
+			$('\#{$_name} [data-attr]').each(function(index,value){
+				$(this).val($(current_selected_component).attr($(this).data('attr')));				
+			});
+		});
+
+		$('#ImageWithDescription-bottom').click(function(event) {
+			$(current_selected_component).find('.desc').removeClass('rightslide upslide leftslide');
+		});
+
+		$('#ImageWithDescription-left').click(function(event) {
+			$(current_selected_component).find('.desc').removeClass('rightslide upslide leftslide');
+			$(current_selected_component).find('.desc').addClass('leftslide');
+		});
+
+		$('#ImageWithDescription-top').click(function(event) {
+			$(current_selected_component).find('.desc').removeClass('rightslide upslide leftslide');
+			$(current_selected_component).find('.desc').addClass('upslide');
+		});
+
+		$('#ImageWithDescription-right').click(function(event) {
+			$(current_selected_component).find('.desc').removeClass('rightslide upslide leftslide');
+			$(current_selected_component).find('.desc').addClass('rightslide');
+		});
+
+		$('#ImageWithDescription-active').click(function(event) {
+			$(current_selected_component).find('.imagepluscontainer-edit').removeClass('imagepluscontainer-edit').addClass('imagepluscontainer');
+		});
+
+		$('#ImageWithDescription-edit').click(function(event) {
+			$(current_selected_component).find('.imagepluscontainer').removeClass('imagepluscontainer').addClass('imagepluscontainer-edit');
+		});
+
+		if($(current_selected_component).find('div:nth-child(1)').hasClass('imagepluscontainer-edit')){
+			$('#ImageWithDescription-active').removeClass('btn-success')
+			$('#ImageWithDescription-edit').addClass('btn-success')
+		}else{
+			$('#ImageWithDescription-edit').removeClass('btn-success')
+			$('#ImageWithDescription-active').addClass('btn-success')
+		}

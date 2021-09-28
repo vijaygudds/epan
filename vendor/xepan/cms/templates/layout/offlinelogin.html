@@ -1,0 +1,62 @@
+
+<div id="login-full-wrapper">
+  <div class="container">
+    <div class="row">
+      <div class="col-xs-12">
+        <div id="login-box">
+          <div id="login-box-holder">
+            <div class="row">
+              <div class="col-xs-12">
+                <header id="login-header">
+                  <div id="login-logo"><img src="img/logo.png" alt="" style="width:100px; height:65px;"/>
+                    <p style="font-size:22px">{$company_name}</p>
+                  </div>
+                </header>
+                <div id="login-box-inner">
+                  {Content}
+                  {form_layout}
+                  <div style="width:100%" class="input-group"><i class="glyphicon glyphicon-user"></i>
+                    <div class="atk-form-row atk-form-field">{$username}</div>
+                  </div>
+                  <div class="input-group"><i class="glyphicon glyphicon-lock"></i>
+                    <div class="atk-form-row atk-form-field">{$password}</div>
+                  </div>
+                  <div id="remember-me-wrapper">
+                    <div class="row">
+                      <div class="col-xs-6">
+                        <div class="checkbox-nice">{$memorize}</div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-xs-12">
+                      <button type="submit" class="btn btn-success col-xs-12">Login</button>
+                    </div>
+                  </div>
+                  <style>
+                    .input-group{
+                      width:100% !important;
+                    }
+                    .input-group input {
+                      width:100% !important ;
+                    }
+                  </style>{/}
+                  {/}
+                </div>
+                <div id="login-box-footer" style="margin-top: -6px" class="panel-footer text-right"><span style="color:black;">Powered by  <a href="http://www.xavoc.com" target="_blank" style="color:#03A9A4">Xavoc Technocrats Pvt. Ltd.</a></span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<style>
+  .input-group{
+    width:100% !important;
+  }
+  .input-group input {
+    width:100% !important ;
+  }
+</style>

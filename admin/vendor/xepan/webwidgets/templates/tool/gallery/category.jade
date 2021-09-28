@@ -1,0 +1,23 @@
+div(id='{$_name}')
+  h4 Categories
+  .row
+    .widget.categories
+      .row.col-sm-12
+        ul.list-group
+          {rows}{row}
+          div.seprate-li-content(data-id="{$id}")
+            li.list-group-item
+              a.gallery-name(href='{$url}' style="font-size:20px")
+                | {$name} 
+          {/}{/}
+  style.
+    .seprate-li-content{
+      margin-bottom:5px;
+    }
+    .seprate-li-content .list-group-item{
+      border-top-left-radius:8px!important;
+      border-top-right-radius :8px!important; 
+    }
+    .widget.categories a.active {
+      font-weight: bold;
+    }

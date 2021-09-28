@@ -1,0 +1,1 @@
+ALTER TABLE `store_transaction_row_custom_field_value` CHANGE `store_transaction_id` `store_transaction_row_id` INT(11) NOT NULL;

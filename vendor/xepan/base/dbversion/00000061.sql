@@ -1,0 +1,1 @@
+ALTER TABLE `emailsetting` ADD `last_email_fetched_at` DATETIME NULL AFTER `email_threshold_per_month`;

@@ -1,0 +1,27 @@
+
+<div id="{$_name}">
+  <h4>Categories</h4>
+  <div class="row">
+    <div class="widget categories">
+      <div class="row col-sm-12">
+        <ul class="list-group">{rows}{row}
+          <div data-id="{$id}" class="seprate-li-content">
+            <li class="list-group-item"><a href="{$url}" style="font-size:20px" class="gallery-name">{$name} </a></li>
+          </div>{/}{/}
+        </ul>
+      </div>
+    </div>
+  </div>
+  <style>
+    .seprate-li-content{
+      margin-bottom:5px;
+    }
+    .seprate-li-content .list-group-item{
+      border-top-left-radius:8px!important;
+      border-top-right-radius :8px!important; 
+    }
+    .widget.categories a.active {
+      font-weight: bold;
+    }
+  </style>
+</div>

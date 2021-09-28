@@ -1,0 +1,1 @@
+ALTER TABLE `store_transaction_row` ADD `related_transaction_row_id` int(11);

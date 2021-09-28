@@ -1,0 +1,1 @@
+ALTER TABLE `salary_template_details` ADD `created_by_id` INT(11) NULL AFTER `amount`; 

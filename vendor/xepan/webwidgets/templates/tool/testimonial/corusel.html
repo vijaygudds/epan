@@ -1,0 +1,29 @@
+
+<div id="{$_name}" data-ride="carousel" style="height:270px;" class="carousel slide">
+  <ol class="carousel-indicators">
+    <li data-target="undefined" data-slide-to="0" class="active"></li>
+    <li data-target="undefined" data-slide-to="1"></li>
+    <li data-target="undefined" data-slide-to="2"></li>
+  </ol>
+  <div role="listbox" class="carousel-inner">
+    {rows}
+    {row}
+    <div class="item {$active}">
+      <div class="row">
+        <div class="col-md-2"></div>
+        <div style="margin-top:20px;" class="col-md-8 text-center">{title_wrapper}
+          <h3><b>{$title}</b></h3>{/}<span>
+            <blockquote>{$description}</blockquote></span>
+          <div> <img src="{$file}" style="width:50px;  border-radius: 50%;"/><small><b>{$customer_name} &nbsp; &nbsp;</b></small>{created_at_wrapper}<small class="text-muted">{$created_at}</small>{/}  </div>
+        </div>
+        <div class="col-md-2"></div>
+      </div>
+      <div class="carousel-caption"></div>
+    </div>  {/}{/}
+  </div><a href='#{$_name}' role="button" data-slide="prev" class="left carousel-control"><span aria-hidden="true" class="glyphicon glyphicon-chevron-left"></span><span class="sr-only">Previous</span></a><a href='#{$_name}' role="button" data-slide="next" class="right carousel-control"><span aria-hidden="true" class="glyphicon glyphicon-chevron-right"></span><span class="sr-only">Next</span></a>
+</div>
+<style>
+  .carousel-control{
+    height: 270px;
+  }
+</style>

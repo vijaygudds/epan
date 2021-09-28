@@ -1,0 +1,1 @@
+ALTER TABLE `activity` CHANGE COLUMN `notify_to` `notify_to` text DEFAULT "";

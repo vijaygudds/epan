@@ -1,0 +1,1 @@
+ALTER TABLE `xepan_cms_image_gallery_images` ADD `video_embedded_code` text;

@@ -1,0 +1,44 @@
+div(id="{$_name}" class="{$class}" style="{$style}")
+	.row
+		.col-cs-12
+			ul(id="filter-list")
+				li.filter(data-filter="all") ALL
+				{$category}
+				{category_list}
+				{$Content}
+				{rows}{row}
+				li.filter(data-filter="{$name}") {$name}
+				{/}{/}
+				{/}
+	.row
+		.col-xs-12
+			ul.portfolio_items
+				{$item_list}
+				{item}
+				{$Content}
+				li.portfolio(class="{$gallery_cat}")
+					.post_thumb
+						img(src="{$image_path}")
+						.portfolio-overlay
+							.overlay-inner
+								{name_wrapper}
+								h3 {$name}
+								{/}
+								{description_wrapper}
+								p  {$description}
+								{/}
+								{fancybox_wrapper}
+								a(href="{$image_path}" class="fancybox")
+									i.fa.fa-camera
+								{/}
+								{link_wrapper}
+								a(href="{$link}" class="fancybox")
+									i.fa.fa-link
+								{/}
+				{/}
+	script.
+		$('.portfolio_items').mixitup({
+			targetSelector: '.portfolio',
+			transitionSpeed: 450
+		});
+		$('#{$_name} a.fancybox').fancybox();

@@ -1,0 +1,38 @@
+<div id="{$_name}" class="{$class} slider-pro" style="{$style}">
+	{$Content}
+    {lister_wrapper}
+    <div class="sp-slides">
+        {rows}{row}
+        <div class="sp-slide">
+            <a href="{$file}">
+                <img class="sp-image" src="vendor/xepan/cms/templates/css/slidepro/images/blank.gif" data-src="{$file}" data-retina="{$file}"/>
+            </a>
+            <div class="sp-caption">{$text}</div>
+            {$layer_wrapper}
+        </div>
+        {/}{/}
+    </div>
+    {/}
+    
+    {thumbnail_wrapper}
+        {rows}{row}
+        {/}{/}
+    {/}
+
+    <script type="text/javascript">
+        $( document ).ready(function( $ ) {
+
+        // instantiate fancybox when a link is clicked
+        $( '#{$_name} .sp-image' ).parent( 'a' ).on( 'click', function( event ) {
+            event.preventDefault();
+            // check if the clicked link is also used in swiping the slider
+            // by checking if the link has the 'sp-swiping' class attached.
+            // if the slider is not being swiped, open the lightbox programmatically,
+            // at the correct index
+            if ( $( '#{$_name}' ).hasClass( 'sp-swiping' ) === false ) {
+                $.fancybox.open( $( '#{$_name} .sp-image' ).parent( 'a' ), { index: $( this ).parents( '.sp-slide' ).index() } );
+            }
+        });
+    });
+    </script>
+</div>

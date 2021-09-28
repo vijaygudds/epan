@@ -1,0 +1,1 @@
+ALTER TABLE `listing_status_activity` ADD COLUMN `list_dataset_id` Int;

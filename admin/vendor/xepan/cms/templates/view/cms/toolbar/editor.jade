@@ -1,0 +1,40 @@
+#epan-editor-top-panel.epan-editor-top-panel.hidden-xs
+  .epan-editor-logo.pull-left
+    i.fa.fa-leaf.fa-2x
+  .epan-editor-current-page.pull-left(onclick="$.univ().frameURL('{$page_tempalte_frame_title}','{$page_template_url}');")
+    label|Page: <span class='epan-editor-current-page'>{current_page}Current Page Here{/current_page}</span>
+  #toolbar-toggle-btn.pull-left.editor-tooltip(title="Toolbar Hide/Show")
+    i.fa.fa-cog.fa-2x
+  #save-as-snapshot.pull-left.editor-tooltip(title="Save And Take Snapshot")
+    i.fa.fa-camera.fa-2x
+  #xepan-savepage-btn.pull-left.editor-tooltip.label-success(title="Save")
+    i.fa.fa-save.fa-2x
+  #epan-editor-preview.pull-left.editor-tooltip(title="Preview")
+    i.fa.fa-eye.fa-2x
+  #epan-editor-preview-desktop.pull-left
+    i.fa.fa-desktop.fa-2x
+  #epan-editor-preview-laptop.pull-left
+    i.fa.fa-laptop.fa-2x
+  #epan-editor-preview-tablet.pull-left
+    i.fa.fa-tablet.fa-2x
+  #epan-editor-preview-mobile.pull-left
+    i.fa.fa-mobile.fa-2x
+  #epan-editor-logout.pull-right
+    a(href="index.php?page=logout" title="Logout" style="color:white").editor-tooltip
+      i.fa.fa-power-off.fa-2x
+  #dashboard-btn.pull-right.editor-tooltip(title="Admin Dashboard")
+    i.fa.fa-home.fa-2x(style="cursor:pointer")
+  #epan-editcss-button.pull-right.editor-tooltip(title="Common CSS File" style="cursor:pointer")
+    label(style="cursor:pointer")| CSS
+  #template-btn.pull-right.editor-tooltip(title="Edit Template of this page" style="cursor:pointer")
+    label(style="cursor:pointer")| Template
+  .pull-right.editor-tooltip(title="Show Border")
+    input#epan-component-border( type='checkbox' value="Border"  style="margin: 0")
+    label(for='epan-component-border' )
+      | Border
+  .pull-right.editor-tooltip( title="Show Extra Space For Easy Drop")
+    input#epan-component-extra-padding( type='checkbox' value="Padding" style="margin: 0")
+    label(for='epan-component-extra-padding' title="Show Extra Space For Easy Drop")
+      | Easy Drop
+  #xepan-editing-toolbar-breadcrumb.pull-left(style="width:100%")
+    | This is breadcrumb : An Easy way to select your elements ...        

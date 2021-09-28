@@ -1,0 +1,32 @@
+{
+    "name": "xepan/CCAvenue",
+    "type": "library",
+    "description": "CC Avenue Payment Gateway for OmniPay ",
+    "homepage": "https://github.com/xepan/omnipay_ccavenue",
+    "keywords": ["xEpan","SaaS","ERP","PaymentGateway", "Omnipay","CCAvenue"],
+    "license": "MIT",
+    "minimum-stability" : "dev",
+    "authors": [
+        {
+            "name": "Xavoc Technocrats Pvt. Ltd.",
+            "email": "info@xavoc.com"
+        }
+    ],
+    "source": {
+        "url": "git@github.com:xepan/ccavenue.git",
+        "type": "git",
+        "reference": "origin/master"
+    },
+    "require": {
+        "omnipay/common": "~2.0",
+        "php": ">=5.3"
+    },
+    "autoload": {
+        "psr-4": { "Omnipay\\CCAvenue\\" : "src/" }
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "2.0.x-dev"
+        }
+    }
+}

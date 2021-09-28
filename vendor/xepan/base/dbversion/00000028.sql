@@ -1,0 +1,1 @@
+ALTER TABLE `dispatch_barcode` DROP `status`, DROP `type`;

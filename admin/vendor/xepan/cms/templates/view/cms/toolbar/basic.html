@@ -1,0 +1,1217 @@
+<div id="xepan-basic-css-panel" class="epan-css-options">
+    <div id="xepan-cms-groups-panel" class="xepan-cms-groups-panel collapse in"></div>
+    <hr/>
+    <div class="xepan-cms-group-panel clearfix xepan-cms-tool">
+        <div data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" class="collapsed xepan-cms-toolbar-heading"><span>Basic Properties</span><i class="fa fa-chevron-down pull-right"></i></div>
+        <div id="collapseOne" class="xepan-cms-tools-bar-panel row-fluid collapse">
+            <div class="xepan-toolbar-panel-body xepan-collasp-body">
+                <table class="table table-condensed table-hover">
+                    <tbody>
+                        <tr>
+                            <td>Component Width
+                                <button id="epan-component-width-reset" class="pull-right btn btn-warning btn-xs">Reset</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">
+                                <input id="epan-component-width-input" type="NUMBER" min="0" max="999999999" size="5" /><br/>
+                                <button id="epan-component-width-in-px" type="button" class="btn btn-default btn-xs">PX</button>
+                                <button id="epan-component-width-in-per" type="button" class="btn btn-default btn-xs">%</button>
+                                <button id="epan-component-width-auto" type="button" class="btn btn-default btn-xs">auto</button>
+                                <button id="epan-component-width-max" type="button" class="btn btn-default btn-xs">max 100%</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Comp. Height
+                                <button id="epan-component-height-reset" class="pull-right btn btn-warning btn-xs">Reset</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">
+                                <input id="epan-component-height-input" type="NUMBER" min="0" max="999999999" size="5" /><br/>
+                                <button id="epan-component-height-in-px" type="button" class="btn btn-default btn-xs">PX</button>
+                                <button id="epan-component-height-in-per" type="button" class="btn btn-default btn-xs">%</button>
+                                <button id="epan-component-height-auto" type="button" class="btn btn-default btn-xs">auto</button>
+                                <button id="epan-component-height-max" type="button" class="btn btn-default btn-xs">max 100%</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">Text Color</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <input id="epan-component-text-color" type="text" style="width: 80%;" class="epan-color-picker" />
+                            </td>
+                            <td>
+                                <button onclick="$(current_selected_component).css('color','');$('#epan-component-text-color').colorpicker('setColor','');" class="btn btn-default btn-xs"> CLR</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>css class
+                                <button id="epan-component-extra-css-reset" class="pull-right btn btn-warning btn-xs">Reset</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">
+                                <input id="xepan-image-option-classess" style="width:95%" type="text" />
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="xepan-cms-group-panel clearfix xepan-cms-tool">
+        <div data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" class="collapsed xepan-cms-toolbar-heading"><span>Padding</span><i class="fa fa-chevron-down pull-right"></i></div>
+        <div id="collapseTwo" class="xepan-cms-tools-bar-panel row-fluid collapse">
+            <div class="xepan-toolbar-panel-body xepan-collasp-body">
+                <!-- Padding panel-->
+                <table class="table table-condensed table-hover">
+                    <tbody>
+                        <tr>
+                            <td>Effect ALL</td>
+                            <td width="58%">
+                                <input id="epan-all-padding-same" type="checkbox" />
+                            </td>
+                            <td>
+                                <button id="epan-all-padding-reset" class="pull-right btn btn-warning btn-xs">
+                                
+                  Reset
+                </button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Unit</td>
+                            <td colspan="2">
+                                <table>
+                                    <tr>
+                                        <td width="25%">
+                                            <input id="epan-all-padding-unit-px" type="radio" name="padding-unit" checked="" />
+                                        </td>
+                                        <td width="25%">Px</td>
+                                        <td width="25%">
+                                            <input id="epan-all-padding-unit-per" type="radio" name="padding-unit" />
+                                        </td>
+                                        <td width="25%">%</td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Top</td>
+                            <td>
+                                <div id="epan-component-padding-top" css="padding-top" class="epan-component-padding"></div>
+                            </td>
+                            <td>
+                                <div id="padding-top-value"></div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Right</td>
+                            <td>
+                                <div id="epan-component-padding-right" css="padding-right" class="epan-component-padding"></div>
+                            </td>
+                            <td>
+                                <div id="padding-right-value"></div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Bottom</td>
+                            <td>
+                                <div id="epan-component-padding-bottom" css="padding-bottom" class="epan-component-padding"></div>
+                            </td>
+                            <td>
+                                <div id="padding-bottom-value"></div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Left</td>
+                            <td>
+                                <div id="epan-component-padding-left" css="padding-left" class="epan-component-padding"></div>
+                            </td>
+                            <td></td>
+                        </tr>
+                        <div id="padding-left-value"></div>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <!-- MARGIN-->
+    </div>
+    <div class="xepan-cms-group-panel clearfix xepan-cms-tool">
+        <div data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" class="collapsed xepan-cms-toolbar-heading"><span>Margin</span><i class="fa fa-chevron-down pull-right"></i></div>
+        <div id="collapseThree" class="xepan-cms-tools-bar-panel row-fluid collapse">
+            <div class="xepan-toolbar-panel-body xepan-collasp-body">
+                <table class="table table-condensed table-hover">
+                    <tbody>
+                        <tr>
+                            <td>Effect ALL</td>
+                            <td width="58%">
+                                <input id="epan-all-margin-same" type="checkbox" />
+                            </td>
+                            <td>
+                                <button id="epan-all-margin-reset" class="pull-right btn btn-warning btn-xs">Reset</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Unit</td>
+                            <td colspan="2">
+                                <table>
+                                    <tr>
+                                        <td width="25%">
+                                            <input id="epan-all-margin-unit-px" type="radio" name="margin-unit" checked="" />
+                                        </td>
+                                        <td width="25%">Px</td>
+                                        <td width="25%">
+                                            <input id="epan-all-margin-unit-per" type="radio" name="margin-unit" />
+                                        </td>
+                                        <td width="25%">%</td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Top</td>
+                            <td>
+                                <table width="100%">
+                                    <tr>
+                                        <td width="90%">
+                                            <div id="epan-component-margin-top" css="margin-top" class="epan-component-margin"></div>
+                                        </td>
+                                        <td width="10%">
+                                            <div id="margin-top-value"></div>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                            <td>
+                                <button type="button" pos="top" class="btn btn-default btn-xs margin-auto-btn btn-sm">auto</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Right</td>
+                            <td>
+                                <table width="100%">
+                                    <tr>
+                                        <td width="90%">
+                                            <div id="epan-component-margin-right" css="margin-right" class="epan-component-margin"></div>
+                                        </td>
+                                        <td width="10%">
+                                            <div id="margin-right-value"></div>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                            <td>
+                                <button type="button" pos="right" class="btn btn-default btn-xs margin-auto-btn">auto</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Bottom</td>
+                            <td>
+                                <table width="100%">
+                                    <tr>
+                                        <td width="90%">
+                                            <div id="epan-component-margin-bottom" css="margin-bottom" class="epan-component-margin"></div>
+                                        </td>
+                                        <td width="10%">
+                                            <div id="margin-bottom-value"></div>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                            <td>
+                                <button type="button" pos="bottom" class="btn btn-default btn-xs margin-auto-btn">auto</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Left</td>
+                            <td>
+                                <table width="100%">
+                                    <tr>
+                                        <td width="90%">
+                                            <div id="epan-component-margin-left" css="margin-left" class="epan-component-margin"></div>
+                                        </td>
+                                        <td width="10%">
+                                            <div id="margin-left-value"></div>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                            <td>
+                                <button type="button" pos="left" class="btn btn-default btn-xs margin-auto-btn">auto</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <!-- BACKGROUND-->
+    </div>
+    <div class="xepan-cms-group-panel clearfix xepan-cms-tool">
+        <div data-toggle="collapse" data-target="#collapseFour" aria-expanded="false" class="collapsed xepan-cms-toolbar-heading"><span>Background</span><i class="fa fa-chevron-down pull-right"></i></div>
+        <div id="collapseFour" class="xepan-cms-tools-bar-panel row-fluid collapse">
+            <div class="xepan-toolbar-panel-body xepan-collasp-body">
+                <table class="table table-condensed table-hover">
+                    <tbody>
+                        <tr>
+                            <td>BG Color</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <input id="epan-background-color" type="text" style="width: 80%;" class="epan-color-picker" />
+                            </td>
+                            <td>
+                                <button onclick="$(current_selected_component).css('background-color','')" class="btn btn-default btn-xs"> CLR </button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>BG Image</td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">
+                                <div class="input-group"><span class="input-group-btn">
+                    <button id="epan-component-background-image-clear-button" type="button" class="btn btn-default btn-xs">Clr</button></span>
+                                    <input id="epan-component-background-image-input" style="height:5%;" type="text" class="form-control" /><span class="input-group-btn">
+                    <button id="epan-component-background-image-select-button" type="button" class="btn btn-default btn-xs">Select</button></span>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Repeat</td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">
+                                <div class="btn-group">
+                                    <div repeat-background="repeat" class="xepan-btn xepan-btn-default xepan-btn-success btn-xs">All</div>
+                                    <div repeat-background="repeat-x" class="xepan-btn xepan-btn-default btn-xs">X Only</div>
+                                    <div repeat-background="repeat-y" class="xepan-btn xepan-btn-default btn-xs">Y Only</div>
+                                    <div repeat-background="no-repeat" class="xepan-btn xepan-btn-default btn-xs">No-Repeat</div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Background</td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">
+                                <div class="btn-group">
+                                    <button id="epan-component-background-fixed" type="button" class="xepan-btn xepan-btn-default btn-xs">Fixed</button>
+                                    <button id="epan-component-background-scroll" type="button" class="xepan-btn xepan-btn-default btn-xs">Scroll</button>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Background Size</td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">Unit<br/>
+                                <input id="epan-background-size-unit-px" type="radio" name="background_size_unit" checked="" />Px<span></span>
+                                <input id="epan-background-size-unit-per" type="radio" name="background_size_unit" />%
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <table width="100%">
+                                    <tr>
+                                        <td width="90%">
+                                            <div id="epan-component-background-size" css="background-size" class="epan-component-background-size"></div>
+                                        </td>
+                                        <td width="10%">
+                                            <div id="background-size-value"></div>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                            <td>
+                                <button type="button" pos="background-size" class="btn btn-default btn-xs background-size-none-btn btn-sm">none</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>base64</td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">
+                                <textarea id="xepan-bg-image-base64data" placeholder="">   </textarea>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <!-- BORDER-->
+    </div>
+    <div class="xepan-cms-group-panel clearfix xepan-cms-tool">
+        <div data-toggle="collapse" data-target="#collapseFive" aria-expanded="false" class="collapsed xepan-cms-toolbar-heading"><span>Border</span><i class="fa fa-chevron-down pull-right"></i></div>
+        <div id="collapseFive" class="xepan-cms-tools-bar-panel row-fluid collapse">
+            <div class="xepan-toolbar-panel-body xepan-collasp-body">
+                <table class="table table-condensed table-hover">
+                    <tbody>
+                        <tr>
+                            <td colspan="">Effect All</td>
+                            <td>
+                                <input id="epan-all-border-same" type="checkbox" checked="" />
+                            </td>
+                            <td>
+                                <button id="epan-all-border-reset" class="pull-right btn btn-warning btn-xs">
+                     
+                  Reset
+                </button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">Top Border</td>
+                        </tr>
+                        <tr>
+                            <td colspan="2"><span style="padding: 5%">Color</span><span style="padding: 5%">Style</span><span style="padding: 5%">Width</span></td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">
+                                <div style="float: left;" class="epan-component-border-top-color">
+                                    <input id="epan-component-border-top-color" type="hidden" pos="top" class="epan-color-picker epan-border-color" />
+                                </div>
+                                <select pos="top" style="float: left; width: 35%;" class="epan-border-style">
+                  <option value="0">Style</option>
+                  <option value="dashed">dash</option>
+                  <option value="dotted">dotted</option>
+                  <option value="double">double</option>
+                  <option value="groove">groove</option>
+                  <option value="hidden">hidden</option>
+                  <option value="inset">inset</option>
+                  <option value="none">none</option>
+                  <option value="outset">outset</option>
+                  <option value="ridge">ridge</option>
+                  <option value="solid">solide</option>
+                  <option value="inherit">inherit</option>
+                </select>
+                                <input id="epan-component-border-top-width" type="text" size="2" pos="top" style="float: left;" class="epan-border-width" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="6">Right Border</td>
+                        </tr>
+                        <tr>
+                            <td colspan="6">
+                                <div style="float: left;" class="epan-component-border-right-color">
+                                    <input id="epan-component-border-right-color" type="hidden" pos="right" class="epan-color-picker epan-border-color" />
+                                </div>
+                                <select pos="right" style="float: left; width: 35%;" class="epan-border-style">
+                  <option value="0">Style</option>
+                  <option value="dashed">dash</option>
+                  <option value="dotted">dotted</option>
+                  <option value="double">double</option>
+                  <option value="groove">groove</option>
+                  <option value="hidden">hidden</option>
+                  <option value="inset">inset</option>
+                  <option value="none">none</option>
+                  <option value="outset">outset</option>
+                  <option value="ridge">ridge</option>
+                  <option value="solid">solide</option>
+                  <option value="inherit">inherit</option>
+                </select>
+                                <input id="epan-component-border-right-width" type="text" size="2" pos="right" style="float: left;" class="epan-border-width" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="6">Bottom Border</td>
+                        </tr>
+                        <tr>
+                            <td colspan="6">
+                                <div style="float: left;" class="epan-component-border-bottom-color">
+                                    <input id="epan-component-border-bottom-color" type="hidden" pos="bottom" class="epan-color-picker epan-border-color" />
+                                </div>
+                                <select pos="bottom" style="float: left; width: 35%;" class="epan-border-style">
+                  <option value="0">Style</option>
+                  <option value="dashed">dash</option>
+                  <option value="dotted">dotted</option>
+                  <option value="double">double</option>
+                  <option value="groove">groove</option>
+                  <option value="hidden">hidden</option>
+                  <option value="inset">inset</option>
+                  <option value="none">none</option>
+                  <option value="outset">outset</option>
+                  <option value="ridge">ridge</option>
+                  <option value="solid">solide</option>
+                  <option value="inherit">inherit</option>
+                </select>
+                                <input id="epan-component-border-bottom-width" type="text" size="2" pos="bottom" style="float: left;" class="epan-border-width" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="6">Left Border</td>
+                        </tr>
+                        <tr>
+                            <td colspan="6">
+                                <div style="float: left;" class="epan-component-border-bottom-color">
+                                    <input id="epan-component-border-left-color" type="hidden" pos="left" class="epan-color-picker epan-border-color" />
+                                </div>
+                                <select pos="left" style="float: left; width: 35%;" class="epan-border-style">
+                  <option value="0">Style</option>
+                  <option value="dashed">dash</option>
+                  <option value="dotted">dotted</option>
+                  <option value="double">double</option>
+                  <option value="groove">groove</option>
+                  <option value="hidden">hidden</option>
+                  <option value="inset">inset</option>
+                  <option value="none">none</option>
+                  <option value="outset">outset</option>
+                  <option value="ridge">ridge</option>
+                  <option value="solid">solide</option>
+                  <option value="inherit">inherit</option>
+                </select>
+                                <input id="epan-component-border-left-width" type="text" size="2" pos="left" style="float: left;" class="epan-border-width" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">Radius Top-Left</td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">
+                                <input id="epan-border-radius-t-left" type="text" pos="border-top-left-radius" placeHolder="exp. 10px, 10em, 10% etc." style="width:100%" class="epan-border-radius" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">Radius Top-Right</td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">
+                                <input id="epan-border-radius-t-right" type="text" pos="border-top-right-radius" placeHolder="exp. 10px, 10em, 10% etc." style="width:100%" class="epan-border-radius" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">Radius Bottom-Left</td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">
+                                <input id="epan-border-radius-b-left" type="text" pos="border-bottom-left-radius" placeHolder="exp. 10px, 10em, 10% etc." style="width:100%" class="epan-border-radius" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">Radius Bottom-Right</td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">
+                                <input id="epan-border-radius-b-right" type="text" pos="border-bottom-right-radius" placeHolder="exp. 10px, 10em, 10% etc." style="width:100%" class="epan-border-radius" />
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <!--CSS Tranform-->
+    </div>
+    <div class="xepan-cms-group-panel clearfix xepan-cms-tool">
+        <div data-toggle="collapse" data-target="#collapseSix" aria-expanded="false" class="collapsed xepan-cms-toolbar-heading"><span>Transform</span><i class="fa fa-chevron-down pull-right"></i></div>
+        <div id="collapseSix" class="xepan-cms-tools-bar-panel row-fluid collapse">
+            <div class="xepan-toolbar-panel-body xepan-collasp-body">
+                <table class="table table-condensed table-hover">
+                    <tbody>
+                        <tr>
+                            <td>
+                                <button id="epan-all-transform-reset" class="pull-right btn btn-warning btn-xs">
+                   
+                  Reset
+                </button>
+                            </td>
+                            <td width="58%"></td>
+                        </tr>
+                        <tr>
+                            <td width="20%">Rotate</td>
+                        </tr>
+                        <tr>
+                            <td width="50%">
+                                <div css-syntax="rotate" unit="deg" class="epan-component-transform epan-component-transform-rotate"></div>
+                            </td>
+                            <td width="30%">
+                                <div rotate="(0deg)" class="epan-component-transform-rotate-value"></div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td width="20%">Scale</td>
+                        </tr>
+                        <tr>
+                            <td width="50%">x
+                                <div css-syntax="scale" unit="" direction="x" class="epan-component-transform epan-component-transform-scale"></div>y
+                                <div css-syntax="scale" unit="" direction="y" class="epan-component-transform epan-component-transform-scale"></div>
+                            </td>
+                            <td width="30%">
+                                <div scale="(1,1)" class="epan-component-transform-scale-value"></div>
+                                <div scale="1" class="epan-component-transform-scale-x-value"></div>
+                                <div scale="1" class="epan-component-transform-scale-y-value"></div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td width="20%">Skew</td>
+                        </tr>
+                        <tr>
+                            <td width="50%">x
+                                <div css-syntax="skew" unit="deg" direction="x" class="epan-component-transform epan-component-transform-skew"></div>y
+                                <div css-syntax="skew" unit="deg" direction="y" class="epan-component-transform epan-component-transform-skew"></div>
+                            </td>
+                            <td width="30%">
+                                <div skew="(0deg,0deg)" class="epan-component-transform-skew-value"></div>
+                                <div skew="0" class="epan-component-transform-skew-x-value"></div>
+                                <div skew="0" class="epan-component-transform-skew-y-value"></div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td width="20%">Translate</td>
+                        </tr>
+                        <tr>
+                            <td width="50%">x
+                                <div css-syntax="translate" unit="px" direction="x" class="epan-component-transform epan-component-transform-translate"></div>y
+                                <div css-syntax="translate" unit="px" direction="y" class="epan-component-transform epan-component-transform-translate"></div>
+                            </td>
+                            <td width="30%">
+                                <div translate="(1px,1px)" class="epan-component-transform-translate-value"></div>
+                                <div translate="1" class="epan-component-transform-translate-x-value"></div>
+                                <div translate="1" class="epan-component-transform-translate-y-value"></div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    padding_unit = 'px';
+    is_all_padding_same = false;
+    margin_unit = 'px';
+    is_all_margin_same = false;
+    is_all_border_same = true;
+
+    //-option Class
+    $('#xepan-image-option-classess').change(function(event) {
+        //- alert("hchcsfhkdshfkfs");
+        $(current_selected_component).removeClass($(current_selected_component).attr('data-extra-classes'));
+        $(current_selected_component).attr('data-extra-classes', $(this).val());
+        $(current_selected_component).addClass($(this).val());
+    });
+
+    $('#epan-background-color').change(function() {
+        if($(this).val() !='')
+          $(current_selected_component).css('background-color', '#' + $(this).val());
+        else
+          $(current_selected_component).css('background-color', '');
+    });
+
+    $('#epan-component-text-color').change(function() {
+        if($(this).val())
+          $(current_selected_component).css('color', '#' + $(this).val()).attr('text-color', $(this).val());
+        else{
+          $(current_selected_component).css('color', '').attr('text-color', '');
+        }
+    });
+
+    $('\#xepan-basic-css-panel').on('show', function(event) {
+        init_css_options();
+    });
+
+    $('#epan-component-background-image-select-button').click(function(event) {
+        //- if($('#xepan-bg-image-base64data').val().length > 0){
+        //-   alert("Please clear base64 data first");
+        //-   return;
+        //- }
+
+        var fm = $('<div/>').dialogelfinder({
+            url: 'index.php?page=xepan_base_elconnector&cut_page=true&www_root=true',
+            lang: 'en',
+            width: 840,
+            destroyOnClose: true,
+            getFileCallback: function(files, fm) {
+                $('#epan-component-background-image-input').val(files.url);
+                $(current_selected_component).css('background-image', "url('" + files.url + "')");
+                // console.log(files);
+            },
+            commandsOptions: {
+                getfile: {
+                    oncomplete: 'close',
+                    folders: false
+                }
+            }
+        }).dialogelfinder('instance');
+    });
+
+
+    $('#xepan-bg-image-base64data').change(function(event) {
+        $('#epan-component-background-image-input').val("")
+        $(current_selected_component).css("background-image", "url('" + $(this).val() + "')");
+        //- $(current_selected_component).attr('background-image:url(',$(this).val());
+    });
+    $('#{$_name}').on('show', function(event) {
+
+        var src_val = $(current_selected_component).css('background-image');
+        if (src_val.startsWith('url("data:')) {
+            $('#xepan-bg-image-base64data').val(src_val);
+            $('#epan-component-background-image-input').val('');
+        } else {
+            $('#epan-component-background-image-input').val(src_val);
+            $('#xepan-bg-image-base64data').val('');
+        }
+
+        $('.xepan-cms-tool-option-panel').find('.selected-component-name').remove();
+        if ($(current_selected_component).is("[xepan-component-name]")) {
+            $('<div class="selected-component-name" >' + $(current_selected_component).attr("xepan-component-name") + '</div>').appendTo($(".xepan-cms-tool-option-panel"));
+        }
+
+
+
+    });
+
+
+
+    $('#epan-component-background-image-clear-button').click(function(event) {
+        $('#epan-component-background-image-input').val('none');
+        $(current_selected_component).css('background-image', 'none');
+    });
+    $('#epan-component-background-scroll').click(function(event) {
+        $(current_selected_component).css('background-attachment', 'scroll');
+        $('#epan-component-background-fixed').removeClass('xepan-btn-success');
+        $(this).addClass('xepan-btn-success');
+    });
+    $('#epan-component-background-fixed').click(function(event) {
+        $(current_selected_component).css('background-attachment', 'fixed');
+        $('#epan-component-background-scroll').removeClass('xepan-btn-success');
+        $(this).addClass('xepan-btn-success');
+    });
+
+    //- Background Size
+    $('.epan-component-background-size').slider({
+        min: 0,
+        max: 100,
+        slide: function(event, ui) {
+            $(current_selected_component).css('background-size', ui.value + background_size_unit);
+            $('#' + $(this).attr('css') + '-value').html(ui.value + '' + background_size_unit);
+        }
+    });
+
+
+
+    // INITIAL ONE TIME SETUP ON PAGE LOAD
+    $('.epan-component-padding').slider({
+        min: 0,
+        max: 100,
+        slide: function(event, ui) {
+            if (!is_all_padding_same)
+                $(current_selected_component).css($(this).attr('css'), ui.value + padding_unit);
+            else {
+                $(current_selected_component).css('padding-top', ui.value + padding_unit);
+                $(current_selected_component).css('padding-right', ui.value + padding_unit);
+                $(current_selected_component).css('padding-bottom', ui.value + padding_unit);
+                $(current_selected_component).css('padding-left', ui.value + padding_unit);
+            }
+            $('#' + $(this).attr('css') + '-value').html(ui.value + '' + padding_unit);
+        }
+    });
+    $('.epan-component-margin').slider({
+        min: -100,
+        max: 100,
+        slide: function(event, ui) {
+            ui.value = parseInt(ui.value, 10) || 0;
+            if (!is_all_margin_same) {
+                console.log('setting ' + $(this).attr('css') + ' = ' + ui.value + margin_unit);
+                console.log($(current_selected_component));
+                $(current_selected_component).css($(this).attr('css'), ui.value + margin_unit);
+            } else {
+                $(current_selected_component).css('marginTop', ui.value + margin_unit);
+                $(current_selected_component).css('marginRight', ui.value + margin_unit);
+                $(current_selected_component).css('marginBottom', ui.value + margin_unit);
+                $(current_selected_component).css('marginLeft', ui.value + margin_unit);
+            }
+            $('#' + $(this).attr('css') + '-value').html(ui.value + '' + margin_unit);
+        }
+    });
+    $('.margin-auto-btn').click(function(event) {
+        $(current_selected_component).css('margin-' + $(this).attr('pos'), 'auto');
+        $('#margin-' + $(this).attr('pos') + '-value').text('auto');
+        $(this).siblings('.epan-component-margin').slider('option', 'value', 0);
+        $(this).siblings('.epan-component-margin').slider('refresh');
+    });
+    $('#epan-all-padding-same').click(function(event) {
+        if ($('#epan-all-padding-same:checked').size() > 0) {
+            $('.epan-component-padding').not('#epan-component-padding-top').slider('disable');
+            is_all_padding_same = true;
+        } else {
+            $('.epan-component-padding').slider('enable');
+            is_all_padding_same = false;
+        }
+    });
+
+    //- Reset Width on current_selected_component
+    $('#epan-component-width-reset').click(function(event) {
+        $(current_selected_component).css('width', '');
+        $(current_selected_component).css('max-width', '');
+        $(current_selected_component).css('min-width', '');
+    });
+    //- Reset Height on current_selected_component
+    $('#epan-component-height-reset').click(function(event) {
+        $(current_selected_component).css('height', '');
+        $(current_selected_component).css('max-height', '');
+        $(current_selected_component).css('min-height', '');
+    });
+    //- Reset Width on current_selected_component
+    $('#epan-component-extra-css-reset').click(function(event) {
+        $(current_selected_component).removeClass($(current_selected_component).attr('data-extra-classes'));
+    });
+    //- Reset Padding on current_selected_component
+    $('#epan-all-padding-reset').click(function(event) {
+        $(current_selected_component).css('padding', '');
+    });
+
+    //- Reset Margin on current_selected_component
+    $('#epan-all-margin-reset').click(function(event) {
+        $(current_selected_component).css('margin', '');
+    });
+
+    //- Reset Border on current_selected_component
+    $('#epan-all-border-reset').click(function(event) {
+        $(current_selected_component).css('border', '');
+    });
+
+    //- Reset Tranform on current_selected_component
+    $('#epan-all-transform-reset').click(function(event) {
+        $(current_selected_component).css('transform', '');
+    });
+
+    //- Reset Tranform on current_selected_component
+    $('button.background-size-none-btn').click(function(event) {
+        $(current_selected_component).css('background-size', '');
+    });
+
+    $('#epan-all-margin-same').click(function(event) {
+        if ($('#epan-all-margin-same:checked').size() > 0) {
+            $('.epan-component-margin').not('#epan-component-margin-top').slider('disable');
+            is_all_margin_same = true;
+        } else {
+            $('.epan-component-margin').slider('enable');
+            is_all_margin_same = false;
+        }
+    });
+    $('#epan-all-padding-unit-px').click(function(event) {
+        padding_unit = 'px';
+    });
+    $('#epan-all-padding-unit-per').click(function(event) {
+        padding_unit = '%';
+    });
+    $('#epan-all-margin-unit-px').click(function(event) {
+        margin_unit = 'px';
+    });
+    $('#epan-all-margin-unit-per').click(function(event) {
+        margin_unit = '%';
+    });
+
+    $('#epan-background-size-unit-px').click(function(event) {
+        background_size_unit = 'px';
+    });
+    $('#epan-background-size-unit-per').click(function(event) {
+        background_size_unit = '%';
+    });
+
+    $('[repeat-background]').click(function(event) {
+        $('[repeat-background]').removeClass('xepan-btn-success');
+        $(this).addClass('xepan-btn-success');
+        $(current_selected_component).css('background-repeat', $(this).attr('repeat-background'));
+    });
+    $('#epan-all-border-same').click(function(event) {
+        if ($('#epan-all-border-same:checked').size() > 0) {
+            is_all_border_same = true;
+        } else {
+            is_all_border_same = false;
+        }
+    });
+
+    //Border Radius
+    $('.epan-border-radius').change(function(event) {
+        $(current_selected_component).css($(this).attr('pos'), $(this).val());
+        $(current_selected_component).css('-moz-' + $(this).attr('pos'), $(this).val());
+        $(current_selected_component).css('-webkit-' + $(this).attr('pos'), $(this).val());
+    });
+
+    //CSS TRANSFORM
+    $('.epan-component-transform').slider({
+        slide: function(event, ui) {
+            if ($(this).attr('css-syntax') == 'rotate') {
+                var rotate = '(' + ui.value + 'deg)';
+                $('.epan-component-transform-rotate-value').html(rotate).attr($(this).attr('css-syntax'), rotate);
+            }
+
+            if ($(this).attr('css-syntax') == 'scale') {
+                var x = $('.epan-component-transform-scale-x-value').attr('scale');
+                var y = $('.epan-component-transform-scale-y-value').attr('scale');
+
+                if ($(this).attr('direction') == 'x') {
+                    x = ui.value;
+                    $('.epan-component-transform-scale-x-value').html(x);
+                    $('.epan-component-transform-scale-x-value').attr('scale', x);
+                }
+
+                if ($(this).attr('direction') == 'y') {
+                    y = ui.value;
+                    $('.epan-component-transform-scale-y-value').html(y);
+                    $('.epan-component-transform-scale-y-value').attr('scale', y);
+                }
+
+                var scale = '(' + x + ',' + y + ')';
+                $('.epan-component-transform-scale-value').html(scale);
+                $('.epan-component-transform-scale-value').attr($(this).attr('css-syntax'), scale);
+            }
+
+            if ($(this).attr('css-syntax') == 'skew') {
+                var x = $('.epan-component-transform-skew-x-value').attr('skew');
+                var y = $('.epan-component-transform-skew-y-value').attr('skew');
+
+                if ($(this).attr('direction') == 'x') {
+                    x = ui.value;
+                    $('.epan-component-transform-skew-x-value').html(x + 'deg');
+                    $('.epan-component-transform-skew-x-value').attr('skew', x);
+                }
+
+                if ($(this).attr('direction') == 'y') {
+                    y = ui.value;
+                    $('.epan-component-transform-skew-y-value').html(y + 'deg');
+                    $('.epan-component-transform-skew-y-value').attr('skew', y);
+                }
+
+                var skew = '(' + x + 'deg,' + y + 'deg)';
+                $('.epan-component-transform-skew-value').html(skew);
+                $('.epan-component-transform-skew-value').attr($(this).attr('css-syntax'), skew);
+            }
+
+            if ($(this).attr('css-syntax') == 'translate') {
+                var x = $('.epan-component-transform-translate-x-value').attr('translate');
+                var y = $('.epan-component-transform-translate-y-value').attr('translate');
+
+                if ($(this).attr('direction') == 'x') {
+                    x = ui.value;
+                    $('.epan-component-transform-translate-x-value').html(x + 'px');
+                    $('.epan-component-transform-translate-x-value').attr('translate', x);
+                }
+
+                if ($(this).attr('direction') == 'y') {
+                    y = ui.value;
+                    $('.epan-component-transform-translate-y-value').html(y + 'px');
+                    $('.epan-component-transform-translate-y-value').attr('translate', y);
+                }
+
+                var translate = '(' + x + 'px,' + y + 'px)';
+                $('.epan-component-transform-translate-value').html(translate);
+                $('.epan-component-transform-translate-value').attr($(this).attr('css-syntax'), translate);
+            }
+
+
+            var transform_value = 'rotate' + $('.epan-component-transform-rotate-value').attr('rotate');
+            transform_value += ' scale' + $('.epan-component-transform-scale-value').attr('scale');
+            transform_value += ' skew' + $('.epan-component-transform-skew-value').attr('skew');
+            transform_value += ' translate' + $('.epan-component-transform-translate-value').attr('translate');
+
+            $(current_selected_component).css('transform', transform_value);
+            $(current_selected_component).css('-webkit-transform', transform_value);
+            $(current_selected_component).css('-moz-transform', transform_value);
+            $(current_selected_component).css('-o-transform', transform_value);
+            $(current_selected_component).css('-ms-transform', transform_value);
+
+
+            //- console.log($(this).attr('unit'));    
+        }
+    });
+
+    $('.epan-component-transform-rotate').slider({
+        min: -360,
+        max: 360,
+    });
+
+    $('.epan-component-transform-scale').slider({
+        min: -100,
+        max: 100,
+    });
+
+    $('.epan-component-transform-skew').slider({
+        min: -180,
+        max: 180,
+    });
+
+    $('.epan-component-transform-translate').slider({
+        min: -100,
+        max: 100,
+    });
+
+
+
+    $('.epan-border-width').keyup(function(event) {
+        // console.log('border-'+$(this).attr('pos')+'-width',$(this).val());
+        if (is_all_border_same)
+            $(current_selected_component).css('border-width', $(this).val());
+        else
+            $(current_selected_component).css('border-' + $(this).attr('pos') + '-width', $(this).val());
+    });
+    $('.epan-border-color').change(function(event) {
+        // console.log('border-'+$(this).attr('pos')+'-color','#'+$(this).val());
+        if (is_all_border_same)
+            $(current_selected_component).css('border-color', '#' + $(this).val());
+        else
+            $(current_selected_component).css('border-' + $(this).attr('pos') + '-color', '#' + $(this).val());
+    });
+    $('.epan-border-style').change(function(event) {
+        // console.log('border-'+$(this).attr('pos')+'-style',$(this).attr('style'));
+        if (is_all_border_same)
+            $(current_selected_component).css('border-style', $(this).val());
+        else
+            $(current_selected_component).css('border-' + $(this).attr('pos') + '-style', $(this).val());
+        $(this).siblings().removeClass('xepan-btn-success');
+        $(this).addClass('xepan-btn-success');
+    });
+    $('#epan-component-width-in-per').click(function(event) {
+        $(current_selected_component).css('width', $('#epan-component-width-input').val() + '%');
+    });
+    $('#epan-component-width-in-px').click(function(event) {
+        $(current_selected_component).css('width', $('#epan-component-width-input').val() + 'px');
+    });
+    $('#epan-component-width-auto').click(function(event) {
+        $(current_selected_component).css('width', 'auto');
+    });
+    $('#epan-component-width-max').click(function(event) {
+        $(current_selected_component).css('max-width', '100%');
+    });
+    $('#epan-component-height-in-per').click(function(event) {
+        $(current_selected_component).css('height', $('#epan-component-height-input').val() + '%');
+    });
+    $('#epan-component-height-in-px').click(function(event) {
+        $(current_selected_component).css('height', $('#epan-component-height-input').val() + 'px');
+        $(current_selected_component).css('overflow', 'hidden');
+    });
+    $('#epan-component-height-auto').click(function(event) {
+        $(current_selected_component).css('height', 'auto');
+    });
+    $('#epan-component-height-max').click(function(event) {
+        $(current_selected_component).css('max-height', '100%');
+    });
+    //  GET OPTIONS FROM CURRENT SELECTED COMPONENT
+    function init_css_options() {
+        $('#epan-background-color').val($(current_selected_component).css('background-color'));
+        $('#xepan-image-option-classess').val($(current_selected_component).attr('data-extra-classes'));
+        $('.epan-background-color .current-color').css('background-color', $(current_selected_component).css('background-color'));
+        $('#epan-component-text-color').val($(current_selected_component).css('color'));
+        $('#epan-component-text-color').colorpicker('setColor', ('#' + $(current_selected_component).attr('text-color')));
+        $('#epan-text-color').val($(current_selected_component).css('color'));
+        $('.epan-text-color .current-color').css('background-color', $(current_selected_component).css('color'));
+        $('#epan-component-padding').val($(current_selected_component).css('padding'));
+        $('#epan-component-margin').val(
+            $(current_selected_component).css('margin-top') + ' ' +
+            $(current_selected_component).css('margin-right') + ' ' +
+            $(current_selected_component).css('margin-bottom') + ' ' +
+            $(current_selected_component).css('margin-left')
+        );
+        $('#epan-component-extra-clases').val($(current_selected_component).attr('data-extra-classes'));
+        $('#epan-component-background-image-input').val($(current_selected_component).css('background-image'));
+        if ($(current_selected_component).css('background-attachment') == 'fixed') {
+            $('#epan-component-background-fixed').addClass('xepan-btn-success');
+        } else {
+            $('#epan-component-background-scroll').addClass('xepan-btn-success');
+        }
+        // Background Size
+
+        if ($(current_selected_component)[0].style.backgroundSize.indexOf('px') != -1) {
+            background_size_unit = 'px';
+            $('#epan-background-size-unit-px').prop('checked', true);
+            $('#epan-background-size-unit-per').removeAttr('checked');
+        } else {
+            background_size_unit = '%';
+            $('#epan-background-size-unit-per').prop('checked', true);
+            $('#epan-background-size-unit-px').removeAttr('checked');
+        }
+        if ($(current_selected_component)[0].style.backgroundSize.length > 0) {
+            $('#epan-component-background-size').slider('value', parseInt($(current_selected_component)[0].style.backgroundSize));
+        } else {
+            $('#epan-component-background-size').slider('value', '0');
+        }
+        // Set Paddings from current component
+        if ($(current_selected_component)[0].style.paddingTop.indexOf('px') != -1) {
+            padding_unit = 'px';
+            $('#epan-all-padding-unit-px').prop('checked', true);
+            $('#epan-all-padding-unit-per').removeAttr('checked');
+        } else {
+            padding_unit = '%';
+            $('#epan-all-padding-unit-per').prop('checked', true);
+            $('#epan-all-padding-unit-px').removeAttr('checked');
+        }
+        if ($(current_selected_component)[0].style.paddingTop.length > 0) {
+            $('#epan-component-padding-top').slider('value', parseInt($(current_selected_component)[0].style.paddingTop));
+            $('#epan-component-padding-right').slider('value', parseInt($(current_selected_component)[0].style.paddingRight));
+            $('#epan-component-padding-bottom').slider('value', parseInt($(current_selected_component)[0].style.paddingBottom));
+            $('#epan-component-padding-left').slider('value', parseInt($(current_selected_component)[0].style.paddingLeft));
+        } else {
+            $('#epan-component-padding-top').slider('value', '0');
+            $('#epan-component-padding-right').slider('value', '0');
+            $('#epan-component-padding-bottom').slider('value', '0');
+            $('#epan-component-padding-left').slider('value', '0');
+        }
+        // Set margin
+        if ($(current_selected_component)[0].style.marginTop.indexOf('px') != -1) {
+            margin_unit = 'px';
+            $('#epan-all-margin-unit-px').prop('checked', true);
+            $('#epan-all-margin-unit-per').removeAttr('checked');
+        } else {
+            margin_unit = '%';
+            $('#epan-all-margin-unit-per').prop('checked', true);
+            $('#epan-all-margin-unit-px').removeAttr('checked');
+        }
+        if ($(current_selected_component)[0].style.marginTop.length > 0) {
+            $('#epan-component-margin-top').slider('value', parseInt($(current_selected_component)[0].style.marginTop));
+            $('#epan-component-margin-right').slider('value', parseInt($(current_selected_component)[0].style.marginRight));
+            $('#epan-component-margin-bottom').slider('value', parseInt($(current_selected_component)[0].style.marginBottom));
+            $('#epan-component-margin-left').slider('value', parseInt($(current_selected_component)[0].style.marginLeft));
+        } else {
+            $('#epan-component-margin-top').slider('value', '0');
+            $('#epan-component-margin-right').slider('value', '0');
+            $('#epan-component-margin-bottom').slider('value', '0');
+            $('#epan-component-margin-left').slider('value', '0');
+            $('#epan-all-margin-unit-px').prop('checked', true);
+            margin_unit = 'px';
+        }
+        // Background Repeat
+        $('[repeat-background]').removeClass('xepan-btn-success');
+        $("[repeat-background='" + $(current_selected_component).css('background-repeat') + "']").addClass('xepan-btn-success');
+        // Background Size
+
+        // Border Initialization
+        border_positions = ['top', 'right', 'bottom', 'left'];
+        $.each(border_positions, function(p_index, pos_val) {
+            if ($(current_selected_component).css('border-' + pos_val + '-width')) {
+                $('#epan-component-border-' + pos_val + '-width').val($(current_selected_component).css('border-' + pos_val + '-width'));
+                $('#epan-component-border-' + pos_val + '-color').val($(current_selected_component).css('border-' + pos_val + '-color'));
+                $('.epan-border-style[pos="' + pos_val + '"]').removeClass('xepan-btn-success');
+                $('.epan-border-style[pos="' + pos_val + '"][style="' + $(current_selected_component).css('border-' + pos_val + '-style') + '"]').addClass('xepan-btn-success');
+                $('.epan-component-border-' + pos_val + '-color .current-color').css('background-color', $(current_selected_component).css('border-' + pos_val + '-color'));
+            }
+        });
+        // TODO Get current width and put in Options
+        $('#epan-component-width-input').val('');
+
+
+        //TRANSFORM INITIALIZATION
+        var tr = $(current_selected_component).css('transform');
+        var regExp = /\(([^)]+)\)/g;
+        var matches = tr.match(regExp);
+
+        if ((matches != null) && matches.length > 0) { //Check Condition for Just Dropped Component
+
+            for (var i = 0; i < matches.length; i++) {
+                var str = matches[i];
+                if (i == 0) { // SET ROTATE VALUE
+                    $('.epan-component-transform-rotate-value').html(matches[i]);
+                    var set_value_rotate = matches[0].match(/([-]*)\d+/gi);
+                    $('.epan-component-transform-rotate').slider('value', set_value_rotate);
+
+                } else if (i == 1) { //SET SCALE VALUE
+                    $('.epan-component-transform-scale-value').html(matches[i]);
+                    var array = matches[1].split(',');
+                    var set_value_scale_x = array[0].match(/([-]*)\d+/gi);
+                    var set_value_scale_y = array[1].match(/([-]*)\d+/gi);
+                    //- console.log(set_value_scale_x+'y='+set_value_scale_y);
+                    $('.epan-component-transform-scale[direction="x"]').slider('value', parseInt(set_value_scale_x));
+                    $('.epan-component-transform-scale-x-value').html(set_value_scale_x);
+
+                    $('.epan-component-transform-scale[direction="y"]').slider('value', parseInt(set_value_scale_y));
+                    $('.epan-component-transform-scale-y-value').html(set_value_scale_y);
+
+                } else if (i == 2) {
+                    $('.epan-component-transform-skew-value').html(matches[i]);
+                    var array = matches[2].split(',');
+                    var set_value_skew_x = array[0].match(/([-]*)\d+/gi);
+                    var set_value_skew_y = array[1].match(/([-]*)\d+/gi);
+                    //- console.log(set_value_skew_x+'y='+set_value_skew_y);
+                    $('.epan-component-transform-skew[direction="x"]').slider('value', parseInt(set_value_skew_x));
+                    $('.epan-component-transform-skew-x-value').html(set_value_skew_x);
+
+                    $('.epan-component-transform-skew[direction="y"]').slider('value', parseInt(set_value_skew_y));
+                    $('.epan-component-transform-skew-y-value').html(set_value_skew_y);
+
+                } else if (i == 3) {
+                    $('.epan-component-transform-translate-value').html(matches[i]);
+                    var array = matches[3].split(',');
+                    var set_value_translate_x = array[0].match(/([-]*)\d+/gi);
+                    var set_value_translate_y = array[1].match(/([-]*)\d+/gi);
+                    console.log(set_value_translate_x + 'y=' + set_value_translate_y);
+                    $('.epan-component-transform-translate[direction="x"]').slider('value', parseInt(set_value_translate_x));
+                    $('.epan-component-transform-translate-x-value').html(set_value_translate_x);
+
+                    $('.epan-component-transform-translate[direction="y"]').slider('value', parseInt(set_value_translate_y));
+                    $('.epan-component-transform-translate-y-value').html(set_value_translate_y);
+                }
+            }
+
+        }
+    }
+
+    $('#xepan-tool-createlayoutbtn').click(function(event) {
+        $form = $('.xepan-create-layout-form');
+        $(current_selected_component).removeClass('xepan-selected-component');
+        $(current_selected_component).xepanComponent('hideComponentToolBar');
+        $form.find('#xepan-layout-html').val($(current_selected_component).prop('outerHTML'));
+        html2canvas($(current_selected_component)[0], {
+            onrendered: function(canvas) {
+                theCanvas = canvas;
+                document.body.appendChild(canvas);
+                // Convert and download as image 
+                img_data = canvas.toDataURL('image/png', 1.0);
+                $form.find('#xepan-layout-image-64').val(img_data);
+                // Clean up
+                document.body.removeChild(canvas);
+            }
+        });
+
+        $('.xepan-create-layout-dialoge').dialog({
+            modal: true,
+            width: 800,
+            buttons: {
+                "Create Layout": function() {
+                    //- check validation here
+                    file_name = $form.find('#xepan-layout-name').val();
+                    if (file_name == null || file_name == "" || file_name == undefined) {
+                        $.univ().errorMessage('name must not be empty ');
+                        return;
+                    }
+                    $.ajax({
+                        type: "POST",
+                        url: "index.php?page=xepan_cms_createlayout",
+                        timeout:0,
+                        data: {
+                            lname: $form.find('#xepan-layout-name').val(),
+                            lhtml: $form.find('#xepan-layout-html').val(),
+                            img_data: $form.find('#xepan-layout-image-64').val()
+                        },
+                        success: function(data) {
+                            return_data = JSON.parse(data);
+                            if (return_data.status == "success")
+                                $.univ().successMessage(return_data.message);
+                            else
+                                $.univ().errorMessage(return_data.message);
+                            $(".xepan-create-layout-dialoge").dialog("close");
+                            //- console.log(data);
+                        }
+                    });
+                },
+                Cancel: function() {
+                    $(this).dialog("close");
+                }
+            },
+            close: function() {
+                $(this).dialog("close");
+            }
+        });
+        //- console.log($(current_selected_component));
+
+        //- html2canvas($(current_selected_component)[0], {
+        //-     onrendered: function(canvas) {
+        //-         theCanvas = canvas;
+        //-         document.body.appendChild(canvas);
+        //-         // Convert and download as image 
+        //-         Canvas2Image.saveAsPNG(canvas);
+        //-         $('body').append(canvas);
+        //-         // Clean up 
+        //-         //- document.body.removeChild(canvas);
+        //-     }
+        //- });
+    });
+</script>

@@ -1,0 +1,22 @@
+{
+    "name": "xepan/filestore",
+    "type": "library",
+    "description": "ATK filestore modified for xEpan Platform",
+    "homepage": "https://github.com/xepan/filestore",
+    "keywords": ["xEpan","SaaS","FileStore"],
+    "license": "MIT",
+    "minimum-stability" : "dev",
+    "authors": [
+        {
+            "name": "Xavoc Technocrats Pvt. Ltd.",
+            "email": "info@xavoc.com"
+        }
+    ],
+    "require": {
+        "xepan/atk4": "4.3",
+        "php": ">=5.3"
+    },
+    "autoload": {
+        "psr-0": { "autocomplete": "lib" }
+    }
+}

@@ -1,0 +1,31 @@
+<div id="{$_name}" class="{$class}">
+    <div class="owl-carousel">
+    {rows}
+    {row}
+          <div class="testimonial-slides" >
+               <div class="col-md-12 ">
+                   <div class="singleTst animated text-center xepan-component" id="xepan-ea41f162-9107-4c20-c25d-cd474c98602d">
+                    {image_wrapper}<div class="container" style="width:50%;height:240px;">
+
+                        <img src="{$contact_image}" style="max-width: 100%;
+                        height: 100%;
+                         width: 100%;
+                        border-radius: 50%;
+                      box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);">
+                    </div><br>{/}
+        {title_wrapper} <div class="title" style="font-weight: bold; font-size: 24px; color:black" >{$name}</div><br>{/}
+
+           {description_wrapper}<p  style="position: relative; ">{$description}</p>{/}
+                {contact_wrapper}<span class="clientName   xepan-component xepan-editable-text mce-content-body" xepan-contains="David Ramon" id="xepan-eb4e60cb-d936-4c77-bf4c-7581577ea0b6" contenteditable="true" style="position: relative;">{$contact}</span>{/}
+          {rating_wrapper}<div class="rating">{$rating}</div>{/}
+       {created_wrapper}<div class="created at">{$created_at}</div>{/}
+                   
+                      
+                </div>
+             </div>
+           
+       </div>  
+    
+    {/}{/}
+    </div>
+</div>

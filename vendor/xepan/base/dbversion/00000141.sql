@@ -1,0 +1,1 @@
+ALTER IGNORE TABLE communication ADD UNIQUE (to_id, related_id, related_document_id);

@@ -1,0 +1,48 @@
+.xepan-tool-options(id='{$_name}' style="display:none" for-xepan-component='xepan/cms/Tool_ImageGallery')
+	//- .xepan-cms-group-panel.clearfix
+	//- 	h3.collapsed(data-toggle="collapse" data-target="#collapse-Img-gallery" aria-expanded="false")
+	//- 		span Image Gallery
+	//- 	#collapse-Img-gallery.xepan-cms-tools-bar-panel.row-fluid.collapse.in
+	//- 		.panel-body
+	//- 			.xepan-cms-groups-panel.collapse.in(id="xepan-cms-groups-panel")
+	table.table-condensed.table-hover.xepan-cms-tool-table
+		tr.show-text
+			.xepan-tool-option
+				td.xepan-tool-option-title Show Title
+				td.xepan-tool-option-value 
+					select#show_title(data-attr='show_title' data-defaultvalue="true")
+						option(value="true") Yes
+						option(value="false") No
+		tr.show-description
+			.xepan-tool-option		
+				td.xepan-tool-option-title Show Description
+				td.xepan-tool-option-value
+					select#show_title(data-attr='show_description' data-defaultvalue="true")
+						option(value="true") Yes
+						option(value="false") No
+
+		tr.category
+			.xepan-tool-option
+				td.xepan-tool-option-title Category
+				td.xepan-tool-option-value(colspan="2")
+					select.chosen-select.option-category(id="{$_name}_dropdown" style="width:100%;" data-attr='img_gallery_category')
+	script.
+		$.ajax({
+			url: 'index.php?page=xepan_cms_getimagegallerycategory',
+			type: 'GET',
+			data: { },
+			success: function ( data ){
+				//- console.log(data);
+				$('\#{$_name}_dropdown').html(data);
+			}
+		});
+
+		$('\#{$_name} [data-attr]').on('change',function(){
+			$(current_selected_component).attr($(this).data('attr'),$(this).val());
+		});
+
+		$('\#{$_name}').on('show',function(event){
+			$('\#{$_name} [data-attr]').each(function(index,value){
+				$(this).val($(current_selected_component).attr($(this).data('attr')));				
+			});
+		});

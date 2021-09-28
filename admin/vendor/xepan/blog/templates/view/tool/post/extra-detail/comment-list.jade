@@ -1,0 +1,20 @@
+h3 {$msg}
+{comment_wrapper}
+.xepan-blog-comment(id="{$_name}")
+  {$comment_form_above}
+  div(style="padding-top:10px;")
+    {rows}{row}
+    .panel.panel-default
+      .panel-body
+        h3 {$commented_by}
+        h4 {$comment_date}
+        p
+          {$comment}
+    div(id='contact-page clearfix')
+      .status.alert.alert-success(style='display: none')
+    {/}{/}
+    {not_found}
+    {$not_found_message}
+    {/}
+  {$comment_form_below}
+{/}

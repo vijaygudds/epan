@@ -1,0 +1,102 @@
+.xepan-grid.main-box.clearfix.atk-table.atk-table-zebra.atk-table-bordered(id="{$_name}" class="{$class}")
+    {Pannel}
+    header.main-box-header.clearfix.atk-actions(class=" {$class} ")
+        div.filter-block( style="100%")
+            .pull-right {$grid_buttons}
+            .form-group.pull-right.xepan-filter-form
+                span(class="form-control pull-left")|{$quick_search}
+                    i(class="fa fa-search search-icon")
+    {/Pannel}
+    .main-box-body.clearfix.table-responsive
+        table.table.user-list.table-hover.footable.toggle-circle-filled(style="width:100%")
+            {header}
+            thead.xepan-hover-hand
+                {cols}{col}
+                th(id="{$order_no_sortid}")
+                  span Jobcard {$order_no_sort} 
+                th(id="{$days_elapsed_sortid}" data-hide="phone")
+                  span Duration {$name_sort} 
+                th(id="{$order_item_quantity_sortid}")
+                  span Quantity {$order_item_quantity_sort} 
+                th(id="{$toreceived_sortid}" data-hide="phone")
+                  span toreceived {$toreceived_sort} 
+                th(id="{$processing_sortid}" data-hide="phone")
+                  span Received/ processing {$processing_sort} 
+                th(id="{$completed_sortid}" data-hide="phone")
+                  span Completed {$completed_sort} 
+                th(id="{$forwarded_sortid}" data-hide="phone")
+                    span forwarded {$forwarded_sort}
+                    | Received \ Pending  
+                th(id="{$completed_sortid}" data-hide="phone")
+                    span dispatched {$dispatched_sort}
+                    | Received \ Pending  
+                th(id="{$name_sortid}")
+                  span Status
+                th
+                {/}{/}
+            {/}
+            {$subheader}
+
+            tbody
+                {rows}{row}
+                tr(class="{$odd_even}" data-id="{$id}")
+                    {cols}
+                    td(style="width: 30%;")
+                      a.user-link(href = '{url}?page=xepan_production_jobcarddetail&document_id={$id}{/}' title="Jobcard No. {$id} " style="margin-left: 0px;")
+                        {$id}
+                        small
+                          a.user-subhead(href='{url}?page=xepan_commerce_salesorderdetail&document_id={$order_document_id}{/}' title="Order No. {$order_no}"){order_no}order not found{/}
+                            span [ {$order_item} ]
+                          div.user-subhead(href='{url}?page=xepan_commerce_customerdetail&contact_id={$id}{/}'){customer_name}Not Found{/}
+                      p(title="Base Unit").label.label-default  Base Unit: {$item_base_unit}
+                      p(title="Jobcard Department").label.label-primary {$department}
+
+                    td
+                        div {days_elapsed}{/} Days
+                        small created at: {$created_at}
+                    td
+                        span Order Qty ( {$order_item_quantity} {$order_item_unit} )
+                    //- td
+                    //-     span {department}{/}
+                    td
+                        span {$toreceived}
+                    td
+                        span {$processing}
+                    td
+                        span {$completed}
+                    td
+                        span {$forwarded}
+                        br
+                        small.label.label-success {$receivedbynext} 
+                        | /
+                        small.label.label-danger {pendingbynext}0{/}
+                    td
+                        span {$dispatched}  
+                        br
+                        small.label.label-success {receivedbydispatch}0{/} 
+                        | /
+                        small.label.label-danger {pendingbydispatch}0{/}
+                    td
+                        span {$action}
+                    td(style="width: 10%;")
+                        {$edit}
+                        {$delete}
+                    
+                    {/}
+                {/}{/}
+                {not_found}
+                div.row
+                    .col-md-12.text-center.alert.alert-warning(role="alert")
+                        span.icon-attention.fa.fa-exclamation-triangle  &nbsp;{$not_found_message}
+                {/}
+
+            {totals}
+            tfoot
+                tr(class="totals")
+                    {cols}{col}
+                    <td {$tdparam}>
+                    {$content}
+                    </td>
+                    {/}{/}
+            {/}
+        {$Paginator}

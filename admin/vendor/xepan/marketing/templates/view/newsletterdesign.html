@@ -1,0 +1,48 @@
+
+<div tabindex="0" style="right: -13px;" class="email-detail-nano-content">
+  <div id="email-detail-inner">
+    <div id="email-detail-subject" class="clearfix">
+      <div class="row">
+        <div class="col-md-1"><span class="subject">Name:</span></div>
+        <div class="col-md-11">
+           
+          {$content_name}
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-1"><span class="subject">Subject: </span></div>
+        <div class="col-md-8">
+          <div class="atk-form-row">{$title}</div>
+        </div>
+        <div class="col-md-3 pull-right"> <span class="atk-form-row">Category: {$marketing_category}{$marketing_category_id}</span></div>
+      </div>
+    </div>
+    <div id="email-detail-sender" class="clearfix">
+      <div class="picture hidden-xs">
+         
+        {$avatar} 
+      </div>
+      <div class="users">
+        <div class="from clearfix">
+          <div class="name">{$created_by}</div>
+        </div>
+      </div>
+      <div class="tools">
+        <div class="date">{$created_at}</div>
+        <div class="btns">
+          <div class="btn-group">
+             
+            {$action}
+          </div>
+          <div class="text-muted">
+                
+            {$is_template}   
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="email-body">
+      <div class="atk-form-row">{$message_blog}</div><span class="small text-muted">Hint : type {$unsubscribe } for unsubscription link </span>
+    </div>
+  </div>
+</div>{$Content}

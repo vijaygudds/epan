@@ -1,0 +1,39 @@
+.carousel.slide(id='{$_name}', data-ride='carousel' style="height:270px;")
+  ol.carousel-indicators
+    li.active(data-target='#{$_name}', data-slide-to='0')
+    li(data-target='#{$_name}', data-slide-to='1')
+    li(data-target='#{$_name}', data-slide-to='2')
+  .carousel-inner(role='listbox')
+    | {rows}
+    | {row}
+    .item(class='{$active}')
+      .row
+        .col-md-2
+        .col-md-8.text-center(style="margin-top:20px;")
+          {title_wrapper}
+          h3
+            b {$title}
+          {/}
+          span
+            blockquote {$description}
+          div 
+            img(src='{$file}', style='width:50px;  border-radius: 50%;')
+            small
+              b {$customer_name} &nbsp; &nbsp;
+            {created_at_wrapper}
+            small.text-muted {$created_at}
+            {/}  
+        .col-md-2
+      .carousel-caption
+    |   {/}{/}
+  a.left.carousel-control(href='#{$_name}', role='button', data-slide='prev')
+    span.glyphicon.glyphicon-chevron-left(aria-hidden='true')
+    span.sr-only Previous
+  a.right.carousel-control(href='#{$_name}', role='button', data-slide='next')
+    span.glyphicon.glyphicon-chevron-right(aria-hidden='true')
+    span.sr-only Next
+
+style.
+  .carousel-control{
+    height: 270px;
+  }

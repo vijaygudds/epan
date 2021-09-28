@@ -1,0 +1,34 @@
+
+<div id="{$_name}" style="display:none" for-xepan-component="xepan/cms/Tool_HtmlBlock" class="xepan-tool-options">
+  <table class="table table-condensed table-hover xepan-cms-tool-table">
+    <tr>
+      <td style="width:100%" class="text-center">
+        <textarea id="xepan_html_code_for_html_block" style="width:100%; font-size:10px" rows="10" placeholder="place html code here"></textarea>
+      </td>
+    </tr>
+    <tr>
+      <td class="text-center">
+        <button id="xepan_html_code_for_html_block_btn" class="btn btn-default btn-xs">UPDATE</button>
+      </td>
+    </tr>
+  </table>
+  <script>
+    
+    $('#{$_name} [data-attr]').on('change',function(){
+    	$(current_selected_component).attr($(this).data('attr'),$(this).val());
+    });
+    
+    $('#{$_name}').on('show',function(event){
+    	$('#{$_name} [data-attr]').each(function(index,value){
+    		$(this).val($(current_selected_component).attr($(this).data('attr')));				
+    	});
+    });
+    
+    $('#xepan_html_code_for_html_block_btn').click(function(event) {
+    	$(current_selected_component).html($('#xepan_html_code_for_html_block').val());
+    });
+    
+    html_text = $(current_selected_component).html();
+    $('#xepan_html_code_for_html_block').val(html_text);
+  </script>
+</div>

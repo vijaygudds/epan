@@ -1,0 +1,196 @@
+
+<div id="{$_name}" style="display:none" for-xepan-component="xepan/blog/Tool_PostList" class="xepan-tool-options">
+  <div class="xepan-cms-group-panel clearfix">
+    <div id="collapse-post-list" class="xepan-cms-tools-bar-panel row-fluid collapse in">
+      <div style="padding-top:0px;padding-bottom:0px;" class="panel-body">
+        <div id="xepan-cms-groups-panel" class="xepan-cms-groups-panel collapse in"></div>
+        <div class="xepan-cms-group-panel clearfix">
+          <div data-toggle="collapse" data-target="#show-hide-post-list-option" aria-expanded="false" class="panel panel-heading panel-primary collapsed"><span>Hide/ Show</span><i class="fa fa-chevron-down pull-right"></i></div>
+        </div>
+        <div id="show-hide-post-list-option" class="xepan-cms-tools-bar-panel row-fluid collapse">
+          <table class="table table-condensed table-hover xepan-cms-tool-table">
+            <tr class="xepan-tool-option">
+              <td class="xepan-tool-option-title">Title</td>
+              <td class="xepan-tool-option-value"> 
+                <select id="show_title" data-attr="show_title" data-defaultvalue="true">
+                  <option value="true">Yes																					</option>
+                  <option value="false">No</option>
+                </select>
+              </td>
+            </tr>
+            <tr class="xepan-tool-option">
+              <td class="xepan-tool-option-title">Description</td>
+              <td class="xepan-tool-option-value">
+                <select id="show_description" data-attr="show_description" data-defaultvalue="true">
+                  <option value="true">Yes</option>
+                  <option value="false">No</option>
+                </select>
+              </td>
+            </tr>
+            <tr class="xepan-tool-option">
+              <td class="xepan-tool-option-title">Read More Button</td>
+              <td class="xepan-tool-option-value">
+                <select id="show_read_more_btn" data-attr="show_read_more_btn" data-defaultvalue="true">
+                  <option value="true">Yes</option>
+                  <option value="false">No</option>
+                </select>
+              </td>
+            </tr>
+            <tr class="xepan-tool-option">
+              <td class="xepan-tool-option-title">Set By Order</td>
+              <td class="xepan-tool-option-value">
+                <select id="set_by_order" data-attr="set_by_order" data-defaultvalue="order_by_id">
+                  <option value="order_by_id">Id</option>
+                  <option value="order_by_recent_post">Recent Post First</option>
+                  <option value="order_by_created_at">Created Date</option>
+                </select>
+              </td>
+            </tr>
+            <tr class="xepan-tool-option">
+              <td class="xepan-tool-option-title">Show Image</td>
+              <td class="xepan-tool-option-value"> 
+                <select id="show_image" data-attr="show_image" data-defaultvalue="true">
+                  <option value="true">Yes</option>
+                  <option value="false">No</option>
+                </select>
+              </td>
+            </tr>
+            <tr class="xepan-tool-option">
+              <td class="xepan-tool-option-title">Show Paginator</td>
+              <td class="xepan-tool-option-value"> 
+                <select id="show_paginator" data-attr="show_paginator" data-defaultvalue="true" data-togglevalue="true" data-toggleclass=".xepan-commerce-itemlist-option-toggle">
+                  <option value="true">Yes</option>
+                  <option value="false">No</option>
+                </select>
+              </td>
+            </tr>
+            <tr class="xepan-tool-option">
+              <td class="xepan-tool-option-title">Record Limit Per Page</td>
+              <td class="xepan-tool-option-value"> 
+                <input id="paginator_set_rows_per_page" data-attr="paginator_set_rows_per_page"/>
+              </td>
+            </tr>
+            <tr class="xepan-tool-option">
+              <td class="xepan-tool-option-title">Social Share</td>
+              <td class="xepan-tool-option-value">
+                <select id="show_socialshare" data-attr="add_socialshare" data-defaultvalue="true" data-togglevalue="true" data-toggleclass=".xepan-blog-postlist-socialshare-option-toggle">
+                  <option value="true">Yes</option>
+                  <option value="false">No</option>
+                </select>
+              </td>
+            </tr>
+            <tr class="xepan-blog-postlist-socialshare-option-toggle xepan-tool-option">
+              <td colspan="2" class="xepan-tool-option-value">
+                <select id="{$_name}_multiselect_share" style="width:100%;" multiple="" data-attr="include_socialshare" multiselect="multiselect" class="chosen-select post-list-option-social-multiselect">
+                  <option value="email">Email</option>
+                  <option value="facebook">Facebook</option>
+                  <option value="googleplus">Googleplus</option>
+                  <option value="pinterest">Pinterest</option>
+                  <option value="linkedin">Linkedin</option>
+                  <option value="stumbleupon">stumbleupon</option>
+                  <option value="twitter">Twitter</option>
+                  <option value="whatsapp">Whatsapp</option>
+                </select>
+              </td>
+            </tr>
+            <tr class="xepan-blog-postlist-socialshare-option-toggle xepan-tool-option">
+              <td class="xepan-tool-option-title">Theme</td>
+              <td class="xepan-tool-option-value">
+                <select id="{$_name}" data-attr="socialshare_theme" data-defaultvalue="flat">
+                  <option value="flat">Flat</option>
+                  <option value="classic">Classic</option>
+                  <option value="minima">Minima</option>
+                  <option value="plain">Plain</option>
+                </select>
+              </td>
+            </tr>
+          </table>
+        </div>
+        <div class="xepan-cms-group-panel clearfix">
+          <div data-toggle="collapse" data-target="#post-list-other-options" aria-expanded="false" class="panel panel-heading panel-primary collapsed"><span>Page Links</span><i class="fa fa-chevron-down pull-right"></i></div>
+        </div>
+        <div id="post-list-other-options" class="xepan-cms-tools-bar-panel row-fluid collapse">
+          <table class="table table-condensed table-hover xepan-cms-tool-table">
+            <tr class="xepan-tool-option">
+              <td class="xepan-tool-option-title">Description Page URL</td>
+              <td class="xepan-tool-option-value"> 
+                <input id="description_page_url" data-attr="description_page_url"/>
+              </td>
+            </tr>
+            <tr class="xepan-tool-option">
+              <td class="xepan-tool-option-title">Custom Template</td>
+              <td class="xepan-tool-option-value">
+                <input data-attr="custom_template" data-defaultvalue="list"/>
+              </td>
+            </tr>
+          </table>
+        </div>
+        <div data-toggle="collapse" data-target="#post-list-option-category" aria-expanded="false" class="panel panel-heading panel-primary collapsed"><span>Category</span><i class="fa fa-chevron-down pull-right"></i></div>
+        <div id="post-list-option-category" class="xepan-cms-tools-bar-panel row-fluid collapse">
+          <table class="table table-condensed table-hover xepan-cms-tool-table">
+            <tr class="xepan-tool-option">
+              <td colspan="2" class="xepan-tool-option-value">
+                <select id="{$_name}_post_cat_multiselect" style="width:100%;" multiple="" data-attr="show_post_of_category" multiselect="multiselect" class="chosen-select post-list-option-category-multiselect"></select>
+              </td>
+            </tr>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div><link rel="stylesheet" type="text/css" href="vendor/xepan/blog/templates/css/chosen.css"/>
+  <script src="vendor/xepan/blog/templates/js/chosen.jquery.js"></script>
+  <script>
+    $.ajax({
+    	url: 'index.php?page=xepan_blog_getcategory',
+    	type: 'GET',
+    	data: { },
+    	success: function ( data ){
+    		$('#{$_name}_post_cat_multiselect').html(data);
+    		
+    		$('#{$_name}_post_cat_multiselect').chosen();
+    		$('#{$_name}_post_cat_multiselect').chosen({allow_single_deselect: true });
+    	}
+    });
+    $('#{$_name}_multiselect_share').chosen({allow_single_deselect: true });
+
+    $('#{$_name} [data-attr]').on('change',function(){
+    	$(current_selected_component).attr($(this).data('attr'),$(this).val());
+    	// show or hide the toggle class
+    	if($(this).data('toggleclass')){
+    		var value = $(this).data('togglevalue').toString();
+    		if($(this).val() === value){
+    			$($(this).data('toggleclass')).show();
+    		}else
+    			$($(this).data('toggleclass')).hide();
+    	}
+
+    });
+    
+    $('#{$_name}').on('show',function(event){
+    	$('#{$_name} [data-attr]').each(function(index,value){
+    		var default_value = $(this).attr('data-defaultvalue');
+    		if($(current_selected_component).attr($(this).data('attr')))
+    			default_value = $(current_selected_component).attr($(this).data('attr'));
+    		
+    		$(this).val(default_value);
+    	});
+      
+
+    	//- chosen multiselect options
+    	if(typeof $(current_selected_component).attr('show_post_of_category') === 'undefined'){
+    		$("#{$_name}_post_cat_multiselect").val("\{\}").trigger("chosen:updated");
+    	}else{
+    		var str = $(current_selected_component).attr('show_post_of_category');
+    		$("#{$_name}_post_cat_multiselect").val(str.split(',')).trigger("chosen:updated");
+    	}
+      
+      // social share multiple updated
+      if(typeof $(current_selected_component).attr('include_socialshare') === 'undefined'){
+        $("#{$_name}_multiselect_share").val("\{\}").trigger("chosen:updated");
+      }else{
+        var str = $(current_selected_component).attr('include_socialshare');
+        $("#{$_name}_multiselect_share").val(str.split(',')).trigger("chosen:updated");
+      }
+    });
+  </script>
+</div>

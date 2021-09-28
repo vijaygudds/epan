@@ -1,0 +1,1 @@
+ALTER TABLE `employee_leave` CHANGE `employee_id` `created_by_id` INT(11) NULL DEFAULT NULL;

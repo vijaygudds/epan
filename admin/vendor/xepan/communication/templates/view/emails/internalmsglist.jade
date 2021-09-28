@@ -1,0 +1,88 @@
+div.internal-conversion-lister(id="{$_name}" class="{$class}" style="{$style}")
+  .row
+    .col-lg-12
+      .main-box.clearfix
+        //- header.main-box-header.clearfix
+        //-   h2 Conversation
+        {rows}{row}
+        .conversation-item.clearfix(class="item-{$position}")
+          .conversation-user
+            {avatar}
+            img(src='img/samples/kunis.png', alt='')
+            {/}  
+          .conversation-body(class=" bg-{$class}")
+            a.name(class="{$unread}"  data-id="{$id}")
+              | {from_name}Ryan Gossling{/} 
+              small  {$subject}
+              a.table-link.danger.do-delete-conversion.pull-right(href="#" data-id="{$id}")
+                {trash_wrapper}
+                span.fa-stack
+                  i.fa.fa-square.fa-stack-2x
+                  i.fa.fa-stack-1x.fa-inverse.fa-trash-o
+                {/}
+              .btns.pull-right
+                .btn-group
+                  button.btn.btn-success.dropdown-toggle(type='button', data-toggle='dropdown')
+                    span.caret
+                  ul.dropdown-menu.dropdown-menu-right
+                    li(style= "cursor:pointer; cursor: hand; max-width:600px;").do-msg-reply(data-id="{$id}")
+                      a(data-id="{$id}")
+                        i.fa.fa-mail-reply
+                        |  Reply
+                    li(style= "cursor:pointer; cursor: hand; max-width:600px;").do-msg-reply-all(data-id="{$id}")
+                      a(data-id="{$id}")
+                        i.fa.fa-mail-reply-all
+                        |  Reply all
+                    li(style= "cursor:pointer; cursor: hand; max-width:600px;").do-msg-fwd(data-id="{$id}")
+                      a(data-id="{$id}")
+                        i.fa.fa-mail-forward
+                        |  Forward
+              br
+            small.text-muted
+              |To: {$to_name}
+              br  
+              |Cc: {$cc_name}
+            //- .btns.pull-right
+            //-   a.table-link.danger.do-msg-reply-all(href="#" data-id="{$id}"  title="Reply To ALL")
+            //-       span.fa-stack
+            //-         i.fa.fa-mail-reply-all
+
+            .time.hidden-xs
+              | &nbsp;{callback_date}September 21, 2013 18:28{/}
+            
+            .text(data-id="{$id}" style="display:none")
+              {message}
+              | I don't think they tried to market it to the billionaire, spelunking,
+              | base-jumping crowd.{/}
+              br
+              br
+              #email-attachments-content.msg-attachment
+                {$Attachments}
+        {/}{/}
+        .xepan-push-large
+        {$Paginator}
+style.
+  .form-control{
+    border-color:#e7ebee!important;
+  }
+  .conversation-wrapper .conversation-body > .name{
+    font-weight:100;
+  }
+  .internal-conversion-lister .conversation-body .btn{
+    padding:1px 4px!important;
+  }
+  a.name{
+    cursor:pointer;
+  }
+  .conversation-wrapper .bg-success{
+    background:#dff0d8!important;
+  }
+  .conversation-wrapper .bg-danger{
+    background:#f2dede!important;
+  }
+script.
+        //- jQuery(document).ready(function(){
+        //-   jQuery('.name').on('click', function(event) {        
+        //-        $(this).parent().find('.text').toggle('hide'); 
+        //-   });
+        //- });  

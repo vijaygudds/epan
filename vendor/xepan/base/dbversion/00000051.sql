@@ -1,0 +1,1 @@
+ALTER TABLE `task` ADD COLUMN `updated_at`  datetime NULL DEFAULT NULL AFTER `is_reminder_only`;

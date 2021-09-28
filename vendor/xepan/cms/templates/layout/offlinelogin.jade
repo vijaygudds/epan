@@ -1,0 +1,61 @@
+#login-full-wrapper
+  .container
+    .row
+      .col-xs-12
+        #login-box
+          #login-box-holder
+            .row
+              .col-xs-12
+                header#login-header
+                  #login-logo
+                    img(src='img/logo.png', alt='' style="width:100px; height:65px;")
+                    p(style="font-size:22px")|{$company_name}
+                #login-box-inner
+                    {Content}
+                    {form_layout}
+                    .input-group(style="width:100%")
+                      i.glyphicon.glyphicon-user
+                      .atk-form-row.atk-form-field{$username}
+                    .input-group
+                      i.glyphicon.glyphicon-lock
+                      .atk-form-row.atk-form-field{$password}
+                    #remember-me-wrapper
+                      .row
+                        .col-xs-6
+                          .checkbox-nice
+                            {$memorize}
+                    .row
+                      .col-xs-12
+                        button.btn.btn-success.col-xs-12(type='submit') Login
+                    //- .row
+                    //-   .col-xs-12
+                    //-     p.social-text Or login with
+                    //- .row
+                    //-   .col-xs-12.col-sm-6
+                    //-     button.btn.btn-primary.col-xs-12.btn-facebook(type='submit')
+                    //-       i.fa.fa-facebook
+                    //-       |  facebook
+                    //-   .col-xs-12.col-sm-6
+                    //-     button.btn.btn-primary.col-xs-12.btn-twitter(type='submit')
+                    //-       i.fa.fa-twitter
+                    //-       |  Twitter
+                    style.
+                      .input-group{
+                        width:100% !important;
+                      }
+                      .input-group input {
+                        width:100% !important ;
+                      }
+                    {/}
+                    {/}
+                  #login-box-footer.panel-footer.text-right(style="margin-top: -6px")
+                        span(style="color:black;")| Powered by  
+                          a(href='http://www.xavoc.com' target="_blank" style="color:#03A9A4")
+                            | Xavoc Technocrats Pvt. Ltd.
+style.
+  .input-group{
+    width:100% !important;
+  }
+  .input-group input {
+    width:100% !important ;
+  }

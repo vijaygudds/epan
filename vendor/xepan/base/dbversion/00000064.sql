@@ -1,0 +1,1 @@
+ALTER TABLE `projectcomment` ADD COLUMN `created_at`  datetime NULL DEFAULT NULL;

@@ -1,0 +1,1 @@
+ALTER TABLE `custom_form` MODIFY COLUMN `custom_form_layout_path` text CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL;

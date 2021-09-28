@@ -1,0 +1,74 @@
+.xepan-tool-options(id='{$_name}' style="display:none" for-xepan-component='xepan/cms/Tool_AwesomeSlider')
+	//- .xepan-cms-group-panel.clearfix
+	//- 	h3.collapsed(data-toggle="collapse" data-target="#collapse-carousel" aria-expanded="false")
+	//- 		span Awesome Slider
+	//- 	#collapse-carousel.xepan-cms-tools-bar-panel.row-fluid.collapse.in
+	//- 		.panel-body
+	table.table-condensed.table-hover.xepan-cms-tool-table
+		tr.category
+			td.xepan-tool-option-title Gallery
+			td.xepan-tool-option-value(colspan="2")
+				select.chosen-select.option-category(id="{$_name}_dropdown" style="width:150px;" data-attr='slider_category')
+		tr
+			td Themes
+			td
+				select#AwesomeSlider_Theme(data-attr="data-awesome-theme")
+					option(value="theme-default")|theme-default
+					option(value="theme-bar")|theme-bar
+					option(value="theme-dark")|theme-dark
+					option(value="theme-light")|theme-light
+		tr
+			td Control Nav
+			td
+				select#AwesomeSlider_control_nav(data-attr="control_nav")
+					option(value="true") Yes
+					option(value="false") No
+		tr
+			td Paginator Position
+			td
+				select#AwesomeSlider_Paginator-pos(data-attr="paginator-position")
+					option(value="position-topleft")|position-topleft
+					option(value="position-topcenter")|position-topcenter
+					option(value="position-topright")|position-topright
+					option(value="position-bottomleft")|position-bottomleft
+					option(value="position-bottomcenter")|position-bottomcenter
+					option(value="position-bottomright")|position-bottomright
+	script.
+		$.ajax({
+			url: 'index.php?page=xepan_cms_getAwesomegallery',
+			type: 'GET',
+			data: { },
+			success: function ( data ){
+				//- console.log(data);
+				$('\#{$_name}_dropdown').html(data);
+			}
+		});
+		$('#AwesomeSlider_Theme').val($(current_selected_component).attr('data-awesome-theme'));
+		$('#AwesomeSlider_Paginator-pos').val($(current_selected_component).attr('paginator-position'));
+		$('#AwesomeSlider_control_nav').val($(current_selected_component).attr('control_nav'));
+				
+
+		$('\#{$_name} [data-attr]').on('change',function(){
+			$(current_selected_component).attr($(this).data('attr'),$(this).val());
+		});
+
+		$('\#{$_name}').on('show',function(event){
+			$('\#{$_name} [data-attr]').each(function(index,value){
+				$(this).val($(current_selected_component).attr($(this).data('attr')));				
+			});
+		});
+
+		$('.option-category').change(function(event) {
+			$(current_selected_component).attr('data-options',$('.option-category').val());
+			$(current_selected_component).univ().errorMessage('Save and reload Page to see changes');
+		});
+
+		$('#AwesomeSlider_Theme').change(function(event) {
+			$(current_selected_component).find('.slider-wrapper').removeClass (function (index, className) {
+				return (className.match (/(^|\s)theme-\S+/g) || []).join(' ');
+			}).addClass($(current_selected_component).attr('data-awesome-theme'));
+		});
+
+		//- $('#AwesomeSlider_Paginator-pos').change(function(event) {
+		//- 	$(current_selected_component).find('.nivo-controlNav').addClass($(current_selected_component).attr('paginator-position'));
+		//- });

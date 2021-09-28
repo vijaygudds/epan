@@ -1,0 +1,28 @@
+{
+    "name": "xepan/webwidgets",
+    "type": "library",
+    "description": "Official xEpan CMS Web Widgets",
+    "homepage": "https://github.com/xepan/webwidgets",
+    "keywords": ["xEpan","SaaS","ERP","CMS", "Drag and Drop","Widgets"],
+    "license": "MIT",
+    "minimum-stability" : "dev",
+    "authors": [
+        {
+            "name": "Xavoc Technocrats Pvt. Ltd.",
+            "email": "info@xavoc.com"
+        }
+    ],
+    "source": {
+        "url": "git@github.com:xepan/webwidgets.git",
+        "type": "git",
+        "reference": "origin/master"
+    },
+    "require": {
+        "xepan/cms":"dev-master",
+        "tburry/pquery" : ">=0.2",
+        "php": ">=5.3"
+    },
+    "autoload": {
+        "psr-0": { "autocomplete": "lib" }
+    }
+}

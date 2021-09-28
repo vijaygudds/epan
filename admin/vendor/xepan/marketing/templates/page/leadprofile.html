@@ -1,0 +1,162 @@
+
+<div id="user-profile">{$Content}
+  <div class="row">
+    <div class="col-lg-12 col-md-12 col-sm-12">
+      {contact_view_full_width}
+      {$Content}
+      <div class="main-box">
+        <header class="main-box-header clearfix text-center">
+          <h1>Add New Lead</h1>
+        </header>
+        <div class="main-box-body clearfix">
+          <div class="row">
+            <div class="form-group col-xs-8">
+              <div style="margin-bottom:0px;" class="panel panel-default">
+                <div class="panel panel-heading panle-primary">General Information</div>
+                <div class="panel-body">
+                  <div class="row">
+                    <div class="col-xs-6">
+                      <div class="form-group atk-form-row atk-form-field">{$first_name}</div>
+                    </div>
+                    <div class="col-xs-6">
+                      <div class="form-group atk-form-row atk-form-field">{$last_name}</div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-xs-6">
+                      <div class="form-group atk-form-row atk-form-field">{$organization}</div>
+                    </div>
+                    <div class="col-xs-6">
+                      <div class="form-group atk-form-row atk-form-field">{$post}</div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-xs-6">
+                      <div class="form-group atk-form-row atk-form-field">{$website}</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div style="margin-bottom:0px;" class="panel panel-default">
+                <div class="panel panel-heading panle-primary">Address</div>
+                <div class="panel-body">
+                  <div class="row">
+                    <div class="form-group col-xs-6 atk-form-row atk-form-field">{$address}</div>
+                    <div class="col-xs-6">
+                      <div class="form-group atk-form-row atk-form-field">
+                        Country 
+                        {$country_id}
+                      </div>
+                      <div class="form-group atk-form-row atk-form-field">
+                        State
+                        {$state_id}    
+                      </div>
+                      <div class="form-group atk-form-row atk-form-field">{$city}</div>
+                      <div class="form-group atk-form-row atk-form-field">{$pin_code}</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div style="margin-bottom:0px;" class="panel panel-default">
+                <div class="panel panel-heading panle-primary">Miscellaneous Information</div>
+                <div class="panel-body">
+                  <div class="row">
+                    <div class="form-group col-xs-12 atk-form-row atk-form-field">
+                      Lead Note\ Remark\ Interest\ Narration
+                      {$remark}
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="form-group col-xs-6 atk-form-field atk-form-row">
+                      Lead Source
+                      {$source}
+                    </div>
+                    <div class="form-group col-xs-6 atk-form-row atk-form-field">
+                      Lead Assign to Employee
+                      {$assign_to_id}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="form-group col-xs-4">
+              <div style="margin-bottom:0px;" class="panel panel-default">
+                <div class="panel panel-heading panle-primary">Official Email</div>
+                <div class="panel-body">        
+                  <div class="row">
+                    <div class="form-group col-xs-12 atk-form-row atk-form-field">{$email_1}</div>
+                    <div class="form-group col-xs-12 atk-form-row atk-form-field">{$email_2}</div>
+                  </div>
+                </div>
+              </div>
+              <div style="margin-bottom:0px;" class="panel panel-default">
+                <div class="panel panel-heading panle-primary">Personal Email</div>
+                <div class="panel-body">
+                  <div class="row">
+                    <div class="form-group col-xs-12 atk-form-row atk-form-field">{$email_3}</div>
+                    <div class="form-group col-xs-12 atk-form-row atk-form-field">{$email_4}</div>
+                  </div>
+                </div>
+              </div>
+              <div style="margin-bottom:0px;" class="panel panel-default">
+                <div class="panel panel-heading panle-primary">Official Contact</div>
+                <div class="panel-body">
+                  <div class="row">
+                    <div class="form-group col-xs-12 atk-form-row atk-form-field">{$contact_no_1}</div>
+                    <div class="form-group col-xs-12 atk-form-row atk-form-field">{$contact_no_2}</div>
+                  </div>
+                </div>
+              </div>
+              <div style="margin-bottom:0px;" class="panel panel-default">
+                <div class="panel panel-heading panle-primary">Personal Contact</div>
+                <div class="panel-body">
+                  <div class="row">
+                    <div class="form-group col-xs-12 atk-form-row atk-form-field">{$contact_no_3}</div>
+                    <div class="form-group col-xs-12 atk-form-row atk-form-field">{$contact_no_4}</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div style="margin-bottom:0px;" class="panel panel-default">
+            <div class="panel panel-heading panle-primary">Lead Category</div>
+            <div class="panel-body">
+              <div class="row">
+                <div class="form-group col-xs-12 atk-form-row atk-form-field">{$category}</div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="form-group col-xs-12 atk-form-row atk-form-field">{$want_to_add_next_lead}</div>
+          </div>
+        </div>{$form_buttons}
+      </div>{/}
+    </div>
+    <div class="col-lg-3 co-md-3 col-sm-3">{$contact_view}</div>{other_details}
+    <div class="col-lg-9 col-md-8 col-sm-8">
+      <div class="main-box clearfix">
+        <div class="tabs-wrapper profile-tabs">
+          <ul class="nav nav-tabs responsive-tabs">
+            <li class="active"><a data-toggle="tab" href="#tab-details">Details</a></li>
+            <li><a data-toggle="tab" href="#tab-opportunity">Opportunity</a></li>
+            <li><a data-toggle="tab" href="#tab-activity">Activity  </a></li>
+            <li class="tab-extrenal-info"><a data-toggle="tab" href="#tab-external-info">External Information  </a></li>
+          </ul>
+          <div class="tab-content">
+            <div id="tab-details" class="tab-pane active">{details}
+              <div class="alert alert-warning"><i class="fa fa-warning fa-fw fa-lg"></i><strong>Warning!</strong> Please Fill the basic information first. </div>{/details}
+            </div>
+            <div id="tab-opportunity" class="tab-pane">{$opportunity}</div>
+            <div id="tab-activity" class="tab-pane">{$activity}</div>
+            <div id="tab-external-info" class="tab-pane">
+              <div class="view-related-lead-extrenal-info">
+                {$extra_info}
+                {$extra_info_message}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>{/}         
+  </div>
+</div>

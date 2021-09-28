@@ -1,0 +1,33 @@
+version: "2"
+
+services:
+  nginx:
+    image: bitnami/nginx
+    ports:
+      - "80:80"
+    links:
+      - phpfpm:phpfpm
+      - mariadb:xepandbserver
+    volumes:
+      - ./server/nginx.conf:/bitnami/nginx/conf/vhosts/my.conf
+      - ./server/error.log:/var/log/nginx/error.log
+      - .:/app
+
+  phpfpm:
+    image: bitnami/php-fpm
+    ports:
+      - "9000:9000"
+    links:
+      - mariadb:xepandbserver
+    volumes:
+      - .:/app
+
+  mariadb:
+    image: mariadb
+    ports:
+      - "3306:3306"
+    environment:
+      - MYSQL_ROOT_PASSWORD=password_here
+      - MYSQL_DATABASE=xepan2
+    volumes:
+      - "~/db-files:/var/lib/mysql"

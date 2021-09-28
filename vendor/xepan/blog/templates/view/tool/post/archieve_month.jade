@@ -1,0 +1,11 @@
+div(id='{$_name}' class="{$class} row" style="{$style}")
+  {rows}{row}
+  .row
+    .col-sm-12
+      ul.blog_archieve
+        li.text-center
+          a(href='{$url}')
+            i.fa.fa-angle-double-right
+            | {$month} 
+            span.text-right &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {$month_post_count}
+  {/}{/}

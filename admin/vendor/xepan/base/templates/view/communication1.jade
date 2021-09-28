@@ -1,0 +1,85 @@
+div(id="{$_name}" class = "xepan-communication-lister {$class}")
+  .row.xepan-push-small
+    span
+      div.panel.panel-default.panel-body
+        .row.xepan-push 
+          .col-md-6
+            .btn.btn-primary.btn-sm.inform.btn-block Inform Customer
+          .col-md-6 
+            .btn.btn-primary.btn-sm.create.btn-block Create Communication
+        {$form}
+  {rows}{row}
+  #accordion.panel-group.accordion
+      .panel.panel-default
+        .panel-heading
+          h4.panel-title(style="height: 20px;overflow: hidden;")
+            a.accordion-toggle.collapsed(href='#details{$id}', data-parent='#accordion', data-toggle='collapse')
+              .col-md-5 
+                {title}title of communication should come here{/}
+                {$attachment}
+              .col-md-2
+                span.pull-right
+                  {$created_at}
+              .col-md-2
+                span.text-small
+                  {$status} &nbsp; {$to}
+              .col-md-1
+                span.pull-right
+                  {$communication_type}
+              .col-md-2
+                a.do-view-delete-communication.pull-right.xepan-communication-action(data-id="{$id}")
+                  i.fa.fa-trash       
+                a.do-view-edit-communication.pull-right.xepan-communication-action(data-id="{$id}")
+                  i.fa.fa-edit       
+        .panel-collapse.collapse(style='height: 2px;', id="details{$id}")
+          .panel-body
+            .row
+              {from_lister}
+              span.small From: 
+              {rows}{row} 
+              span.small {$name} &nbsp;&nbsp;
+              {/}{/}
+              {/}
+            .row
+              {to_lister}
+              span.small To:
+              {rows}{row} 
+              span.small {$name}{$email}&nbsp;{$number} &nbsp; &nbsp;
+              {/}{/}
+              {/}
+            .row
+              {cc_lister}
+              span.small CC: 
+              {rows}{row} 
+              span.small {$name}{$email}&nbsp;{$number} &nbsp;&nbsp;
+              {/}{/}
+              {/}
+            .row.xepan-push-large
+              hr    
+            .row.xepan-push-large    
+              {description}  
+              | Description should come here simpley for now
+              {/}
+            .row    
+              {Attachments}
+              {rows}{row}
+              span     
+                .img
+                  a(href="{$file}")
+                    img(alt='', src='{$file}')
+                span.name
+                a(href='{$file}' download) Download Attachment
+              {/}{/}
+              {/}
+
+  {/}{/}
+  
+  {$Paginator}
+style.
+  .accordion .panel-title > a::after{
+    margin-top:0px!important;
+  }  
+
+  .xepan-communication-lister h4{
+    font-size:13px !important;
+  }

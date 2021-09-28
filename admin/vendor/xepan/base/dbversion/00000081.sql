@@ -1,0 +1,1 @@
+ALTER TABLE `graphical_report` ADD `permitted_post` VARCHAR(255) NOT NULL;

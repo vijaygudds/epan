@@ -1,0 +1,88 @@
+.xepan-tool-options(id='{$_name}' style="display:none" for-xepan-component='xepan/cms/Tool_Marquee')
+	//- .xepan-cms-group-panel.clearfix
+		//- h3.collapsed(data-toggle="collapse" data-target="#collapse-marquee" aria-expanded="false")
+		//- 	span Marquee
+		//- #collapse-marquee.xepan-cms-tools-bar-panel.row-fluid.collapse
+		//- 	.panel-body
+		//- 		.xepan-cms-groups-panel.collapse.in(id="xepan-cms-groups-panel")
+		//- 		.xepan-cms-group-panel.clearfix
+		//- 			div.panel.panel-heading.panel-primary.collapsed(data-toggle="collapse" data-target="#show-hide-marquee-option" aria-expanded="false")
+		//- 				span Options 
+		//- 		#show-hide-marquee-option.xepan-cms-tools-bar-panel.row-fluid.collapse.in
+	table.table-condensed.table-hover.xepan-cms-tool-table
+		tr.action
+			td
+				.btn.btn-success.btn-xs.marque-start.btn-block Start
+			td
+				.btn.btn-danger.btn-xs.marque-stop.btn-block Stop
+		tr.show-text
+			.xepan-tool-option
+				td.xepan-tool-option-title Width
+				td.xepan-tool-option-value 
+					input#width( data-attr='width'  type='text', placeholder='' style="width:90%")
+		tr.show-text
+			.xepan-tool-option
+				td.xepan-tool-option-title Height
+				td.xepan-tool-option-value 
+					input#height( data-attr='height' type='text', placeholder='' style="width:90%")
+		tr.show-text
+			.xepan-tool-option
+				td.xepan-tool-option-title Direction
+				td.xepan-tool-option-value 
+					select#direction(data-attr='direction' data-defaultvalue="left")
+						option(value="left") Left
+						option(value="right") Right
+						option(value="up") Up
+						option(value="down") Down
+		tr.show-text
+			.xepan-tool-option
+				td.xepan-tool-option-title Behavior
+				td.xepan-tool-option-value 
+					select#behavior(data-attr='behavior' data-defaultvalue="scroll")
+						option(value="scroll") Scroll
+						option(value="slide") Slide
+						option(value="alternate") Alternate
+		tr.show-text
+			.xepan-tool-option
+				td.xepan-tool-option-title Scroll Delay
+				td.xepan-tool-option-value 
+					input#Scrolldelay(data-attr='Scrolldelay' type='text', placeholder='' style="width:90%")
+		tr.show-text
+			.xepan-tool-option
+				td.xepan-tool-option-title Scroll Amount
+				td.xepan-tool-option-value 
+					input#scrollamount(data-attr='scrollamount'  type='text', placeholder='' style="width:90%")
+		tr.show-text
+			.xepan-tool-option
+				td.xepan-tool-option-title HSpace
+				td.xepan-tool-option-value 
+					input#hspace(data-attr='hspace' type='text', placeholder='' style="width:90%")
+		tr.show-text
+			.xepan-tool-option
+				td.xepan-tool-option-title VSpace
+				td.xepan-tool-option-value 
+					input#vspace(data-attr='vspace' type='text', placeholder='' style="width:90%")
+
+	script.
+		$('\#{$_name} [data-attr]').on('change',function(){
+			$(current_selected_component).attr($(this).data('attr'),$(this).val());
+		});
+
+		$('body').on('beforeSave',function(){
+			$(current_selected_component).attr('scrollamount',$('\#{$_name}').find('#scrollamount').val());
+		});
+
+		$('.marque-stop').on('click',function(){
+			$(current_selected_component).attr('scrollamount',0);
+		});
+
+
+		$('.marque-start').on('click',function(){
+			$(current_selected_component).attr('scrollamount',$('\#{$_name}').find('#scrollamount').val());
+		});
+
+		$('\#{$_name}').on('show',function(event){
+			$('\#{$_name} [data-attr]').each(function(index,value){
+				$(this).val($(current_selected_component).attr($(this).data('attr')));
+			});
+		});

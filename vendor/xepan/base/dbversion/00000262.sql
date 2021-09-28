@@ -1,0 +1,1 @@
+ALTER TABLE `blog_post` CHANGE COLUMN `short_description` `short_description` text DEFAULT NULL;

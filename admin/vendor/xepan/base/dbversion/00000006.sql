@@ -1,0 +1,1 @@
+ALTER TABLE `IP2LOCATION-LITE-DB11` RENAME TO `ip2location-lite-db11`;

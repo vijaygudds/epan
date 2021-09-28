@@ -1,0 +1,1 @@
+ALTER TABLE `item` ADD COLUMN `purchase_nominal_id` int(11) DEFAULT 0;

@@ -1,0 +1,16 @@
+.xepan-component(id='{$_name}', style=' {$style}', data-awesome-theme='', paginator-position='', class='{$class}' xepan-component-name="Awesome Slider")
+  b.editor(contenteditable='true')
+  link(rel='stylesheet', type='text/css', href='vendor/xepan/cms/templates/css/awesome/themes/default/default.css')
+  link(rel='stylesheet', type='text/css', href='vendor/xepan/cms/templates/css/awesome/themes/bar/bar.css')
+  link(rel='stylesheet', type='text/css', href='vendor/xepan/cms/templates/css/awesome/themes/dark/dark.css')
+  link(rel='stylesheet', type='text/css', href='vendor/xepan/cms/templates/css/awesome/themes/light/light.css')
+  link(rel='stylesheet', type='text/css', href='vendor/xepan/cms/templates/css/awesome/nivo-slider.css')
+  script(type='text/javascript', src='vendor/xepan/cms/templates/js/awesome/jquery.nivo.slider.js')
+  | {$Content}  
+  .slider-wrapper(class='{theme_css}theme-default{/theme_css}')
+    .nivoSlider(id='slider_{$_name}')
+      | {rows}
+      | {row}
+      img(src='{$file}', title='{$tag}', data-thumb='{$file}', alt='', data-transition='{$effects}')
+      | {/row}
+      | {/rows}

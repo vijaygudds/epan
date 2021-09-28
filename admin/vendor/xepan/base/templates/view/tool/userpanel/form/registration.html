@@ -1,0 +1,95 @@
+
+<div id="{$_name}" class="panel panel-default">
+  <div class="panel-heading text-center"><strong> Registration</strong></div>
+  <div style="margin-top:30px;margin-bottom:30px;" class="panel-body">
+    <form role="form" action="#" method="POST">
+      <fieldset>
+        <div class="row">
+          <div class="col-sm-12 col-md-12">
+            <div class="form-group atk-form-row atk-form-field">
+              <div class="input-group"><span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                <div class="xepan-form-field">{$first_name}    </div>
+              </div>
+            </div>
+            <div class="form-group atk-form-row atk-form-field">
+              <div class="input-group"><span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                <div class="xepan-form-field">{$last_name}    </div>
+              </div>
+            </div>
+            <div class="form-group atk-form-row atk-form-field">
+              <div class="input-group"><span class="input-group-addon">
+                <i class="fa {username_icon}fa-envelope{/}"></i>
+              </span>
+                <div class="xepan-form-field">{$username}</div>
+              </div>
+            </div>
+            <div class="form-group atk-form-row atk-form-field">
+              <div class="input-group"><span class="input-group-addon"><i class="fa fa-key"></i></span>
+                <div class="xepan-form-field">{$password}</div>
+              </div>
+            </div>
+            <div class="form-group atk-form-row atk-form-field">
+              <div class="input-group"><span class="input-group-addon"><i class="fa fa-key"></i></span>
+                <div class="xepan-form-field">{$retype_password}</div>
+              </div>
+            </div>{country_wrapper}
+            <div class="form-group atk-form-row atk-form-field">
+              <div class="input-group"><span class="input-group-addon"><i class="fa fa-map-marker"></i></span>
+                <div class="xepan-form-field">{$country}</div>
+              </div>
+            </div>{/}
+            {state_wrapper}
+            <div class="form-group atk-form-row atk-form-field">
+              <div class="input-group"><span class="input-group-addon"><i class="fa fa-map-marker"></i></span>
+                <div class="xepan-form-field">{$state}</div>
+              </div>
+            </div>{/}
+            {city_wrapper}
+            <div class="form-group atk-form-row atk-form-field">
+              <div class="input-group"><span class="input-group-addon"><i class="fa fa-map-marker"></i></span>
+                <div class="xepan-form-field">{$city}</div>
+              </div>
+            </div>{/}
+            {address_wrapper}
+            <div class="form-group atk-form-row atk-form-field">
+              <div class="input-group"><span class="input-group-addon"><i class="fa fa-map-marker"></i></span>
+                <div class="xepan-form-field">{$address}</div>
+              </div>
+            </div>{/}
+            {pin_code_wrapper}
+            <div class="form-group atk-form-row atk-form-field">
+              <div class="input-group"><span class="input-group-addon"><i class="fa fa-map-marker"></i></span>
+                <div class="xepan-form-field">{$pin_code}</div>
+              </div>
+            </div>{/}
+            {mobile_no_wrapper}
+            <div class="form-group atk-form-row atk-form-field">
+              <div class="input-group"><span class="input-group-addon"><i class="fa fa-mobile"></i></span>
+                <div class="xepan-form-field">{$mobile_no}</div>
+              </div>
+            </div>{/}
+            {tnc_wrapper}
+            <div class="form-group"><span class="input-group-addon">
+                <div class="col-md-2">{$tnc} </div>
+                <div class="col-md-10"><a href="{$tnc_page_url}" target="_blank">I accept Terms and conditions of usage </a></div></span></div>{/}  
+          </div>
+        </div>
+        <div style="padding-bottom:20px;" class="ro">            </div>
+        <div class="row">
+          <div class="col-xs-12">
+            <button type="submit" class="btn btn-success col-xs-12">Register</button>
+          </div>
+        </div>
+      </fieldset>
+    </form>
+  </div>
+  <div class="panel-footer text-center">
+      {login_wrapper}
+        <a style="cursor:pointer; cursor: hand;" href="#" data-showview="login_view" class="back-login xepan-login-panl-loadview"> Back To Login 
+          <div id="login-box-footer"></div></a>{/}</div>
+</div>
+<style>
+   input{
+    width:100%;
+  }      
+</style>

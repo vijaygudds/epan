@@ -1,0 +1,1 @@
+ALTER TABLE `custom_form_submission` ADD COLUMN `created_at` datetime DEFAULT NULL;

@@ -1,0 +1,1 @@
+ALTER TABLE `reimbursement` ADD `employee_id` INT(11) NULL;

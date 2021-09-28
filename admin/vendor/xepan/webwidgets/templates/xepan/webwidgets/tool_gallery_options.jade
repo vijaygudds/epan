@@ -1,0 +1,68 @@
+.xepan-tool-options(id='{$_name}' style="display:none" for-xepan-component='xepan/webwidgets/Tool_Gallery')
+	.xepan-cms-group-panel.clearfix
+		h3.collapsed(data-toggle="collapse" data-target="#collapse-gallery" aria-expanded="false")
+			span Gallery
+		#collapse-gallery.xepan-cms-tools-bar-panel.row-fluid.collapse
+			.panel-body
+				.xepan-cms-groups-panel.collapse.in(id="xepan-cms-groups-panel")
+				.xepan-cms-group-panel.clearfix
+					div.panel.panel-heading.panel-primary.collapsed(data-toggle="collapse" data-target="#show-hide-gallery-option" aria-expanded="false")
+						span Options 
+				#show-hide-gallery-option.xepan-cms-tools-bar-panel.row-fluid.collapse
+					table.table.table-condensed.table-hover
+						tr
+							.xepan-tool-option
+								td.xepan-tool-option-title Show Title
+								td.xepan-tool-option-value
+									select#show_title(data-attr='show_title' data-defaultvalue="true")
+										option(value="true") Yes
+										option(value="false") No
+						tr
+							.xepan-tool-option
+								td.xepan-tool-option-title Default Category
+								td.xepan-tool-option-value(colspan="2")
+									select.default_category(id="dc_{$_name}" style="width:150px;" data-attr='default_category')
+
+script.
+	//- $.ajax({
+	//- 		url: 'index.php?page=xepan_webwidgets_getcategory',
+	//- 		type: 'GET',
+	//- 		data: { },
+	//- 		success: function ( data ){
+	//- 			$('\#dc_{$_name}').html(data);
+				
+	//- 			$('\#dc_{$_name}').chosen();
+	//- 			$('\#dc_{$_name}').chosen({allow_single_deselect: true });
+	//- 		}
+	//- 	});
+
+	$('\#{$_name} [data-attr]').on('change',function(){
+		$(current_selected_component).attr($(this).data('attr'),$(this).val());
+	});
+
+	$('\#{$_name}').on('show',function(event){
+		$('\#{$_name} [data-attr]').each(function(index,value){
+			$(this).val($(current_selected_component).attr($(this).data('attr')));				
+		});
+	})
+
+	$(document).ready(function(){
+	    $('#template_type').on('change', function() {
+	      if (this.value == 'corusel')
+	      {
+	        $(".add-paginator").hide();
+	        $(".column-width").hide();
+	        $(".paginator-limit").hide();
+	      }
+	      else if(this.value == 'grid')
+	      {
+	        $(".column-width").hide();
+	      }
+		  else{
+			$(".add-paginator").show();
+			$(".column-width").show();
+			$(".paginator-limit").show();
+	  	  }
+
+	    });
+	});

@@ -1,0 +1,32 @@
+
+<div id="epan-editor-top-panel" class="epan-editor-top-panel hidden-xs">
+  <div class="epan-editor-logo pull-left"><i class="fa fa-leaf fa-2x"></i></div>
+  <div onclick="$.univ().frameURL('{$page_tempalte_frame_title}','{$page_template_url}');" class="epan-editor-current-page pull-left">
+    <label>Page: <span class='epan-editor-current-page'>{current_page}Current Page Here{/current_page}</span></label>
+  </div>
+  <div id="toolbar-toggle-btn" title="Toolbar Hide/Show" class="pull-left editor-tooltip"><i class="fa fa-cog fa-2x"></i></div>
+  <div id="save-as-snapshot" title="Save And Take Snapshot" class="pull-left editor-tooltip"><i class="fa fa-camera fa-2x"></i></div>
+  <div id="xepan-savepage-btn" title="Save" class="pull-left editor-tooltip label-success"><i class="fa fa-save fa-2x"></i></div>
+  <div id="epan-editor-preview" title="Preview" class="pull-left editor-tooltip"><i class="fa fa-eye fa-2x"></i></div>
+  <div id="epan-editor-preview-desktop" class="pull-left"><i class="fa fa-desktop fa-2x"></i></div>
+  <div id="epan-editor-preview-laptop" class="pull-left"><i class="fa fa-laptop fa-2x"></i></div>
+  <div id="epan-editor-preview-tablet" class="pull-left"><i class="fa fa-tablet fa-2x"></i></div>
+  <div id="epan-editor-preview-mobile" class="pull-left"><i class="fa fa-mobile fa-2x"></i></div>
+  <div id="epan-editor-logout" class="pull-right"><a href="index.php?page=logout" title="Logout" style="color:white" class="editor-tooltip"><i class="fa fa-power-off fa-2x"></i></a></div>
+  <div id="dashboard-btn" title="Admin Dashboard" class="pull-right editor-tooltip"><i style="cursor:pointer" class="fa fa-home fa-2x"></i></div>
+  <div id="epan-editcss-button" title="Common CSS File" style="cursor:pointer" class="pull-right editor-tooltip">
+    <label style="cursor:pointer">CSS</label>
+  </div>
+  <div id="template-btn" title="Edit Template of this page" style="cursor:pointer" class="pull-right editor-tooltip">
+    <label style="cursor:pointer">Template</label>
+  </div>
+  <div title="Show Border" class="pull-right editor-tooltip">
+    <input id="epan-component-border" type="checkbox" value="Border" style="margin: 0"/>
+    <label for="epan-component-border">Border</label>
+  </div>
+  <div title="Show Extra Space For Easy Drop" class="pull-right editor-tooltip">
+    <input id="epan-component-extra-padding" type="checkbox" value="Padding" style="margin: 0"/>
+    <label for="epan-component-extra-padding" title="Show Extra Space For Easy Drop">Easy Drop</label>
+  </div>
+  <div id="xepan-editing-toolbar-breadcrumb" style="width:100%" class="pull-left">This is breadcrumb : An Easy way to select your elements ...        </div>
+</div>

@@ -1,0 +1,1174 @@
+<div>
+
+<link rel="stylesheet" href="css/jquery.fancybox.css" type="text/css" media="screen">
+<link rel="stylesheet" href="css/jquery.fancybox-buttons.css" type="text/css" media="screen">
+<script type="text/javascript" src="js/jquery.fancybox.js"></script><style>
+
+.epan-feature{
+    margin-top:20px;
+    background:#eee;
+}
+
+.header-name{
+    padding-top:15px;
+}
+
+.widget-container {
+    -webkit-border-radius: 2px;
+    -webkit-background-clip: padding-box;
+    -moz-border-radius: 2px;
+    -moz-background-clip: padding;
+    border-radius: 2px;
+    background-clip: padding-box;
+    -webkit-box-shadow: 0 1px 2px rgba(0, 0, 0, .07);
+    -moz-box-shadow: 0 1px 2px rgba(0, 0, 0, .07);
+    box-shadow: 0 1px 2px rgba(0, 0, 0, .07);
+    margin-bottom: 30px;
+    height: 450px;
+    background-color: #fff;
+}
+
+.widget-container .widget {
+    margin-bottom: 0
+}
+
+.widget-container>.row {
+    margin-right: 0 !important;
+    margin-left: 0 !important
+}
+
+.widget-container>.row>[class*="col-"] {
+    padding-left: 0 !important;
+    padding-right: 0 !important
+}
+
+.epan-feature .widget {
+    -webkit-border-radius: 2px;
+    -webkit-background-clip: padding-box;
+    -moz-border-radius: 2px;
+    -moz-background-clip: padding;
+    border-radius: 2px;
+    background-clip: padding-box;
+    background-color: #fff;
+    font-weight: 300;
+    margin-bottom: 30px;
+    position: relative;
+    vertical-align: middle
+}
+
+.widget .row {
+    font-size: 0;
+    margin-left: 0;
+    margin-right: 0
+}
+
+.widget .row:before {
+    display: none
+}
+
+.widget .row .col {
+    font-size: 11px
+}
+
+.widget .row .col:first-child {
+    -webkit-border-radius: 2px 0 0 2px;
+    -webkit-background-clip: padding-box;
+    -moz-border-radius: 2px 0 0 2px;
+    -moz-background-clip: padding;
+    border-radius: 2px 0 0 2px;
+    background-clip: padding-box
+}
+
+.widget .row .col:last-child {
+    -webkit-border-radius: 0 2px 2px 0;
+    -webkit-background-clip: padding-box;
+    -moz-border-radius: 0 2px 2px 0;
+    -moz-background-clip: padding;
+    border-radius: 0 2px 2px 0;
+    background-clip: padding-box
+}
+
+.widget .col {
+    display: inline-block;
+    vertical-align: top
+}
+
+.widget [class*=col-] {
+    font-size: 11px;
+    margin: 0;
+    padding: 0
+}
+
+.widget .widget-stat {
+    position: absolute
+}
+
+.widget .widget-stat.top {
+    top: 7px
+}
+
+.widget .widget-stat.right {
+    right: 10px
+}
+
+.widget .widget-stat.left {
+    left: 10px
+}
+
+.widget .widget-stat.bottom {
+    bottom: 7px
+}
+
+.widget .widget-stat strong,
+.widget .widget-stat span,
+.widget .widget-stat i,
+.widget .widget-stat div {
+    vertical-align: top
+}
+
+.widget .progress {
+    margin-bottom: 0
+}
+
+.profile-card .card-header .header-avatar {
+    text-align: center
+}
+
+.profile-card .card-header .header-avatar img {
+    margin: 25px 0 15px;
+    width: 128px;
+    height: 128px
+}
+
+.profile-card .card-header .header-name {
+    font-size: 20px;
+    font-weight: 400;
+    text-align: center
+}
+
+.profile-card .card-body {
+    -webkit-transform: skew(0deg, -10deg);
+    -moz-transform: skew(0deg, -10deg);
+    -o-transform: skew(0deg, -10deg);
+    -ms-transform: skew(0deg, -10deg);
+    transform: skew(0deg, -10deg);
+    margin-top: 30px;
+    min-height: 100px;
+    padding: 50px 20px;
+    height: 300px;
+}
+
+.profile-card .card-body .body-description {
+    -webkit-transform: skew(0deg, 10deg);
+    -moz-transform: skew(0deg, 10deg);
+    -o-transform: skew(0deg, 10deg);
+    -ms-transform: skew(0deg, 10deg);
+    transform: skew(0deg, 10deg);
+    color: #fff;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.profile-card .card-footer {
+    margin-top: 50px;
+    padding: 10px 0 20px
+}
+
+.profile-card .card-footer .footer-social {
+    text-align: center
+}
+
+.profile-card .card-footer .footer-social .row {
+    margin: 0
+}
+
+.profile-card .card-footer .footer-social i {
+    color: #292929;
+    font-size: 20px
+}
+
+.bg-primary {
+    background-color: #29c7ca !important;
+    color: #fff !important
+}
+
+.bg-success {
+    background-color: #1dbc9c !important;
+    color: #fff !important
+}
+
+.bg-info {
+    background-color: #34b5dc !important;
+    color: #fff !important
+}
+
+.bg-warning {
+    background-color: #ffc107 !important;
+    color: #fff !important
+}
+
+.bg-danger {
+    background-color: #cd4237 !important;
+    color: #fff !important
+}
+
+.bg-inverse {
+    background-color: #fefefe !important;
+    color: #292929 !important
+}
+
+.bg-white {
+    background-color: #fff !important;
+    color: #292929 !important
+}
+
+.bg-transparent {
+    background-color: transparent !important
+}
+
+.bg-body {
+    background-color: #f1f3f2 !important
+}
+
+.bg-highlight {
+    background-color: #ff8
+}
+
+.bg-default-darker {
+    background-color: #212121
+}
+
+.widget-container:hover .card-body{
+    -moz-box-shadow: 0 0 5px rgba(0,0,0,0.5);
+    -webkit-box-shadow: 0 0 5px rgba(0,0,0,0.5);
+    box-shadow: 0 0 5px rgba(0,0,0,0.5);
+}
+
+.widget-container:hover{
+    -moz-box-shadow: 0 0 5px rgba(0,0,0,0.5);
+    -webkit-box-shadow: 0 0 5px rgba(0,0,0,0.5);
+    box-shadow: 0 0 5px rgba(0,0,0,0.5);
+}
+
+.header-name {
+   -webkit-transition: all 1s ease;
+   -moz-transition: all 1s ease;
+   -ms-transition: all 1s ease;
+   -o-transition: all 1s ease;
+   transition: all 1s ease;
+}
+
+.widget-container:hover .header-name{
+   color: #17BEBB;
+   -webkit-transform: scale(1.5);
+   -moz-transform: scale(1.5);
+   -ms-transform: scale(1.5);
+   -o-transform: scale(1.5);
+   transform: scale(1.5);
+   -webkit-transition: all 1s ease;
+   -moz-transition: all 1s ease;
+   -ms-transition: all 1s ease;
+   -o-transition: all 1s ease;
+   transition: all 1s ease;
+}
+
+.widget-container{ 
+    cursor: pointer;
+    cursor: hand; 
+}
+
+.modal img{
+    border-radius: 2px;
+    box-shadow: 0 0 5px; 
+}
+
+img:hover{
+    -moz-box-shadow: 0 0 5px rgba(0,0,0,0.5);
+    -webkit-box-shadow: 0 0 5px rgba(0,0,0,0.5);
+    box-shadow: 0 0 5px rgba(0,0,0,0.5);
+}
+
+.jumbotron{
+    padding-top: 20px !important;
+    padding-bottom: 0px !important;    
+    background-color: #ffffff !important;    
+}
+
+.xepan-form-free-trial-btn{
+    font-size : 30px !important;
+ } 
+input#bigbutton { margin-left:5%; margin-right:5%; width:90%; background: #ef473a; /*the colour of the button*/ padding: 8px 14px 10px; /*apply some padding inside the button*/ border:1px solid #ef473a; /*required or the default border for the browser will appear*/ cursor:pointer; /*forces the cursor to change to a hand when the button is hovered*/ /*style the text*/ font-size:1.5em; font-family:Oswald, sans-serif; /*Oswald is available from http://www.google.com/webfonts/specimen/Oswald*/ letter-spacing:.1em; text-shadow: 0 -1px 0px rgba(0, 0, 0, 0.3); /*give the text a shadow - doesn't appear in Opera 12.02 or earlier*/ color: #fff; /*use box-shadow to give the button some depth - see cssdemos.tupence.co.uk/box-shadow.htm#demo7 for more info on this technique*/ -webkit-box-shadow: inset 0px 1px 0px #ef473a, 0px 5px 0px 0px #ef473a, 0px 10px 5px #999; -moz-box-shadow: inset 0px 1px 0px #ef473a, 0px 5px 0px 0px #ef473a, 0px 10px 5px #999; box-shadow: inset 0px 1px 0px #ef473a, 0px 5px 0px 0px #ef473a, 0px 10px 5px #999; /*give the corners a small curve*/ -moz-border-radius: 10px; -webkit-border-radius: 10px; border-radius: 10px; } /***SET THE BUTTON'S HOVER AND FOCUS STATES***/ input#bigbutton:hover, input#bigbutton:focus { color:#dfe7ea; /*reduce the size of the shadow to give a pushed effect*/ -webkit-box-shadow: inset 0px 1px 0px #ef473a, 0px 2px 0px 0px #ef473a, 0px 2px 5px #999; -moz-box-shadow: inset 0px 1px 0px #ef473a, 0px 2px 0px 0px #ef473a, 0px 2px 5px #999; box-shadow: inset 0px 1px 0px #ef473a, 0px 2px 0px 0px #ef473a, 0px 2px 5px #999; }
+
+</style>
+<!-- MODEL POPUPS --><!-- HR APPLICATITON START--><div id="hrmodal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+ <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×  </button>
+        <h4 class="modal-title" id="myModalLabel">HUMAN RESOURCE</h4>
+      </div>
+      <div class="modal-body" style="max-height:450px; overflow-y: scroll; overflow-x: hidden;">
+            <div class="row">
+                <div class="col-md-5">
+                    <img class="fancybox" src="images/features/hr1.jpg" style="max-width: 230px; width:230px; height:170px;">
+</div>
+                <div class="col-md-7">
+                    <h4>Department | Post | Employee</h4>
+                    <span>Define departments, posts and assign employees to posts. Maintain communication log of employees, view activities of employees to know what they are doing or have done</span>
+                </div>
+            </div>
+            <hr>
+<div class="row">
+                <div class="col-md-5">
+                    <img class="fancybox" src="images/features/hr2.jpg" style="max-width: 230px; width:230px; height:170px;">
+</div>
+                <div class="col-md-7">
+                    <h4>Employee Attendance | Movement</h4>
+                    <span>It provides a convenient way to track employees movement and attendance</span>
+                </div>
+            </div>
+             <hr>
+<div class="row">
+                <div class="col-md-5">
+                    <img class="fancybox" src="images/features/hr3.jpg" style="max-width: 230px; width:230px; height:170px;">
+</div>
+                <div class="col-md-7">
+                    <h4>Access Control</h4>
+                    <span>Not tying account privileges(who can add/edit/delete etc.) to employees open your system to internal attack from users abusing privileges that they should not have. Thats why epan provides access control level (ACL). Authority can be given role based or to individual employee.</span>
+                </div>
+            </div>
+            <hr>
+<div class="row">
+            <div class="col-md-12">
+            <span> Some other features of HR Application includes leave, reimbursement and deduction management. Affiliates and users( customers(website): In case you have front-end website with user registration, employees) management can also be done from HR application </span>
+            </div>
+</div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>    
+<!-- HR APPLICATION END -->
+
+
+<!-- PROJECT APPLICATITON START-->
+<div id="projectmodal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+ <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×  </button>
+        <h4 class="modal-title" id="myModalLabel">PROJECT AND TASK</h4>
+      </div>
+      <div class="modal-body" style="max-height:450px; overflow-y: scroll; overflow-x: hidden;">
+            <div class="row">
+                <div class="col-md-5">
+                    <img class="fancybox" src="images/features/project1.jpg" style="max-width: 230px; width:230px; height:170px;">
+</div>
+                <div class="col-md-7">
+                    <h4>Project | Task | Recurring | Reminders</h4>
+                    <span>Create projects, add tasks in projects and assign it to employees. Task can be made recurring (bill payment) and can be reminded via sms/email/notification</span>
+                </div>
+            </div>
+            <hr>
+<div class="row">
+                <div class="col-md-5">
+                    <img class="fancybox" src="images/features/project2.jpg" style="max-width: 230px; width:230px; height:170px;">
+</div>
+                <div class="col-md-7">
+                    <h4>Timesheet | Instant Task Feed | Trace Employee | FollowUps</h4>
+                    <span>Timesheet to facilitates employee to enter their work schedule at the end of day, instantly add task from anywhere in the system, trace employees current task status. Create followup task/reminder after communicating to get reminded</span>
+                </div>
+            </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>    
+<!-- PROJECT APPLICATION END -->
+
+
+<!-- MARKETING APPLICATITON START-->
+<div id="marketingmodal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+ <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×  </button>
+        <h4 class="modal-title" id="myModalLabel">DIGITAL MARKETING</h4>
+      </div>
+      <div class="modal-body" style="max-height:450px; overflow-y: scroll; overflow-x: hidden;">
+            <div class="row">
+                <div class="col-md-5">
+                    <img class="fancybox" src="images/features/marketing1.jpg" style="max-width: 230px; width:230px; height:170px;">
+</div>
+                <div class="col-md-7">
+                    <h4>Category | Lead | Opportunity</h4>
+                    <span>Add categories, grab/add/upload leads, create opportunities of lead. One stop communication history, send newsletter to individual leads</span>
+                </div>
+            </div>
+            <hr>
+<div class="row">
+                <div class="col-md-5">
+                    <img class="fancybox" src="images/features/marketing2.jpg" style="max-width: 230px; width:230px; height:170px;">
+</div>
+                <div class="col-md-7">
+                    <h4>Content Marketing</h4>
+                    <span>Design Newsletters, make social and sms content, forward them for approval and finally schedule them to post</span>
+                </div>
+            </div>
+             <hr>
+<div class="row">
+                <div class="col-md-5">
+                    <img class="fancybox" src="images/features/marketing3.jpg" style="max-width: 230px; width:230px; height:170px;">
+</div>
+                <div class="col-md-7">
+                    <h4>Schedule And Campaign</h4>
+                    <span>Designed newsletters,social content? now schedule them to be posted on specific dates to selected/all leads</span>
+                </div>
+            </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>    
+<!-- MARKETING APPLICATION END -->
+
+<!-- HR APPLICATITON START-->
+<div id="commercemodal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+ <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×  </button>
+        <h4 class="modal-title" id="myModalLabel">COMMERCE</h4>
+      </div>
+      <div class="modal-body" style="max-height:450px; overflow-y: scroll; overflow-x: hidden;">
+            <div class="row">
+                <div class="col-md-5">
+                    <img class="fancybox" src="images/features/commerce1.jpg" style="max-width: 230px; width:230px; height:170px;">
+</div>
+                <div class="col-md-7">
+                    <h4>Item | Category</h4>
+                    <span>Everything you deal in is an item (from a small screw to a big jet), categorize them, manage which item to show on website (in case of ecommerce business), manage item consumptions in different departments in production process</span>    
+                </div>
+            </div>
+            <hr>
+<div class="row">
+                <div class="col-md-5">
+                    <img class="fancybox" src="images/features/commerce2.jpg" style="max-width: 230px; width:230px; height:170px;">
+</div>
+                <div class="col-md-7">
+                    <h4>Quotation | Sales Order, Invoice | Purchase Order, Invoice</h4>
+                     <span>Easy to make and manage. One click print, email, send for approval. Comes with document attachment facility. Make invoice directly from approved orders. Jobcard get's created as soon as order is approved</span>   
+                </div>
+            </div>
+             <hr>
+<div class="row">
+                <div class="col-md-5">
+                     <img class="fancybox" src="images/features/commerce3.jpg" style="max-width: 230px; width:230px; height:170px;">
+</div>
+                <div class="col-md-7">
+                    <h4>Fully Configurable</h4>
+                    <span>Configure everything based upon your needs (layouts/tax & percentage, currency etc.)</span>   
+                </div>
+            </div>
+    <div class="row">
+    <div class="col-md-12">
+    <span>Some other features include tight integration with accounts,store and production application, proper reporting, discount vouchers management (in case you are using e-commerce facility)</span>
+    </div>
+    </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>    
+<!-- COMMERCE APPLICATION END -->
+
+
+<!-- STORE APPLICATITON START-->
+<div id="storemodal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+ <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×  </button>
+        <h4 class="modal-title" id="myModalLabel">STORE AND WAREHOUSE</h4>
+      </div>
+      <div class="modal-body" style="max-height:450px; overflow-y: scroll; overflow-x: hidden;">
+            <div class="row">
+                <div class="col-md-5">
+                    <img class="fancybox" src="images/features/store1.jpg" style="max-width: 230px; width:230px; height:170px;">
+</div>
+                <div class="col-md-7">
+                    <h4>Store | Warehouse | Dispatch</h4>
+                    <span>Multi warehouse, multi store facility, one click to view which item is in what quantity and in which warehouse. Manage flow of items from peope to people or to warehouses easily. Dispatch items when complete quanity is received from production, add or import barcode, insight through analytical reports and widgets</span>
+                </div>
+            </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>    
+<!-- STORE APPLICATION END -->
+
+<!-- PRODUCTION APPLICATITON START-->
+<div id="productionmodal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+ <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×  </button>
+        <h4 class="modal-title" id="myModalLabel">PRODUCTION</h4>
+      </div>
+      <div class="modal-body" style="max-height:450px; overflow-y: scroll; overflow-x: hidden;">
+            <div class="row">
+                <div class="col-md-5">
+                    <img class="fancybox" src="images/features/production1.jpg" style="max-width: 230px; width:230px; height:170px;">
+</div>
+                <div class="col-md-7">
+                    <h4>Jobcards | Outsource Party | Departments</h4>
+                    <span>A jobcards is created as soon as order is approved. Sharp view of job card is provided (jobcard is in which department and has consumed what amount of items), maintain outsource party if your business outsources work. Complete jobcards to process them to next department and hence to dispatch department</span>   
+                </div>
+            </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>    
+<!-- PRODUCTION APPLICATION END -->
+
+<!-- CRM APPLICATITON START-->
+<div id="crmmodal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+ <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×  </button>
+        <h4 class="modal-title" id="myModalLabel">CUSTOMER RELATIONSHIP MANAGEMENT</h4>
+      </div>
+      <div class="modal-body" style="max-height:450px; overflow-y: scroll; overflow-x: hidden;">
+            <div class="row">
+                <div class="col-md-5">
+                     <img class="fancybox" src="images/features/crm1.jpg" style="max-width: 230px; width:230px; height:170px;">
+</div>
+                <div class="col-md-7">
+                    <h4>Fully Configurable</h4>
+                    <span>Configure content of support mails. We have provided pre made templates with you can edit according to your need</span>
+                </div>
+            </div>
+            <hr>
+<div class="row">
+                <div class="col-md-5">
+                     <img class="fancybox" src="images/features/crm2.jpg" style="max-width: 230px; width:230px; height:170px;">
+</div>
+                <div class="col-md-7">
+                    <h4>Support Tickets | Issues</h4>
+                    <span>Define support emails, whenever customer mails on support it generates a ticket, assign a ticket to employee, automatic mailing facility on ticket closing</span>
+                </div>
+            </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>    
+<!-- CRM APPLICATION END -->
+
+<!-- COMMUNICATION APPLICATITON START-->
+<div id="communicationmodal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+ <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×  </button>
+        <h4 class="modal-title" id="myModalLabel">COMMUNICATION</h4>
+      </div>
+      <div class="modal-body" style="max-height:450px; overflow-y: scroll; overflow-x: hidden;">
+            <div class="row">
+                <div class="col-md-5">
+                    <img class="fancybox" src="images/features/communication1.jpg" style="max-width: 230px; width:230px; height:170px;">
+</div>
+                <div class="col-md-7">
+                    <h4>Emails</h4>
+                    <span>Strong centralized email management system. Separately email
+with any customer in just one click to have a communication history. Post based permission on email for employees.
+</span>    
+                </div>
+            </div>
+            <hr>
+<div class="row">
+                <div class="col-md-5">
+                    <img class="fancybox" src="images/features/communication2.jpg" style="max-width: 230px; width:230px; height:170px;">
+</div>
+                <div class="col-md-7">
+                    <h4>Messages</h4>
+                    <span>We might be living in a digital age but communication with your coworkers is still not that easy. To solve this problem Epan provides internal communication facility to establish communication between employees.</span>
+                </div>
+            </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>    
+<!-- COMMUNICATION APPLICATION END -->
+
+<!-- CMS APPLICATITON START-->
+<div id="cmsmodal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+ <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×  </button>
+        <h4 class="modal-title" id="myModalLabel">WEBSITE BUILDER</h4>
+      </div>
+      <div class="modal-body" style="max-height:450px; overflow-y: scroll; overflow-x: hidden;">
+            <div class="row">
+                <div class="col-md-5">
+                    <img class="fancybox" src="images/features/cms1.jpg" style="max-width: 230px; width:230px; height:170px;">
+</div>
+                <div class="col-md-7">
+                    <h4>Drag And Drop Website Builder</h4>
+                    <span>Create professional looking websites just by dragging and dropping elements on the page, design your website on your own or just use one of our template from epan’s template bank.
+</span>
+                </div>
+            </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>    
+<!-- CMS APPLICATION END -->
+
+<!-- BLOGGING APPLICATITON START-->
+<div id="bloggingmodal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+ <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×  </button>
+        <h4 class="modal-title" id="myModalLabel">BLOGGING</h4>
+      </div>
+      <div class="modal-body" style="max-height:450px; overflow-y: scroll; overflow-x: hidden;">
+            <div class="row">
+                <div class="col-md-5">
+                    <img class="fancybox" src="images/features/blogging1.jpg" style="max-width: 230px; width:230px; height:170px;">
+</div>
+                <div class="col-md-7">
+                    <h4>Blogging</h4>
+                    <span>Using epan’s blogging application, you can write blogs directly from ERP and schedule them to get posted on social sites and your own site. Blogs can be edited directly from website or from the ERP, comments can be restrict/anonymous/identified. Replying to comments can be done from ERP as well as website.
+</span>
+                </div>
+            </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>    
+<!-- BLOGGING APPLICATION END -->
+
+<!-- ACCOUNTING APPLICATITON START-->
+<div id="accountingmodal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+ <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×  </button>
+        <h4 class="modal-title" id="myModalLabel">ACCOUNTING</h4>
+      </div>
+      <div class="modal-body" style="max-height:450px; overflow-y: scroll; overflow-x: hidden;">
+            <div class="row">
+                <div class="col-md-5">
+                    <img class="fancybox" src="images/features/accounting1.jpg" style="max-width: 230px; width:230px; height:170px;">
+</div>
+                <div class="col-md-7">
+                    <h4>Accounting Management</h4>
+                    An easy to use and manage accounting application which is based on double book entry accounting system. Now calculate exchange loss per invoice, take out balance sheet and p&l templates/formats of printing and much more.
+
+                </div>
+            </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>    
+<!-- ACCOUNTING APPLICATION END -->
+
+<!-- PRINTING APPLICATITON START-->
+<div id="printingmodal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+ <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×  </button>
+        <h4 class="modal-title" id="myModalLabel">SPECIAL FEATURES FOR PRINTING INDUSTRIES</h4>
+      </div>
+      <div class="modal-body" style="max-height:450px; overflow-y: scroll; overflow-x: hidden;">
+            <div class="row">
+                <div class="col-md-5">
+                    <img class="fancybox" src="images/features/printing1.jpg" style="max-width: 230px; width:230px; height:170px;">
+</div>
+                <div class="col-md-7">
+                    <h4>E-Commerce Webiste | Designer Tool</h4>
+                    <span>Ecommerce website with designer tool for customers to design products according to their needs with a backend ERP </span>
+                </div>
+            </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>    
+<!-- PRINTING APPLICATION END -->
+
+
+<!-- APPLICATION FEATURE CARDS STARTING-->
+<div class="container" style="padding-top: 30px;">
+    <h2>Application Feature List</h2>
+    <hr>
+</div>
+<div class="container epan-feature" style="padding-top: 30px; margin-bottom: 30px;">
+<div class="row">
+    <div class="col-md-4">
+        <div class="widget-container" data-toggle="modal" data-target="#hrmodal">
+            <div class="widget">
+                <div class="profile-card">
+                    <div class="card-header">
+                        <div class="header-avatar">
+                        </div>
+                        <div class="buzz header-name">
+                            Human Resource
+                        </div>
+                    </div>
+                    <div class="card-body bg-warning">
+                        <div class="body-description">
+                           <ol>
+<li>Department management</li>
+                            <li>Posts management</li>
+                            <li>Employee management</li>
+                            <li>Attendance &amp; Payroll system for salaried persons</li>
+                            <li>User management</li>
+                            <li>Affiliate management</li>
+                            <li>ACL (Access Control Level)</li>
+                           </ol>
+</div>
+                    </div>
+                    <div class="card-footer">
+                        <div class="footer-social">
+                            <div class="row">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="widget-container" data-toggle="modal" data-target="#projectmodal">
+            <div class="widget">
+                <div class="profile-card">
+                    <div class="card-header">
+                        <div class="header-avatar">
+                        </div>
+                        <div class="header-name">
+                            Project &amp; Task
+                        </div>
+                    </div>
+                    <div class="card-body bg-primary">
+                        <div class="body-description">
+                            <ol>
+<li>Add project</li>
+                                <li>Assign team to project</li>
+                                <li>Add tasks in project</li>
+                                <li>Assign tasks to employees</li>
+                                <li>Set task reminders</li>
+                                <li>Make repeatable tasks</li>
+                            </ol>
+</div>
+                    </div>
+                    <div class="card-footer">
+                        <div class="footer-social">
+                            <div class="row">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="widget-container" data-toggle="modal" data-target="#marketingmodal">
+            <div class="widget">
+                <div class="profile-card">
+                    <div class="card-header">
+                        <div class="header-avatar">
+                        </div>
+                        <div class="header-name">
+                           Digital Marketing
+                        </div>
+                    </div>
+                    <div class="card-body bg-info">
+                        <div class="body-description">
+                            <ol>
+<li>Grab ‘n’ number of leads from internet in seconds</li>
+                                <li>Design content</li>
+                                <li>Automatized campaign</li>
+                                <li>Perform better Telemarketing</li>
+                                <li>Do Mass emails, scheduled social posts</li>
+                                <li>Track communications with leads</li>
+                                <li>Get Visual reports for performance of sales team</li>
+                                <li>Get funnel view for various opportunities etc.</li>
+                            </ol>
+</div>
+                    </div>
+                    <div class="card-footer">
+                        <div class="footer-social">
+                            <div class="row">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>   
+</div>
+
+<div class="row">
+    <div class="col-md-4">
+        <div class="widget-container" data-toggle="modal" data-target="#commercemodal">
+            <div class="widget">
+                <div class="profile-card">
+                    <div class="card-header">
+                        <div class="header-avatar">
+                        </div>
+                        <div class="header-name">
+                            Commerce
+                        </div>
+                    </div>
+                    <div class="card-body bg-success">
+                        <div class="body-description">
+                            <ol style="font-size:11px !important;">
+<li>Online and onsite/Traditional business</li>
+                                <li>Online/offline orders</li>
+                                <li>Create items, customize rate lists as per quantities or custom selection (color, size etc)</li>
+                                <li>Customizable shipping rules, govt taxes etc.</li>
+                                <li>Manage Online saleable items and Traditional items differently</li>
+                                <li>Manage customer/suppliers, track communications, orders, invoices etc</li>
+                                <li>Manage documents, send Order/invoices/Dispatch documents via email in a click</li>
+                            </ol>
+</div>
+                    </div>
+                    <div class="card-footer">
+                        <div class="footer-social">
+                            <div class="row">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="widget-container" data-toggle="modal" data-target="#storemodal">
+            <div class="widget">
+                <div class="profile-card">
+                    <div class="card-header">
+                        <div class="header-avatar">
+                        </div>
+                        <div class="header-name">
+                            Store And Warehouse
+                        </div>
+                    </div>
+                    <div class="card-body bg-danger">
+                        <div class="body-description">
+                            <ol>
+<li>Multiple warehouse</li>
+                                <li>Stock management</li>
+                                <li>Stock availability info.</li>
+                            </ol>
+</div>
+                    </div>
+                    <div class="card-footer">
+                        <div class="footer-social">
+                            <div class="row">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="widget-container" data-toggle="modal" data-target="#productionmodal">
+            <div class="widget">
+                <div class="profile-card">
+                    <div class="card-header">
+                        <div class="header-avatar">
+                        </div>
+                        <div class="header-name">
+                           Production
+                        </div>
+                    </div>
+                    <div class="card-body bg-default-darker">
+                        <div class="body-description">
+                            <ol>
+<li>Job card management</li>
+                                <li>With proper order item</li>
+                                <li>specifications and customer   selections</li>
+                                <li>Manage Offline or Traditional</li>
+                                <li>on-site businesses</li>
+                                <li>Bulls eye view on flow</li>
+                                <li>Dispatch and mail customer</li>
+                                <li>Customers get tracking URL on shipp</li>
+                            </ol>
+</div>
+                    </div>
+                    <div class="card-footer">
+                        <div class="footer-social">
+                            <div class="row">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>   
+</div>
+
+<div class="row">
+    <div class="col-md-4">
+        <div class="widget-container" data-toggle="modal" data-target="#crmmodal">
+            <div class="widget">
+                <div class="profile-card">
+                    <div class="card-header">
+                        <div class="header-avatar">
+                        </div>
+                        <div class="header-name">
+                            CRM
+                        </div>
+                    </div>
+                    <div class="card-body bg-danger">
+                        <div class="body-description">
+                            <ol>
+<li>Multiple support emails</li>
+                                <li>Ticketing system</li>
+                                <li>Maintains mailing log</li>
+                                <li>Add communication on same ticket on email replies</li>
+                            </ol>
+</div>
+                    </div>
+                    <div class="card-footer">
+                        <div class="footer-social">
+                            <div class="row">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="widget-container" data-toggle="modal" data-target="#communicationmodal">
+            <div class="widget">
+                <div class="profile-card">
+                    <div class="card-header">
+                        <div class="header-avatar">
+                        </div>
+                        <div class="header-name">
+                            Communication
+                        </div>
+                    </div>
+                    <div class="card-body bg-default-darker">
+                        <div class="body-description">
+                            <ol>
+<li>Email management system</li>
+                                <li>Multiple email management</li>
+                                <li>Filtered your contacts communication, never miss important shout from your customers, leads or suppliers.</li>
+                                <li>Post based permissions for various email accounts</li>
+                            </ol>
+</div>
+                    </div>
+                    <div class="card-footer">
+                        <div class="footer-social">
+                            <div class="row">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="widget-container" data-toggle="modal" data-target="#cmsmodal">
+            <div class="widget">
+                <div class="profile-card">
+                    <div class="card-header">
+                        <div class="header-avatar">
+                        </div>
+                        <div class="header-name">
+                           CMS
+                        </div>
+                    </div>
+                    <div class="card-body bg-info">
+                        <div class="body-description">
+                            <ol>
+<li>Drag &amp; Drop tool</li>
+                                <li>Template based</li>
+                                <li>Easy to manage and update</li>
+                            </ol>
+</div>
+                    </div>
+                    <div class="card-footer">
+                        <div class="footer-social">
+                            <div class="row">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+    <div class="row">
+        <div class="col-md-4">
+            <div class="widget-container" data-toggle="modal" data-target="#bloggingmodal">
+                <div class="widget">
+                    <div class="profile-card">
+                        <div class="card-header">
+                            <div class="header-avatar">
+                            </div>
+                            <div class="header-name">
+                                Blogging
+                            </div>
+                        </div>
+                        <div class="card-body bg-warning">
+                            <div class="body-description">
+                                <ol>
+<li>Write blog post</li>
+                                    <li>Associate post to category</li>
+                                    <li>Manage all comments</li>
+                                    <li>Block comments on posts</li>
+                                </ol>
+</div>
+                        </div>
+                        <div class="card-footer">
+                            <div class="footer-social">
+                                <div class="row">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-4">
+            <div class="widget-container" data-toggle="modal" data-target="#accountingmodal">
+                <div class="widget">
+                    <div class="profile-card">
+                        <div class="card-header">
+                            <div class="header-avatar">
+                            </div>
+                            <div class="header-name">
+                                Accounting
+                            </div>
+                        </div>
+                        <div class="card-body bg-default-darker">
+                            <div class="body-description">
+                               <ol>
+<li>Create and use your own entry yet follow accounting rules (no need of accounting expertise)</li>
+                                <li>Create heads/groups according to your needs</li>
+                                <li>Can maintain cash and day book</li>
+                                <li>Balance Sheet and Trading and P&amp;L reports</li>
+                                <li>Merge two accounts without losing entries</li>
+                                <li>Send accounts statement on one click via email</li>
+                                <li>Print account statement/reports on one click</li>
+                               </ol>
+</div>
+                        </div>
+                        <div class="card-footer">
+                            <div class="footer-social">
+                                <div class="row">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="widget-container" data-toggle="modal" data-target="#printingmodal"> 
+                <div class="widget">
+                    <div class="profile-card">
+                        <div class="card-header">
+                            <div class="header-avatar">
+                            </div>
+                            <div class="header-name">
+                                For Printing Industries
+                            </div>
+                        </div>
+                        <div class="card-body bg-primary">
+                            <div class="body-description">
+                               <ol>
+<li>Easy manageable ecommerce website.</li>
+                                <li>Designer tool for customers to design products according to their needs.</li>
+                                <li>Power Packed ERP with category, product, customer, supplier, documents (quotations, invoices, orders), management.</li>
+                                <li>Real time information about job cards, their department, amount of material used in each department, etc.</li>
+                               </ol>
+</div>
+                        </div>
+                        <div class="card-footer">
+                            <div class="footer-social">
+                                <div class="row">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        
+    </div>
+
+
+</div>
+<div style="max-height: 100%; max-width: 100%; width: auto; margin-bottom: 25px; background-color: #ffffff; margin-top: 25px;" id="75db9f21-5b83-45e1-c2b6-8aa9ef4c2425" xepan-component="xepan/cms/Tool_Container" emptytext="Container" class="xepan-component xepan-sortable-component container ui-sortable">
+	<div class="row xepan-component" style="min-height:20px;" xepan-component="xepan/cms/Tool_Columns" id="5e8055e1-ab02-45d3-b779-b1c9fdef9a1b">
+		<a href="quote"><input id="bigbutton" type="submit" value="Visit Demo / Request A Quote" /></a>
+	</div>
+</div>
+</div><div style="display:none;" class="xepan-component xepan-serverside-component" xepan-component="xepan/epanservices/Tool_EpanTrial" id="0f80f277-7c9f-4dfc-8c27-17df18ae7cb8"></div>
+
+<script type="text/javascript" style="">
+    
+    $('.fancybox').click(function(){
+        img_url = $(this).attr('src');
+        if(img_url.length){
+            $.fancybox.open({
+                href: img_url,
+                type: 'iframe'
+            });
+        }
+    });
+
+    $('.fancybox').hover(function(){
+        $('.epan-zoom-icon').remove();
+        icon = $('<i style="position:absolute;font-size:60px;opacity:0.5;top:40%;left:40%;display:none;" class="glyphicon glyphicon-zoom-in epan-zoom-icon">').appendTo($(this).parent('div'));
+        $(icon).toggle();
+    },function(){
+        $('.epan-zoom-icon').remove();
+    });
+</script>

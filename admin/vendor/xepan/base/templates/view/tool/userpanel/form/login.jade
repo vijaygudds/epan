@@ -1,0 +1,42 @@
+.panel.panel-default(id="{$_name}")
+  .panel-heading.text-center
+    strong Sign in to continue
+  .panel-body(style='margin-top:30px;margin-bottom:30px;')
+    {message_wrapper}
+    .text-center.text-primary.alert.alert-danger {$message}
+    {/message_wrapper}
+    form(role='form', action='#', method='POST')
+      fieldset
+        .row(style='padding-bottom:20px;')
+          .col-sm-12.col-md-12
+            .form-group.atk-form-row
+              .input-group
+                span.input-group-addon
+                  i.glyphicon.glyphicon-user
+                | {$username}{$fieldError}
+            .form-group.atk-form-row.atk-form-field
+              .input-group
+                span.input-group-addon
+                  i.glyphicon.glyphicon-lock
+                | {$password}
+        .row
+          .col-xs-12
+            button.btn.btn-success.col-xs-12(type='submit') Login  
+  {footer_wrapper}
+  .panel-footer.row(style="margin:auto")
+    {forgot_wrapper}
+    a#login-forget-link.col-md-4.col-xs-12.col-sm-12.text-center.forgotpassword.xepan-login-panl-loadview(class="{$forgot_class}" style='cursor:pointer; cursor: hand;', data-showview='forget_password') Forgot password
+    {/}
+    {register_wrapper}
+    a.col-md-4.col-xs-12.col-sm-12.text-center.reg_view.xepan-login-panl-loadview1.xepan-registration-load-panl(class="{$registration_class}" style='cursor:pointer; cursor: hand;', data-showview='new_registration')  Register now 
+    {/}
+    {activate_wrapper}
+    a.col-md-4.col-xs-12.col-sm-12.text-center.reg_view.xepan-login-panl-loadview(class="{$activation_class}" style='cursor:pointer; cursor: hand;', data-showview='verify_account')
+      | Activate
+      #login-box-footer
+    {/} 
+  {/}
+style.
+    #{$_name} input{
+      width:100%;
+    }

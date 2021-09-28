@@ -1,0 +1,22 @@
+
+<div class="row xepan-push panel panel-default">
+  <div class="panel-heading">Reminder Info</div>
+  <div class="panel-body">
+    <div class="row xepan-push">
+      <div class="col-md-6 atk-form-field atk-form-row"><strong>Reminder Title: </strong>{$task_name}</div>
+      <div class="col-md-6 atk-form-field atk-form-row"><strong>Remind At: </strong>{$reminder_time}  </div>
+    </div>
+    <div class="row xepan-push"> 
+      <div class="col-md-6 atk-form-field atk-form-row"><strong>Remind Via :</strong>{$remind_via}</div>
+      <div class="col-md-6 atk-form-field atk-form-row"><strong>Remind To:</strong>{$notify_to}  </div>
+    </div>
+  </div>
+</div>
+<div class="row xepan-push panel panel-default">
+  <div class="panel-heading">Make Reminder Recurring</div>
+  <div class="panel-body">
+    <div class="col-md-6 atk-form-field atk-form-row">{$is_recurring}</div>
+    <div class="col-md-6 atk-form-field atk-form-row"><strong>Time Gap:    </strong>{$recurring_span}</div>
+  </div>
+</div>
+<div style="display:none"><span>starting date and deadlie are not displayed because : "read comments in task reminder view"</span><span>{$starting_date} </span><span>{$deadline} </span></div>

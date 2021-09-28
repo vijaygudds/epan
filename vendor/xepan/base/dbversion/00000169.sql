@@ -1,0 +1,1 @@
+ALTER TABLE `item` ADD `nominal_id` INT(11) NULL;

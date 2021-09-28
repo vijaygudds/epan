@@ -1,0 +1,1 @@
+ALTER TABLE `store_transaction` ADD `related_transaction_id` INT NULL;

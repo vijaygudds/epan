@@ -1,0 +1,1 @@
+ALTER TABLE `qsp_master` ADD `outsource_party_id` INT NULL AFTER `nominal_id`;

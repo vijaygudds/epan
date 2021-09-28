@@ -1,0 +1,1 @@
+ALTER TABLE `communication_attachment` ADD `type` VARCHAR(255) NOT NULL AFTER `file_id`;

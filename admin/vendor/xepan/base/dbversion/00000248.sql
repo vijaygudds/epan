@@ -1,0 +1,1 @@
+ALTER TABLE `item` ADD `is_production_phases_fixed` tinyint(4) default 0;

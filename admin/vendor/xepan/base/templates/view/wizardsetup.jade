@@ -1,0 +1,26 @@
+.main-box.clearfix(class="{$class} ")
+  header.main-box-header.clearfix
+    .col-md-7
+      .name {$addon}
+    .col-md-1
+    .col-md-4
+      .main-box-body.clearfix
+        i.fa.fa-hand-o-down
+        .pull-left.text-muted{$helpmessage} &nbsp;
+  .main-box-body.clearfix
+    .main-box-body.clearfix
+      table.table-hover.footable(style="width:100%;")
+        thead.xepan-hover-hand
+            th.text-primary
+                span {$title} 
+        tbody
+            tr
+                td
+                  .xepan-push
+                  .col-md-9
+                    .main-box-body.clearfix
+                      span.text-muted {$message}
+                  .col-md-2(style="margin-bottom:10px;")
+                      {$action_spot}
+                  .col-md-1
+                    a.fa.fa-question-circle-o(style = "font-size: 25px;" href="{$url}")

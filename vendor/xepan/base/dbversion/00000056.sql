@@ -1,0 +1,1 @@
+ALTER TABLE `projectcomment` CHANGE `action` `on_action` INT(11) NULL DEFAULT NULL;

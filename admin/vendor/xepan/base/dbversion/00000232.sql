@@ -1,0 +1,1 @@
+ALTER TABLE `rule_options` MODIFY COLUMN `score_per_qty` DECIMAL(10,4);

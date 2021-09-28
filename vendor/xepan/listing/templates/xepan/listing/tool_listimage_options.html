@@ -1,0 +1,25 @@
+
+<div id="{$_name}" style="display:none" for-xepan-component="xepan/listing/Tool_ListImage" class="xepan-tool-options">
+  <table class="table table-condensed table-hover xepan-cms-tool-table">
+    <tr class="xepan-tool-option">
+      <td class="xepan-tool-option-title">Show Post Count</td>
+      <td class="xepan-tool-option-value"> 
+        <select id="show_post_count" data-attr="show_post_count">
+          <option>true</option>
+          <option>false																							</option>
+        </select>
+      </td>
+    </tr>
+  </table>
+  <script>
+    $('#{$_name} [data-attr]').on('change',function(){
+    	$(current_selected_component).attr($(this).data('attr'),$(this).val());
+    });
+    
+    $('#{$_name}').on('show',function(event){
+    	$('#{$_name} [data-attr]').each(function(index,value){
+    		$(this).val($(current_selected_component).attr($(this).data('attr')));				
+    	});
+    })
+  </script>
+</div>

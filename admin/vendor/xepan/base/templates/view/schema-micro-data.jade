@@ -1,0 +1,120 @@
+div(id='{$_name}')
+  //-====== Tell Us About Yourself with Person Mark-up ========
+  | {person_info}
+  script(type='application/ld+json').
+    {
+    "@context": "http://schema.org",
+    "@type" : "Organization",
+    "name" : "{$company_name}",
+    "image" : "{$image_id}",
+    "address" : {
+    "@type" : "PostalAddress",
+    "addressLocality" : "{$company_address}",
+    "postalCode" : "{$company_pin_code}"
+    },
+    "telephone" : "{$mobile_no}",
+    "email" : "{$company_email}",
+    "description" : "{$company_description}"
+    }
+  | {/}
+
+  | {Product_list_block}
+  | {rows}{row}
+  script(type='application/ld+json').
+   {
+    "@context": "http://schema.org/",
+    "@type": "Product",
+    "name": "{$name}",
+    "image": "{$item_image}",
+    "description": "{$description}",
+    "model": "{$sku}",
+    "brand": {
+      "@type": "Thing",
+      "name": "{$item_brand_value}"
+    },
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "4.9",
+      "reviewCount": "499"
+    },
+    "offers": { 
+      "@type": "Offer",
+      "priceCurrency": "{$currency}",
+      "price": "{$sale_price}",
+      "priceValidUntil": "{$expiry_date}",
+      "itemCondition": "http://epan.in/terms-and-condition",
+      "availability": "{$available_stock}",
+      "seller": {"@type": "Organization","name": "{$company_name}"}
+   }
+   }  
+  | {/}{/} 
+  | {/}
+
+  //-==========Logo & Social Sitelinks in Knowledge Graph============
+  {social_block}
+  script(type='application/ld+json').
+   { "@context" : "http://schema.org",
+    "@type" : "Organization",
+    "name" : "{$company_name}",
+    "logo" : "{$logo_url}",
+    "url" : "{$website_url}",
+    "sameAs" : [
+     "{$twitter_url}",
+     "{$facebook_url}",
+     "{$google_url}",
+     "{$linkedin_url}"
+    ]
+   }
+  {/}
+
+  //-===========Blog Post Content=======================
+  {blog_post_block}
+  {rows}{row}
+  script(type='application/ld+json').
+    { "@context": "http://schema.org",
+    "@type": "BlogPosting",
+    "headline": "{blog_title}14 Ways Json Can Improve Your SEO{/}",
+    "alternativeHeadline": "{slug_url}and the women who love them{/}",
+    "image": ["{$blog_image}"],
+    "award": "Best article ever written",
+    "editor": "{created_by}John Doe{/}",
+    "genre": "{categories}search engine optimization{/}",
+    "keywords": {$keywords},
+    "wordcount": "{word_count}{/}",
+    "publisher": {
+        "@type": "Organization" , "name": "{created_by}Xavoc technocrats Pvt. Ltd.{/}" , "logo":["{$blog_image}"]},
+
+    
+    "url": "{url}http://www.example.com{/}",
+    "datePublished": "{created_at}2015-09-20{/}",
+    "dateCreated": "{created_at}2015-09-20{/}",
+    "dateModified": "{created_at}2015-09-20{/}",
+    "description": {meta_description}We love to do stuff to help people and stuff{/},
+    "articleBody": {blog_description}You can paste your entire post in here, and yes it can get really really long.{/},
+    
+    "mainEntityOfPage": {"@type": "WebPage","@id": "{url}http://cathscafe.example.com{/}"},
+    "author": {"@type": "Person","name": "{$created_by}"}
+    }
+  {/}{/}  
+  {/}
+
+  //- ========SearchAction – Sitelinks Search Box===================
+
+  //- {SearchAction}
+  //- div(itemscope='', itemtype='http://schema.org/WebSite')
+  //-  meta(itemprop='url', content='[website url]')
+  //-  form(itemprop='potentialAction', itemscope='', itemtype='http://schema.org/SearchAction')
+  //-    meta(itemprop='target', content='[website search url]={search_term}')
+  //-    input(itemprop='query-input', type='text', name='search_term')
+  //-    input(type='submit')
+  //- script(type='application/ld+json').
+  //-  { "@context": "http://schema.org",
+  //-  "@type": "WebSite",
+  //-  "url": "[website url]",
+  //-  "potentialAction": {
+  //-  "@type": "SearchAction",
+  //-  "target": "[website search url]={search_term}",
+  //-  "query-input": "required name=search_term"
+  //-  }
+  //-  }
+  //- {/} 

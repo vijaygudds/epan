@@ -1,0 +1,21 @@
+
+<div id="{$_name}" class="xepan-grid {$class}">
+  <div style="width:100%; max-width:100%; margin-bottom:0px !important;">
+    {header}
+    {cols}{col}   
+    {/}{/}
+    {/}
+    {$subheader}
+    {rows}{row}
+    <div data-id="{$id}" style="padding-top:5px;padding-bottom:5px;" class="{$odd_even} row">{cols}
+      <div class="col-md-8"><a href="#nowhere" onclick="$.univ().frameURL(&quot;&quot;,&quot;{$url}&quot;)" style="margin-left:0;white-space:nowrap;overflow: hidden;text-overflow: ellipsis;" class="user-link">{$title}&nbsp;</a></div>
+      <div style="background-color:white;" class="col-md-4 text-muted small">{$type_status}</div>
+      <div class="container">
+        <div class="row col-md-12 text-muted small">{$quick_info}    </div>
+      </div>{/}
+    </div>{/}{/}
+    {not_found}
+    {$not_found_message}
+    {/}
+  </div>{$Paginator}
+</div>

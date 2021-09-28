@@ -1,0 +1,24 @@
+<div id="{$_name}" xepan-component="floatingSocialShare" class="xepan-component" data-place="top-left" data-url="url" data-description="description" data-buttons="buttons">
+    <link rel="stylesheet" type="text/css" href="./websites/epan/www/widget/jquery.floating-social-share.css" />
+	<script type="text/javascript" src="./websites/epan/www/widget/jquery.floating-social-share.js"></script>
+    <script>
+        $( document ).ready(function() {
+            var place =$("#{$_name}").attr('data-place');
+            var weburl =$("#{$_name}").attr('data-url');
+            var description =$("#{$_name}").attr('data-description');
+            // console.log(place);
+            $("body").floatingSocialShare({
+                buttons: ["facebook", "twitter", "google-plus", "linkedin", "pinterest"],
+                twitter_counter: true,
+                text: "share with: ",
+                url: weburl,
+                place: place,
+                popup_width: 400,
+                popup_height: 300,
+                counter: true,
+                description: description
+            });
+        });
+
+    </script>
+</div>

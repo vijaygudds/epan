@@ -1,0 +1,143 @@
+<div id="theme-wrapper" class="atk-layout" {$attributes}>
+  <header id="header-navbar" class="navbar {configuration_mode}{/}">
+    <div class="container"><a id="logo" href="index.php" class="navbar-brand"><img src="img/logo3.png" alt="" class="normal-logo logo-white"/><img src="img/logo3-black.png" alt="" class="normal-logo logo-black"/><img src="img/logo.png" alt="" class="small-logo hidden-xs hidden-sm hidden"/></a>
+      <div class="clearfix">
+        <button data-target=".navbar-ex1-collapse" data-toggle="collapse" type="button" class="navbar-toggle pull-left"><span class="sr-only">Toggle navigation</span><span class="fa fa-bars"></span></button>
+        <button data-target=".navbar-ex1-collapse1" data-toggle="collapse" type="button" class="navbar-toggle"><span class="sr-only">Toggle navigation</span><span class="fa fa-bars"></span></button>
+        <div id="header-nav" class="nav-no-collapse pull-right">
+          <ul class="nav navbar-nav">
+            <li id="messageid" class="dropdown hidden-xs hidden-sm">{$message_view}
+            </li>
+            <li id="notificationid" class="dropdown">{$notification_view}</li>
+            <li class="mobile-search"><a data-toggle="modal" href="#myModal" class="btn"><i class="fa fa-search"></i></a></li>{User_Menu}    
+            {/User_Menu}
+            <li class="hidden-xxs"><a href="?page=xepan_base_logout" class="btn"><i class="fa fa-power-off">     </i></a></li>
+          </ul>
+        </div>
+        <div class="navbar-ex1-collapse navbar-left collapse navbar-collapse">
+          <ul class="nav navbar-nav">
+            <li><a id="make-small-nav" class="btn hidden-xs"><i class="fa fa-bars"></i></a></li>{Main_Menu}
+            {/Main_Menu}
+          </ul>
+        </div>
+      </div>
+    </div>
+  </header>
+  <div class="container">
+    <div class="clearfix">
+    </div>
+  </div>
+  <div id="page-wrapper" class="container nav-small">
+    <div class="row">
+      <div id="nav-col">
+        <section id="col-left" class="col-left-nano">
+          <div id="col-left-inner" class="col-left-nano-content">
+            <div id="user-left-box" class="clearfix hidden-sm hidden-xs dropdown profile2-dropdown">{avatar}img(alt='', src='{image}img/samples/scarlet-159.png{/}'){/}
+              <div class="user-box"><span class="name"><a href="#" data-toggle="dropdown" class="dropdown-toggle">{first_name}Scarlett J.{/} <i class="fa fa-angle-down"></i></a>
+                  <ul class="dropdown-menu">
+                    <li><a href="?page=xepan_hr_employee_profile"><i class="fa fa-user"></i>Profile</a></li>
+                    <li><a href="?page=xepan_hr_employee_setting"><i class="fa fa-cog"></i>Settings</a></li>
+                    <li><a href="?page=xepan_base_logout"><i class="fa fa-power-off"></i>Logout     </a></li>
+                  </ul></span><span class="status"><i class="fa fa-circle"></i> {status}Online{/}</span></div>
+            </div>
+            <div id="sidebar-nav" class="collapse navbar-collapse navbar-ex1-collapse1"><small class="text-muted">{$task_status}</small>
+              <hr/>
+              <ul class="nav nav-pills nav-stacked">
+                <li class="nav-header nav-header-first hidden-sm hidden-xs">xEpan {$xepan_version}</li>{$Side_Menu}
+              </ul>
+            </div>
+          </div>
+        </section>
+        <div id="nav-col-submenu"></div>
+      </div>
+      <div id="content-wrapper">
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="row">
+              <div class="col-lg-12">
+                <div id="content-header" class="clearfix">
+                  <div class="pull-left"><i class="fa fa-question-circle run-page-intro"></i></div>
+                  <div class="pull-left">{breadcrumb}
+                    <ol class="breadcrumb">{rows}{row}
+                      <li class="{$active}"><a href="{$url}">{title}Home{/title}</a></li>{/row}{/rows}
+                    </ol>{/breadcrumb}
+                    <h1>{page_title}Page_Title{/}</h1>
+                  </div>
+                  <div class="pull-left">{$page_top_center}</div>
+                  <div class="pull-right">
+                    {page_top_right}
+                    {/page_top_right}
+                  </div>
+                </div>
+              </div>
+            </div>{$Content}
+          </div>
+        </div>
+        <footer id="footer-bar" class="row">
+          <p id="footer-copyright" class="col-xs-12">Developed and Maintained by <a href="http://xavoc.com" target="_blank">Xavoc Technocrats Pvt Ltd.</a></p>
+        </footer>
+      </div>
+    </div>
+  </div>
+</div>
+<div id="config-tool" class="closed"><a id="config-tool-cog"><i class="fa fa-cog"></i></a>
+  <div id="config-tool-options">
+    <h4>Layout Options</h4>
+    <ul>
+      <li>
+        <div class="checkbox-nice">
+          <input id="config-fixed-header" type="checkbox"/>
+          <label for="config-fixed-header">Fixed Header</label>
+        </div>
+      </li>
+      <li>
+        <div class="checkbox-nice">
+          <input id="config-fixed-sidebar" type="checkbox"/>
+          <label for="config-fixed-sidebar">Fixed Left Menu</label>
+        </div>
+      </li>
+      <li>
+        <div class="checkbox-nice">
+          <input id="config-fixed-footer" type="checkbox"/>
+          <label for="config-fixed-footer">Fixed Footer</label>
+        </div>
+      </li>
+      <li>
+        <div class="checkbox-nice">
+          <input id="config-boxed-layout" type="checkbox"/>
+          <label for="config-boxed-layout">Boxed Layout</label>
+        </div>
+      </li>
+    </ul><br/>
+    <h4>Skin Color</h4>
+    <ul id="skin-colors" class="clearfix">
+      <li><a data-skin="" data-toggle="tooltip" title="Default" style="background-color: #34495e;" class="skin-changer"></a></li>
+      <li><a data-skin="theme-white" data-toggle="tooltip" title="White/Green" style="background-color: #2ecc71;" class="skin-changer"></a></li>
+      <li><a data-skin="theme-blue-gradient" data-toggle="tooltip" title="Gradient" class="skin-changer blue-gradient"></a></li>
+      <li><a data-skin="theme-turquoise" data-toggle="tooltip" title="Green Sea" style="background-color: #1abc9c;" class="skin-changer"></a></li>
+      <li><a data-skin="theme-amethyst" data-toggle="tooltip" title="Amethyst" style="background-color: #9b59b6;" class="skin-changer"></a></li>
+      <li><a data-skin="theme-blue" data-toggle="tooltip" title="Blue" style="background-color: #2980b9;" class="skin-changer"></a></li>
+      <li><a data-skin="theme-red" data-toggle="tooltip" title="Red" style="background-color: #e74c3c;" class="skin-changer"></a></li>
+      <li><a data-skin="theme-whbl" data-toggle="tooltip" title="White/Blue" style="background-color: #3498db;" class="skin-changer"></a></li>
+    </ul>
+  </div>
+</div>
+</div>
+
+<div id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" class="modal fade">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" data-dismiss="modal" aria-hidden="true" class="close">×</button>
+        <h4 class="modal-title">Quick Search</h4>
+      </div>
+      <div class="modal-body">
+        {$quick_search_form}
+        {$quick_search_result}
+      </div>
+      <div class="modal-footer">
+        <button type="button" data-dismiss="modal" class="btn btn-default">Close</button>
+      </div>
+    </div>
+  </div>
+</div>

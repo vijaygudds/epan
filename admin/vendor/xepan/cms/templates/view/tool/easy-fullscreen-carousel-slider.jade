@@ -1,0 +1,49 @@
+.xepan-component.xepan-easy-fullscreen--carousel(id='{$_name}', data-ride='carousel')
+	link(rel="stylesheet" href="vendor/xepan/cms/templates/css/normalize.css")
+	link(rel="stylesheet" href="vendor/xepan/cms/templates/css/app.css")
+	//- script(src="http://code.jquery.com/jquery-1.11.3.min.js")
+	script(src="vendor/xepan/cms/templates/js/slider.js")
+	script(src="vendor/xepan/cms/templates/js/app.js")
+	#main-slider
+		{rows}{row}
+		.slide(class="slide-{slide_no}1{/}" style='background-image: url("https://unsplash.it/1920/1200?image=817");')
+			.container
+				.vertical-hook
+				.vertical-container
+					header
+						h1 {title}Slide One{/}
+						p {text_to_display}This is slide one{/}
+		{/row}
+		.slide.slide-2(style='background-image: url("https://unsplash.it/1920/1200?image=617");')
+			.container
+				.vertical-hook
+				.vertical-container
+					header
+						h1 Slide Two
+						p This is slide two
+		.slide.slide-3(style='background-image: url("https://unsplash.it/1920/1200?image=317");')
+			.container
+				.vertical-hook
+				.vertical-container
+					header
+						h1 Slide Three
+						p This is slide three
+		.slide.slide-4(style='background-image: url("https://unsplash.it/1920/1200?image=417");')
+			.container
+				.vertical-hook
+				.vertical-container
+					header
+						h1 Slide Four
+						p This is slide Four				
+		{/rows}				
+	//- #main-slider
+
+	//- 	.slider-controls
+	//- 		.arrow.arrow-left
+	//- 		.arrow.arrow-right
+
+//- script.
+//- 	$('#main-slider').Slider({
+//- 		mode: 'vertical',
+//- 	});
+

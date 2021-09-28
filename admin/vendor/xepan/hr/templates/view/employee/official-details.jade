@@ -1,0 +1,46 @@
+.col-lg-12
+  .panel.panel-default
+    .panel-body 
+        .col-md-12.xepan-push
+          .col-lg-5
+          .col-lg-5.xepan-push-small
+          .col-lg-5
+            .atk-form-row
+              strong  Offer Date
+              div {$offer_date}
+          .col-lg-5
+            .atk-form-row
+              strong  Joining Date
+              div {$doj}
+        .col-md-12.xepan-push
+          .col-lg-5
+            .atk-form-row
+              strong  Contract Date
+              div {$contract_date}
+          .col-lg-5
+            .atk-form-row
+              strong  leaving Date
+              div {$leaving_date}
+        .col-md-12.xepan-push
+          .col-lg-5
+            .atk-form-row
+              strong  In_Time
+              div {$in_time}
+          .col-lg-5
+            .atk-form-row
+              strong  Out_Time
+              div {$out_time}
+        .col-md-12.xepan-push
+          .col-lg-12
+            .atk-form-row
+              strong  Salary Payment Type
+              div {$salary_payment_type}
+        .col-lg-12.pull-right
+          | {$FormButtons}
+.col-lg-12
+  .panel.panel-default
+    {$EmployeeSalary}
+.col-lg-12
+  .panel.panel-default
+    {$EmployeeLeaveAllow}
+{$Content}

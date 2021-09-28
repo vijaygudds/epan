@@ -1,0 +1,76 @@
+
+<div id="{$_name}" class="panel panel-default">
+  <div class="panel-heading text-center">
+    <h2> Epan <br/>CMS / E-COMM / CRM / ERP<br/>Installer</h2>
+  </div>
+  <div class="panel-body">
+    <form role="form" action="#" method="POST">
+      <fieldset>
+        <div class="row">
+          <div class="col-sm-12 col-md-12">
+            <div class="form-group atk-form-row atk-form-field"><strong>Database Name:</strong>
+              <div class="input-group"><span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                <div class="xepan-form-field">{$database}    </div>
+              </div>
+            </div>
+            <div class="form-group atk-form-row atk-form-field"><strong>Database Host:</strong>
+              <div class="input-group"><span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                <div class="xepan-form-field">{$database_host}    </div>
+              </div>
+            </div>
+            <div class="form-group atk-form-row atk-form-field"><strong>Database User:</strong>
+              <div class="input-group"><span class="input-group-addon"><i class="fa fa-envelope"></i></span>
+                <div class="xepan-form-field">{$database_user}</div>
+              </div>
+            </div>
+            <div class="form-group atk-form-row atk-form-field"><strong>Database Password:</strong>
+              <div class="input-group"><span class="input-group-addon"><i class="fa fa-key"></i></span>
+                <div class="xepan-form-field">{$database_password}</div>
+              </div>
+            </div>
+            <div class="form-group atk-form-row atk-form-field"><strong>Admin Username (Must be Email):</strong>
+              <div class="input-group"><span class="input-group-addon"><i class="fa fa-key"></i></span>
+                <div class="xepan-form-field">{$admin_username}</div>
+              </div>
+            </div>
+            <div class="form-group atk-form-row atk-form-field"><strong>Admin Password:</strong>
+              <div class="input-group"><span class="input-group-addon"><i class="fa fa-key"></i></span>
+                <div class="xepan-form-field">{$admin_password}</div>
+              </div>
+            </div>
+            <div class="form-group atk-form-row atk-form-field"><strong>Install As:</strong>
+              <div class="input-group"><span class="input-group-addon"><i class="fa fa-key"></i></span>
+                <div class="xepan-form-field">{$install_as}</div>
+              </div>
+            </div>
+            <div class="form-group atk-form-row atk-form-field"><strong>License Key:</strong>
+              <div class="input-group"><span class="input-group-addon"><i class="fa fa-key"></i></span>
+                <div class="xepan-form-field">{$license_key} </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div style="padding-bottom:20px;" class="ro">            </div>
+        <div class="row">
+          <div class="col-xs-12">
+            <button type="submit" class="btn btn-success col-xs-12">Install (May take a few minutes on slow pc)</button>
+          </div>
+        </div>
+      </fieldset>
+    </form>
+  </div>
+</div>
+<style>
+   input{
+    width:100%;
+  }
+  .atk-wrapper .atk-box-large {
+    margin:auto;
+  }     
+  .atk-wrapper .atk-box-large .xepan-form-field  input{
+    line-height:30px;
+  }
+  .atk-wrapper .atk-box-large .form-group{
+    margin-bottom: 10px;
+  }
+</style>

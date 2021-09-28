@@ -1,0 +1,41 @@
+
+<div id="{$_name}" style="display:none" for-xepan-component="xepan/cms/Tool_EasyFullscreenCarouselSlider" class="xepan-tool-options">
+  <table class="table-condensed table-hover xepan-cms-tool-table">
+    <tr class="category">
+      <div class="xepan-tool-option">
+        <td class="xepan-tool-option-title">Gallery</td>
+      </div>
+    </tr>
+    <tr>		
+      <td colspan="2" class="xepan-tool-option-value">
+        <select id="{$_name}_dropdown" style="width:150px;" data-attr="slider_category" class="chosen-select option-category"></select>
+      </td>
+    </tr>
+  </table>
+  <script>
+    $.ajax({
+    	url: 'index.php?page=xepan_cms_getAwesomegallery',
+    	type: 'GET',
+    	data: { },
+    	success: function ( data ){
+    		//- console.log(data);
+    		$('#{$_name}_dropdown').html(data);
+    	}
+    });
+    
+    $('#{$_name} [data-attr]').on('change',function(){
+    	$(current_selected_component).attr($(this).data('attr'),$(this).val());
+    });
+    
+    $('#{$_name}').on('show',function(event){
+    	$('#{$_name} [data-attr]').each(function(index,value){
+    		$(this).val($(current_selected_component).attr($(this).data('attr')));				
+    	});
+    });
+    
+    $('.option-category').change(function(event) {
+    	$(current_selected_component).attr('data-options',$('.option-category').val());
+    	$(current_selected_component).univ().errorMessage('Save and reload Page to see changes');
+    });
+  </script>
+</div>

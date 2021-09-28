@@ -1,0 +1,28 @@
+{
+    "name": "xepan/cms",
+    "type": "library",
+    "description": "Drag and Drop based Live editing CMS for xEpan platform frontend",
+    "homepage": "https://github.com/xepan/cms",
+    "keywords": ["xEpan","SaaS","ERP","CMS", "Drag and Drop"],
+    "license": "MIT",
+    "minimum-stability" : "dev",
+    "authors": [
+        {
+            "name": "Xavoc Technocrats Pvt. Ltd.",
+            "email": "info@xavoc.com"
+        }
+    ],
+    "source": {
+        "url": "https://github.com/xepan/cms.git",
+        "type": "git",
+        "reference": "origin/master"
+    },
+    "require": {
+        "xepan/base":"dev-master",
+        "tburry/pquery" : ">=0.2",
+        "php": ">=5.3"
+    },
+    "autoload": {
+        "psr-0": { "autocomplete": "lib" }
+    }
+}

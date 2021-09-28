@@ -1,0 +1,1 @@
+ALTER TABLE `qsp_detail` MODIFY COLUMN `discount` DECIMAL(14,4) default 0;

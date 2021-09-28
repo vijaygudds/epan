@@ -1,0 +1,92 @@
+.xepan-tool-options(id='{$_name}' style="display:none" for-xepan-component='xepan/webwidgets/Tool_Testimonials')
+	.xepan-cms-group-panel.clearfix
+		h3.collapsed(data-toggle="collapse" data-target="#collapse-testimonials" aria-expanded="false")
+			span Testimonials
+		#collapse-testimonials.xepan-cms-tools-bar-panel.row-fluid.collapse
+			.panel-body
+				.xepan-cms-groups-panel.collapse.in(id="xepan-cms-groups-panel")
+				.xepan-cms-group-panel.clearfix
+					div.panel.panel-heading.panel-primary.collapsed(data-toggle="collapse" data-target="#show-hide-testimonials-option" aria-expanded="false")
+						span Options 
+				#show-hide-testimonials-option.xepan-cms-tools-bar-panel.row-fluid.collapse
+					table.table.table-condensed.table-hover
+						tr
+							.xepan-tool-option
+								td.xepan-tool-option-title Template Type
+								td.xepan-tool-option-value
+									select#template_type(data-attr='template_type' data-defaultvalue="grid")
+										option(value="grid") Grid
+										option(value="list") List
+										option(value="corusel") Corusel
+						tr.add-paginator
+							.xepan-tool-option
+								td.xepan-tool-option-title Add Paginator
+								td.xepan-tool-option-value
+									select#add_paginator(data-attr='add_paginator' data-defaultvalue="yes")
+										option(value="true") Yes
+										option(value="false") No
+						tr
+							.xepan-tool-option
+								td.xepan-tool-option-title Show Created Date
+								td.xepan-tool-option-value
+									select#show_created_at(data-attr='show_created_at' data-defaultvalue="yes")
+										option(value="true") Yes
+										option(value="false") No
+						tr
+							.xepan-tool-option
+								td.xepan-tool-option-title Show Title
+								td.xepan-tool-option-value
+									select#show_title(data-attr='show_title' data-defaultvalue="yes")
+										option(value="true") Yes
+										option(value="false") No
+						tr.column-width
+							.xepan-tool-option
+								td.xepan-tool-option-title Column Width In List Template
+								td.xepan-tool-option-value
+									select#list_column_width(data-attr='list_column_width' data-defaultvalue="4")
+										option(value="4") 4
+										option(value="6") 6
+										option(value="12") 12
+										
+					table.table.table-condensed.table-hover
+						tr						
+							.xepan-tool-option
+								td.xepan-tool-option-title Record Limit
+								td.xepan-tool-option-value
+									input#record_limit(data-attr='record_limit')
+						tr.paginator-limit
+							.xepan-tool-option
+								td.xepan-tool-option-title Paginator Limit
+								td.xepan-tool-option-value 
+									input#paginator_limit(data-attr='paginator_limit')
+script.
+	$('\#{$_name} [data-attr]').on('change',function(){
+		$(current_selected_component).attr($(this).data('attr'),$(this).val());
+	});
+
+	$('\#{$_name}').on('show',function(event){
+		$('\#{$_name} [data-attr]').each(function(index,value){
+			$(this).val($(current_selected_component).attr($(this).data('attr')));				
+		});
+	})
+
+	$(document).ready(function(){
+	    $('#template_type').on('change', function() {
+	      if (this.value == 'corusel')
+	      {
+	        $(".add-paginator").hide();
+	        $(".column-width").hide();
+	        $(".paginator-limit").hide();
+	      }
+	      else if(this.value == 'grid')
+	      {
+	        $(".column-width").hide();
+	      }
+		  else{
+			$(".add-paginator").show();
+			$(".column-width").show();
+			$(".paginator-limit").show();
+	  	  }
+
+	    });
+	});

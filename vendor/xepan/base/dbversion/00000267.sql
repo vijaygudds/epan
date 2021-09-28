@@ -1,0 +1,1 @@
+ALTER TABLE `employee_row` ADD `officialholidays` INT default 0 , ADD `extraworkingdays` INT default 0, ADD `extraworkinghours` INT default 0, ADD `paidleavesonholiday` INT default 0, ADD `unpaidleavesonholiday` INT default 0;

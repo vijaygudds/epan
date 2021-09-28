@@ -1,0 +1,150 @@
+.xepan-contact-profile(id='{$_name}')
+  .main-box.clearfix
+    header.main-box-header.clearfix
+      {action}{/}
+      h2 {first_name}First Name{/} 
+      h2 {last_name}Last Name{/} 
+    .main-box-body.clearfix
+      {online_status_wrapper}
+      .profile-status
+        i.fa.fa-circle
+        |  {online_status}Online{/}
+      {/}
+      .image-wrapper
+        {avatar_wrapper}
+        {avatar}
+        img.profile-img.img-responsive.center-block(alt='', src='')
+        {/}{/}
+        p.image-caption
+          |Click Here to Upload Your Image
+      {contact_type_wrapper}
+      .profile-label
+        span.label.label-danger {type}{/}
+      {/}
+      {contact_since_wrapper}
+      .profile-since
+        | Contact since: {created_at}{/}
+      {/}
+      {email_and_phone}
+      h2 Emails
+      .profile-details
+        {Emails}
+        {rows}{row}
+        {$header}
+        {/}{/}
+        {not_found_message}{/}
+        {/}
+      h2 Phones
+      .profile-details
+        {Phones}
+        {/}
+      {/}
+      {send_email_sms_wrapper}
+      .profile-message-btn.center-block.text-center
+        .btn-group.btn-group-sm(role="group")
+          button.btn.btn-primary.do-contact-email(type="button" title="send email")
+            i.fa.fa-envelope
+            |&nbsp;Email
+          //- button.btn.btn-primary(type="button" title="send message")
+          //-   i.fa.fa-phone
+          //-   |&nbsp;SMS
+      {/}
+      .row.xepan-push
+      .row
+      .profile-details
+        .form-group
+          span(title="organization")
+            i.fa.fa-building.fa-lg &nbsp;
+            label 
+            strong Organization : 
+            | {organization}-{/}
+        {post_wrapper}
+        .form-group
+          span(title="post")
+            i.fa.fa-user.fa-lg &nbsp;
+            label
+            strong Post : 
+            | {post}-{/}
+        {/}
+        .form-group
+          span(title="website")
+            i.fa.fa-globe.fa-lg &nbsp;
+            label 
+            strong Website : 
+            |{website}-{/}
+        .form-group
+          span(title="address")
+            i.fa.fa-map-marker.fa-lg &nbsp;
+            label 
+            strong Address : 
+            |{address}not found{/}<br/>
+            label 
+            strong Country :  
+            div.atk-form-row {$country}{country_id}not found{/}<br/>
+            label 
+            strong State :  
+            div.atk-form-row {$state}{state_id}not found{/}<br/>
+            label 
+            strong City :  
+            div {city}not found{/}<br/>
+            label 
+            strong Pin Code :  
+            div {pin_code}not found{/}
+      {im_and_events_andrelation}
+      h2 Other details
+      .profile-details 
+        {OtherContactInfos}
+        div
+          span(title="Skype")
+            i.fa.fa-skype &nbsp;
+              a(href="wwww.xavoc.com" target="_blank")  
+        div
+          span(title="Whatsup")
+            i.fa.fa-whatsapp.fa-phone &nbsp;
+              a(href="9090909090" target="_blank") 
+        
+        {/}
+      h2 IM Numbers
+      .profile-details 
+        {IMs}
+        div
+          span(title="Skype")
+            i.fa.fa-skype &nbsp;
+              a(href="wwww.xavoc.com" target="_blank")  
+        div
+          span(title="Whatsup")
+            i.fa.fa-whatsapp.fa-phone &nbsp;
+              a(href="9090909090" target="_blank") 
+        
+        {/}
+      h2 Events
+      .profile-details 
+        {Events}
+        div
+          span(title="DOB")
+            i.fa.fa-wish &nbsp;
+          |DOB:
+        {/}
+      h2 Relationship
+      .profile-details 
+        {Relations}
+        div
+          span(title="Father")
+            i.fa.fa-skype &nbsp;
+          | 
+        {/}
+      {/}  
+      {$FormButtons}
+      {$Content}
+
+style.
+  .image-caption{
+    display:none;
+  }
+  .image-wrapper:hover .image-caption{
+    border:2px solid redd;
+    display:blockk;
+
+  }
+
+

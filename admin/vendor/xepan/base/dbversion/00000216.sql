@@ -1,0 +1,1 @@
+ALTER TABLE `xepan_listing_contact_plan_association` ADD `number_of_list_detail_allowed` int;

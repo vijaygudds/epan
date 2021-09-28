@@ -1,0 +1,1 @@
+ALTER TABLE `item` ADD `is_teller_made_item` TINYINT NULL;

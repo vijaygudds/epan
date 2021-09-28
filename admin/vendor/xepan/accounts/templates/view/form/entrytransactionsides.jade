@@ -1,0 +1,24 @@
+style.
+	.atk-cells {
+	  display: table;
+	  width: 100%;
+	}
+	.atk-cells > .atk-cell {
+	  display: table-cell;
+	  vertical-align: middle;
+	}
+	.atk-cells.atk-cells-justified {
+	  table-layout: fixed;
+	}
+	.atk-cells[class*=atk-move] {
+	  width: auto;
+	}
+
+h2.text-center{$transaction_name}
+hr
+.form-group.xepan-accounts-transaction-block
+	.row.xepan-push
+		.col-md-6.col-lg-6
+			{$transaction_row_left}
+		.col-md-6.col-lg-6
+			{$transaction_row_right}

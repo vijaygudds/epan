@@ -1,0 +1,1 @@
+ALTER TABLE `support_ticket` Add COLUMN `pending_at` datetime DEFAULT NULL,Add COLUMN `assigned_at` datetime DEFAULT NULL,Add COLUMN `closed_at` datetime DEFAULT NULL,Add COLUMN `rejected_at` datetime DEFAULT NULL;

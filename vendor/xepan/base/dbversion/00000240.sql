@@ -1,0 +1,1 @@
+ALTER TABLE `qsp_master` ADD (`cancel_reason` varchar(255),`cancel_narration` text);

@@ -1,0 +1,125 @@
+
+<div id="{$_name}" style="display:none" for-xepan-component="xepan/webwidgets/Tool_Testimonials" class="xepan-tool-options">
+  <div class="xepan-cms-group-panel clearfix">
+    <h3 data-toggle="collapse" data-target="#collapse-testimonials" aria-expanded="false" class="collapsed"><span>Testimonials</span></h3>
+    <div id="collapse-testimonials" class="xepan-cms-tools-bar-panel row-fluid collapse">
+      <div class="panel-body">
+        <div id="xepan-cms-groups-panel" class="xepan-cms-groups-panel collapse in"></div>
+        <div class="xepan-cms-group-panel clearfix">
+          <div data-toggle="collapse" data-target="#show-hide-testimonials-option" aria-expanded="false" class="panel panel-heading panel-primary collapsed"><span>Options </span></div>
+        </div>
+        <div id="show-hide-testimonials-option" class="xepan-cms-tools-bar-panel row-fluid collapse">
+          <table class="table table-condensed table-hover">
+            <tr>
+              <div class="xepan-tool-option">
+                <td class="xepan-tool-option-title">Template Type</td>
+                <td class="xepan-tool-option-value">
+                  <select id="template_type" data-attr="template_type" data-defaultvalue="grid">
+                    <option value="grid">Grid</option>
+                    <option value="list">List</option>
+                    <option value="corusel">Corusel</option>
+                  </select>
+                </td>
+              </div>
+            </tr>
+            <tr class="add-paginator">
+              <div class="xepan-tool-option">
+                <td class="xepan-tool-option-title">Add Paginator</td>
+                <td class="xepan-tool-option-value">
+                  <select id="add_paginator" data-attr="add_paginator" data-defaultvalue="yes">
+                    <option value="true">Yes</option>
+                    <option value="false">No</option>
+                  </select>
+                </td>
+              </div>
+            </tr>
+            <tr>
+              <div class="xepan-tool-option">
+                <td class="xepan-tool-option-title">Show Created Date</td>
+                <td class="xepan-tool-option-value">
+                  <select id="show_created_at" data-attr="show_created_at" data-defaultvalue="yes">
+                    <option value="true">Yes</option>
+                    <option value="false">No</option>
+                  </select>
+                </td>
+              </div>
+            </tr>
+            <tr>
+              <div class="xepan-tool-option">
+                <td class="xepan-tool-option-title">Show Title</td>
+                <td class="xepan-tool-option-value">
+                  <select id="show_title" data-attr="show_title" data-defaultvalue="yes">
+                    <option value="true">Yes</option>
+                    <option value="false">No</option>
+                  </select>
+                </td>
+              </div>
+            </tr>
+            <tr class="column-width">
+              <div class="xepan-tool-option">
+                <td class="xepan-tool-option-title">Column Width In List Template</td>
+                <td class="xepan-tool-option-value">
+                  <select id="list_column_width" data-attr="list_column_width" data-defaultvalue="4">
+                    <option value="4">4</option>
+                    <option value="6">6</option>
+                    <option value="12">12</option>
+                  </select>
+                </td>
+              </div>
+            </tr>
+          </table>
+          <table class="table table-condensed table-hover">
+            <tr>						
+              <div class="xepan-tool-option">
+                <td class="xepan-tool-option-title">Record Limit</td>
+                <td class="xepan-tool-option-value">
+                  <input id="record_limit" data-attr="record_limit"/>
+                </td>
+              </div>
+            </tr>
+            <tr class="paginator-limit">
+              <div class="xepan-tool-option">
+                <td class="xepan-tool-option-title">Paginator Limit</td>
+                <td class="xepan-tool-option-value"> 
+                  <input id="paginator_limit" data-attr="paginator_limit"/>
+                </td>
+              </div>
+            </tr>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+  $('#{$_name} [data-attr]').on('change',function(){
+  	$(current_selected_component).attr($(this).data('attr'),$(this).val());
+  });
+  
+  $('#{$_name}').on('show',function(event){
+  	$('#{$_name} [data-attr]').each(function(index,value){
+  		$(this).val($(current_selected_component).attr($(this).data('attr')));				
+  	});
+  })
+  
+  $(document).ready(function(){
+      $('#template_type').on('change', function() {
+        if (this.value == 'corusel')
+        {
+          $(".add-paginator").hide();
+          $(".column-width").hide();
+          $(".paginator-limit").hide();
+        }
+        else if(this.value == 'grid')
+        {
+          $(".column-width").hide();
+        }
+  	  else{
+  		$(".add-paginator").show();
+  		$(".column-width").show();
+  		$(".paginator-limit").show();
+    	  }
+  
+      });
+  });
+</script>

@@ -1,0 +1,1 @@
+ALTER TABLE `salary` ADD `created_by_id` INT(11) NULL AFTER `order`; 

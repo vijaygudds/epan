@@ -1,0 +1,1 @@
+ALTER TABLE `employee_leave_allow` ADD `effective_date` DATE default NULL , ADD `previously_carried_leaves` INT default NULL; 

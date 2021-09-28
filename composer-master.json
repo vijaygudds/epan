@@ -1,0 +1,36 @@
+{
+  "type":"project",
+  "minimum-stability" :"dev",
+  "require":{
+    "educoder\/pest":"1.0.0",
+    "xepan/base": "dev-master",
+    "xepan/hr": "dev-master",
+    "xepan/marketing": "dev-master",
+    "xepan/commerce": "dev-master",
+    "xepan/production": "dev-master",
+    "xepan/communication": "dev-master",
+    "xepan/crm": "dev-master",
+    "xepan/cms": "dev-master",
+    "xepan/accounts": "dev-master",
+    "xepan/projects": "dev-master",
+    "xepan/blog": "dev-master",
+    "hoa/websocket": "~3.0",
+    "xepan/webwidgets": "dev-master",
+    "rah/danpu": "2.6",
+    "xepan/omnipay-instamojo": "dev-master",
+    "xepan/digitalocean-v2": "2.2.x-dev",
+    "xepan/listing": "dev-master",
+    "xepan/atk4": "4.3"
+  },
+  "autoload":{
+    "psr-0":{
+      "":[ ]
+    }
+  },
+  "extra": {
+        "heroku": {
+            "document-root": "frontend/public",
+            "index-document": "index.php"
+        }
+    }
+}

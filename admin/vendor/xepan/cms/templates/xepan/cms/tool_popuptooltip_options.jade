@@ -1,0 +1,48 @@
+.xepan-tool-options(id='{$_name}' style="display:none" for-xepan-component='xepan/cms/Tool_PopupToolTip')
+	//- .xepan-cms-group-panel.clearfix
+	//- 	h3.collapsed(data-toggle="collapse" data-target="#collapse-carousel" aria-expanded="false")
+	//- 		span Mod
+	//- 	#collapse-carousel.xepan-cms-tools-bar-panel.row-fluid.collapse.in
+	//- 		.panel-body
+	table.table-condensed.table-hover.xepan-cms-tool-table
+		tr
+			td Mode
+			td
+				.btn-group.btn-group-xs
+					button#popup_edit_mode(type='button' value='edit mode' class="btn btn-success") Edit
+					button#popup_view_mode(type='button' value='view mode' class="btn btn-primary") View
+		tr
+			td Button Text
+			td
+				input(type="text" id="xpopup_trigger_label")
+	script.
+
+		$('\#{$_name} [data-attr]').on('change',function(){
+			$(current_selected_component).attr($(this).data('attr'),$(this).val());
+		});
+
+		$('\#{$_name}').on('show',function(event){
+			$('\#{$_name} [data-attr]').each(function(index,value){
+				$(this).val($(current_selected_component).attr($(this).data('attr')));				
+			});
+		});
+
+		$('#popup_edit_mode').click(function(event) {
+			//console.log($('#myModal11'+$(current_selected_component).attr('id')));
+			// $( "div.xpopup" ).css( "background-color", "red" ).removeClass('modal fade');
+			$(current_selected_component).find( "div.xpopup" ).removeClass('modal fade').css('display','block');
+			$(current_selected_component).find( "button.xpopup-btn" ).css('display','inline');
+
+			$('#epan-quick-component-options').hide('slideup');
+
+		});
+
+		$('#popup_view_mode').click(function(event) {
+			$(current_selected_component).find( "div.xpopup" ).addClass('modal fade').css('display','none');
+			$(current_selected_component).find( "button.xpopup-btn" ).css('display','none');
+			// $('#myModal11'+$(current_selected_component).attr('id')).addClass('modal fade');
+		});
+
+		$('#xpopup_trigger_label').change(function(event) {
+			$(current_selected_component).find('div.xpopup_trigger').html($("#xpopup_trigger_label").val());
+		});

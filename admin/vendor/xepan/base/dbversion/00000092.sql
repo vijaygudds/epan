@@ -1,0 +1,1 @@
+ALTER TABLE `contact_info` ADD INDEX `contact_id` USING BTREE (`contact_id`) comment '';

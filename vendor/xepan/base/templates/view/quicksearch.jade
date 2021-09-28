@@ -1,0 +1,24 @@
+.xepan-grid(id="{$_name}" class="{$class}")
+    div(style="width:100%; max-width:100%; margin-bottom:0px !important;")
+        {header}
+        {cols}{col}   
+        {/}{/}
+        {/}
+        {$subheader}
+        {rows}{row}
+        div(class="{$odd_even} row" data-id="{$id}" style="padding-top:5px;padding-bottom:5px;")
+            {cols}
+            .col-md-8
+                a.user-link(href="#nowhere" onclick='$.univ().frameURL("","{$url}")' style="margin-left:0;white-space:nowrap;overflow: hidden;text-overflow: ellipsis;")
+                    {$title}&nbsp;
+            .col-md-4.text-muted.small(style="background-color:white;")
+                {$type_status}
+            .container
+                .row.col-md-12.text-muted.small
+                    {$quick_info}    
+            {/}
+        {/}{/}
+        {not_found}
+        {$not_found_message}
+        {/}
+    {$Paginator}

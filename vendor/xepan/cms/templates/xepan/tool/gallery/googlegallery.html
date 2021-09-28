@@ -1,0 +1,27 @@
+
+<div id="{$_name}" class="xepan-component">
+  <link rel="stylesheet" type="text/css" href="vendor/xepan/cms/templates/css/image-gallery/ImageGalleryDefault.css"/>
+  <link rel="stylesheet" type="text/css" href="vendor/xepan/cms/templates/css/image-gallery/ImageGalleryComponent.css"/>
+  <script src="vendor/xepan/cms/templates/js/image-gallery/ImageGalleryModernizr.custom.js"></script>
+  <div class="main"></div>
+  <ul id="og-grid" class="og-grid">
+    {rows}
+    {row}
+    <li>
+        <a href="#55657" data-largesrc="{$image}" data-videocode='{$video_embedded_code}' data-title="{$name}" data-description="{$description}">
+          <div style="margin:0 auto 0 auto;width:200px;height:200px;padding:5px;" class="gallery-item-wrapper">
+            {$image_wrapper}
+            {$video_wrapper}
+          </div>
+        </a>
+    </li>
+    {/row}
+    {/rows}
+  </ul>
+</div>
+<script src="vendor/xepan/cms/templates/js/image-gallery/ImageGalleryGrid1.js"></script>
+<script>
+  $(function() {
+  	Grid.init();
+  });	
+</script>

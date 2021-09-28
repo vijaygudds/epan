@@ -1,0 +1,248 @@
+section#blog.container
+  .center
+    h2 Blogs
+    p.lead Pellentesque habitant morbi tristique senectus et netus et malesuada
+  .blog
+    .row
+      .col-md-8
+        .blog-item
+          img.img-responsive.img-blog(src='images/blog/blog1.jpg', width='100%', alt='')
+          .row
+            .col-xs-12.col-sm-2.text-center
+              .entry-meta
+                span#publish_date 07  NOV
+                span
+                  i.fa.fa-user
+                  a(href='#')  John Doe
+                span
+                  i.fa.fa-comment
+                  a(href='blog-item.html#comments') 2 Comments
+                span
+                  i.fa.fa-heart
+                  a(href='#') 56 Likes
+            .col-xs-12.col-sm-10.blog-content
+              h2 Consequat bibendum quam
+              p
+                | Curabitur quis libero leo, pharetra mattis eros. Praesent consequat libero eget dolor convallis vel rhoncus magna scelerisque. Donec nisl ante, elementum eget posuere a, consectetur a metus. Proin a adipiscing sapien. Suspendisse vehicula porta lectus vel semper. Nullam sapien elit, lacinia eu tristique non.posuere at mi. Morbi at turpis id urna ullamcorper ullamcorper.
+              p
+                | Curabitur quis libero leo, pharetra mattis eros. Praesent consequat libero eget dolor convallis vel rhoncus magna scelerisque. Donec nisl ante, elementum eget posuere a, consectetur a metus. Proin a adipiscing sapien. Suspendisse vehicula porta lectus vel semper.
+              .post-tags
+                strong Tag:
+                a(href='#') Cool
+                |  / 
+                a(href='#') Creative
+                |  / 
+                a(href='#') Dubttstep
+        // /.blog-item
+        .media.reply_section
+          .pull-left.post_reply.text-center
+            a(href='#')
+              img.img-circle(src='images/blog/boy.png', alt='')
+            ul
+              li
+                a(href='#')
+                  i.fa.fa-facebook
+              li
+                a(href='#')
+                  i.fa.fa-twitter
+              li
+                a(href='#')
+                  i.fa.fa-google-plus
+          .media-body.post_reply_content
+            h3 Antone L. Huges
+            p.lead
+              | Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariaturp
+            p
+              strong Web:
+              a(href='http://www.shapebootstrap.net') www.shapebootstrap.net
+        h1#comments_title 5 Comments
+        .media.comment_section
+          .pull-left.post_comments
+            a(href='#')
+              img.img-circle(src='images/blog/girl.png', alt='')
+          .media-body.post_reply_comments
+            h3 Marsh
+            h4 NOVEMBER 9, 2013 AT 9:15 PM
+            p
+              | Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
+            a(href='#') Reply
+        .media.comment_section
+          .pull-left.post_comments
+            a(href='#')
+              img.img-circle(src='images/blog/boy2.png', alt='')
+          .media-body.post_reply_comments
+            h3 Marsh
+            h4 NOVEMBER 9, 2013 AT 9:15 PM
+            p
+              | Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
+            a(href='#') Reply
+        .media.comment_section
+          .pull-left.post_comments
+            a(href='#')
+              img.img-circle(src='images/blog/boy3.png', alt='')
+          .media-body.post_reply_comments
+            h3 Marsh
+            h4 NOVEMBER 9, 2013 AT 9:15 PM
+            p
+              | Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
+            a(href='#') Reply
+        div(id='contact-page clearfix')
+          .status.alert.alert-success(style='display: none')
+          .message_heading
+            h4 Leave a Replay
+            p
+              | Make sure you enter the(*)required information where indicate.HTML code is not allowed
+          form#main-contact-form.contact-form(name='contact-form', method='post', action='sendemail.php', role='form')
+            .row
+              .col-sm-5
+                .form-group
+                  label Name *
+                  input.form-control(type='text', required='required')
+                .form-group
+                  label Email *
+                  input.form-control(type='email', required='required')
+                .form-group
+                  label URL
+                  input.form-control(type='url')
+              .col-sm-7
+                .form-group
+                  label Message *
+                  textarea#message.form-control(name='message', required='required', rows='8')
+                .form-group
+                  button.btn.btn-primary.btn-lg(type='submit', required='required') Submit Message
+        // /#contact-page
+      // /.col-md-8
+      aside.col-md-4
+        .widget.search
+          form(role='form')
+            input.form-control.search_box(type='text', autocomplete='off', placeholder='Search Here')
+        // /.search
+        .widget.categories
+          h3 Recent Comments
+          .row
+            .col-sm-12
+              .single_comments
+                img(src='images/blog/avatar3.png', alt='')
+                p Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do 
+                .entry-meta.small.muted
+                  span
+                    | By 
+                    a(href='#') Alex
+                  | On 
+                  a(href='#') Creative
+              .single_comments
+                img(src='images/blog/avatar3.png', alt='')
+                p Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do 
+                .entry-meta.small.muted
+                  span
+                    | By 
+                    a(href='#') Alex
+                  | On 
+                  a(href='#') Creative
+              .single_comments
+                img(src='images/blog/avatar3.png', alt='')
+                p Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do 
+                .entry-meta.small.muted
+                  span
+                    | By 
+                    a(href='#') Alex
+                  | On 
+                  a(href='#') Creative
+        // /.recent comments
+        .widget.categories
+          h3 Categories
+          .row
+            .col-sm-6
+              ul.blog_category
+                li
+                  a(href='#')
+                    | Computers 
+                    span.badge 04
+                li
+                  a(href='#')
+                    | Smartphone 
+                    span.badge 10
+                li
+                  a(href='#')
+                    | Gedgets 
+                    span.badge 06
+                li
+                  a(href='#')
+                    | Technology 
+                    span.badge 25
+        // /.categories
+        .widget.archieve
+          h3 Archieve
+          .row
+            .col-sm-12
+              ul.blog_archieve
+                li
+                  a(href='#')
+                    i.fa.fa-angle-double-right
+                    |  December 2013 
+                    span.pull-right (97)
+                li
+                  a(href='#')
+                    i.fa.fa-angle-double-right
+                    |  November 2013 
+                    span.pull-right (32)
+                li
+                  a(href='#')
+                    i.fa.fa-angle-double-right
+                    |  October 2013 
+                    span.pull-right (19)
+                li
+                  a(href='#')
+                    i.fa.fa-angle-double-right
+                    |  September 2013 
+                    span.pull-right (08)
+        // /.archieve
+        .widget.tags
+          h3 Tag Cloud
+          ul.tag-cloud
+            li
+              a.btn.btn-xs.btn-primary(href='#') Apple
+            li
+              a.btn.btn-xs.btn-primary(href='#') Barcelona
+            li
+              a.btn.btn-xs.btn-primary(href='#') Office
+            li
+              a.btn.btn-xs.btn-primary(href='#') Ipod
+            li
+              a.btn.btn-xs.btn-primary(href='#') Stock
+            li
+              a.btn.btn-xs.btn-primary(href='#') Race
+            li
+              a.btn.btn-xs.btn-primary(href='#') London
+            li
+              a.btn.btn-xs.btn-primary(href='#') Football
+            li
+              a.btn.btn-xs.btn-primary(href='#') Porche
+            li
+              a.btn.btn-xs.btn-primary(href='#') Gadgets
+        // /.tags
+        .widget.blog_gallery
+          h3 Our Gallery
+          ul.sidebar-gallery
+            li
+              a(href='#')
+                img(src='images/blog/gallery1.png', alt='')
+            li
+              a(href='#')
+                img(src='images/blog/gallery2.png', alt='')
+            li
+              a(href='#')
+                img(src='images/blog/gallery3.png', alt='')
+            li
+              a(href='#')
+                img(src='images/blog/gallery4.png', alt='')
+            li
+              a(href='#')
+                img(src='images/blog/gallery5.png', alt='')
+            li
+              a(href='#')
+                img(src='images/blog/gallery6.png', alt='')
+        // /.blog_gallery
+    // /.row
+  // /.blog
+// /#blog

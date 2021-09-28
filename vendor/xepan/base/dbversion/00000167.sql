@@ -1,0 +1,1 @@
+ALTER TABLE `qsp_detail` ADD COLUMN `discount`  double(8,4);

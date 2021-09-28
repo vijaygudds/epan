@@ -1,0 +1,50 @@
+.xepan-tool-options(id='{$_name}' style="display:none" for-xepan-component='xepan/base/Tool_Location')
+	//- .xepan-cms-group-panel.clearfix
+	//- 	h3.collapsed(data-toggle="collapse" data-target="#collapse-location" aria-expanded="false")
+	//- 		span|Item List
+	//- 	#collapse-location.xepan-cms-tools-bar-panel.row-fluid.collapse
+	//- 		.panel-body
+	//- 			.xepan-cms-groups-panel.collapse.in(id="xepan-cms-groups-panel")
+	//- 			.xepan-cms-group-panel.clearfix
+	//- 				div.panel.panel-heading.panel-primary.collapsed(data-toggle="collapse" data-target="#show-hide-location-option" aria-expanded="false")
+	//- 					span Hide/ Show
+	//- 			#show-hide-location-option.xepan-cms-tools-bar-panel.row-fluid.collapse
+	table.table-condensed.table-hover.xepan-cms-tool-table
+		tr
+			.xepan-tool-option
+				td.xepan-tool-option-title Country Name
+				td.xepan-tool-option-value
+					select#country_name(data-attr='show_country_name' data-defaultvalue="true")
+						option(value="true") Yes
+						option(value="false") No
+		tr
+			.xepan-tool-option
+				td.xepan-tool-option-title State Name
+				td.xepan-tool-option-value
+					select#state_name(data-attr='show_state_name' data-defaultvalue="true")
+						option(value="true") Yes
+						option(value="false") No
+	script.
+		$('\#{$_name} [data-attr]').on('change',function(){
+			$(current_selected_component).attr($(this).data('attr'),$(this).val());
+			// show or hide the toggle class
+			if($(this).data('toggleclass')){
+				var value = $(this).data('togglevalue').toString();
+				if($(this).val() === value){
+					$($(this).data('toggleclass')).show();
+				}else
+					$($(this).data('toggleclass')).hide();
+			}
+
+		});
+	
+		$('\#{$_name}').on('show',function(event){
+			$('\#{$_name} [data-attr]').each(function(index,value){
+				// setting up default value if no option selected
+				var default_value = $(this).attr('data-defaultvalue');
+				if($(current_selected_component).attr($(this).data('attr')))
+					default_value = $(current_selected_component).attr($(this).data('attr'));
+				
+				$(this).val(default_value);
+			});
+		});	

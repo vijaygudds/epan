@@ -1,0 +1,1 @@
+ALTER TABLE `item` CHANGE `qty_unit` `qty_unit_id` INT(11) NULL DEFAULT NULL;

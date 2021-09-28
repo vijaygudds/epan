@@ -1,0 +1,80 @@
+.panel.panel-default(id="{$_name}")
+  .panel-heading.text-center
+    h2  Epan <br/>CMS / E-COMM / CRM / ERP<br/>Installer
+  .panel-body
+    form(role='form', action='#', method='POST')
+      fieldset
+        .row
+          .col-sm-12.col-md-12
+            .form-group.atk-form-row.atk-form-field
+              strong Database Name:
+              .input-group
+                span.input-group-addon
+                  i.glyphicon.glyphicon-user
+                .xepan-form-field{$database}    
+            .form-group.atk-form-row.atk-form-field
+              strong Database Host:
+              .input-group
+                span.input-group-addon
+                  i.glyphicon.glyphicon-user
+                .xepan-form-field{$database_host}    
+            .form-group.atk-form-row.atk-form-field
+              strong Database User:
+              .input-group
+                span.input-group-addon
+                  i.fa.fa-envelope
+                .xepan-form-field{$database_user}
+            .form-group.atk-form-row.atk-form-field
+              strong Database Password:
+              .input-group
+                span.input-group-addon
+                  i.fa.fa-key
+                .xepan-form-field{$database_password}
+            .form-group.atk-form-row.atk-form-field
+              strong Admin Username (Must be Email):
+              .input-group
+                span.input-group-addon
+                  i.fa.fa-key
+                .xepan-form-field{$admin_username}
+            .form-group.atk-form-row.atk-form-field
+              strong Admin Password:
+              .input-group
+                span.input-group-addon
+                  i.fa.fa-key
+                .xepan-form-field{$admin_password}
+            .form-group.atk-form-row.atk-form-field
+              strong Install As:
+              .input-group
+                span.input-group-addon
+                  i.fa.fa-key
+                .xepan-form-field{$install_as}
+            .form-group.atk-form-row.atk-form-field
+              strong License Key:
+              .input-group
+                span.input-group-addon
+                  i.fa.fa-key
+                .xepan-form-field{$license_key} 
+              
+        .ro(style="padding-bottom:20px;")             
+        .row
+          .col-xs-12
+            button.btn.btn-success.col-xs-12(type='submit') Install (May take a few minutes on slow pc)
+        
+  //- .panel-footer.text-center
+  //-   {login_wrapper}
+  //-   a.back-login.xepan-login-panl-loadview(style="cursor:pointer; cursor: hand;" href="index.php" data-showview="login_view")  Back To Login 
+  //-    #login-box-footer
+  //-   {/}
+style.
+    #{$_name} input{
+      width:100%;
+    }
+    .atk-wrapper .atk-box-large {
+      margin:auto;
+    }     
+    .atk-wrapper .atk-box-large .xepan-form-field  input{
+      line-height:30px;
+    }
+    .atk-wrapper .atk-box-large .form-group{
+      margin-bottom: 10px;
+    }

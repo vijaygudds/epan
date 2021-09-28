@@ -1,0 +1,33 @@
+
+<div id="{$_name}" style="{$style}" class="{$class}"><i title="select your location" type="button" data-toggle="modal" data-target="#{$_name}_location_model" style="cursor:pointer; cursor: hand;" class="xepan-location-tool glyphicon glyphicon-map-marker text-primary">{$country_name} {$state_name}</i>
+  <div id="{$_name}_location_model" tabindex="-1" role="dialog" aria-labelledby="{$_name}_model_label" class="modal fade">
+    <div role="document" class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" data-dismiss="modal" aria-label="Close" class="close"><span aria-hidden="true">×</span></button>
+          <h4 id="{$_name}_model_label" class="modal-title">Select your location</h4>
+        </div>
+        <div class="modal-body">
+          <div style="width:80%" class="container xepan-select-your-location-form">{form_layout}
+            <div class="form-group">
+              <label>Country</label>
+              <div class="atk-form-row">{$country}</div>
+            </div>
+            <div class="form-group">
+              <label>State</label>
+              <div class="atk-form-row">{$state}</div>
+            </div>{/}
+          </div>{$Content}
+        </div>
+        <div class="modal-footer">
+          <button type="button" data-dismiss="modal" class="btn btn-default">Close</button>{$save_button}
+        </div>
+      </div>
+    </div>
+  </div>
+  <style>
+    .xepan-select-your-location-form select{
+    width:100%;
+    }
+  </style>  {location_fetcher_wrapper}  {/}
+</div>

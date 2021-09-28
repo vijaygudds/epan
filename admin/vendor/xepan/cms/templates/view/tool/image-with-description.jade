@@ -1,0 +1,7 @@
+.xepan-component(id="{$_name}" class=' {$class}' style=' {$style}' xepan-component='xepan/cms/Tool_ImageWithDescription')
+	link(rel="stylesheet" type="text/css" href="vendor/xepan/cms/templates/css/ImageWithDescription.css")
+	.imagepluscontainer(style="z-index:2")
+		.xepan-component(xepan-component="xepan/cms/Tool_Image")
+			img(src="admin/img/logo.png" style="max-width:100%; height: 100%; width:100%" data-extra-classes="" alt="Image" class="ui-resizable")
+		.xepan-component.xepan-editable-text.mce-content-body.desc.editor(xepan-component="xepan/cms/Tool_Text" emptytext="Edit this text" contenteditable="true")
+			|Edit this text	

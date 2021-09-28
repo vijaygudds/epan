@@ -1,0 +1,48 @@
+
+<div class="main-box clearfix">
+  <div class="tabs-wrapper profile-tabs">
+    <ul class="nav nav-tabs responsive-tabs responsive-tabs">
+      <li class="active"><a data-toggle="tab" href="#tab-general_setting">Emails Setting</a></li>
+      <li><a data-toggle="tab" href="#sms_setting">SMS Setting</a></li>
+      <li><a data-toggle="tab" href="#misc">Misc Setting</a></li>
+      <li><a data-toggle="tab" href="#basic-info">Company Info</a></li>
+      <li><a data-toggle="tab" href="#communication-subtype">Communication Sub Types</a></li>
+      <li><a data-toggle="tab" href="#Verify-contact">Email`s Verify Contact  </a></li>
+    </ul>
+    <div class="tab-content">
+      <div id="tab-general_setting" class="tab-pane active">
+        {Content}
+        {general_setting}Please Save Basic Information First{/}
+        {/}
+      </div>
+      <div id="sms_setting" class="tab-pane">
+        {Content}
+        {$sms_setting}
+        {/}
+      </div>
+      <div id="misc" class="tab-pane">
+        {Content}
+        {$misc_view}
+        {$email_view}
+        {$contactno_view}
+        {/}
+      </div>
+      <div id="basic-info" class="tab-pane">
+        {Content}
+        {$company_info}
+        {/}
+      </div>
+      <div id="communication-subtype" class="tab-pane">
+        {Content}
+        {$comm_subtype}
+        {/}
+      </div>
+      <div id="Verify-contact" class="tab-pane">{$verify_to_contact}</div>
+    </div>
+  </div>
+</div>
+<style>
+  .select2{
+    width:100%!important;
+  }
+</style>

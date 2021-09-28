@@ -1,0 +1,21 @@
+
+<div id="{$_name}" {$attributes}="{$attributes}" style="background-color:white;" class="xepan-grid {$class}">
+  <div class="main-box-body text-center">
+        {$header}
+        {rows}{row}
+        <div data-id="{$id}" class="row {$odd_even}">
+          <div class="col-md-12 col-sx-12"><span data-id="{$id}" style="cursor:pointer; cursor: hand; max-width:600px; margin-left:6px; display:block; margin-bottom:4px;" class="text-center instant-task-feed text-{$color}">{task_name}<span class="text-danger">No Active Task </span>{/}</span></div>
+        </div>
+        <div class="row" style="font-size: 0.8em;">
+          <div class="col-md-12" title="Starting Date">{$starting_date}</div>
+          <div class="col-md-12" style="height: 2px"></div>
+          <div class="col-md-12" title="Dead Line">{$deadline}</div>
+          <div class="col-md-12" style="height: 2px"></div>
+          <div class="col-md-12 label label-primary"><span title="Total Duration">{$total_duration}</span></div>
+          <div class="col-md-12"><span data-action="{$possible_action}" data-id="{$id}" style="cursor:pointer; cursor: hand;" class="current_task_btn fa {$icon} {$running-task}" title="Running Since"><span style="margin-left:3px;" class="duration">           </span></span></div>
+        </div>{/rows}{/row}
+  </div>{not_found}
+  <div style="margin-left:auto;margin-right:auto" class="row">
+    <div role="alert" style="cursor:pointer; cursor: hand;" class="col-md-12 text-center alert alert-warning instant-task-feed"><span class="icon-attention fa fa-exclamation-triangle">  {not_found_message}{/not_found_message}</span></div>
+  </div>{/}
+</div>

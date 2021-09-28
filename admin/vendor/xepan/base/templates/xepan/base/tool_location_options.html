@@ -1,0 +1,52 @@
+
+<div id="{$_name}" style="display:none" for-xepan-component="xepan/base/Tool_Location" class="xepan-tool-options">
+  <table class="table-condensed table-hover xepan-cms-tool-table">
+    <tr>
+      <div class="xepan-tool-option">
+        <td class="xepan-tool-option-title">Country Name</td>
+        <td class="xepan-tool-option-value">
+          <select id="country_name" data-attr="show_country_name" data-defaultvalue="true">
+            <option value="true">Yes</option>
+            <option value="false">No</option>
+          </select>
+        </td>
+      </div>
+    </tr>
+    <tr>
+      <div class="xepan-tool-option">
+        <td class="xepan-tool-option-title">State Name</td>
+        <td class="xepan-tool-option-value">
+          <select id="state_name" data-attr="show_state_name" data-defaultvalue="true">
+            <option value="true">Yes</option>
+            <option value="false">No</option>
+          </select>
+        </td>
+      </div>
+    </tr>
+  </table>
+  <script>
+    $('#{$_name} [data-attr]').on('change',function(){
+    	$(current_selected_component).attr($(this).data('attr'),$(this).val());
+    	// show or hide the toggle class
+    	if($(this).data('toggleclass')){
+    		var value = $(this).data('togglevalue').toString();
+    		if($(this).val() === value){
+    			$($(this).data('toggleclass')).show();
+    		}else
+    			$($(this).data('toggleclass')).hide();
+    	}
+    
+    });
+    
+    $('#{$_name}').on('show',function(event){
+    	$('#{$_name} [data-attr]').each(function(index,value){
+    		// setting up default value if no option selected
+    		var default_value = $(this).attr('data-defaultvalue');
+    		if($(current_selected_component).attr($(this).data('attr')))
+    			default_value = $(current_selected_component).attr($(this).data('attr'));
+    		
+    		$(this).val(default_value);
+    	});
+    });	
+  </script>
+</div>

@@ -1,0 +1,1 @@
+ALTER TABLE `item` ADD COLUMN `is_serializable`  tinyint(4) NULL DEFAULT NULL;

@@ -1,0 +1,47 @@
+.main-box.clearfix
+      .tabs-wrapper.profile-tabs
+        ul.nav.nav-tabs.responsive-tabs.responsive-tabs
+          //- li.active
+          //-   a(data-toggle='tab', href='#tab-user') User Managment 
+          li.active
+            a(data-toggle='tab', href='#tab-general_setting') Emails Setting
+          li
+            a(data-toggle='tab', href='#sms_setting') SMS Setting
+          li
+            a(data-toggle='tab', href='#misc') Misc Setting
+          li
+            a(data-toggle='tab', href='#basic-info') Company Info
+          li
+            a(data-toggle='tab', href='#communication-subtype') Communication Sub Types
+          li
+            a(data-toggle='tab', href='#Verify-contact') Email`s Verify Contact  
+        .tab-content
+          #tab-general_setting.tab-pane.active
+            {Content}
+            {general_setting}Please Save Basic Information First{/}
+            {/}
+           #sms_setting.tab-pane
+            {Content}
+            {$sms_setting}
+            {/}
+           #misc.tab-pane
+            {Content}
+            {$misc_view}
+            {$email_view}
+            {$contactno_view}
+            {/}
+           #basic-info.tab-pane
+            {Content}
+            {$company_info}
+            {/}
+           #communication-subtype.tab-pane
+            {Content}
+            {$comm_subtype}
+            {/}
+           #Verify-contact.tab-pane
+            {$verify_to_contact}
+
+style.
+  .select2{
+    width:100%!important;
+  }

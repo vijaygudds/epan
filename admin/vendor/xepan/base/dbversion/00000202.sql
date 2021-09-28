@@ -1,0 +1,1 @@
+ALTER TABLE `webpage` Add COLUMN `order`  integer;

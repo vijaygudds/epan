@@ -1,0 +1,1 @@
+ALTER TABLE `contact` ADD `last_communication_before_days` int;

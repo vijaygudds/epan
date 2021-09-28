@@ -1,0 +1,254 @@
+.main-box.no-header.clearfix
+  .main-box-body.clearfix
+    .alert.alert-danger What are other required buttons here .. may be add search etc
+    {$Content}
+    {ContactList}{ContactListTemplate}
+    .table-responsive(id="{$_name}")
+      table.table.user-list.table-hover
+        thead
+          tr
+            th
+              span User
+            th
+              span Created
+            th
+              span LAST ACTIVITY
+            th.text-center
+              span Status
+            th.text-left
+              span Contact
+            th  
+        tbody
+          {rows}{row}
+          tr(data-id="{$id}")
+            td
+              img(alt='', src='img/samples/scarlet-159.png')
+              a.user-link(href='#') {first_name}FirstName{/first_name} {last_name}LastName{/last_name}
+              span.user-subhead Admin
+            td
+              | 2013/08/08
+            td
+              | 2016/02/01
+            td.text-center
+              span.label.label-default active
+            td.text-left
+              a(href='#') {email}email@example.com{/email}
+              div 9887464043
+            td(style='width: 20%;')
+              a.table-link(href='#')
+                span.fa-stack
+                  i.fa.fa-square.fa-stack-2x
+                  i.fa.fa-pencil.fa-stack-1x.fa-inverse
+              a.table-link.danger(href='#')
+                span.fa-stack
+                  i.fa.fa-square.fa-stack-2x
+                  i.fa.fa-trash-o.fa-stack-1x.fa-inverse
+          {/row}{/rows}{$Paginator}{/ContactListTemplate}
+          tr
+            td
+              img(alt='', src='img/samples/robert-300.jpg')
+              a.user-link(href='#') Silky Monga
+              span.user-subhead Member
+            td
+              | 2013/08/12
+            td
+              | 2016/02/01  
+            td.text-center
+              span.label.label-success Active
+            td.text-left
+              a(href='#') monga@gmail.com
+              div 9887464043
+            td(style='width: 20%;')
+              a.table-link(href='#')
+                span.fa-stack
+                  i.fa.fa-square.fa-stack-2x
+                  i.fa.fa-pencil.fa-stack-1x.fa-inverse
+              a.table-link.danger(href='#')
+                span.fa-stack
+                  i.fa.fa-square.fa-stack-2x
+                  i.fa.fa-trash-o.fa-stack-1x.fa-inverse
+          tr
+            td
+              img(alt='', src='img/samples/ryan-300.jpg')
+              a.user-link(href='#') Tanvi
+              span.user-subhead Registered
+            td
+              | 2013/03/03
+            td
+              | 2016/02/01  
+            td.text-center
+              span.label.label-danger Banned
+            td.text-left
+              a(href='#') Tanvi@xavoc.com
+              div 9887464043
+            td(style='width: 20%;')
+              a.table-link(href='#')
+                span.fa-stack
+                  i.fa.fa-square.fa-stack-2x
+                  i.fa.fa-pencil.fa-stack-1x.fa-inverse
+              a.table-link.danger(href='#')
+                span.fa-stack
+                  i.fa.fa-square.fa-stack-2x
+                  i.fa.fa-trash-o.fa-stack-1x.fa-inverse
+          tr
+            td
+              img(alt='', src='img/samples/emma-300.jpg')
+              a.user-link(href='#') Rakesh Sinha
+              span.user-subhead Registered
+            td
+              | 2004/01/24
+            td
+              | 2016/02/01  
+            td.text-center
+              span.label.label-warning Pending
+            td.text-left
+              a(href='#') sinha@rakesh.com
+              div 9887464043
+            td(style='width: 20%;')
+              a.table-link(href='#')
+                span.fa-stack
+                  i.fa.fa-square.fa-stack-2x
+                  i.fa.fa-pencil.fa-stack-1x.fa-inverse
+              a.table-link.danger(href='#')
+                span.fa-stack
+                  i.fa.fa-square.fa-stack-2x
+                  i.fa.fa-trash-o.fa-stack-1x.fa-inverse
+          tr
+            td
+              img(alt='', src='img/samples/robert-300.jpg')
+              a.user-link(href='#') Preeti Vishwkarma
+              span.user-subhead Admin
+            td
+              | 2013/12/31
+            td
+              | 2016/02/01  
+            td.text-center
+              span.label.label-success Active
+            td.text-left
+              a(href='#') spencer@tracy
+              div 9887464043
+            td(style='width: 20%;')
+              a.table-link(href='#')
+                span.fa-stack
+                  i.fa.fa-square.fa-stack-2x
+                  i.fa.fa-pencil.fa-stack-1x.fa-inverse
+              a.table-link.danger(href='#')
+                span.fa-stack
+                  i.fa.fa-square.fa-stack-2x
+                  i.fa.fa-trash-o.fa-stack-1x.fa-inverse
+          tr
+            td
+              img(alt='', src='img/samples/kunis-300.jpg')
+              a.user-link(href='#') Gowrav Vishwkarma
+              span.user-subhead Admin
+            td
+              | 2013/08/08
+            td
+              | 2016/02/01  
+            td.text-center
+              span.label.label-default Inactive
+            td.text-left
+              a(href='#') gowrav@xavoc.com
+              div 9887464043
+            td(style='width: 20%;')
+              a.table-link(href='#')
+                span.fa-stack
+                  i.fa.fa-square.fa-stack-2x
+                  i.fa.fa-pencil.fa-stack-1x.fa-inverse
+              a.table-link.danger(href='#')
+                span.fa-stack
+                  i.fa.fa-square.fa-stack-2x
+                  i.fa.fa-trash-o.fa-stack-1x.fa-inverse
+          tr
+            td
+              img(alt='', src='img/samples/lima-300.jpg')
+              a.user-link(href='#') Nilam
+              span.user-subhead Member
+            td
+              | 2013/08/12
+            td
+              | 2016/02/01  
+            td.text-center
+              span.label.label-success Active
+            td.text-left
+              a(href='#') Neel@joshi.com
+              div 9887464043
+            td(style='width: 20%;')
+              a.table-link(href='#')
+                span.fa-stack
+                  i.fa.fa-square.fa-stack-2x
+                  i.fa.fa-pencil.fa-stack-1x.fa-inverse
+              a.table-link.danger(href='#')
+                span.fa-stack
+                  i.fa.fa-square.fa-stack-2x
+                  i.fa.fa-trash-o.fa-stack-1x.fa-inverse
+          tr
+            td
+              img(alt='', src='img/samples/ryan-300.jpg')
+              a.user-link(href='#') Radha
+              span.user-subhead Registered
+            td
+              | 2013/03/03
+            td
+              | 2016/02/01  
+            td.text-center
+              span.label.label-danger Banned
+            td.text-left
+              a(href='#') sh@radha.com
+              div 9887464043
+            td(style='width: 20%;')
+              a.table-link(href='#')
+                span.fa-stack
+                  i.fa.fa-square.fa-stack-2x
+                  i.fa.fa-pencil.fa-stack-1x.fa-inverse
+              a.table-link.danger(href='#')
+                span.fa-stack
+                  i.fa.fa-square.fa-stack-2x
+                  i.fa.fa-trash-o.fa-stack-1x.fa-inverse
+          tr
+            td
+              img(alt='', src='img/samples/emma-300.jpg')
+              a.user-link(href='#') Vijay Mali
+              span.user-subhead Registered
+            td
+              | 2004/01/24
+            td
+              | 2016/02/01  
+            td.text-center
+              span.label.label-warning Pending
+            td.text-left
+              a(href='#') vijay@mali.com
+              div 9887464043
+            td(style='width: 20%;')
+              a.table-link(href='#')
+                span.fa-stack
+                  i.fa.fa-square.fa-stack-2x
+                  i.fa.fa-pencil.fa-stack-1x.fa-inverse
+              a.table-link.danger(href='#')
+                span.fa-stack
+                  i.fa.fa-square.fa-stack-2x
+                  i.fa.fa-trash-o.fa-stack-1x.fa-inverse
+          tr
+            td
+              img(alt='', src='img/samples/robert-300.jpg')
+              a.user-link(href='#') Radha
+              span.user-subhead Admin
+            td
+              | 2013/12/31
+            td
+              | 2016/02/01  
+            td.text-center
+              span.label.label-success Active
+            td.text-left
+              a(href='#') radha@sh.com
+              div 9887464043
+            td(style='width: 20%;')
+              a.table-link(href='#')
+                span.fa-stack
+                  i.fa.fa-square.fa-stack-2x
+                  i.fa.fa-pencil.fa-stack-1x.fa-inverse
+              a.table-link.danger(href='#')
+                span.fa-stack
+                  i.fa.fa-square.fa-stack-2x
+                  i.fa.fa-trash-o.fa-stack-1x.fa-inverse
+    {/ContactList}

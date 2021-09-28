@@ -1,0 +1,16 @@
+.main-box.clearfix
+      .tabs-wrapper.profile-tabs
+        ul.nav.nav-tabs.responsive-tabs
+          li.active
+            a(data-toggle='tab', href='#reset-password') Reset Password Mail
+          li
+            a(data-toggle='tab', href='#update-password') Update Password Mail
+        .tab-content
+          #reset-password.tab-pane.active
+            {Content}
+            {$reset_email}
+            {/}
+          #update-password.tab-pane
+            {Content}
+            {$updatepassword_view}
+            {/}

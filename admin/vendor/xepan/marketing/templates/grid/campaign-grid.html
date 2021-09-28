@@ -1,0 +1,124 @@
+
+<div id="{$_name}" class="xepan-grid main-box clearfix {$class}">{Pannel}
+  <header class="main-box-header clearfix atk-actions  {$class} ">
+    <div class="filter-block">
+      <div class="pull-right">{$grid_buttons} </div>
+      <div class="form-group pull-right xepan-filter-form">
+        <div class="form-control pull-left">{$quick_search}<i class="fa fa-search search-icon"></i></div>
+      </div>
+    </div>
+  </header>{/Pannel}
+  <div class="row">
+    {header}{cols}{col}{/}{/}{/}
+    {rows}{row}
+    <div data-id="{$id}" class="{$odd_even} col-md-{col-width}4{/}">{cols}
+      <div class="main-box clearfix project-box {$box}">
+        <div style="cursor:pointer; cursor: hand; max-width:600px;" class="ribbon-wrapper-green">
+          <div class="ribbon-green"> <span data-id="{$id}" style="color:white;" class="small text-muted campaign-visit-detail">{$defect} {$dummy_spot}</span></div>
+        </div>
+        <div class="main-box-body clearfix">
+          <div class="project-box-header {$bg}">
+            <div class="name"><a href="{$url}"><i class="{$campaign_icon_class}"></i>&nbsp;{$title}</a></div>
+          </div>
+          <div class="project-box-content"><span data-percent="{completed_percentage}0{/}" class="chart"><span class="percent"></span>% <br/><span class="lbl">completed</span></span></div>
+          <div class="project-box-footer clearfix"><a href="#"> <strong class="text-success">  Sent</strong>
+              <div class="row">   <span class="text-success">  {$total_combined_postings_done}   </span></div></a><a href="#"> <strong class="text-success">  Schedule Left  </strong>
+              <div class="row"><span class="text-success">  {$schedule_left} </span></div></a><a href="#"> <strong class="text-success">  Days Left   </strong>
+              <div class="row"><span class="text-success">  {$remaining_duration}   </span></div></a></div>
+          <div class="project-box-ultrafooter clearfix">
+            <div class="col-md-4">{$action}</div>
+            <div class="col-md-4"></div>
+            <div class="col-md-4">
+               
+              {$edit}
+              {$delete}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>{/}
+    {/}{/}
+    {not_found}
+    <div class="row">
+      <div role="alert" class="col-md-12 text-center alert alert-warning"><span class="icon-attention fa fa-exclamation-triangle"> &nbsp;{$not_found_message}</span></div>
+    </div>{/}
+    {totals}{cols}{col}{$content}{/}{/}{/}
+  </div>{$Paginator}
+</div>
+<script>
+  $('.chart').easyPieChart({
+  easing: 'Linear',
+  onStep: function(from, to, percent) {
+    console.log(percent);
+    $(this.el).find('.percent').text(Math.round(percent));
+  },
+  barColor: '#3498db',
+  trackColor: '#f2f2f2',
+  scaleColor: false,
+  lineWidth: 8,
+  size: 130,
+  animate: 1500
+  });
+  
+</script>
+<style type="text/css">
+  .wrapper {
+  margin: 50px auto;
+  width: 280px;
+  height: 370px;
+  background: white;
+  border-radius: 10px;
+  -webkit-box-shadow: 0px 0px 8px rgba(0,0,0,0.3);
+  -moz-box-shadow:    0px 0px 8px rgba(0,0,0,0.3);
+  box-shadow:         0px 0px 8px rgba(0,0,0,0.3);
+  position: relative;
+  z-index: 90;
+  }
+  .ribbon-wrapper-green {
+  width: 85px;
+  height: 88px;
+  overflow: hidden;
+  position: absolute;
+  top: -3px;
+  right: -3px;
+  }
+  .ribbon-green {
+  font: bold 15px Sans-Serif;
+  color: #333;
+  text-align: center;
+  text-shadow: rgba(255,255,255,0.5) 0px 1px 0px;
+  -webkit-transform: rotate(45deg);
+  -moz-transform:    rotate(45deg);
+  -ms-transform:     rotate(45deg);
+  -o-transform:      rotate(45deg);
+  position: relative;
+  padding: 7px 0;
+  left: -5px;
+  top: 15px;
+  width: 120px;
+  background-color: #BFDC7A;
+  background-image: -webkit-gradient(linear, left top, left bottom, from(#BFDC7A), to(#8EBF45));
+  background-image: -webkit-linear-gradient(top, #BFDC7A, #8EBF45);
+  background-image:    -moz-linear-gradient(top, #BFDC7A, #8EBF45);
+  background-image:     -ms-linear-gradient(top, #BFDC7A, #8EBF45);
+  background-image:      -o-linear-gradient(top, #BFDC7A, #8EBF45);
+  color: #6a6340;
+  -webkit-box-shadow: 0px 0px 3px rgba(0,0,0,0.3);
+  -moz-box-shadow:    0px 0px 3px rgba(0,0,0,0.3);
+  box-shadow:         0px 0px 3px rgba(0,0,0,0.3);
+  }
+  .ribbon-green:before, .ribbon-green:after {
+  content: "";
+  border-top:   3px solid #6e8900;
+  border-left:  3px solid transparent;
+  border-right: 3px solid transparent;
+  position:absolute;
+  bottom: -3px;
+  }
+  .ribbon-green:before {
+  left: 0;
+  }
+  .ribbon-green:after {
+  right: 0;
+  }​  
+</style>

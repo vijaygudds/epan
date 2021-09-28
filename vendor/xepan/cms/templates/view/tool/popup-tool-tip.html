@@ -1,0 +1,49 @@
+
+<div id="{$_name}" style=" {$style}" xepan-component="xepan/cms/Tool_PopupToolTip" xepan-component-name="Modal Popup" class="xepan-component {$_name}  {$class}" modalonpageload="false" showmodalbutton="true" showfootersection="true">
+  <div id="myModal11_{$_name}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" class="modal fade xpopup">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" data-dismiss="modal" class="close"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+          <div xepan-component="xepan/cms/Tool_Text" style="width:95%;" emptytext="Edit this text" contenteditable="true" class="xepan-component xepan-editable-text mce-content-body desc editor">Edit this text</div>
+        </div>
+        <div class="modal-body">
+          <div xepan-component="xepan/cms/Tool_Container" emptytext="Container" style="width:85%;margin:0 auto;" class="xepan-component xepan-sortable-component xepan-cms-container ui-sortable"></div>
+        </div>
+        <div class="modal-footer">
+          <div xepan-component="xepan/cms/Tool_Container" emptytext="Container" style="width:85%;margin:0 auto;" class="xepan-component xepan-sortable-component xepan-cms-container ui-sortable">
+            <a href="#none" data-dismiss="modal" target="" id="{$_name}" style="{$style}" data-button-icon-class="" data-icon-position="left" xepan-button-label="Button Text" xepan-button-link="#none" xepan-button-link-behavior="0" xepan-component="xepan/cms/Tool_Button" xepan-component-name="Button" class="xepan-button xepan-component custom-btn-links btn btn-default xpopup-btn {$class}" >
+              <i class="fa"></i>Close
+            </a>
+          </div>
+          <!-- <button type="button" style="display:none;" class="btn btn-default xpopup-btn">Save changes</button> -->
+        </div>
+      </div>
+    </div>
+  </div>
+  <div data-toggle="modal" data-target="myModal11_{$_name}" class="btn btn-primary xpopup_trigger">Launch demo modal</div>
+  <script type="text/javascript">
+    $(document).ready(function(){
+      // if display on page load on
+      if($('.{$_name}').attr('modalonpageload') == "true"){
+        $('#myModal11_{$_name}').modal('show');
+      }
+
+      if($('.{$_name}').attr('showfootersection') == "true"){
+        $('.{$_name} .modal-footer > .xepan-cms-container').show();
+      }else{
+        $('.{$_name} .modal-footer > .xepan-cms-container ').hide();
+      }
+
+      if($('.{$_name}').attr('showmodalbutton') == "true"){
+        $('.{$_name} .xpopup_trigger').show();
+      }else{
+        $('.{$_name} .xpopup_trigger').hide();
+      }
+      // show popup on click event
+      $('.xpopup_trigger').click(function(){
+        $('#myModal11_{$_name}').modal('show');
+      });
+    });
+  </script>  
+</div>

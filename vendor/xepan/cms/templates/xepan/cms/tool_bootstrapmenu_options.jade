@@ -1,0 +1,208 @@
+.xepan-tool-options(id='{$_name}' style="display:none" for-xepan-component='xepan/cms/Tool_BootStrapMenu')
+	//- .xepan-cms-groups-panel.collapse.in(id="xepan-cms-groups-panel")
+	//- .xepan-cms-group-panel.clearfix
+	//- 	h3.collapsed(data-toggle="collapse" data-target="#collapse-boot-menu" aria-expanded="false")
+	//- 		span| BootStrap Menu Options
+	//- 	#collapse-boot-menu.xepan-cms-tools-bar-panel.row-fluid.collapse.in
+	//- 		.xepan-toolbar-panel-body
+	table.table-condensed.table-hover.xepan-cms-tool-table
+		tr
+			td.xepan-tool-option-title Brand Name
+			td.xepan-tool-option-value
+				input#xbmenu-brand-name(data-attr='xbmenu-brand-name' style="width:100%;")
+		tr
+			td.xepan-tool-option-title(valign="top") Logo
+			td.xepan-tool-option-value
+				.btn-group.btn-group-sm
+					button#xbmenu-logo-select(type='button') Select
+					button#xbmenu-image-clear(type='button') Clear
+				input#xbmenu-logo-src(type='text', disabled='true' data-attr="xbmenu-logo-src" style="width:100%;")
+		tr
+			td
+				| Get Pages
+			td
+				button#xmenu-bootstrap-get-pages.btn.btn-primary.btn-xs Get Pages
+		tr.xepan-tool-option
+			td.xepan-tool-option-title(valign="top") Align
+			td.xepan-tool-option-value
+				select#xmenu-bootstrap-alignment(data-attr='xbootmenu-align' data-defaultvalue="right")
+					option(value="right") Right
+					option(value="left") Left
+		tr.xepan-tool-option
+			td.xepan-tool-option-title(valign="top") Navbar Position
+			td.xepan-tool-option-value
+				button#xepan-bootstrap-menu-default-nav.btn.btn-default.btn-xs(type='button') Default
+				button#xepan-bootstrap-menu-fixed-top.btn.btn-default.btn-xs(type='button') Fixed to Top
+				button#xepan-bootstrap-menu-fixed-bottom.btn.btn-default.btn-xs(type='button') Fixed to Bottom
+				button#xepan-bootstrap-menu-static-top.btn.btn-default.btn-xs(type='button') Static Top
+				button#xepan-bootstrap-menu-inverted-nav.btn.btn-default.btn-xs(type='button') Inverted Navbar
+		tr
+			td(colspan="2") Inner section width
+				input(class="bnavbar-innersection-width" placeholder="width" type="NUMBER" min="0" max="99999")
+				div.input-group.input-group-sm
+					span.input-group-addon(class="bnavbar-inner-section-action-btn" unit="px") Px
+					span.input-group-addon(class="bnavbar-inner-section-action-btn" unit="%") %
+					span.input-group-addon(class="bnavbar-inner-section-action-btn" unit="auto") Auto
+					span.input-group-addon(class="bnavbar-inner-section-action-btn" unit="max") Max
+	//- .xepan-cms-groups-panel.collapse.in(id="xepan-cms-groups-panel")
+				
+	script.
+		$('\#{$_name} [data-attr]').on('change',function(){
+			$(current_selected_component).attr($(this).data('attr'),$(this).val());
+		});
+
+		$('\#{$_name}').on('show',function(event){
+			$('\#{$_name} [data-attr]').each(function(index,value){
+
+				var default_value = $(this).attr('data-defaultvalue');
+				if($(current_selected_component).attr($(this).data('attr')))
+					default_value = $(current_selected_component).attr($(this).data('attr'));
+				
+				$(this).val(default_value);
+			});	
+
+			$('\#{$_name}').find('.bnavbar-innersection-width').val($(current_selected_component).find('.navbar-inner-container').attr('inner-width'));
+						
+		});
+
+		//- brand name change value
+		$('#xbmenu-brand-name').keyup(function(e){
+			if($(current_selected_component).find('a.xepan-brand.navbar-brand img').length){
+				$(current_selected_component).find('a.xepan-brand.navbar-brand').attr('title',$(this).val());
+				$(current_selected_component).find('.navbar-brand-wrapper').removeClass('navbar-brand');
+			}else{
+				$(current_selected_component).find('a.xepan-brand').html($(this).val());
+				$(current_selected_component).find('.navbar-brand-wrapper').addClass('navbar-brand');
+			}
+		});
+
+		//- image clear btn
+		$('#xbmenu-image-clear').on('click',function(){
+			$('#xbmenu-logo-src').val("");
+			$(current_selected_component).find('a.xepan-brand > img').remove();
+			$(current_selected_component).find('.navbar-brand-wrapper').addClass('navbar-brand');
+			$(current_selected_component).find('a.xepan-brand').html($('#xbmenu-brand-name').val());
+		});
+		//- image selector
+		$('#xbmenu-logo-select').click(function(event) {
+			var fm = $('<div/>').dialogelfinder({
+				url : '?page=xepan_base_elconnector',
+				lang : 'en',
+				width : 840,
+				destroyOnClose : true,
+				getFileCallback : function(files, fm) {
+					$('#xbmenu-logo-src').val(files.url);
+					$(current_selected_component).find('a.xepan-brand').html("");
+					$(current_selected_component).find('a.xepan-brand').attr("title",$('#xbmenu-brand-name').val()).attr('href','index');
+					$('<img alt="'+$('#xbmenu-brand-name').val()+'" src="'+files.url+'"/>').appendTo($(current_selected_component).find('a.xepan-brand'));
+					$(current_selected_component).find('.navbar-brand-wrapper').removeClass('navbar-brand');
+				},
+				commandsOptions : {
+					getfile : {
+						oncomplete : 'close',
+						folders : true
+					}
+		  		}
+			}).dialogelfinder('instance');
+		});
+
+
+		$('#xepan-bootstrap-menu-default-nav').click(function(event) {
+		  $(current_selected_component).removeClass('navbar-fixed-bottom navbar-fixed-top navbar-static-top navbar-inverse');
+		  $(current_selected_component).addClass('navbar-default');
+		});
+
+		$('#xepan-bootstrap-menu-fixed-top').click(function(event) {
+		  $(current_selected_component).removeClass('navbar-fixed-bottom navbar-static-top');
+		  $(current_selected_component).addClass('navbar-fixed-top');
+		});
+		
+		$('#xepan-bootstrap-menu-fixed-bottom').click(function(event) {
+		  $(current_selected_component).removeClass('navbar-fixed-top navbar-static-top navbar-inverse');
+		  $(current_selected_component).addClass('navbar-fixed-bottom');
+		});
+
+		$('#xepan-bootstrap-menu-static-top').click(function(event) {
+		  $(current_selected_component).removeClass('navbar-fixed-bottom navbar-fixed-top navbar-inverse');
+		  $(current_selected_component).addClass('navbar-static-top');
+		});
+
+		$('#xepan-bootstrap-menu-inverted-nav').click(function(event) {
+		  $(current_selected_component).removeClass('navbar-default');
+		  $(current_selected_component).addClass('navbar-inverse');
+		});
+
+		//- set nav Alignment
+		$('#xmenu-bootstrap-alignment').change(function(){
+			if($(this).val() == "left"){
+				$(current_selected_component).find('.navbar-collapse').removeClass('navbar-right').addClass('navbar-left');
+			}else{
+				$(current_selected_component).find('.navbar-collapse').removeClass('navbar-left').addClass('navbar-right');
+			}
+		});
+
+		$('.bnavbar-inner-section-action-btn').click(function(){
+			var unit = $(this).attr('unit');
+			var inner_width = $('.bnavbar-innersection-width').val();
+
+			if(inner_width > 0){
+				$inner_conatiner = $(current_selected_component).find('.navbar-inner-container');
+				if(unit == "px" || unit == "%"){
+					$inner_conatiner.css('width',inner_width+unit);
+				}else if(unit == "auto"){
+					$inner_conatiner.css('width','80%');
+					inner_width = "80";
+					unit = "%";
+				}else if(unit == "max"){
+					inner_width = "100";
+					unit = "%";
+					$inner_conatiner.css('width','100%');
+				}
+				$inner_conatiner.attr('inner-width',inner_width);
+				$inner_conatiner.attr('inner-unit',unit);
+			}
+
+		})
+
+		function getSubPageHtml(path,page_data){
+
+			if($(page_data.subpage).length){
+				var html = '<li class="dropdown dropdown-submenu">';
+					html += '<a href="'+path+'" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">'+page_data.name+' <span class="caret"></span></a>';
+					html += '<ul class="dropdown-menu">';
+				$.each(page_data.subpage,function(sub_page_path,sub_page_data){
+					html += getSubPageHtml(sub_page_path,sub_page_data);
+				});
+				html += '</ul></li>';
+			}else{
+				var html = '<li><a href="'+path+'">'+page_data.name+'</a></li>';
+			}
+
+			return html;
+		}
+		//- get Pages
+		$("\#{$_name} \#xmenu-bootstrap-get-pages").click(function(){
+			$.ajax({
+				url: 'index.php?page=xepan_cms_getpage',
+				type: 'GET',
+				data: { },
+				success: function (data){
+					var pages = JSON.parse(data);
+					var list_html = "" ;
+					$.each(pages,function(path,page_data){
+						list_html += getSubPageHtml(path,page_data);
+					});
+
+					$(current_selected_component).find('ul.navbar-nav').html("");
+					$(list_html).appendTo($(current_selected_component).find('ul.navbar-nav'));
+					
+					//- //- manual call dropdown after get page and also coded at document ready in view tool html file
+					$(current_selected_component).find('.dropdown-toggle').dropdown();
+					$(current_selected_component).find('.dropdown-submenu a').on('click',function(e){
+						$(this).next('ul').toggle();
+					    e.stopPropagation();
+					    e.preventDefault();
+					});
+				}
+			});
+		});

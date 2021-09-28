@@ -1,0 +1,1 @@
+ALTER TABLE `contact` ADD `code` VARCHAR(255) NOT NULL AFTER `type`;

@@ -1,0 +1,22 @@
+.main-box.clearfix
+      .tabs-wrapper.profile-tabs
+        ul.nav.nav-tabs.responsive-tabs
+          //- li.active
+          //-   a(data-toggle='tab', href='#tab-user') User Managment 
+          li.active
+            a(data-toggle='tab', href='#auto-reply') Support Auto Reply Mail Content 
+          li
+            a(data-toggle='tab', href='#reject-reply') Support Denied Mail Content
+          li
+            a(data-toggle='tab', href='#close-reply') Closed Ticket Mail Content
+          li
+            a(data-toggle='tab', href='#new_customer') Allow New Customer Ticket
+        .tab-content
+          #auto-reply.tab-pane.active
+            {$auto-reply}                       
+          #reject-reply.tab-pane
+            {$reject-reply}                       
+          #close-reply.tab-pane
+            {$close-reply}                       
+          #new_customer.tab-pane
+            {$new_customer_section}                       

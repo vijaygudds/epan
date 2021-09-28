@@ -1,0 +1,171 @@
+
+<div id="{$_name}" for-xepan-component="xepan/commerce/Tool_MyAccount" style="display:none" class="xepan-tool-options">
+  <div class="xepan-cms-group-panel clearfix">
+    <div id="collapse-member-account" class="xepan-cms-tools-bar-panel row-fluid collapse in">
+      <div style="padding-top:0px;padding-bottom:0px;" class="panel-body">
+        <div id="xepan-cms-groups-panel" class="xepan-cms-groups-panel collapse in"></div>
+        <div style="padding:0px;" class="xepan-cms-group-panel clearfix">
+          <div data-toggle="collapse" data-target="#show-hide-member-acc" aria-expanded="false" class="panel panel-heading panel-primary collapsed"><span>Hide/ Show</span><i class="fa fa-chevron-down pull-right"></i></div>
+        </div>
+        <div id="show-hide-member-acc" class="xepan-cms-tools-bar-panel row-fluid collapse">
+          <table class="table table-condensed table-hover xepan-cms-tool-table">
+            <tr class="xepan-tool-option">
+              <td class="xepan-tool-option-title">Show My Template</td>
+              <td class="xepan-tool-option-value"> 
+                <select id="show_my_template" data-attr="show_my_template">
+                  <option value="true">Yes</option>
+                  <option value="false">No</option>
+                </select>
+              </td>
+            </tr>
+            <tr class="xepan-tool-option">
+              <td class="xepan-tool-option-title">Show Duplicate template Form</td>
+              <td class="xepan-tool-option-value"> 
+                <select id="show_duplicate_form" data-attr="show_duplicate_form">
+                  <option value="true">Yes</option>
+                  <option value="false">No</option>
+                </select>
+              </td>
+            </tr>
+            <tr class="xepan-tool-option">
+              <td class="xepan-tool-option-title">Show Empty Category</td>
+              <td class="xepan-tool-option-value">
+                <select id="show_empty_category" data-attr="show_empty_category">
+                  <option value="true">Yes</option>
+                  <option value="false">No</option>
+                </select>
+              </td>
+            </tr>
+            <tr class="xepan-tool-option">
+              <td class="xepan-tool-option-title">Keep Login on Password Change</td>
+              <td class="xepan-tool-option-value">
+                <select id="show_empty_category" data-attr="keep-login-on-password-change" data-defaultvalue="true">
+                  <option value="true">Yes</option>
+                  <option value="false">No</option>
+                </select>
+              </td>
+            </tr>
+            <tr class="xepan-tool-option">
+              <td class="xepan-tool-option-title">Show Add To Wishlit</td>
+              <td class="xepan-tool-option-value"> 
+                <select id="show_wishlist" data-attr="show_wishlist" data-defaultvalue="true">
+                  <option value="true">Yes</option>
+                  <option value="false">No</option>
+                </select>
+              </td>
+            </tr>
+            <tr>
+              <td colspan="2">
+                <div>Wishlist Button Label</div>
+                <input data-attr="wishlist_button_name" data-defaultvalue="add to wish list">
+              </td>
+            </tr>
+            <tr>
+              <td colspan="2">
+                <div>Wishlist Not Login Error Message</div>
+                <input data-attr="wishlist_not_login_error_message" data-defaultvalue="login first to add in your wish">
+              </td>
+            </tr>
+            <tr>
+              <td colspan="2">
+                <div>Wishlist Not Customer Error Message</div>
+                <input data-attr="wishlist_not_customer_error_message" data-defaultvalue="you are not a customer">
+              </td>
+            </tr>
+            <tr>
+              <td colspan="2">
+                <div>Wishlist Success Message</div>
+                <input data-attr="wishlist_success_message" data-defaultvalue="Added in your wish list">
+              </td>
+            </tr>
+            <tr class="xepan-tool-option">
+              <td class="xepan-tool-option-title">Show Support Ticket</td>
+              <td class="xepan-tool-option-value"> 
+                <select id="show_support_ticket" data-attr="show_support_ticket" data-defaultvalue="false">
+                  <option value="1">Yes</option>
+                  <option value="0">No</option>
+                </select>
+              </td>
+            </tr>
+          </table>
+        </div>
+        <div style="padding:0px;" class="xepan-cms-group-panel clearfix">
+          <div data-toggle="collapse" data-target="#member-account-layout" aria-expanded="false" class="panel panel-heading panel-primary collapsed"><span>Layout / Templates</span><i class="fa fa-chevron-down pull-right"></i></div>
+        </div>
+        <div id="member-account-layout" class="xepan-cms-tools-bar-panel row-fluid collapse">
+          <table class="table table-condensed table-hover xepan-cms-tool-table">
+            <tr class="xepan-tool-option">
+              <td class="xepan-tool-option-title">Layout</td>
+              <td class="xepan-tool-option-value">
+                <input id="layout" data-attr="layout" data-defaultvalue="myaccount" value="myaccount"/>
+              </td>
+            </tr>
+            <tr class="xepan-tool-option">
+              <td class="xepan-tool-option-title">Custom Template</td>
+              <td class="xepan-tool-option-value"> 
+                <input id="custom_template" data-attr="custom_template"/>
+              </td>
+            </tr>
+            <tr class="xepan-tool-option">
+              <td class="xepan-tool-option-title">Tool Customer Setting Section Layout</td>
+              <td class="xepan-tool-option-value">
+                <input id="custom_layout" data-attr="customer-setting-layout" data-defaultvalue="myaccountsetting" value="myaccountsetting"/>
+              </td>
+            </tr>
+            <tr class="xepan-tool-option">
+              <td class="xepan-tool-option-title">Product Designer Page</td>
+              <td class="xepan-tool-option-value">
+                <input id="product_design_page" data-attr="designer-page"/>
+              </td>
+            </tr>
+            <tr class="xepan-tool-option">
+              <td class="xepan-tool-option-title">Login Page</td>
+              <td class="xepan-tool-option-value">
+                <input id="login_page" data-attr="xepan_commerce_login_page" data-defaultvalue="login"/>
+              </td>
+            </tr>
+            <tr class="xepan-tool-option">
+              <td class="xepan-tool-option-title">Item Detail Page</td>
+              <td class="xepan-tool-option-value"> 
+                <input data-attr="product-detail-page"/>
+              </td>
+            </tr>
+            <tr class="xepan-tool-option">
+              <td class="xepan-tool-option-title">Customer Design Grid Layout</td>
+              <td class="xepan-tool-option-value">
+                <input id="cust_design_layout" data-attr="customer-design-grid-layout" data-defaultvalue="customerdesign"/>
+              </td>
+            </tr>
+            <tr class="xepan-tool-option">
+              <td class="xepan-tool-option-title">Design Template Grid Layout</td>
+              <td class="xepan-tool-option-value">
+                <input id="temp_grid_layout" data-attr="customer-template-grid-layout" data-defaultvalue="customertemplate"/>
+              </td>
+            </tr>
+            <tr class="xepan-tool-option">
+              <td class="xepan-tool-option-title">Setting Layout</td>
+              <td class="xepan-tool-option-value">
+                <input id="setting_page" data-attr="customer-setting-layout" data-defaultvalue="myaccountsetting"/>
+              </td>
+            </tr>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script>
+    $('#{$_name} [data-attr]').on('change',function(){
+    	$(current_selected_component).attr($(this).data('attr'),$(this).val());
+    });
+    
+    $('#{$_name}').on('show',function(event){
+    	$('#{$_name} [data-attr]').each(function(index,value){
+    		
+    		var default_value = $(this).attr('data-defaultvalue');
+    		if($(current_selected_component).attr($(this).data('attr')))
+    			default_value = $(current_selected_component).attr($(this).data('attr'));
+    		$(this).val(default_value);
+    	});
+    })    
+  </script>
+</div>

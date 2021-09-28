@@ -1,0 +1,42 @@
+div(id="{$_name}")
+  .conversation-new-message
+    {form}
+    .row.form-group
+      .col-lg-12
+        {$send_to_all}
+    .row.form-group
+      div.atk-form-row
+        .col-lg-12
+          | Message To : 
+        .col-lg-12
+            {$message_to}
+    .row.form-group
+      div.atk-form-row  
+        .col-lg-12
+          | Cc : 
+        .col-lg-12
+            {$cc}
+    .row.form-group
+      .col-lg-12
+        | Subject : 
+      .col-lg-12
+        {$subject}
+    .row.form-group
+      .col-lg-12
+        | Message : 
+      .col-lg-12
+        {$message}
+    .row.form-group
+      .col-lg-12
+        | Attachments : 
+      .col-lg-12
+        .existing-attachment
+          {$existing_attachments}
+        {$attachment}
+    {/}
+style.
+  .existing-attachment li{
+    width:20%;
+    float:left;
+    margin-right:5px;
+  }

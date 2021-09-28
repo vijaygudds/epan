@@ -1,0 +1,100 @@
+
+<div id="{$_name}" style="display:none" for-xepan-component="xepan/listing/Tool_ManageListData" class="xepan-tool-options" xepan-component-name="Add List Data">
+  <table class="table table-condensed table-hover xepan-cms-tool-table">
+    <tr class="xepan-tool-option">
+      <td class="xepan-tool-option-value"> 
+        <div class="xepan-tool-option-title">Select List</div>
+        <select id="{$_name}-xepan-listing-add-list" data-attr="listing_id" data-defaultvalue="0">
+        </select>
+      </td>
+    </tr>
+    <tr class="xepan-tool-option">
+      <td class="xepan-tool-option-value"> 
+        <div class="xepan-tool-option-title">List Layout</div>
+        <select id="xepan-listing-form-layout" data-attr="listing_layout_id" data-defaultvalue="0">
+        </select>
+      </td>
+    </tr>
+    <tr class="xepan-tool-option">
+      <td class="xepan-tool-option-value">
+        <div class="xepan-tool-option-title">Select List Data Set</div>
+        <select id="xepan-listing-data-set-id" data-attr="list_data_set_id" data-defaultvalue="0">
+        </select>
+      </td>
+    </tr>
+    <tr>
+      <td class="xepan-tool-option-value">
+        <div class="xepan-tool-option-title">Save Button Caption</div>
+        <input type="input" name="save button caption" data-attr="save_button_caption" data-defaultvalue="Save">
+      </td>
+    </tr>
+    <tr>
+      <td class="xepan-tool-option-value">
+        <div class="xepan-tool-option-title">Save Button Class</div>
+        <input type="input" name="save button class" data-attr="save_button_class" data-defaultvalue="btn btn-primary">
+      </td>
+    </tr>
+    <tr>
+      <td class="xepan-tool-option-value">
+        <div class="xepan-tool-option-title">Show Data Set Record Only (Login User Record Only)</div>
+        <select data-attr="show_data_set_record_only" data-defaultvalue="0">
+          <option value="1">Yes</option>
+          <option value="0">No</option>
+        </select>
+      </td>
+    </tr>
+
+  </table>
+  
+  <script>
+    $('#{$_name} [data-attr]').on('change',function(){
+    	$(current_selected_component).attr($(this).data('attr'),$(this).val());
+    });
+
+    $('#{$_name}-xepan-listing-add-list').on('change',function(){
+        $.ajax({
+          url: 'index.php?page=xepan_listing_getrecord_listlayout',
+          type: 'GET',
+          data: {'list_id':$(this).val() },
+          success: function ( data ){
+            $('#{$_name} #xepan-listing-form-layout').html(data);
+            $('#{$_name} #xepan-listing-form-layout').set($(current_selected_component).attr('listing_layout_id'));
+          }
+        });
+
+        $.ajax({
+          url: 'index.php?page=xepan_listing_getrecord_listingdataset',
+          type: 'GET',
+          data: {'listing_id':$(this).val() },
+          success: function ( data ){
+            $('#{$_name} #xepan-listing-data-set-id').html(data);
+            console.log($(current_selected_component).attr('list_data_set_id'));
+            $('#{$_name} #xepan-listing-data-set-id').val($(current_selected_component).attr('list_data_set_id'));
+          }
+        });
+
+    });
+    
+    $('#{$_name}').on('show',function(event){
+      $.ajax({
+        url: 'index.php?page=xepan_listing_getrecord_list',
+        type: 'GET',
+        data: { },
+        success: function ( data ){
+          $('#{$_name}-xepan-listing-add-list').html(data);
+          $('#{$_name}-xepan-listing-add-list').val($(current_selected_component).attr('listing_id')).trigger('change');
+        }
+      });
+
+    	$('#{$_name} [data-attr]').each(function(index,value){
+        // setting up default value if no option selected
+        var default_value = $(this).attr('data-defaultvalue');
+        if($(current_selected_component).attr($(this).data('attr')))
+          default_value = $(current_selected_component).attr($(this).data('attr'));
+        
+        $(this).val(default_value);
+      });
+
+    })
+  </script>
+</div>

@@ -1,0 +1,103 @@
+
+<div id="{$_name}" class="xepan-grid main-box clearfix {$class}">{Pannel}
+  <header class="main-box-header clearfix atk-actions  {$class} ">
+    <div class="filter-block">
+      <div class="pull-right">{$grid_buttons} </div>
+      <div class="form-group pull-right xepan-filter-form">
+        <div class="form-control pull-left">{$quick_search}<i class="fa fa-search search-icon"></i></div>
+      </div>
+    </div>
+  </header>{/Pannel}
+  <div class="main-box-body clearfix">
+    <div class="row">
+      {header}{cols}{col}{/}{/}{/}
+      {rows}{row}
+      <div data-id="{$id}" class="{$odd_even} col-md-{col-width}4{/}">{cols}
+        <div class="col-lg-12 col-md-6 col-sm-6">
+          <div class="main-box clearfix project-box">
+            <div class="project-box-header">
+              <div class="name text-center"><a href="?page=xepan_marketing_socialpost&amp;post_id={$id}" target="_blank">
+                  <h1 title="{$title}" style="width: 100%;white-space:nowrap;overflow: hidden;text-overflow: ellipsis;">{$title}</h1></a></div>
+            </div>
+            <div class="row text-muted"> 
+              <div class="col-md-4"><span>&nbsp; Visitors : {$total_visitor}</span></div>
+              <div class="col-md-4"><span>Likes : {$total_like}</span></div>
+              <div class="col-md-4"> <span>Comments : {$total_comments} </span></div>
+            </div>
+            <hr/><small class="text-primary">URL : {$url}</small>
+            <div class="row">
+              <div class="col-md-5"><img src="{$first_image}" alt="No Image" style="max-width:100%; width:100px; height:58px;"/></div>
+              <div class="col-md-7"> 
+                <div class="project-box-content">
+                  <div style="height:57px; overflow: hidden; text-overflow: ellipsis;" class="text-muted">{$msg} </div>
+                </div>
+              </div>
+            </div>
+            <div class="project-box-footer clearfix"><a href="#"><span sparkType="pie" data-id="{$id}" sparkHeight="50px" class="sparkline source_graph">{$source_graph}</span><span class="text-success">Platform</span></a><a href="#"></a><a href="#" class="pull-right"><span sparkType="pie" data-id="{$id}" sparkHeight="50px" class="sparkline timing_graph">{$timing_graph}  </span><span class="text-success">  Timings   </span></a>
+            </div>
+            <div class="project-box-ultrafooter clearfix">
+              <div class="col-md-4">{$action}</div>
+              <div class="col-md-4"> </div>
+              <div class="col-md-4 pull-right">
+                {$edit}
+                {$delete}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>{/}
+      {/}{/}
+      {not_found}
+      <div class="row">
+        <div role="alert" class="col-md-12 text-center alert alert-warning"><span class="icon-attention fa fa-exclamation-triangle"> &nbsp;{$not_found_message}</span></div>
+      </div>{/}
+      {totals}{cols}{col}{$content}{/}{/}{/}
+    </div>{$Paginator}
+  </div>
+</div>
+<script>
+  $('.chart').easyPieChart({
+  easing: 'Linear',
+  onStep: function(from, to, percent) {
+    console.log(percent);
+    $(this.el).find('.percent').text(Math.round(percent));
+  },
+  barColor: '#3498db',
+  trackColor: '#f2f2f2',
+  scaleColor: false,
+  lineWidth: 8,
+  size: 130,
+  animate: 1500
+  });
+  
+</script>
+<style type="text/css" media="screen">
+  .project-box .project-box-header .name a{
+  padding-top : 0px !important;
+  padding-bottom : 0px !important;
+  padding-left : 0px !important;
+  padding-right : 0px !important; 
+  }    
+  
+  .project-box .project-box-footer a{
+  padding: 0px 15px !important;
+  margin: 0px 0px 0px 0px !important;
+  }
+  
+  .project-box .project-box-footer {
+    border-top: 1px solid #e9eef0;
+    margin-top:10px !important;
+  }
+  
+  .project-box .project-box-content{
+    padding: 0px 0px 0px 0px !important;
+  }
+  
+  hr{
+    margin: 2px 0px 5px 0px !important;
+  }
+  
+  .project-box .project-box-footer a{
+  border-right:0px !important;
+  }
+</style>

@@ -1,0 +1,36 @@
+
+<div id="{$_name}" class="panel panel-default">
+  <div class="panel-heading text-center"><strong>Sign in to continue</strong></div>
+  <div style="margin-top:30px;margin-bottom:30px;" class="panel-body">{message_wrapper}
+    <div class="text-center text-primary alert alert-danger">{$message}</div>{/message_wrapper}
+    <form role="form" action="#" method="POST">
+      <fieldset>
+        <div style="padding-bottom:20px;" class="row">
+          <div class="col-sm-12 col-md-12">
+            <div class="form-group atk-form-row">
+              <div class="input-group"><span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>{$username}{$fieldError}</div>
+            </div>
+            <div class="form-group atk-form-row atk-form-field">
+              <div class="input-group"><span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>{$password}</div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xs-12">
+            <button type="submit" class="btn btn-success col-xs-12">Login  </button>
+          </div>
+        </div>
+      </fieldset>
+    </form>
+  </div>{footer_wrapper}
+  <div style="margin:auto" class="panel-footer row">{forgot_wrapper}<a id="login-forget-link" style="cursor:pointer; cursor: hand;" data-showview="forget_password" class="col-md-4 col-xs-12 col-sm-12 text-center forgotpassword xepan-login-panl-loadview {$forgot_class}">Forgot password</a>{/}
+    {register_wrapper}<a style="cursor:pointer; cursor: hand;" data-showview="new_registration" class="col-md-4 col-xs-12 col-sm-12 text-center reg_view xepan-login-panl-loadview1 xepan-registration-load-panl {$registration_class}"> Register now </a>{/}
+    {activate_wrapper}<a style="cursor:pointer; cursor: hand;" data-showview="verify_account" class="col-md-4 col-xs-12 col-sm-12 text-center reg_view xepan-login-panl-loadview {$activation_class}">Verify Account
+      <div id="login-box-footer"></div></a>{/} 
+  </div>{/}
+</div>
+<style>
+   input{
+    width:100%;
+  }
+</style>

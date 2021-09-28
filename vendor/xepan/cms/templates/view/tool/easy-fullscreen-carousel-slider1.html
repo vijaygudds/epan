@@ -1,0 +1,57 @@
+
+<div id="{$_name}" data-ride="carousel" xepan-component-name="Full Screen Carousel" class="xepan-component xepan-easy-fullscreen-carousel">
+  <link rel="stylesheet" href="vendor/xepan/cms/templates/css/style.css"/>
+  <link rel="stylesheet" href="vendor/xepan/cms/templates/css/swiper.min.css"/>
+  <script src="vendor/xepan/cms/templates/js/swiper.jquery.min.js"></script>
+  <script src="vendor/xepan/cms/templates/js/swiper.js"></script>
+  <div class="s-swiper js__swiper-slider">
+    <div class="swiper-wrapper">{rows}{row}
+      <div style="background:rgba(0, 0, 0, 0) url(&quot;{file}/xepan2/websites/sss/www/img/13.jpg{/}&quot;) repeat scroll 0 0;" class="s-promo-block-v4 g-fullheight--xs g-bg-position--center swiper-slide {$active}">{show_text_wrapper}
+        <div class="container g-ver-center--xs">
+          <div class="row">
+            <div class="col-md-7 col-md-offset-5">
+              <div class="g-margin-b-50--xs">
+                <h1 class="g-font-size-32--xs g-font-size-45--sm g-font-size-60--md g-color--white">
+                  {title}
+                  Medical Services<br/>that You Can Trust
+                  {/title}
+                </h1>
+                <div class="g-font-size-18--xs g-font-size-22--sm g-color--white-opacity">
+                  {text_to_display}
+                  A clinic is a healthcare facility that is primarily focused on the care of outpatients.
+                  {/text_to_display}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>{/}
+      </div>{/row}
+      <div style="background: rgba(0, 0, 0, 0) url(&quot;/xepan2/websites/sss/www/img/14.jpg&quot;) repeat scroll 0 0;" class="s-promo-block-v4 g-fullheight--xs g-bg-position--center swiper-slide">
+        <div class="container g-text-right--xs g-ver-center--xs">
+          <div class="row">
+            <div class="col-md-7 col-md-offset-5">
+              <div class="g-margin-b-50--xs">
+                <h2 class="g-font-size-32--xs g-font-size-45--sm g-font-size-55--md g-color--white">Medical Excellence<br/>Every Day</h2>
+                <p class="g-font-size-18--xs g-font-size-22--sm g-color--white-opacity">Clinics can be privately operated or publicly managed and funded.</p>
+              </div><a href="http://themeforest.net/item/metronic-responsive-admin-dashboard-template/4021469?ref=keenthemes" class="text-uppercase s-btn s-btn--md s-btn--white-brd g-radius--50 g-padding-x-50--xs">Read More</a>
+            </div>
+          </div>
+        </div>
+      </div>{/rows}
+    </div>
+    <div class="s-swiper__pagination-v1 s-swiper__pagination-v1--bc s-swiper__pagination-v1--white js__swiper-pagination"></div>
+  </div>
+</div>
+<script>
+  $(function() {
+  	var header = $(".s-header");
+  	$(window).scroll(function() {    
+  		var scroll = $(window).scrollTop();
+  			if (scroll <= 100) {
+  				header.removeClass('s-header__shrink');
+  			} else {
+  				header.addClass('s-header__shrink');
+  			}
+  		});
+  	});
+</script>

@@ -1,0 +1,1 @@
+ALTER TABLE `employee_leave` ADD `employee_id` INT;

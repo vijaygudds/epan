@@ -1,0 +1,25 @@
+
+<ul class="graph-stats {$class}" id="{$_name}" style="{$style}">
+	<li>
+		<div class="clearfix">
+			{heading_wrapper}<div class="title {$heading_class}">{$heading}</div>{/}
+			{value_wrapper}
+			<div class="value pull-right" title="">
+				{$value}
+				{icon_wrapper}
+				<i class=" {$icon}"></i>
+				{/}
+			</div>
+			{/}
+		</div>
+		{progress_wrapper}
+			<div class="progress">
+				<div  style="width:{$progress_percentage}%;" aria-valuemax="100" aria-valuemin="0" aria-valuenow="{$progress_percentage}" role="progressbar" class="progress-bar {$progress_bar_style}">
+					<span class="sr-only">{$progress_percentage}</span>
+				</div>
+			</div>
+		{/}
+		{$footer}
+		{$Content}
+	</li>
+</ul>

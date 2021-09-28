@@ -1,0 +1,1 @@
+ALTER TABLE `communication_read_emails` ADD `row` INT(11) NULL AFTER `type`;

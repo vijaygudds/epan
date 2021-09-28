@@ -1,0 +1,1 @@
+ALTER TABLE `blog_post` ADD COLUMN `short_description` Int;

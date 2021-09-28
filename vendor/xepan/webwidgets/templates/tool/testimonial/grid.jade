@@ -1,0 +1,64 @@
+.xepan-grid.main-box.clearfix.atk-table.atk-table-zebra.atk-table-bordered(id="{$_name}" class="{$class}")
+    {Pannel}
+    header.main-box-header.clearfix.atk-actions(class=" {$class} ")
+        div.filter-block( style="100%")
+            .pull-right {$grid_buttons} 
+            .form-group.pull-right.xepan-filter-form
+                span(class="form-control pull-left")|{$quick_search}
+                    i(class="fa fa-search search-icon")
+    {/Pannel}
+    .main-box-body.clearfix.table
+        table.table.user-list.table-hover(style="width:100%")
+            {header}
+            thead
+                {cols}{col}
+                th
+
+                th
+                    span Customer
+                th
+                    span     
+                {/}{/}
+            {/}
+            {$subheader}
+
+            tbody
+                {rows}{row}
+                tr(class="{$odd_even}" data-id="{$id}")
+                    {cols}
+                    td
+                      img.img-circle(src="{$file}")
+                    td
+                      | {$customer_name}
+                    td
+                      {title_wrapper}
+                      h4 {$title}
+                      {/}
+                      span {$description}
+                      div
+                        {created_at_wrapper}
+                        span.small.text-muted Created At : {$created_at}
+                        {/}
+                    {/}
+                {/}{/}
+                {not_found}
+                {$not_found_message}
+                {/}
+
+            {totals}
+            tfoot
+                tr(class="totals")
+                    {cols}{col}
+                    <td {$tdparam}>
+                    {$content}
+                    </td>
+                    {/}{/}
+            {/}
+        {$Paginator}
+
+style.
+    .img-circle {
+        border-radius: 50%;
+        height: 50px;
+        width:50px;
+    }

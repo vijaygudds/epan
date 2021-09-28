@@ -1,0 +1,1 @@
+ALTER TABLE `employee` ADD `allow_login_from_anywhere` tinyint(4) default 0;

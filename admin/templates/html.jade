@@ -1,0 +1,89 @@
+doctype html
+html(lang="{lang}en{/}")
+  head
+    meta(charset='UTF-8')
+    meta(name='viewport', content='width=device-width, initial-scale=1.0')
+    meta(http-equiv='X-UA-Compatible', content='IE=edge,chrome=1')
+    title xEpan
+    link(rel='stylesheet', type='text/css', href='{css}bootstrap/bootstrap.min.css{/}')
+    link(rel='stylesheet', type='text/css', href='{css}jquery-ui.css{/}')
+    link(rel='stylesheet', type='text/css', href='{css}libs/font-awesome02.css{/}')
+    link(rel='stylesheet', type='text/css', href='{css}compiled/theme_styles.css{/}')
+    link(rel='stylesheet', type='text/css', href='{css}libs/nanoscroller.css{/}')
+
+
+    //- link(rel="stylesheet" href="{css}libs/datepicker.css{/}" type="text/css")
+    //- link(rel="stylesheet" href="{css}libs/daterangepicker.css{/}" type="text/css")
+    //- link(rel="stylesheet" href="{css}libs/bootstrap-timepicker.css{/}" type="text/css")
+    //- link(rel="stylesheet" href="{css}libs/select2.css{/}" type="text/css")
+    //- link(rel="stylesheet" href="{css}libs/bootstrap-editable.css{/}" type="text/css")
+    
+    //- link(rel="stylesheet" href="{css}libs/fullcalendar.css{/}" type="text/css")
+    //- link(rel="stylesheet" href="{css}compiled/calendar.css{/}" type="text/css")
+    
+    //- link(rel='stylesheet', href='{css}libs/daterangepicker.css{/}', type='text/css')
+    //- link(rel='stylesheet', href='{css}libs/jquery-jvectormap-1.2.2.css{/}', type='text/css')
+    //- link(rel='stylesheet', href='{css}libs/weather-icons.css{/}', type='text/css')
+
+    //- link(rel='stylesheet', href='{css}libs/ns-default.css{/}', type='text/css')
+    //- link(rel='stylesheet', href='{css}libs/ns-style-growl.css{/}', type='text/css')
+    //- link(rel='stylesheet', href='{css}libs/ns-style-bar.css{/}', type='text/css')
+    //- link(rel='stylesheet', href='{css}libs/ns-style-attached.css{/}', type='text/css')
+    //- link(rel='stylesheet', href='{css}libs/ns-style-other.css{/}', type='text/css')
+    //- link(rel='stylesheet', href='{css}libs/ns-style-theme.css{/}', type='text/css')
+    
+    //- link(rel='stylesheet', href='{css}semantic.min.css{/}', type='text/css')
+    link(rel='stylesheet', href='{css}xepan.css{/}', type='text/css')
+    link(type='image/x-icon', href='favicon.png', rel='shortcut icon')
+    link(href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,300', rel='stylesheet', type='text/css')
+    //- script(src='templates/js/semantic.min.js')
+    //if lt IE 9
+      script(src='js/html5shiv.js')
+      script(src='js/respond.min.js')
+    {$js_block}
+    {$js_include}
+
+    script(type='text/javascript').
+        $(function(){
+            {$document_ready}
+        });
+  body(class="{$pagename}"){Layout}{/Layout}{$Content}
+    script(src='templates/js/demo-skin-changer.js')
+    script(src='templates/js/demo-rtl.js')
+    script(src='templates/js/bootstrap.js')
+    script(src='templates/js/jquery.nanoscroller.min.js')
+    script(src='templates/js/demo.js')
+        
+    //- script(src="templates/js/bootstrap-datepicker.js")
+    //- script(src='templates/js/moment.min.js')
+    //- script(src='templates/js/modernizr.custom.js')
+    //- script(src='templates/js/snap.svg-min.js')
+    //- script(src='templates/js/classie.js')
+    //- script(src='templates/js/notificationFx.js')
+
+    //- script(src="templates/js/jquery.maskedinput.min.js")
+    //- script(src="templates/js/moment.min.js")
+    //- script(src="templates/js/daterangepicker.js")
+    //- script(src="templates/js/bootstrap-timepicker.min.js")
+    //- script(src="templates/js/select2.min.js")
+    //- script(src="templates/js/hogan.js")
+    //- script(src="templates/js/typeahead.min.js")
+    //- script(src="templates/js/jquery.pwstrength.js")
+    //- script(src="templates/js/bootstrap-editable.min.js")
+
+
+    //- script(src='js/jquery-jvectormap-1.2.2.min.js')
+    //- script(src='js/jquery-jvectormap-world-merc-en.js')
+    //- script(src='js/gdp-data.js')
+    //- script(src='js/flot/jquery.flot.min.js')
+    //- script(src='js/flot/jquery.flot.resize.min.js')
+    //- script(src='js/flot/jquery.flot.time.min.js')
+    //- script(src='js/flot/jquery.flot.threshold.js')
+    //- script(src='js/flot/jquery.flot.axislabels.js')
+    //- script(src='templates/js/jquery.sparkline.min.js')
+    //- script(src='js/skycons.js')
+    script(src='templates/js/scripts.js')
+    //- script(src='js/pace.min.js')
+    script.
+        var bootstrapButton = $.fn.button.noConflict(); // return $.fn.button to previously assigned value
+        $.fn.bootstrapBtn = bootstrapButton;            // give $().bootstrapBtn the Bootstrap functionality

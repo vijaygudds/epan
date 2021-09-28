@@ -1,0 +1,16 @@
+
+<div id="{$_name}" data-ride="carousel" class="xepan-component carousel slide xepan-carousel">
+  <ol class="carousel-indicators">{carousel_indicator}{/}</ol>
+  <div role="listbox" class="carousel-inner">
+    {rows}
+    {row}
+    <div class="item {$active}">
+      <div class="text-center">{show_text_wrapper}
+        <div class="carousel-caption">
+          <div>{$text_to_display}</div>
+        </div>{/}
+        <div><a href="{$link}"><img src="{$file}" alt="{$alt_text}" style="width: 100%; height: auto; max-width: 100%;" title="{$title}"/></a></div>
+      </div>
+    </div>  {/}{/}
+  </div><a href="#{$_name}" role="button" data-slide="prev" class="left carousel-control"><span aria-hidden="true" class="glyphicon glyphicon-chevron-left"></span><span class="sr-only">Previous</span></a><a href="#{$_name}" role="button" data-slide="next" class="right carousel-control"><span aria-hidden="true" class="glyphicon glyphicon-chevron-right"></span><span class="sr-only">Next</span></a>
+</div>

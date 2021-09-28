@@ -1,0 +1,1 @@
+ALTER TABLE `customer` ADD `is_designer` TINYINT NULL AFTER `same_as_billing_address`;

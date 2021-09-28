@@ -1,0 +1,1 @@
+UPDATE `communication` SET `sub_type_3`= TRIM(sub_type_3), `sub_type`=TRIM( sub_type),`calling_status`=TRIM( calling_status);

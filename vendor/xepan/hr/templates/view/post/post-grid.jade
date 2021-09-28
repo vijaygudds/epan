@@ -1,0 +1,99 @@
+.xepan-grid.main-box.clearfix.atk-table.atk-table-zebra.atk-table-bordered(id="{$_name}" class="{$class}")
+    {Pannel}
+    header.main-box-header.clearfix.atk-actions(class=" {$class} ")
+        div.filter-block( style="100%")
+            .pull-right {$grid_buttons} 
+            .form-group.pull-right.xepan-filter-form
+                span(class="form-control pull-left")|{$quick_search}
+                    i(class="fa fa-search search-icon")
+    {/Pannel}
+    .main-box-body.clearfix.table-responsive
+        table.table.user-list.table-hover.footable.toggle-circle-filled(style="width:100%")
+            {header}
+            thead.xepan-hover-hand
+                {cols}{col}
+                th
+                th(id="{$name_sortid}")
+                    span Post 
+                    span(style= "cursor:pointer; cursor: hand; max-width:600px;"){$name_sort}
+                th(id="{$department_id_sortid}")
+                    span Department 
+                    span(style= "cursor:pointer; cursor: hand; max-width:600px;"){$department_id_sort}
+                
+                th(id="{$parent_post_sortid}")
+                    span Report to 
+                    span(style= "cursor:pointer; cursor: hand; max-width:600px;"){$parent_post_sort}
+               
+                th( data-hide="phone")
+                    span Schedule Time
+                th( data-hide="phone")
+                    span E-mail
+                th(id="{$employee_count_sortid}" data-hide="phone")
+                    span Employee 
+                    span(style= "cursor:pointer; cursor: hand; max-width:600px;"){$employee_count_sort}
+                th(id="" data-hide="all")
+                    span Permission Level 
+                th(id="" data-hide="all")
+                    span Salary Template 
+                th(id="" data-hide="all")
+                    span Leave Template 
+                th
+                th
+                {/}{/}
+            {/}
+            {$subheader}
+
+            tbody
+                {rows}{row}
+                tr(class="{$odd_even}" data-id="{$id}")
+                    {cols}
+                    td
+                        {$selected}
+                    td
+                        {$name}
+                        //- .atk-label
+                        //-     small.fa.fa-level-up.user-subhead &nbsp;{$parent_post}
+                    td
+                         {$department}
+                    td
+                         {$parent_post}
+                    td
+                        small In_Time : {$in_time}
+                        .xepan-push-small
+                        small Out_Time : {$out_time}
+                    td
+                      a.emails-accesible(data-type="checklist" data-value="{$existing_permitted_emails}" data-title="Permitted Emails" data-pk="{$id}" style= "cursor:pointer; cursor: hand;")
+                    td
+                      //- a(href='index.php?page=xepan_hr_employee&post_id={$id}')
+                      a.do-view-post-employees(href='#' data-id="{$id}")
+                        |  {$employee_count}
+                    td
+                         {$permission_level}
+                    td
+                         {$salary_template}
+                    td
+                         {$leave_template}
+                    td
+                        | {$action}
+                    td(style="width: 15%;")
+                        {$edit}
+                        {$delete}
+                    
+                    {/}
+                {/}{/}
+                {not_found}
+                div.row
+                    .col-md-12.text-center.alert.alert-warning(role="alert")
+                        span.icon-attention.fa.fa-exclamation-triangle  &nbsp;{$not_found_message}
+                {/}
+
+            {totals}
+            tfoot
+                tr(class="totals")
+                    {cols}{col}
+                    <td {$tdparam}>
+                    {$content}
+                    </td>
+                    {/}{/}
+            {/}
+        {$Paginator}

@@ -1,0 +1,22 @@
+.xepan-component.carousel.slide.xepan-carousel(id='{$_name}', data-ride='carousel')
+  ol.carousel-indicators
+    {carousel_indicator}{/}
+  .carousel-inner(role='listbox')
+    | {rows}
+    | {row}
+    .item(class='{$active}')
+      .text-center
+        {show_text_wrapper}
+        div.carousel-caption
+          div {$text_to_display}
+        {/}
+        div
+          a(href='{$link}')
+            img(src='{$file}' alt="{$alt_text}" title="{$title}")
+    |   {/}{/}
+  a.left.carousel-control(href='\#{$_name}', style="width: 100%; height: auto; max-width: 100%;" role='button', data-slide='prev')
+    span.glyphicon.glyphicon-chevron-left(aria-hidden='true')
+    span.sr-only Previous
+  a.right.carousel-control(href='\#{$_name}', role='button', data-slide='next')
+    span.glyphicon.glyphicon-chevron-right(aria-hidden='true')
+    span.sr-only Next

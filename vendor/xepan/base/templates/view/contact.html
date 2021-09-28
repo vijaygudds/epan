@@ -1,0 +1,99 @@
+
+<div id="{$_name}" class="xepan-contact-profile">
+  <div class="main-box clearfix">
+    <header class="main-box-header clearfix">{action}{/}
+      <h2>{first_name}First Name{/} </h2>
+      <h2>{last_name}Last Name{/} </h2>
+    </header>
+    <div class="main-box-body clearfix">{online_status_wrapper}
+      <div class="profile-status"><i class="fa fa-circle"></i> {online_status}Online{/}</div>{/}
+      <div class="image-wrapper">
+        {avatar_wrapper}
+        {avatar}<img alt="" src="" class="profile-img img-responsive center-block"/>{/}{/}
+        <p class="image-caption">Click Here to Upload Your Image</p>
+      </div>{contact_type_wrapper}
+      <div class="profile-label"><span class="label label-danger">{type}{/}</span></div>{/}
+      {contact_since_wrapper}
+      <div class="profile-since">Contact since: {created_at}{/}</div>{/}
+      {email_and_phone}
+      <h2>Emails</h2>
+      <div class="profile-details">
+        {Emails}
+        {rows}{row}
+        {$header}
+        {/}{/}
+        {not_found_message}{/}
+        {/}
+      </div>
+      <h2>Phones</h2>
+      <div class="profile-details">
+        {Phones}
+        {/}
+      </div>{/}
+      {send_email_sms_wrapper}
+      <div class="profile-message-btn center-block text-center">
+        <div role="group" class="btn-group btn-group-sm">
+          <button type="button" title="send email" class="btn btn-primary do-contact-email"><i class="fa fa-envelope"></i>&nbsp;Email</button>
+        </div>
+      </div>{/}
+      <div class="row xepan-push"></div>
+      <div class="row"></div>
+      <div class="profile-details">
+        <div class="form-group"><span title="organization"><i class="fa fa-building fa-lg">&nbsp;</i>
+            <label> </label><strong>Organization : </strong>{organization}-{/}</span></div>{post_wrapper}
+        <div class="form-group"><span title="post"><i class="fa fa-user fa-lg">&nbsp;</i>
+            <label></label><strong>Post : </strong>{post}-{/}</span></div>{/}
+        <div class="form-group"><span title="website"><i class="fa fa-globe fa-lg">&nbsp;</i>
+            <label> </label><strong>Website : </strong>{website}-{/}</span></div>
+        <div class="form-group"><span title="address"><i class="fa fa-map-marker fa-lg">&nbsp;</i>
+            <label> </label><strong>Address : </strong>{address}not found{/}<br/>
+            <label> </label><strong>Country :  </strong>
+            <div class="atk-form-row">{$country}{country_id}not found{/}<br/></div>
+            <label> </label><strong>State :  </strong>
+            <div class="atk-form-row">{$state}{state_id}not found{/}<br/></div>
+            <label> </label><strong>City :  </strong>
+            <div>{city}not found{/}<br/></div>
+            <label> </label><strong>Pin Code :  </strong>
+            <div>{pin_code}not found{/}</div></span></div>
+      </div>{im_and_events_andrelation}
+      <h2>Other details</h2>
+      <div class="profile-details">
+         
+        {OtherContactInfos}
+        <div><span title="Skype"><i class="fa fa-skype">&nbsp;<a href="wwww.xavoc.com" target="_blank"> </a></i></span></div>
+        <div><span title="Whatsup"><i class="fa fa-whatsapp fa-phone">&nbsp;<a href="9090909090" target="_blank"> </a></i></span></div>{/}
+      </div>
+      <h2>IM Numbers</h2>
+      <div class="profile-details">
+         
+        {IMs}
+        <div><span title="Skype"><i class="fa fa-skype">&nbsp;<a href="wwww.xavoc.com" target="_blank"> </a></i></span></div>
+        <div><span title="Whatsup"><i class="fa fa-whatsapp fa-phone">&nbsp;<a href="9090909090" target="_blank"> </a></i></span></div>{/}
+      </div>
+      <h2>Events</h2>
+      <div class="profile-details">
+         
+        {Events}
+        <div><span title="DOB"><i class="fa fa-wish">&nbsp;</i></span>DOB:</div>{/}
+      </div>
+      <h2>Relationship</h2>
+      <div class="profile-details">
+         
+        {Relations}
+        <div><span title="Father"><i class="fa fa-skype">&nbsp;</i></span> </div>{/}
+      </div>{/}  
+      {$Content}
+      {$FormButtons}
+    </div>
+  </div>
+</div>
+<style>
+  .image-caption{
+    display:none;
+  }
+  .image-wrapper:hover .image-caption{
+    border:2px solid redd;
+    display:blockk;
+  
+  }
+</style>

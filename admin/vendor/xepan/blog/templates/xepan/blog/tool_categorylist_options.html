@@ -1,0 +1,87 @@
+
+<div id="{$_name}" style="display:none" for-xepan-component="xepan/blog/Tool_CategoryList" class="xepan-tool-options">
+  <table class="table table-condensed table-hover xepan-cms-tool-table">
+    
+    <tr class="category-group">
+      <td colspan="2" class="xepan-tool-option-title">
+        <div> Menu Group</div>
+        <select id="{$_name}_category_group" data-attr="category_group" default-value="0">
+        </select>
+      </td>
+    </tr>
+
+    <tr class="xepan-tool-option">
+      <td class="xepan-tool-option-title">Show Post Count</td>
+      <td class="xepan-tool-option-value"> 
+        <select id="show_post_count" data-attr="show_post_count">
+          <option>true</option>
+          <option>false</option>
+        </select>
+      </td>
+    </tr>
+    <tr class="xepan-tool-option">
+      <td class="xepan-tool-option-title">Category Count</td>
+      <td class="xepan-tool-option-value"> 
+        <input id="category_count" data-attr="category_count"/>
+      </td>
+    </tr>
+    <tr class="xepan-tool-option">
+      <td class="xepan-tool-option-title">Category List Url</td>
+      <td class="xepan-tool-option-value"> 
+        <input id="redirect_page_url" data-attr="redirect_page_url"/>
+      </td>
+    </tr>
+    <tr class="xepan-tool-option">
+      <td class="xepan-tool-option-title">Post Detail Page</td>
+      <td class="xepan-tool-option-value"> 
+        <input id="post_detail_page" data-attr="post_detail_page"/>
+      </td>
+    </tr>
+    <tr class="xepan-tool-option">
+      <td class="xepan-tool-option-title">Order</td>
+      <td class="xepan-tool-option-value"> 
+        <select id="order" data-attr="order">
+          <option>true	</option>
+          <option>false </option>
+        </select>
+      </td>
+    </tr>
+<!--     <tr class="xepan-tool-option">
+      <td class="xepan-tool-option-title">Group</td>
+      <td class="xepan-tool-option-value"> 
+        <input id="group" data-attr="group"/>
+      </td>
+    </tr> -->
+    <tr class="xepan-tool-option">
+      <td class="xepan-tool-option-title">Show Posts</td>
+      <td class="xepan-tool-option-value"> 
+        <select id="show_post" data-attr="show_post">
+          <option>true</option>
+          <option>false																									</option>
+        </select>
+      </td>
+    </tr>
+  </table>
+  <script>
+    $('#{$_name} [data-attr]').on('change',function(){
+    	$(current_selected_component).attr($(this).data('attr'),$(this).val());
+    });
+    
+    $('#{$_name}').on('show',function(event){
+    	$.ajax({
+            url: 'index.php?page=xepan_blog_getcategory_group',
+            type: 'GET',
+            data: { },
+            success: function ( data ){
+                $('#{$_name}_category_group').html(data);
+                $('#{$_name}_category_group').val($(current_selected_component).attr('category_group'));
+            }
+        });
+
+      $('#{$_name} [data-attr]').each(function(index,value){
+    		$(this).val($(current_selected_component).attr($(this).data('attr')));				
+    	});
+
+    })
+  </script>
+</div>

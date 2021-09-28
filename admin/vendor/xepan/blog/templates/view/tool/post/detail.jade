@@ -1,0 +1,58 @@
+.blog(id="{$_name}")
+  .row
+    .col-xs-12.col-sm-12.col-md-12.col-lg-12
+      h2#xepan-blog-title.xepan-component.xepan-editable-text.xepan-blog-title(xepan-component='xepan/cms/Tool_Text') {$title}
+      hr
+    .col-md-12
+      {image_wrapper}
+      img.img-responsive.img-blog(src="{$image}" style = "height:auto; width='100%' max-width:100%", alt='')
+      {/}
+  .row
+      //- .col-xs-12.col-sm-12.col-md-3.text-center
+      ul.list-group
+        li.list-group-item.pull-left(style="width:33%;")
+          {$created_at_date}
+          span.pull-right
+            i.fa.fa-calendar
+        li.list-group-item.pull-left(style="width:33%;")
+          {$created_by}
+          span.pull-right 
+            i.fa.fa-user
+        li.list-group-item.pull-left(style="width:33%;")
+          a(href='#') {$comment_count}
+          span.pull-right
+            i.fa.fa-comment
+        {sharewrapper}
+        li.list-group-item.pull-left(style="width:99%;")
+          div(id="postshare{$id}")
+        {/}
+    .col-xs-12.col-sm-12.col-md-12.col-lg-12
+      //- h2#xepan-blog-title.xepan-component.xepan-editable-text.xepan-blog-title(xepan-component='xepan/cms/Tool_Text') {$title}
+      #xepan-blog-description.xepan-component.xepan-editable-text.xepan-blog-description(xepan-component='xepan/cms/Tool_Text'  emptytext="No Content found")
+        {$post_description}
+      {tag_wrapper}
+      .post-tags
+        strong Tags : 
+        a(href='#') {$tag}
+      {/} 
+      {$editing_mode} {$micro_data}
+  {$comments}    
+{$Content}
+style(type='text/css', media='screen').
+  .blog textarea {
+    width: 100%;
+  }
+
+  .row{
+    margin-left: 0px !important;
+    margin-right: 0px !important;
+  }
+
+  .xepan-blog-description iframe{
+  width:100% !important;
+  max-width:100% !important;
+  height:314px !important;
+  }
+  .list-group-item{
+    background-color:transparent;
+  } 

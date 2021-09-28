@@ -1,0 +1,1 @@
+ALTER TABLE `category` ADD `is_website_display` TINYINT NOT NULL;

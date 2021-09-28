@@ -1,0 +1,51 @@
+{paginatoratk}
+<div id="{$_name}" class="atk-box-small atk-actions atk-align-center">{prev}<a class="disabled">« Prev</a>{/}
+      {first}{/}
+      {points_left}{/}
+      {rows}
+      {row}<a data-skip="{$pn}" href="{$href}" class="itemlits {cur}ui-state-active ui-corner-all{/}">{$label}</a>{/}<a href="#">2</a><a href="#">3</a><a href="#" class="disabled">…</a><a href="#">19</a><a href="#">20</a><a href="#">21</a>    {/rows}
+      {points_right}{/}
+      {last}{/}
+      {next}<a class="disabled">Next »</a>{/}
+</div>{/paginatoratk}
+{paginatorcube}
+<style>
+  .pagination > li{
+    padding-left: 0px !important;
+    padding-right: 0px !important;
+  }
+</style>
+<div style="margin:5px 5px 0 0; float: left;" class="paginator hidden-xs">
+  <select id="ipp-selector-{$_name}">
+    <option>5</option>
+    <option>10</option>
+    <option>25</option>
+    <option>50</option>
+    <option>100</option>
+    <option>250</option>
+    <option>500</option>
+    <option>1000</option>
+    <option>2000</option>
+    <option>5000</option>
+  </select>
+</div>
+<ul id="{$_name}" class="pagination pull-left">
+  <li></li>{prev}
+  <li><a data-skip="{$pn}" href="{$href}" class="{cur}ui-state-active ui-corner-all{/}">{$label}</a></li>{/prev}
+  {first}
+  <li><a data-skip="{$pn}" href="{$href}" class="{cur}ui-state-active ui-corner-all{/}">{$label}</a></li>{/first}
+  {points_left}
+  <li><span data-skip="{$pn}" href="#points_left" class="{cur}ui-state-active ui-corner-all{/}">{$label}</span></li>{/}
+  {rows}{row}
+  <li class="{cur}active{/} hidden-xs"><a data-skip="{$pn}" href="{$href}" class="{cur}active{/}">{$label}</a></li>{/row}
+  <li><a href="#">2</a></li>
+  <li class="active"><a href="#">3</a></li>
+  <li><a href="#">4</a></li>
+  <li><a href="#">5</a></li>{/rows}
+  {points_right}
+  <li class="hidden-xs"><span data-skip="{$pn}" href="#points_right" class="{cur}ui-state-active ui-corner-all{/}">{$label}</span></li>{/}
+  {last}
+  <li class="hidden-xs"><a data-skip="{$pn}" href="{$href}" class="{cur}ui-state-active ui-corner-all{/}">{$label}</a></li>{/last}
+  {next}
+  <li><a data-skip="{$pn}" href="{$href}" class="{cur}ui-state-active ui-corner-all{/}">{$label}</a></li>{/next}
+</ul>{/}

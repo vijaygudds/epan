@@ -1,0 +1,15 @@
+div(id="{$_name}" class="{$class}")
+	{rows}{row}
+	.col-md-4
+		.social-box.col-md-12.col-sm-4(class="{$platform}")
+			i.fa(class="{$icon}")
+			.clearfix
+				span.social-count {$likes}
+				span.social-action likes &nbsp; 
+				span.social-count {$comments}
+				span.social-action comments &nbsp;
+				span.social-count {$shares} 
+				span.social-action Shares 
+			span.social-name Maximum Response From : {$max_user} 
+			span.social-name Minimum Response From : {$min_user} 
+	{/}{/}		

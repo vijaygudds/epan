@@ -1,0 +1,1 @@
+ALTER TABLE `freelancer_category` ADD `slug_url` VARCHAR(255) NULL ;

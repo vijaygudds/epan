@@ -1,0 +1,50 @@
+.row
+	.col-lg-12
+		.main-box.clearfix
+			header.main-box-header.clearfix
+				h2 Create Ledger
+			.main-box-body.clearfix
+				{account_info}
+				.row.xepan-push
+					.col-md-3
+						label
+						strong Name:
+						div
+							cite {$name}
+					.col-md-1
+					.col-md-3
+						label
+						strong Display Name:
+						div
+							cite {$LedgerDisplayName}
+					.col-md-1
+					.col-md-3
+						label
+						strong Group:
+						div
+							cite {$group}{$group_id}
+				.row.xepan-push
+					.col-md-3
+						label
+						strong OpeningBalanceDr:
+						div
+							cite {$OpeningBalanceDr}
+					.col-md-1
+					.col-md-3
+						label
+						strong OpeningBalanceCr:
+						div
+							cite {$OpeningBalanceCr}
+					.col-md-1
+					.col-md-3
+						label
+						strong Ledger Type:
+						div
+							cite {$ledger_type}
+				.row.xepan-push
+					.col-md-12
+						label
+						strong Related Contact (If Any?):
+						div
+							cite {$contact_id}{$contact}
+				{/}		

@@ -1,0 +1,11 @@
+<snippet>
+	<content><![CDATA[
+        \$this->app->employee
+            ->addActivity("${1:Activity Text}", ${2:\$this->id} ${3:/* Related Document ID*/}, ${4:\$this['${5:lead}_id']} ${6:/*Related Contact ID*/})
+            ${7:->notifyWhoCan('${8:reject,convert,open etc Actions perform on}','${9:Converted Any Status}' ${10:,Document Here or remove to select related document default})};
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	<tabTrigger>gridtd</tabTrigger>
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<!-- <scope>source.jade</scope> -->
+</snippet>

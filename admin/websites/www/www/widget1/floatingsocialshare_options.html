@@ -1,0 +1,52 @@
+<div id="{$_name}" style="display:block;" for-xepan-component="floatingSocialShare" class="xepan-tool-options floating-social-share">
+    <div id="xepan-cms-groups-panel" class="xepan-cms-groups-panel collapse in"></div>
+        <div class="xepan-cms-group-panel clearfix">
+            <h3 data-toggle="collapse" data-target="#floating-Social-Share" aria-expanded="false" class="collapsed"><span>Floating Social Share</span></h3>
+            <div id="floating-Social-Share" class="xepan-cms-tools-bar-panel row-fluid collapse">
+                <table class="table table-condensed table-hover">                     
+                    <tr>
+                      <div class="xepan-tool-option">
+                        <td class="xepan-tool-option-title">Place</td>
+                        <td class="xepan-tool-option-value">
+                          <select id="place-position" data-attr="data-palce" value="true">
+                            <option value="top-left">Top to Left</option>
+                            <option value="top-right">Top to Right</option>
+                          </select>
+                        </td>
+                      </div>
+                    </tr>
+                    <tr>
+                      <div class="xepan-tool-option">
+                        <td class="xepan-tool-option-title">website Url</td>
+                        <td class="xepan-tool-option-value"> 
+                          <input id="web-url" data-attr="website_url"/>
+                        </td>
+                      </div>
+                    </tr>
+                    <tr>
+                      <div class="xepan-tool-option">
+                        <td class="xepan-tool-option-title">Description</td>
+                        <td class="xepan-tool-option-value"> 
+                          <input id="website-description" data-attr="website_url"/>
+                        </td>
+                      </div>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>                
+<script type="text/javascript">
+    $('#place-position').on('change',function(){
+        $(current_selected_component).attr('data-place',$(this).val());
+        $(current_selected_component).univ().errorMessage('Save and reload Page to see changes');
+    });
+    $('#web-url').on('change',function(){
+        $(current_selected_component).attr('data-url',$(this).val());
+        $(current_selected_component).univ().errorMessage('Save and reload Page to see changes');
+    });
+    $('#website-description').on('change',function(){
+        $(current_selected_component).attr('data-description',$(this).val());
+        $(current_selected_component).univ().errorMessage('Save and reload Page to see changes');
+    });
+</script>
+</div>

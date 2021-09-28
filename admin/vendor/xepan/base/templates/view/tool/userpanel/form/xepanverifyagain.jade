@@ -1,0 +1,26 @@
+.panel.panel-default
+  .panel-heading
+    strong  Activate your Account
+  .panel-body
+    form(role='form', action='#', method='POST')
+      fieldset
+        .row
+          .text-center
+        .row(style="padding-bottom:20px;")
+          .col-sm-12.col-md-12
+            .form-group.atk-form-row.atk-form-field
+              .input-group
+                span.input-group-addon
+                  i.fa.fa-envelope
+                .xepan-form-field{$email}
+        .row.xepan-push-large
+          .col-xs-12
+            button.btn.btn-success.col-xs-12(type='submit') Send Email 
+  .panel-footer.text-center 
+    {login_wrapper} 
+    a.forgot-link.back-login.xepan-login-panl-loadview(style="cursor:pointer; cursor: hand;" data-showview="login_view") Back to login                        
+    {/}
+style.
+    #{$_name} input{
+      width:100%;
+    }

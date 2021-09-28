@@ -1,0 +1,99 @@
+
+<div id="{$_name}" style="display:none" for-xepan-component="xepan/cms/Tool_AwesomeSlider" class="xepan-tool-options">
+  <table class="table-condensed table-hover xepan-cms-tool-table">
+    <tr>
+      <td colspan="2">
+        <div class="btn btn-primary btn-sm xepan-manage-gallery-btn">Manage Gallery</div>
+      </td>
+    </tr>
+    <tr class="category">
+      <td class="xepan-tool-option-title">Gallery</td>
+      <td colspan="2" class="xepan-tool-option-value">
+        <select id="{$_name}_dropdown" style="width:150px;" data-attr="slider_category" class="chosen-select option-category"></select>
+      </td>
+    </tr>
+    <tr>
+      <td>Themes</td>
+      <td>
+        <select id="AwesomeSlider_Theme" data-attr="data-awesome-theme">
+          <option value="theme-default">theme-default</option>
+          <option value="theme-bar">theme-bar</option>
+          <option value="theme-dark">theme-dark</option>
+          <option value="theme-light">theme-light</option>
+        </select>
+      </td>
+    </tr>
+    <tr>
+      <td>Control Nav</td>
+      <td>
+        <select id="AwesomeSlider_control_nav" data-attr="control_nav">
+          <option value="true">Yes</option>
+          <option value="false">No</option>
+        </select>
+      </td>
+    </tr>
+    <tr>
+      <td>Paginator Position</td>
+      <td>
+        <select id="AwesomeSlider_Paginator-pos" data-attr="paginator-position">
+          <option value="position-topleft">position-topleft</option>
+          <option value="position-topcenter">position-topcenter</option>
+          <option value="position-topright">position-topright</option>
+          <option value="position-bottomleft">position-bottomleft</option>
+          <option value="position-bottomcenter">position-bottomcenter</option>
+          <option value="position-bottomright">position-bottomright</option>
+        </select>
+      </td>
+    </tr>
+  </table>
+  <script>
+    $.ajax({
+    	url: 'index.php?page=xepan_cms_getAwesomegallery',
+    	type: 'GET',
+    	data: { },
+    	success: function ( data ){
+    		//- console.log(data);
+    		$('#{$_name}_dropdown').html(data);
+    	}
+    });
+    $('#AwesomeSlider_Theme').val($(current_selected_component).attr('data-awesome-theme'));
+    $('#AwesomeSlider_Paginator-pos').val($(current_selected_component).attr('paginator-position'));
+    $('#AwesomeSlider_control_nav').val($(current_selected_component).attr('control_nav'));
+    		
+    
+    $('#{$_name} [data-attr]').on('change',function(){
+    	$(current_selected_component).attr($(this).data('attr'),$(this).val());
+    });
+    
+    $('#{$_name}').on('show',function(event){
+    	$('#{$_name} [data-attr]').each(function(index,value){
+    		$(this).val($(current_selected_component).attr($(this).data('attr')));				
+    	});
+    });
+    
+    $('.option-category').change(function(event) {
+    	$(current_selected_component).attr('data-options',$('.option-category').val());
+    	$(current_selected_component).univ().errorMessage('Save and reload Page to see changes');
+    });
+    
+    $('#AwesomeSlider_Theme').change(function(event) {
+    	$(current_selected_component).find('.slider-wrapper').removeClass (function (index, className) {
+    		return (className.match (/(^|\s)theme-\S+/g) || []).join(' ');
+    	}).addClass($(current_selected_component).attr('data-awesome-theme'));
+    });
+    
+    //- $('#AwesomeSlider_Paginator-pos').change(function(event) {
+    //- 	$(current_selected_component).find('.nivo-controlNav').addClass($(current_selected_component).attr('paginator-position'));
+    //- });
+    $('.xepan-manage-gallery-btn').click(function(event) {
+      $.univ().frameURL(
+        'Manage Image Gallery',
+        'index.php?page=xepan_cms_gallery&cut_page=1',
+        null,
+        function(events){
+          $('.dropdown-toggle').dropdown('toggle');
+        });
+    });
+    
+  </script>
+</div>

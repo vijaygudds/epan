@@ -1,0 +1,78 @@
+.xepan-grid.main-box.clearfix.atk-table.atk-table-zebra.atk-table-bordered(id="{$_name}" class="{$class}")
+    {Pannel}
+    header.main-box-header.clearfix.atk-actions(class=" {$class} ")
+        div.filter-block( style="100%") 
+            .form-group.pull-right.xepan-filter-form
+                span {$grid_buttons}
+                //- span |{$list_view_btn}
+                
+                span(class="form-control pull-left")|{$quick_search}
+                    i(class="fa fa-search search-icon")
+    {/Pannel}
+    .main-box-body.clearfix.table
+        table.table.user-list.table-hover.footable.toggle-circle-filled(style="width:100%")
+            {header}
+            thead.xepan-hover-hand
+                {cols}{col}
+                th
+                    span Lead {$name_sort}
+                th(id="{$priority_sortid}")
+                    span Priority {$priority_sort}    
+                th(data-hide="desktop,phone,tablet") Contact
+                th(id="{$score_sortid}") 
+                    span Score {$score_sort}
+                //- th Detail
+                {/}{/}
+            {/}
+            {$subheader}
+
+            tbody
+                {rows}{row}
+                tr(class="{$odd_even}" data-id="{$id}")
+                    {cols}
+                    td
+                      {$avatar}
+                      a.do-view-lead(href='' data-id="{$id}")
+                        span.user-subhead
+                            {$effective_name}
+                      .user-subhead
+                        h6 [{city}{/}] - [{$type}]
+                      div  
+                        small.text-muted {$last_communication} 
+                      div
+                        small.text-muted{$date}
+                    td
+                       {$priority}
+                    td {$contacts_str} &nbsp; &nbsp; {action}Action Here{/}
+
+                    td {score}xyz{/}
+                        a.tele-lead(href='' data-id="{$id}")
+                            .area-hidden(style="display: none;") {$name}
+                            span.fa-stack
+                                i.fa.fa-square.fa-stack-2x
+                                i.fa-phone.fa.fa-stack-1x.fa-inverse            
+                    {/}
+                {/}{/}
+                {not_found}
+                div.row
+                    .col-md-12.text-center.alert.alert-warning(role="alert")
+                        span.icon-attention.fa.fa-exclamation-triangle  &nbsp;{$not_found_message}
+                {/}
+
+            {totals}
+            tfoot
+                tr(class="totals")
+                    {cols}{col}
+                    <td {$tdparam}>
+                    {$content}
+                    </td>
+                    {/}{/}
+            {/}
+        {$Paginator}
+style.
+    .view-lead-grid .table{
+        height:534px;
+        max-height:534px;
+        overflow-x:hidden;
+        overflow-y:scroll;
+    }

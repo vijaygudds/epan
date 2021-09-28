@@ -1,0 +1,1 @@
+ALTER TABLE `taxation` ADD `sub_tax` TEXT NULL AFTER `created_by_id`;

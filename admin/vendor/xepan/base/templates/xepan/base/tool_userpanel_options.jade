@@ -1,0 +1,211 @@
+.xepan-tool-options(id='{$_name}' style="display:none" for-xepan-component='xepan/base/Tool_UserPanel')
+	//- .xepan-cms-groups-panel.collapse.in(id="xepan-cms-groups-panel")
+	//- .xepan-cms-group-panel.clearfix
+	//- 	h3.collapsed(data-toggle="collapse" data-target="#collapse-user-panel" aria-expanded="false")
+	//- 		span User Panel Options
+		//- #collapse-user-panel.xepan-cms-tools-bar-panel.row-fluid.collapse
+		//- 	.panel-body
+	.xepan-cms-groups-panel.collapse(id="xepan-cms-groups-panel")
+	.xepan-cms-group-panel.clearfix
+		div.panel.panel-heading.panel-primary.collapsed(data-toggle="collapse" data-target="#user-tool-form-layouts" aria-expanded="false")
+			span Layouts
+			i.fa.fa-chevron-down.pull-right
+	#user-tool-form-layouts.xepan-cms-tools-bar-panel.row-fluid.collapse
+		table.table-condensed.table-hover.xepan-cms-tool-table
+			tr
+				.xepan-tool-option
+					td.xepan-tool-option-title Layout
+					td.xepan-tool-option-value 
+						select#user-panel-layout(data-attr='layout')
+							option(value="login_view")|Login
+							option(value="forget_password")|Forgot Password
+							option(value="new_registration")|New Registration
+							option(value="verify_account")|Aerify Account
+							option(value="verify_again")|Verify Again
+	.xepan-cms-groups-panel.collapse.in(id="xepan-cms-groups-panel")
+	.xepan-cms-group-panel.clearfix
+		div.panel.panel-heading.panel-primary.collapsed(data-toggle="collapse" data-target="#user-tool-show-url-links" aria-expanded="false")
+			span Show/Hide Links/Fields
+			i.fa.fa-chevron-down.pull-right
+	#user-tool-show-url-links.xepan-cms-tools-bar-panel.row-fluid.collapse
+		table.table-condensed.table-hover.xepan-cms-tool-table
+			tr
+				.xepan-tool-option
+					td.xepan-tool-option-title Show Registration Link
+					td.xepan-tool-option-value
+						select#show_tnc(data-attr='show_registration_link' data-defaultvalue="true")
+							option(value="true") Yes
+							option(value="false") No
+
+			tr
+				.xepan-tool-option
+					td.xepan-tool-option-title Show ForgotPassword Link
+					td.xepan-tool-option-value
+						select#show_tnc(data-attr='show_forgotpassword_link' data-defaultvalue="true")
+							option(value="true") Yes
+							option(value="false") No
+			tr
+				.xepan-tool-option
+					td.xepan-tool-option-title Show Activate Link
+					td.xepan-tool-option-value
+						select#show_tnc(data-attr='show_activation_link' data-defaultvalue="true")
+							option(value="true") Yes
+							option(value="false") No
+			tr
+				.xepan-tool-option
+					td.xepan-tool-option-title Show Country Field
+					td.xepan-tool-option-value
+						select#show_field_country(data-attr='show_field_country' data-defaultvalue="0")
+							option(value="1") Yes
+							option(value="0") No
+			tr
+				.xepan-tool-option
+					td.xepan-tool-option-title Country is mandatory
+					td.xepan-tool-option-value
+						select#country_is_mandatory(data-attr='country_is_mandatory' data-defaultvalue="0")
+							option(value="1") Yes
+							option(value="0") No
+			tr
+				.xepan-tool-option
+					td.xepan-tool-option-title Show State Field
+					td.xepan-tool-option-value
+						select#show_field_state(data-attr='show_field_state' data-defaultvalue="0")
+							option(value="1") Yes
+							option(value="0") No
+			tr
+				.xepan-tool-option
+					td.xepan-tool-option-title State is mandatory
+					td.xepan-tool-option-value
+						select#state_is_mandatory(data-attr='state_is_mandatory' data-defaultvalue="0")
+							option(value="1") Yes
+							option(value="0") No
+			tr
+				.xepan-tool-option
+					td.xepan-tool-option-title Show City Field
+					td.xepan-tool-option-value
+						select#show_field_city(data-attr='show_field_city' data-defaultvalue="0")
+							option(value="1") Yes
+							option(value="0") No
+			tr
+				.xepan-tool-option
+					td.xepan-tool-option-title City is mandatory
+					td.xepan-tool-option-value
+						select#city_is_mandatory(data-attr='city_is_mandatory' data-defaultvalue="0")
+							option(value="1") Yes
+							option(value="0") No
+			tr
+				.xepan-tool-option
+					td.xepan-tool-option-title Show Address Field
+					td.xepan-tool-option-value
+						select#show_field_address(data-attr='show_field_address' data-defaultvalue="0")
+							option(value="1") Yes
+							option(value="0") No
+			tr
+				.xepan-tool-option
+					td.xepan-tool-option-title Address is mandatory
+					td.xepan-tool-option-value
+						select#address_is_mandatory(data-attr='address_is_mandatory' data-defaultvalue="0")
+							option(value="1") Yes
+							option(value="0") No
+			tr
+				.xepan-tool-option
+					td.xepan-tool-option-title Show Pin Code Field
+					td.xepan-tool-option-value
+						select#show_field_pin_code(data-attr='show_field_pin_code' data-defaultvalue="0")
+							option(value="1") Yes
+							option(value="0") No
+			tr
+				.xepan-tool-option
+					td.xepan-tool-option-title Pin Code is mandatory
+					td.xepan-tool-option-value
+						select#pin_code_is_mandatory(data-attr='pin_code_is_mandatory' data-defaultvalue="0")
+							option(value="1") Yes
+							option(value="0") No
+			tr
+				.xepan-tool-option
+					td.xepan-tool-option-title Show Mobile No Field
+					td.xepan-tool-option-value
+						select#show_field_mobile_no(data-attr='show_field_mobile_no' data-defaultvalue="0")
+							option(value="1") Yes
+							option(value="0") No
+			tr
+				.xepan-tool-option
+					td.xepan-tool-option-title Mobile No  is mandatory
+					td.xepan-tool-option-value
+						select#mobile_no_is_mandatory(data-attr='mobile_no_is_mandatory' data-defaultvalue="0")
+							option(value="1") Yes
+							option(value="0") No
+	.xepan-cms-groups-panel.collapse.in(id="xepan-cms-groups-panel")
+	.xepan-cms-group-panel.clearfix
+		div.panel.panel-heading.panel-primary.collapsed(data-toggle="collapse" data-target="#user-tool-page-links" aria-expanded="false")
+			span Page Links
+			i.fa.fa-chevron-down.pull-right
+	#user-tool-page-links.xepan-cms-tools-bar-panel.row-fluid.collapse
+		table.table-condensed.table-hover.xepan-cms-tool-table
+			tr
+				.xepan-tool-option
+					td.xepan-tool-option-title Success URL
+					td.xepan-tool-option-value 
+						input#user-panle-sucess-url(data-attr='login_success_url' data-shortname="success_url")
+			tr
+				.xepan-tool-option
+					td.xepan-tool-option-title Show TnC
+					td.xepan-tool-option-value
+						select#show_tnc(data-attr='show_tnc' data-defaultvalue="true")
+							option(value="true") Yes
+							option(value="false") No
+			tr
+				.xepan-tool-option
+					td.xepan-tool-option-title TnC URL
+					td.xepan-tool-option-value 
+						input#tnc_page_url(data-attr='tnc_page_url' data-shortname="tnc_url")
+			tr
+				.xepan-tool-option
+					td.xepan-tool-option-title Logout Page
+					td.xepan-tool-option-value 
+						input#user-panle-logoutpage-layout(data-attr='logout_page' data-shortname="logout_page")
+			tr
+				.xepan-tool-option
+					td.xepan-tool-option-title Login Page
+					td.xepan-tool-option-value 
+						input#user-panle-loginpage-layout(data-attr='login_page' data-shortname="login_page")
+			tr
+				.xepan-tool-option
+					td.xepan-tool-option-title Registration Page
+					td.xepan-tool-option-value 
+						input#user-panle-registration-page-layout(data-attr='registration_page_extranal_url')
+			tr
+				.xepan-tool-option
+					td.xepan-tool-option-title Member Panel Page
+					td.xepan-tool-option-value 
+						input#user-panle-member-page(data-attr='member_panel_page')
+	.xepan-cms-groups-panel.collapse.in(id="xepan-cms-groups-panel")
+	.xepan-cms-group-panel.clearfix
+		div.panel.panel-heading.panel-primary.collapsed(data-toggle="collapse" data-target="#user-tool-micro-login" aria-expanded="false")
+			span Micro Login
+			i.fa.fa-chevron-down.pull-right
+	#user-tool-micro-login.xepan-cms-tools-bar-panel.row-fluid.collapse
+		table.table-condensed.table-hover.xepan-cms-tool-table
+			tr
+				.xepan-tool-option
+					td.xepan-tool-option-title Micro Login
+					td.xepan-tool-option-value 
+						select#user-panel-micrologin(data-attr='show_micro_login' data-shortname="micro_login")
+							option(value="true") True
+							option(value="false") False
+	script.
+		$('\#{$_name} [data-attr]').on('change',function(){
+			$(current_selected_component).attr($(this).data('attr'),$(this).val());
+		});
+
+		$('\#{$_name}').on('show',function(event){
+			$('\#{$_name} [data-attr]').each(function(index,value){
+
+				var default_value = $(this).attr('data-defaultvalue');
+				if($(current_selected_component).attr($(this).data('attr')))
+					default_value = $(current_selected_component).attr($(this).data('attr'));
+				
+				$(this).val(default_value);
+				//- $(this).val($(current_selected_component).attr($(this).data('attr')));
+			});
+		})

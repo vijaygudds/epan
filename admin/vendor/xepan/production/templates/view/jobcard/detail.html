@@ -1,0 +1,68 @@
+
+<div class="main-box no-header clearfix">
+  <header class="main-box-header clearfix">
+    <div class="row"> 
+      <div class="col-md-4"><span class="pull-right">{from_dept_row}From Department : {form_department}Design{/}{/}</span></div>
+      <div class="col-md-4">
+        <h2 style="text-align:center;">Staus: {$status}</h2>
+      </div>
+      <div class="col-md-4"><span class="pull-right">{next_dept_row} Next Department : {next_department} Discard{/}{/}</span></div>
+    </div>
+  </header>
+  <div class="main-box-body clearfix">
+    <div id="invoice-companies" class="row">
+      <div class="col-sm-4 invoice-box">
+        <div class="invoice-icon hidden-sm"><i class="fa fa-home"></i> From</div>
+        <div>
+          <h4> {customer_name}customer name{/}</h4>
+          <div class="xepan-push"></div>
+          <p>{address}{/}</p>
+          <p>{city}{/},&nbsp;{state}{/},&nbsp;{country}{/}</p>
+        </div>
+      </div>
+      <div class="col-sm-4 invoice-box">
+        <h4>Order No.: {order_no}{/}</h4>
+        <div class="xepan-push"></div>Created at:  {order_created_at}{/}
+      </div>
+      <div class="col-sm-4 invoice-box invoice-box-dates">
+        <div class="invoice-dates">
+          <div class="row clearfix">
+            <div class="col-md-6 invoice-number"><strong>Jobcard No.</strong></div>
+            <div class="col-md-6 invoice-number input-full-width"><span style="margin:auto;" class="pull-right atk-form-row atk-form-field">{$id}</span></div>
+          </div>
+          <div class="invoice-date clearfix"><strong>Create Date:</strong><span class="pull-right">{$created_at}</span></div>
+          <div class="invoice-date clearfix"><strong>Due Date: </strong><span class="pull-right">{$due_date}</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="invoice-box clearfix">    </div>
+    <div class="table-responsive">
+      <table class="table">
+        <thead>
+          <tr>
+            <th><span>Item</span></th>
+            <th><span>Quantity</span></th>
+            <th><span>Progress/Detail</span></th>
+            <th><span>Completed</span></th>
+            <th><span>Forwarded</span></th>
+            <th><span>Dispatched</span></th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td style="vertical-align:top"><a class="user-subhead"><strong class="h4">{$order_item}</strong></a>
+              <div> <small>{$extra_info}</small></div>
+            </td>
+            <td style="vertical-align:top">{$order_item_quantity}</td>
+            <td style="vertical-align:top">To Received : {$toreceived}<br/>Processing : {$processing}</td>
+            <td style="vertical-align:top">{$completed}  </td>
+            <td style="vertical-align:top">{$forwarded}</td>
+            <td style="vertical-align:top">{$dispatched}</td>
+            <td style="vertical-align:top"></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

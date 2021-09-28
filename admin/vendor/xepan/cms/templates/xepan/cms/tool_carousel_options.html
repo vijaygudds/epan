@@ -1,0 +1,56 @@
+
+<div id="{$_name}" style="display:none" for-xepan-component="xepan/cms/Tool_Carousel" class="xepan-tool-options">
+  <table class="table-condensed table-hover xepan-cms-tool-table">
+    <tr>
+      <td colspan="2">
+        <div class="btn btn-primary btn-sm xepan-manage-carousel-btn">Manage Carousel</div>
+      </td>
+    </tr>
+    <tr class="show-text">
+        <td class="xepan-tool-option-title">Show Text</td>
+        <td class="xepan-tool-option-value"> 
+          <select id="show_text" data-attr="show_text" data-defaultvalue="true">
+            <option value="true">Yes</option>
+            <option value="false">No</option>
+          </select>
+        </td>
+    </tr>
+    <tr class="category">
+        <td class="xepan-tool-option-title">Category</td>
+        <td colspan="2" class="xepan-tool-option-value">
+          <select id="{$_name}_dropdown" style="width:150px;" data-attr="carousel_category" class="chosen-select option-category"></select>
+        </td>
+    </tr>
+  </table>
+  <script>
+    $.ajax({
+    	url: 'index.php?page=xepan_cms_getcategory',
+    	type: 'GET',
+    	data: { },
+    	success: function ( data ){
+    		//- console.log(data);
+    		$('#{$_name}_dropdown').html(data);
+    	}
+    });
+    
+    $('#{$_name} [data-attr]').on('change',function(){
+    	$(current_selected_component).attr($(this).data('attr'),$(this).val());
+    });
+    
+    $('#{$_name}').on('show',function(event){
+    	$('#{$_name} [data-attr]').each(function(index,value){
+    		$(this).val($(current_selected_component).attr($(this).data('attr')));
+    	});
+    });
+
+    $('.xepan-manage-carousel-btn').click(function(event) {
+      $.univ().frameURL(
+        'Manage Carousel Category',
+        'index.php?page=xepan_cms_carousel&cut_page=1',
+        null,
+        function(events){
+          $('.dropdown-toggle').dropdown('toggle');
+        });
+    });
+  </script>
+</div>

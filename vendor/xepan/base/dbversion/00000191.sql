@@ -1,0 +1,1 @@
+ALTER TABLE `blog_post` ADD COLUMN `slug_url`  varchar(255) DEFAULT NULL;

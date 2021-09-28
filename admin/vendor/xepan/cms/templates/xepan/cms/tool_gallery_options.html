@@ -1,0 +1,135 @@
+
+<div id="{$_name}" style="display:none" for-xepan-component="xepan/cms/Tool_Gallery" class="xepan-tool-options">
+  <div class="xepan-cms-group-panel clearfix">
+    <div id="collapse-item-list" class="xepan-cms-tools-bar-panel row-fluid collapse in">
+      <div style="padding-top:0px;padding-bottom:0px;" class="panel-body">
+        <div id="xepan-cms-groups-panel" class="xepan-cms-groups-panel collapse in"></div>
+        <div id="show-hide-gallery-option" class="xepan-cms-tools-bar-panel row-fluid collapse in">
+          <table class="table table-condensed table-hover xepan-cms-tool-table">
+            <tr>
+              <td colspan="2">
+                <div class="btn btn-primary btn-sm xepan-manage-gallery-btn">Manage Gallery</div>
+              </td>
+            </tr>
+            <tr class="xepan-tool-option">
+              <td class="xepan-tool-option-title">Gallery Type</td>
+              <td class="xepan-tool-option-value">
+                <select id="gallery_type" data-attr="gallery_type" data-defaultvalue="0" data-togglevalue="portfolio" data-toggleclass=".xepan-cms-gallery-p-option">
+                  <option value="0">Please Select</option>
+                  <option value="portfolio">Portfolio</option>
+                  <option value="googlegallery">Google Gallery</option>
+                </select>
+              </td>
+            </tr>
+            <tr class="xepan-tool-option xepan-cms-gallery-p-option">
+              <td class="xepan-tool-option-title">Detail Page</td>
+              <td class="xepan-tool-option-value">
+                <input id="detail_page" data-attr="detail_page"/>
+              </td>
+            </tr>
+            <tr class="show-text xepan-cms-gallery-p-option">
+              <td class="xepan-tool-option-title">Show Fancybox</td>
+              <td class="xepan-tool-option-value">
+                <select id="show_fancybox" data-attr="show_fancybox" data-defaultvalue="true">
+                  <option value="true">Yes</option>
+                  <option value="false">No</option>
+                </select>
+              </td>
+            </tr>
+            <tr class="show-text xepan-cms-gallery-p-option">
+              <td class="xepan-tool-option-title">Show Link</td>
+              <td class="xepan-tool-option-value">
+                <select id="show_link" data-attr="show_link" data-defaultvalue="true">
+                  <option value="true">Yes</option>
+                  <option value="false">No</option>
+                </select>
+              </td>
+            </tr>
+            <tr class="show-text">
+              <td class="xepan-tool-option-title">Show Title</td>
+              <td class="xepan-tool-option-value"> 
+                <select id="show_title" data-attr="show_title" data-defaultvalue="true">
+                  <option value="true">Yes</option>
+                  <option value="false">No</option>
+                </select>
+              </td>
+            </tr>
+            <tr class="show-description">
+              <td class="xepan-tool-option-title">Show Description</td>
+              <td class="xepan-tool-option-value">
+                <select id="show_title" data-attr="show_description" data-defaultvalue="true">
+                  <option value="true">Yes</option>
+                  <option value="false">No</option>
+                </select>
+              </td>
+            </tr>
+            <tr class="category">
+              <td colspan="2" class="xepan-tool-option-value">
+                <div>Select Category</div>
+                <select id="{$_name}_dropdown" style="width:100%;" multiple="" multiselect="multiselect" data-attr="img_gallery_category" class="chosen-select gallery-images-category-multiselect chosen-select option-category"></select>
+              </td>
+            </tr>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <link rel="stylesheet" type="text/css" href="vendor/xepan/blog/templates/css/chosen.css"/>
+  <script src="vendor/xepan/blog/templates/js/chosen.jquery.js"></script>
+
+  <script>
+    $.ajax({
+    	url: 'index.php?page=xepan_cms_getimagegallerycategory',
+    	type: 'GET',
+    	data: { },
+    	success: function ( data ){
+    		//- console.log(data);
+    		$('#{$_name}_dropdown').html(data);
+        $('#{$_name}_dropdown').chosen();
+        $('#{$_name}_dropdown').chosen({allow_single_deselect: true });
+    	}
+    });
+    
+    $('#{$_name} [data-attr]').on('change',function(){
+    	$(current_selected_component).attr($(this).data('attr'),$(this).val());
+    
+    	if($(this).data('toggleclass')){
+    		var value = $(this).data('togglevalue').toString();
+    		if($(this).val() === value){
+    			$($(this).data('toggleclass')).show();
+    		}else
+    			$($(this).data('toggleclass')).hide();
+    	}
+    });
+    
+    $('#{$_name}').on('show',function(event){
+    	$('#{$_name} [data-attr]').each(function(index,value){
+    		// setting up default value if no option selected
+    		var default_value = $(this).attr('data-defaultvalue');
+    		if($(current_selected_component).attr($(this).data('attr')))
+    			default_value = $(current_selected_component).attr($(this).data('attr'));
+    		
+    		$(this).val(default_value);
+    	});
+
+      //- chosen multiselect options
+      if(typeof $(current_selected_component).attr('img_gallery_category') === 'undefined' ){
+        $("#{$_name}_dropdown").val("\{\}").trigger("chosen:updated");
+      }else{
+        var str = $(current_selected_component).attr('img_gallery_category');
+        $("#{$_name}_dropdown").val(str.split(',')).trigger("chosen:updated");
+      }
+    });
+
+    $('.xepan-manage-gallery-btn').click(function(event) {
+      $.univ().frameURL(
+        'Manage Image Gallery',
+        'index.php?page=xepan_cms_gallery&cut_page=1',
+        null,
+        function(events){
+          $('.xepan-document-actions .dropdown-toggle').dropdown('toggle');
+        });
+    });
+  </script>
+</div>

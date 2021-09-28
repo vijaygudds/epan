@@ -1,0 +1,32 @@
+.panel.panel-default(id="{$_name}")
+  .panel-heading.text-center
+    strong  Activate your Account
+  .panel-body(style="margin-top:30px;margin-bottom:30px;")
+    form(role='form', action='#', method='POST')
+      fieldset
+        .row(style="padding-bottom:20px;")
+          .col-sm-12.col-md-12
+            .form-group.atk-form-row.atk-form-field
+              .input-group
+                span.input-group-addon
+                  i.fa.fa-envelope
+                .xepan-form-field{$email}
+            .form-group.atk-form-row.atk-form-field
+              .input-group
+                span.input-group-addon
+                  i.fa.fa-lock
+                .xepan-form-field{$activation_code}    
+        .row
+          .col-xs-12
+            button.btn.btn-success.col-xs-12(type='submit') Verify 
+  .panel-footer
+    {login_wrapper}
+    a.forgot-link.back-login.xepan-login-panl-loadview(style="cursor:pointer; cursor: hand;" data-showview="login_view") Back to login    
+    {/}
+    {resend_wrapper}
+    a.forgot-link.back-login.xepan-login-panl-loadview.pull-right(style="cursor:pointer; cursor: hand;" data-showview="verify_again") Resend verification
+    {/}
+style.
+    #{$_name} input{
+      width:100%;
+    }

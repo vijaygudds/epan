@@ -1,0 +1,664 @@
+.sidebar {
+    z-index: 9999999999;
+    position: fixed;
+    top: -1px;
+    bottom: -1px;
+    padding: 0;
+    width: auto;
+    background-color: rgba(213, 213, 213, 0.9);
+    box-sizing:border-box;
+    height:100%;
+    -webkit-background-clip: padding-box;
+    background-clip: padding-box;
+    border: 1px solid rgba(0, 0, 0, .15);
+    -webkit-box-shadow: 0 6px 12px rgba(0, 0, 0, .175);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, .175);
+    transition: 0.3s;
+}
+
+.sidebar.sidebar-left {
+    left: 0;
+    /*padding:0px; */
+    /*right: 100% !important;*/
+}
+
+.sidebar.sidebar-right {
+    right: 0;
+    left: 20px;
+}
+
+
+.toggler {
+    -webkit-background-clip: padding-box;
+    background-clip: padding-box;
+    border: 1px solid rgba(0, 0, 0, .15);
+    width: 20px;
+    height: 48px;
+    position: absolute;
+    top: 47%;
+    cursor: pointer;
+    background-color: rgba(213, 213, 213, 0.9);
+}
+
+.sidebar-left > .toggler {
+    -webkit-border-top-right-radius: 4px;
+    -webkit-border-bottom-right-radius: 4px;
+    -moz-border-radius-topright: 4px;
+    -moz-border-radius-bottomright: 4px;
+    border-top-right-radius: 4px;
+    border-bottom-right-radius: 4px;
+    /*border-left: 1px solid #fff;*/
+    /*-webkit-box-shadow: 1px 0px 8px rgba(0, 0, 0, .175);
+    box-shadow: 1px 0px 8px rgba(0, 0, 0, .175);*/
+    right: -20px;
+}
+
+.sidebar-left > .toggler > span {
+    margin: 15px 2px;
+}
+
+.sidebar-right > .toggler {
+    -webkit-border-top-left-radius: 4px;
+    -webkit-border-bottom-left-radius: 4px;
+    -moz-border-radius-topleft: 4px;
+    -moz-border-radius-bottomleft: 4px;
+    border-top-left-radius: 4px;
+    border-bottom-left-radius: 4px;
+    /*border-right: 1px solid #fff;*/
+    /*-webkit-box-shadow: -1px 0px 8px rgba(0, 0, 0, .175);
+    box-shadow: -1px 0px 8px rgba(0, 0, 0, .175);*/
+    left: -20px;
+}
+
+.sidebar-right > .toggler > span {
+    margin: 15px 2px;
+}
+
+/*Native BootStrap Hack*/
+.sidebar .list-group-item:last-child, .sidebar .list-group-item:first-child {
+    border-radius: 0;
+}
+
+.sidebar .list-group {
+    margin-bottom: 0;
+}
+
+.sidebar .list-group-item {
+    border: 1px solid #DDD;
+    border-left: 0;
+    border-right: 0;
+    margin-bottom: 0;
+    margin-top: -1px;
+}
+
+.list-group .collapse a {
+    padding-left: 25px;
+}
+
+.list-group-item .glyphicon {
+    margin-right: 5px;
+}
+
+#xepan-cms-toolbar-top-side-panel{
+	width:100% !important; 
+	height:50px !important;
+    box-shadow: 1px 0px 0px rgba(0, 0, 0, 0.176);
+}
+
+#xepan-cms-toolbar-top-side-panel.toggleSideBar{
+	top:0px !important;
+}
+
+.sidebar-top.toggleSideBar{
+	top:0px;
+}
+
+#xepan-cms-toolbar-top-side-panel .toggler{
+	/*-webkit-border-top-right-radius: 4px;*/
+    -webkit-border-bottom-right-radius: 4px;
+    -moz-border-radius-topright: 4px;
+    -moz-border-radius-bottomright: 4px;
+    
+    /*border-top-right-radius: 4px;*/
+    border-bottom-right-radius: 4px;
+    border-bottom-left-radius: 4px;
+    /*border-top: 1px solid #fff;*/
+
+/*    -webkit-box-shadow: 1px 0px 8px rgba(0, 0, 0, .175);
+    box-shadow: 1px 0px 8px rgba(0, 0, 0, .175);*/
+
+    top:48px;
+    width:40px;
+    height:20px;
+    left:300px;
+}
+
+.sidebar-top > .toggler > span {
+    margin: 2px 15px;
+}
+@media (min-width: 400px) {
+    .sidebar {
+        width: 230;
+    }
+
+    .sidebar.sidebar-left {
+        left: 0;
+        right: auto;
+    }
+
+    .sidebar.sidebar-right {
+        right: 0;
+        left: auto;
+    }
+}
+
+@media (min-width: 528px) {
+    .sidebar {
+        width: 230px;
+    }
+
+    .sidebar.sidebar-left {
+        left: 0;
+        right: auto;
+    }
+
+    .sidebar.sidebar-right {
+        right: 0;
+        left: auto;
+    }
+}
+
+@media (min-width: 768px) {
+    .sidebar {
+        width: 230px;
+    }
+
+    .sidebar.sidebar-left {
+        left: 0;
+        right: auto;
+    }
+
+    .sidebar.sidebar-right {
+        right: 0;
+        left: auto;
+    }
+}
+
+@media (min-width: 992px) {
+    .sidebar {
+        width: 230px;
+    }
+
+    .sidebar.sidebar-left {
+        left: 0;
+        right: auto;
+    }
+
+    .sidebar.sidebar-right {
+        right: 0;
+        left: auto;
+    }
+
+    #xepan-cms-toolbar-left-side-panel{
+        /*padding-top: 10px;*/
+    }
+
+    #xepan-cms-toolbar-right-side-panel.toggleSideBar{
+      right: 0px !important;
+    }
+
+    #xepan-cms-toolbar-left-side-panel.toggleSideBar{
+      left: 0px !important;
+    }
+}
+
+@media (min-width: 1200px) {
+    .sidebar {
+        width: 230px;
+    }
+
+    .sidebar.sidebar-left {
+        left: 0;
+        right: auto;
+    }
+
+    .sidebar.sidebar-right {
+        right: 0;
+        left: auto;
+    }
+}
+
+.xepan-cms-toolbar-tool{
+    margin-top:10px;
+    overflow-y: auto;
+    height: 60%;
+}
+
+.sidebar-left select{
+    margin:0 10px 12px 10px;     
+    background-color:white;
+    border-radius:2px;
+    width:90%;
+    border:0px;
+    padding:5px;
+    font-size:16px;
+}
+
+.sidebar-left select > option{
+    padding-left:5px; 
+}
+
+.xepan-cms-tool{
+    cursor:move;
+    margin:0 10px 12px 10px;
+    background-color:white;
+    box-shadow:2px 5px 5px #acacac;
+    border-radius:2px; 
+    text-align:center;
+    padding-top:10px;
+    padding-bottom:10px;
+    font-size:14px;
+}
+
+.xepan-cms-tool-section{
+    cursor:move;
+    margin:0 10px 12px 10px;
+    box-shadow:2px 5px 5px #acacac;
+    border-radius:2px; 
+    text-align:center;
+    padding-top:10px;
+    padding-bottom:10px;
+    font-size:14px;
+    background-color: white;
+}
+
+.xepan-cms-tool-table{
+    margin:0 10px 12px 10px;
+    box-shadow:2px 5px 5px #acacac;
+    border-radius:2px;
+    /*font-size:12px;*/
+    background-color: white;
+}
+.xepan-cms-tool-section.bg-danger{
+    background-color: #d43f3a !important;
+    color: white;
+}
+
+.xepan-cms-tool-section.bg-success{
+    background-color: #5cb85c !important;
+    color: white;
+}
+
+.xepan-cms-tool-section.bg-warning{
+    background-color: #f0ad4e !important;
+    color: white;
+}
+
+.xepan-cms-tool-section.bg-info{
+    background-color: #5bc0de !important;
+    color: white;
+}
+
+.xepan-cms-tool img{
+    min-width: auto;
+    width:auto;
+    max-width: 100%;
+}
+
+.xepan-droppable-highlight{
+    /*background-color: #f1c74e;*/
+}
+
+.xepan-sortable-component{
+    /*border: 1px solid #ef7c2a;*/
+    /*outline: 1px solid #f3f3f3;*/
+    min-height: 100px;
+}
+
+.ui-dialog.xepan-component-remove-confirm{
+    box-shadow: 0 6px 12px rgba(0, 0, 0, .175);
+}
+
+.ui-dialog.xepan-component-remove-confirm .ui-dialog-titlebar{
+    background:white !important;
+    border:0px !important;
+}
+
+/*hover bar css*/
+.xepan-component-hover-selector{
+    position: relative !important;
+}
+
+.xepan-component-hoverbar{
+    position: absolute !important;
+    color: rgba(200, 200, 200, 0.8);
+    font-size: 15px;
+    width: 30px;
+    z-index: 999999;
+    top:0px;
+    /*left:-30px;*/
+}
+
+.xepan-component-hoverbar > div{
+    color: #fff;
+    height: 30px;
+    line-height: 30px;
+    text-align: center;
+    width: 30px;
+    font-size: 15px;
+}
+
+.xepan-component-drag-handler{
+    background: rgb(175, 206, 1) none repeat scroll 0 0;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    cursor: move;
+}
+
+.xepan-component-remove{
+    background: rgb(247, 99, 46) none repeat scroll 0 0;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    cursor: pointer;
+}
+/*end hover bar css*/
+
+/*draggable component*/
+.xepan-cms-tool.ui-draggable-dragging.ui-sortable-helper,
+.xepan-cms-tool.ui-draggable-dragging,
+.ui-sortable-helper{
+    width:230px !important;
+}
+
+/*droppable placeholder in body */
+.ui-sortable-placeholder,
+.xepan-cms-tool.ui-sortable-placeholder{
+    height:40px;
+    background-color: red;
+    margin:0 10px 12px 10px;
+    box-shadow:2px 5px 5px #acacac;
+    border-radius:2px; 
+    text-align:center;
+    padding-top:10px;
+    padding-bottom:10px;
+    font-size:14px;
+}
+
+/*droppable placeholder in Page content region override */
+.xepan-page-wrapper .ui-sortable-placeholder,
+.xepan-page-wrapper .xepan-cms-tool.ui-sortable-placeholder{
+    height:40px;
+    background-color: #fdfcdf;
+    margin:0 10px 12px 10px;
+    box-shadow:2px 5px 5px #acacac;
+    border-radius:2px; 
+    text-align:center;
+    padding-top:10px;
+    padding-bottom:10px;
+    font-size:14px;
+}
+
+.xepan-cms-component-dragging{
+    padding: 10px;
+    background-color: white;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, .175);
+    cursor: move;
+}
+
+.xepan-tools-options {
+    /*margin: 0 10px 12px;*/
+    overflow-x: hidden;
+    overflow-y: auto;
+    height: 70% !important;
+}
+.xepan-toolbar-panel-body{
+    padding-top: 15px;
+    padding-bottom: 15px;
+}
+.xepan-toolbar-panel-body{
+    text-align: left;
+    font-size: 12px;
+}
+.xepan-cms-toolbar-heading{
+    font-size: 16px;
+    font-weight: 300;
+    cursor: pointer;
+    text-align: center;
+    padding-right: 10px;
+}
+
+.xepan-cms-toolbar-heading i{
+    color: #c1c1c1;
+}
+
+.xepan-btn {
+    -moz-user-select: none;
+    background-image: none;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    cursor: pointer;
+    display: inline-block;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.42857;
+    margin-bottom: 0;
+    padding: 6px 12px;
+    text-align: center;
+    vertical-align: middle;
+    white-space: nowrap;
+}
+
+.xepan-btn-group > .xepan-btn:last-child:not(:first-child), .xepan-btn-group > .dropdown-toggle:not(:first-child) {
+    border-bottom-left-radius: 0;
+    border-top-left-radius: 0;
+}
+
+.xepan-btn-default {
+    background-color: #fff;
+    border-color: #ccc;
+    color: #333;
+}
+
+.xepan-btn-default:hover {
+    background-color: #e6e6e6;
+    border-color: #adadad;
+    color: #333;
+}
+
+.xepan-btn-success {
+    background-color: #5cb85c;
+    border-color: #4cae4c;
+    color: #fff;
+}
+
+.xepan-btn-success:hover {
+    background-color: #449d44;
+    border-color: #398439;
+    color: #fff;
+}
+
+/*left bar editor helper*/
+.xepan-cms-editor-helper-wrraper{
+    padding:0 10px 10px 10px;
+}
+
+.component-outline{
+    outline:2px dashed darkgray !important
+}
+
+.xepan-page-wrapper .component-outline{
+    outline:2px dotted gray !important
+}
+
+.xepan-page-wrapper .xepan-selected-component,.xepan-page-wrapper.xepan-selected-component, .xepan-v-body .xepan-selected-component,.xepan-v-body.xepan-selected-component{
+    outline: 2px dashed #b82005 !important;
+}
+
+.xepan-page-wrapper.component-outline{
+    outline:5px groove red !important
+}
+
+.xepan-sortable-extra-padding{
+    padding-bottom:30px !important;
+    padding-top:30px !important;
+    margin-bottom:30px !important;
+    margin-top:30px !important;
+}
+
+.xepan-cms-responsive-wrapper{
+    margin:0 auto !important;
+    box-shadow:1px 5px 10px !important;
+    transition: 0.3s;
+}
+
+.xepan-responsive-xs{
+    width:320px !important;
+    height: 480px !important;
+}
+
+.xepan-responsive-sm{
+    width:768px !important;
+    height: 480px !important;
+}
+
+.xepan-responsive-md{
+    width:992px !important;
+    height:500px !important;
+}
+
+.xepan-responsive-lg{
+    width:100% !important;
+}
+
+.xepan-editor-customcss-form textarea{
+    width:100%;
+}
+
+/*icon picker*/
+.popover.iconpicker-popover{
+    z-index: 999999 !important;
+    margin-left: -120px;
+}
+.popover{
+    z-index: 999999 !important;
+}
+
+.dialog input, .dialog textarea, .dialog select {
+    width: 100%;
+}
+
+/*.xepan-sortable-component.xepan-sortable-highlight-droppable {
+    box-shadow: 0 0 0 10px blue inset;
+}*/
+
+.xepan-tool-option input{
+    width: 100%;
+}
+
+.xepan-cms-group-panel .panel.panel-heading{
+    margin:0px 0px 5px 0px !important;
+}
+
+.xepan-tool-options{
+    /*padding:5px;*/
+    margin-top: 0px;
+}
+
+.xepan-tool-option-value input,
+.xepan-tool-option-value select,
+.xepan-cms-tool-table select{
+    width:95%;
+}
+
+.chosen-container.chosen-container-multi{
+    width:100% !important;
+}
+/*.xepan-cms-group-panel{
+    padding: 0px;
+}*/
+
+.xepan-component-dynamic-option input,
+.xepan-component-dynamic-option textarea {
+    width:100%;
+}
+
+.xepan-component-dynamic-option{
+    padding: 5px;
+}
+
+#xepan-component-creator-form > .modal-dialog.modal-lg{
+    width:80% !important;
+}
+
+#xepan-component-creator-form textarea{
+    width: 100%;
+}
+
+#xepan-component-creator-form input,
+#xepan-component-creator-form select,
+#xepan-component-creator-form textarea{
+    text-transform: lowercase;
+}
+
+#xepan-creator-dynamic-title {
+    text-transform: none;
+}
+
+.xepan-component-creator-extra-margin *{
+    display: block;
+    margin: 20px 0px !important;
+}
+
+.ui-colorpicker.ui-colorpicker-dialog + .ui-widget-overlay{
+    z-index:9999999 !important;
+}
+
+.xepan-hide-page-content-wrapper {
+    height:100px; 
+    background-color:black; 
+    color:yellow;
+    padding: 0 auto;
+    font-size: 20px;
+    margin: 20px 0;
+}
+
+
+/*xepan component creator */
+
+#xepan-component-js-tree-view-wrapper{
+    min-height: 100px;
+    max-height: 250px;
+    overflow: auto;
+    background: #F6F5F4;
+    outline: 5px solid #EFEFEE;
+}
+
+#xepan-tool-original-template{
+    height: 200px;
+    overflow: auto;
+    outline: 5px solid #EFEFEE;
+}
+
+#xepan-cmp-creator-not-found-message{
+    width:100%;
+
+}
+
+.xepan-tag-implementor-wrapper{
+    outline: 2px solid #EFEFEE;
+}
+
+#xepan-creator-implement-tag-wrapper{
+    outline: 2px solid #EFEFEE;
+    height: 60px;
+    overflow: auto;
+    width: 100%;
+}
+/*end of xepan component creator*/
+
+.xepan-layout-selector-category,
+.xepan-layout-selector
+{
+    width: 100% !important;
+    margin-bottom: 2px !important;
+}

@@ -1,0 +1,298 @@
+///*
+// * Import 3L mixins and have fun with styling your website!
+// */
+
+@import '3L/3L';
+
+///* Safe-mode.
+// * Use this one instead of the @import above if you're using other sets of mixins and their names overlap with 3L.
+// * 
+// * After using the safe-mode, the 3L's mixins are available by typing #3L > .mixin();
+// */
+
+//#3L {@import '3L/3L';} 
+
+///*
+// * Use normalize, reset and/or HTML5 Boiler Plate's CSS rules.
+// */
+
+//.normalize();
+//.reset();
+//.h5bp();
+
+///*
+// * From now on is the place for your awesome LESS work.
+// */
+@top-toolbar-height:58px;
+@toolbox-width: 300px;
+@corner-radius : 10px;
+@title-color: #2d4150;
+@seperator-color: #f0f3f5;
+@secondry-color: #3899ec;
+@shadow-color: #9ecaed;
+html{
+	font-size:62.5%!important;
+}
+.xepan-toolbar{
+	.normalize();
+	.h5bp();
+	width: @toolbox-width;
+	position: fixed;
+	top: 60px;
+	right: 10px;
+	background-color: rgba(255, 255, 255, 0.94);
+	.border-radius(@corner-radius);
+	max-height: 400px;
+	z-index: 60000;
+	overflow-x:hidden;
+	overflow-y:auto;
+	.box-shadow(0 0 10px @shadow-color);
+
+	.xepan-toolbar-drag-handler {
+		width: 100%;
+		background-color: @secondry-color;
+		position: relative;
+		top: 0px;
+		height: 40px;
+		.border-top-radius(@corner-radius @corner-radius);
+		margin : -@corner-radius 0 0 0;
+		color: @title-color;
+		i {
+			margin : @corner-radius;
+			font-size: 10px;
+		}
+	}
+
+	.seperator {
+		float: clear;
+		border-bottom: 1px solid @title-color;
+		.box-sizing(border-box);
+		margin: 9px 0;
+		width: 100%;
+		.opacity(50%);
+	}
+	h6{
+		font-size:12px!important;
+		margin:10px 0!important;
+		font-weight:600!important;
+	}
+
+	.xepan-cms-groups-panel{
+		cursor: pointer;
+		padding: @corner-radius;
+		.xepan-tool-bar-tool {
+			height: auto;
+		}
+	}
+}
+
+.xepan-component {
+	position: relative;
+	&:empty:after {
+		min-height: 20px;
+		content: " (" attr(emptytext) ")";
+	}
+	&.xepan-selected-component {
+		outline: 2px dotted rgb(68,192,240);
+	}
+	.xepan-component-hover-selector{
+
+	}
+	.xepan-component-hover-bar{
+		position: absolute;
+		z-index: 999999;
+		top: -@corner-radius*2;
+		height: @corner-radius*2;
+		width: 100%;
+		.border-top-radius(@corner-radius @corner-radius);
+		background-color: @secondry-color;
+		.transition (all 1s);
+		border-color: @shadow-color;
+	    box-shadow: 0 0 10px @shadow-color;
+		.xepan-component-drag-handler{
+			float: left;
+			left: 10px;
+			width: 10px;
+			height: 10px;
+			margin : 2px;
+			cursor: pointer;
+		}
+		.xepan-component-remove{
+			float: right;
+			right: 10px;
+			width: 10px;
+			height: 10px;
+			margin : 2px;
+			cursor: pointer;
+		}
+	}
+
+	.ui-sortable-placeholder {
+		outline: 2px solid red;
+		background-color: rgb(200,80,80);
+		min-height: 30px;
+		visibility: visible;
+	}
+}
+
+.xepan-tools-options {
+	.reset();
+	width: @toolbox-width;
+	position: fixed;
+	top: 10px;
+	right: 10px;
+	background-color: rgba(255, 255, 255, 0.94);
+	.border-radius(@corner-radius);
+	max-height: 400px;
+	padding: @corner-radius;
+	z-index: 65535;
+	overflow-x:hidden;
+	overflow-y:auto;
+	.box-shadow(0 0 10px @shadow-color);
+
+	.panel-heading, .panel{
+		background-color:#e6e6e6!important;
+		border-radius:4px!important;
+		border:0px!important;
+	}
+
+	.panel-heading{
+		cursor:pointer;
+		font-size: 12px!important;
+	    padding: 10px 10px !important;
+	}
+	h3{
+		cursor:pointer;
+		font-size:1.8em!important;
+		font-weight:700!important;
+		margin-bottom:1em!important;
+		padding-bottom:0.8em!important;
+		border-bottom: 1px solid #2d4150;
+	    box-sizing: border-box;
+	    opacity: 0.5;
+	    color:#2a3f52!important;
+	}
+
+	.xepan-tools-options-drag-handler {
+		width: @toolbox-width;
+		background-color: @secondry-color;
+		position: relative;
+		top: 0px;
+		height: 20px;
+		.border-top-radius(@corner-radius @corner-radius);
+		margin : -@corner-radius -@corner-radius @corner-radius -@corner-radius;
+		color: @title-color;
+	}	
+	.xepan-tools {
+		max-height: 400px - (@corner-radius * 4);
+		overflow-y:scroll;
+		overflow-x:initial;
+	}
+	
+	.xepan-tolbar-tool-heading h3{
+	  background-color: #4b4b4b;
+	  border-bottom: 2px solid #252525;
+	  border-top-left-radius: 0;
+	  border-top-right-radius: 0;
+	  margin-bottom: 2px;
+	  padding: 10px !important;
+	}
+
+	.epan-css-options .panel-body , .xepan-tool-options .panel-body{
+		padding:0px;
+	}
+	.epan-css-options .panel , .xepan-tool-options .panel{
+		margin-bottom:10px;
+	}
+	.pick-a-color-markup .basic-colors-list .color-box{
+		width:140px!important;
+	}
+	.pick-a-color-markup .advanced-list .color-box{
+		width:240px!important;
+	}
+	.color-menu{
+		margin-left:-73px!important;
+		width:266px!important;
+	}
+	div.pick-a-color-markup .advanced-content .color-preview{
+		width:240px!important;
+	}
+	div.pick-a-color-markup .color-menu-tabs{
+		font-size:10px!important;
+	}
+	.epan-css-options .btn-success{
+		background-color:#3899ec;
+	}
+	div.pick-a-color-markup .pick-a-color{
+		font-size:8px!important;
+		padding:0px!important;
+	}
+}
+.epan-editor-top-panel {
+  background-color: #3899ec;
+  color: white;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  height: @top-toolbar-height;
+  z-index:100;
+  right: 0px!important;
+  border-radius:0;
+  overflow:hidden;
+}
+
+.epan-editor-top-panel > div {
+  border-right: 1px solid #b3d4fc;
+  padding: 5px 10px 5px 10px;
+  cursor: pointer;
+  height:35px;
+}
+.epan-editor-top-panel > div:hover {
+  color: #ffffff;
+}
+.epan-editor-top-panel .epan-editor-current-page {
+  color: #f2f2f2;
+}
+.epan-editor-top-panel .epan-editor-current-page:hover {
+  color: #ffffff;
+}
+.epan-editor-top-panel label{
+	vertical-align:top;
+	margin-top:3px;
+	font-size:12px;
+	font-weight:200;
+}
+
+body{
+	margin-top:@top-toolbar-height;
+}
+.component-outline{
+	outline:2px dotted lightgray !important;
+}
+.epan-sortable-extra-padding{
+	padding-bottom:30px!important;
+	padding-top:30px!important;
+}
+
+#xepan-editing-toolbar-breadcrumb{
+	border-top:1px solid #b3d4fc;
+	height:auto;
+	padding:2px;
+	margin:0px;
+}
+
+#xepan-editing-toolbar-breadcrumb .xepan-breadcrumb-component{
+	border-bottom:1px solid white;
+	font-size:12px;
+}
+
+.current-row-column-selected{
+	border:1px solid #3899ec !important;
+	background-color:#b3d4fc;
+}
+
+@media screen and (max-width: 980px) and (min-width: 320px) {
+	body{
+		margin-top:0px;
+	}
+}

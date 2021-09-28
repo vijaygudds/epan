@@ -1,0 +1,1 @@
+ALTER TABLE document DROP FOREIGN KEY fk_document_epan1;

@@ -1,0 +1,1 @@
+ALTER TABLE `communication` ADD `calling_status` VARCHAR(255) NULL; 

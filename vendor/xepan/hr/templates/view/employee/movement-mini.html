@@ -1,0 +1,45 @@
+
+<div id="{$_name}" class="{$class}">{Pannel}
+  <div class=" {$class} ">{$grid_buttons} {$quick_search}</div>{/Pannel}
+  <div class="main-box-body clearfix table">
+    {$header}
+    {$subheader}
+    <div class="main-box-body clearfix table">
+      <h2 style="margin-left:15px; margin-top:20px;">Employees Present </h2><span style="margin-left:15px;" class="text-muted">{$as_on}</span>
+      <div class="row main-box clearfix"></div>{cols}
+      {rows}{row}
+      <div data-id="{$id}" style="cursor:pointer; cursor: hand; max-width:600px;" class="col-md-4 small xepan-widget-employee-attendance">{$dummy}
+        <div style="margin-top:4px; margin-bottom:4px;" class="row">
+          <div class="col-md-3"><span style="padding-left:4px;" class="{$text-class}"><i style="text-shadow: 1px 1px 1px #ccc;font-size: 1.5em;" class="{$icon-class}"></i></span></div>
+          <div class="col-md-9">
+            <div class="row">    
+              <div class="col-md-12"><span style="font-size: 12px;" class="text-center small {$text-class}">{$in_at}</span></div>
+            </div>
+            <div class="row">
+              <div class="col-md-12"><span style="font-size: 11px; font-weight:5px;" class="headline text-small text-muted text-center">{$name}</span></div>
+            </div>
+          </div>
+        </div>
+      </div>{/}
+      {/}{/}
+      <div style="margin-bottom:20px;" class="row"></div>{not_found}
+      <div class="row">
+        <div role="alert" class="col-md-12 text-center alert alert-warning"><span class="icon-attention fa fa-exclamation-triangle"> &nbsp;{$not_found_message}</span></div>
+      </div>{/}
+    </div>{totals}
+    <tfoot>
+      <tr class="totals">
+        {cols}{col}
+        <td {$tdparam}>
+        {$content}
+        </td>
+        {/}{/}
+      </tr>
+    </tfoot>{/}
+  </div>{$Paginator}
+  <style>
+    .infographic-box.merged{
+      border-right: 0px !important;
+    }
+  </style>
+</div>

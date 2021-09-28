@@ -1,0 +1,1 @@
+ALTER TABLE `store_transaction_row` ADD `serial_nos` text ;

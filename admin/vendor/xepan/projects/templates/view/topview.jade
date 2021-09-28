@@ -1,0 +1,30 @@
+.row(id="{$_name}")
+  .main-box
+    header.main-box-header.clearfix
+      .row
+        .col-md-4
+        .col-md-4.text-center
+          h1 {$name}
+        .col-md-4  
+          .pull-right.top-page-ui
+            span(data-id="{$id}")
+              a.btn.btn-primary.btn-sm.pull-right(href="#" style="margin-top:10px;")
+                i.fa.fa-plus-circle.fa-lg.add-task &nbsp; New Task/Requests
+            {my-timesheet-button-wrapper}
+            a.btn.btn-primary.btn-sm.pull-right(href="#" style="margin-top:10px;")
+                i.fa.fa-repeat.fa-lg.show-recurring-task &nbsp; Recurring  
+            {/}
+      {progress_bar_wrapper}
+      .row
+        .col-md-3
+          {$selfprogress}
+        .col-md-6
+          .text-center 
+            a.do-view-project-lives-details(href!='#' data-id="{$id}") 
+             span(style="font-size:17px;") Status
+          .text-center 
+            a.do-view-project-all-task-lists(href!='#' data-id="{$id}") 
+               span(style="font-size:17px;") View All Tasks/Requests
+        .col-md-3
+          {$totalprogress}
+      {/}

@@ -1,0 +1,39 @@
+
+<div id="{$_name}" style="{$style}" class="{$class} row">{rows}{row}
+  <div class="blog">
+    <div style="margin-left:0px !important; margin-right:0px; !important" class="row">
+      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">{title_wrapper}
+        <h2>{$title}</h2>{/}
+        <hr/>
+      </div>
+      <div class="col-md-12">{image_wrapper}<a href="{$url}"><img style="height:auto; width:100%; max-width:100%;" src="{$image}"/></a>{/}</div>
+    </div>
+    <div style="margin-top:30px" class="row">
+      <ul class="list-group">
+        <li style="width:33%;" class="list-group-item pull-left">{$created_at_date}<span class="pull-right"><i class="fa fa-calendar"></i></span></li>
+        <li style="width:33%;" class="list-group-item pull-left">{$created_by}																		<span class="pull-right"><i class="fa fa-user"></i></span></li>
+        <li style="width:33%;" class="list-group-item pull-left"><a href="?page=blog-item&amp;post_id={$id}">{$comment_count}</a><span class="pull-right"><i class="fa fa-comment"></i></span></li>
+      </ul>
+    </div>
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+    {desription_wrapper}
+      <div style="height:50px; overflow: hidden; text-overflow: ellipsis; ">
+        {$description}</div>
+    {/}
+
+      {read_more_wrapper}
+        <a href="{$url}" class="btn btn-primary readmore blog-post-detail">Read More <i class="fa fa-angle-right"></i></a>
+      {/}      
+      {socialshare_wrapper}
+        <div id="postshare{$id}">{$socialshare}</div>
+      {/}
+      <hr/>
+    </div>
+  </div>
+  <div style="padding-bottom:25px;"></div>{$micro_data}
+  {/}{/}
+  {not_found}
+  <div role="alert" class="full-width alert alert-warning"><strong class="glyphicon glyphicon-warning-sign">&nbsp;Warning!<span>&nbsp;{$not_found_message}</span></strong></div>{/}
+  {paginator_wrapper}
+  <div style="float:none; clear:both" class="xshop-item-paginator">{$Paginator}</div>{/}	
+</div>

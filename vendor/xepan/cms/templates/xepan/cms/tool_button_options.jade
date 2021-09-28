@@ -1,0 +1,166 @@
+.xepan-tool-options(id='{$_name}' style="display:none" for-xepan-component='xepan/cms/Tool_Button')
+	//- .xepan-cms-group-panel.clearfix
+	//- 	h3.collapsed(data-toggle="collapse" data-target="#collapse-carousel" aria-expanded="false")
+	//- 		span Button
+		//- #collapse-carousel.xepan-cms-tools-bar-panel.row-fluid.collapse.in
+		//- 	.panel-body
+		//- 		.xepan-cms-groups-panel.collapse.in(id="xepan-cms-groups-panel")
+		//- 		.xepan-cms-group-panel.clearfix
+		//- 			div.panel.panel-heading.panel-primary.collapsed(data-toggle="collapse" data-target="#bootstrap-btn-options" aria-expanded="false")
+		//- 				span Options 
+		//- 		#bootstrap-btn-options.xepan-cms-tools-bar-panel.row-fluid.collapse
+	table.table-condensed.table-hover.xepan-cms-tool-table
+		tr
+			.xepan-tool-option
+				td.xepan-tool-option-title Button Text
+				td.xepan-tool-option-value
+					input#xepan-button-text-label(style="width:95%" type='text' data-attr="xepan-button-label" data-value="Button Text" value="Button Text")
+		tr
+			.xepan-tool-option
+				td.xepan-tool-option-title Button Links
+				td.xepan-tool-option-value
+					input#xepan-button-links(style="width:95%" type='text' data-attr="xepan-button-link" data-value="#" value="#")
+		tr
+			.xepan-tool-option
+				td.xepan-tool-option-title Open New Window
+				td.xepan-tool-option-value
+					select#xepan-btn-link-behaivor(data-attr='xepan-button-link-behavior' value="0" data-value="0")
+						option(value="1") Yes
+						option(value="0") No
+		tr
+			.xepan-tool-option
+				td.xepan-tool-option-title Button Color
+				td.xepan-tool-option-value
+					#btn-colors.btn-group.btn-group-xs(role='group', aria-label='...')
+						button.xepan-cms-apply-btn.btn.btn-default(name='color', type='button', value='btn-default' data-attr="xepan-cms-btn-class" data-btn-class="btn-default") Default
+						button.xepan-cms-apply-btn.btn.btn-primary(name='color', type='button', value='btn-primary' data-attr="xepan-cms-btn-class" data-btn-class="btn-primary") Primary
+						button.xepan-cms-apply-btn.btn.btn-info(name='color', type='button', value='btn-info' data-attr="xepan-cms-btn-class" data-btn-class="btn-info") Info
+						button.xepan-cms-apply-btn.btn.btn-success(name='color', type='button', value='btn-success' data-attr="xepan-cms-btn-class" data-btn-class="btn-success") Success
+						button.xepan-cms-apply-btn.btn.btn-warning(name='color', type='button', value='btn-warning' data-attr="xepan-cms-btn-class" data-btn-class="btn-warning") Warning
+						button.xepan-cms-apply-btn.btn.btn-danger(name='color', type='button', value='btn-danger' data-attr="xepan-cms-btn-class" data-btn-class="btn-danger") Danger
+		tr
+			.xepan-tool-option
+				td.xepan-tool-option-title Size
+				td.xepan-tool-option-value
+					#btn-sizes
+						button.btn.btn-xs.btn-default(value='btn-xs', type='button') Mini
+						button.btn.btn-sm.btn-default(value='btn-sm', type='button') Small
+						button.btn.btn-default(value='btn-default', type='button') Default
+						button.btn.btn-default.btn-lg(value='btn-lg', type='button') Large
+						button.btn.btn-default.btn-block.active(href='#', data-toggle='button' style="width:90%;font-size:10px;") Full width button
+		tr 	
+			.xepan-tool-option
+				td.xepan-tool-option-title Icons
+				td.xepan-tool-option-value
+					div#btn-icon(role="iconpicker")
+		tr
+			.xepan-tool-option
+			td.xepan-tool-option-title Icon Position
+			td.xepan-tool-option-value
+				#btn-icon-positions.btn-group.btn-group-xs
+					button.btn.btn-default(value='left', type='button')
+						span.glyphicon.glyphicon-arrow-left
+						|  Left
+					button.btn.btn-default(value='right', type='button')
+						| Right 
+						span.glyphicon.glyphicon-arrow-right
+	script.
+		$('\#{$_name} [data-attr]').on('change',function(){
+			$(current_selected_component).attr($(this).data('attr'),$(this).val());
+		});
+
+		$('\#{$_name}').on('show',function(event){
+			$('\#{$_name} [data-attr]').each(function(index,value){
+				$(this).val($(current_selected_component).attr($(this).data('attr')));				
+			});
+		});
+		
+		//- Button Color 
+		$('\#{$_name} .xepan-cms-apply-btn').click(function(event){
+			$(current_selected_component).removeClass('btn-success btn-default btn-primary btn-info btn-warning btn-danger').addClass($(this).attr('data-btn-class'));
+		    //- $(current_selected_component).removeClass(function(index,classname){
+		    //-   	return (classname.match(/(^|\s)btn-\S+/g) || []).join(' ');
+		    //-   }).addClass($(this).val());
+		});
+
+		//-Button Text Label Change  
+		$('#xepan-button-text-label').change(function(event) {
+			var icon_class = $(current_selected_component).attr('data-button-icon-class'); 
+			if( $(current_selected_component).attr('data-icon-position') == "right"){
+				$(current_selected_component).html(' '+$(this).val()+' <i class="fa '+icon_class+'"></i>');
+			}else 
+				$(current_selected_component).html('<i class="fa '+icon_class+'"></i> '+$(this).val());
+		});
+
+		//- button Anchor Links
+		$('#xepan-button-links').change(function() {
+			var newurl = $('#xepan-button-links').val();
+			$(current_selected_component).attr('href', newurl);
+			//- $('a.custom-btn-links').attr('href', newurl);
+		});
+
+		//- button Anchor Links Behaivor
+		$('#xepan-btn-link-behaivor').change(function() {
+			if($(current_selected_component).attr('xepan-button-link-behavior') == "1"){
+				$('a.custom-btn-links').attr('target','_blank');
+			}else{
+				$('a.custom-btn-links').attr('target','');
+			}
+		});
+
+		//-Button Size 
+		$('#btn-sizes button').on('click', function(e) {
+			$(current_selected_component).removeClass('btn-xs btn-sm btn-lg').addClass($(this).val());
+		});
+
+		//-Button Size  full Width
+		$('#btn-sizes a').on('click', function(e) {
+			$(current_selected_component).toggleClass('btn-block');
+		});
+
+		//-Button Icon
+
+		$('#btn-icon').iconpicker({
+			  	//- align: 'center', // Only in div tag
+			   //-  arrowClass: 'btn-danger',
+			   //-  arrowPrevIconClass: 'glyphicon glyphicon-chevron-left',
+			   //-  arrowNextIconClass: 'glyphicon glyphicon-chevron-right',
+			   //-  cols: 10,
+			   //-  footer: true,
+			   //-  header: true,
+			    icon: 'fa-bomb',
+			    iconset: 'fontawesome',   
+			    labelHeader: '{0} of {1} pages',
+			    labelFooter: '{0} - {1} of {2} icons',
+			    placement: 'bottom', // Only in button tag
+			    rows: 3,
+			    search: true,
+			    searchText: 'Search',
+			    selectedClass: 'btn-success',
+			    unselectedClass: ''
+		});
+
+		//-Button Icon change
+		$('#btn-icon').on('change', function(e) {
+			$(current_selected_component).attr('data-button-icon-class',e.icon);
+			$(current_selected_component).find('i').attr('class',"");
+			$(current_selected_component).find('i').addClass('fa '+e.icon);
+		});
+
+		//-Button Icon Position
+		$('#btn-icon-positions button').on('click', function(e) {
+			var icon = $(current_selected_component).find('i');
+			var text = $(current_selected_component).attr('xepan-button-label');
+			$(current_selected_component).empty();
+			if($(this).val() == 'left'){
+				$(current_selected_component).append(icon).append(' ' + text);
+			}
+			else{
+				$(current_selected_component).append(text + ' ').append(icon);
+			}
+			$(current_selected_component).data('icon-position', $(this).val());
+		});
+
+		$('body').on('beforeSave',function(){
+			$('body').find('a').click(function(){ return false});
+		});

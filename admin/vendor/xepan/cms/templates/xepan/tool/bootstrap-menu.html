@@ -1,0 +1,26 @@
+
+<nav id="{$_name}" style="{$style}" role="navigation" xepan-component="xepan/cms/Tool_BootStrapMenu" xbootmenu-align="right" xepan-component-name="BootStrap Menu" class="navbar navbar-default xepan-component {$Class}">
+  <div style="width:80%;margin:0 auto;" inner-width="80" inner-unit="%" class="navbar-inner-container">
+    <div class="navbar-header">
+      <button type="button" data-toggle="collapse" data-target=".navbar-ex1-collapse" class="navbar-toggle"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button>
+      <div class="navbar-brand-wrapper navbar-brand"><a title="Brand Name" class="xepan-brand">Brand Name</a></div>
+    </div>
+    <div class="collapse navbar-collapse navbar-ex1-collapse">
+      <ul id="xepan-boostrap-ul" class="nav navbar-nav navbar-right">
+        <li class="active"><a href="#">Home</a></li>
+        <li><a href="#">About</a></li>
+      </ul>
+    </div>
+    <script>
+      $(document).ready(function(){
+      	$('#{$_name} .dropdown-toggle').dropdown();
+      	
+      	$('#{$_name} .dropdown-submenu a').on("click", function(e){
+      	    $(this).next('ul').toggle();
+      	    e.stopPropagation();
+      	    e.preventDefault();
+      	});
+      });
+    </script>
+  </div>
+</nav>

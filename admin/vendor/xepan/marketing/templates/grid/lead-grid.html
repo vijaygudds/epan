@@ -1,0 +1,61 @@
+
+<div id="{$_name}" class="xepan-grid main-box clearfix atk-table atk-table-zebra atk-table-bordered {$class}">{Pannel}
+  <header class="main-box-header clearfix atk-actions  {$class} ">
+    <div style="100%" class="filter-block">
+      <div class="pull-right">{$grid_buttons} </div>
+      <div class="form-group pull-right xepan-filter-form"><span class="form-control pull-left">{$quick_search}<i class="fa fa-search search-icon"></i></span></div>
+    </div>
+  </header>{/Pannel}
+  <div class="main-box-body clearfix table-responsive">
+    <table style="width:100%" class="table user-list table-hover footable toggle-circle-filled">{header}
+      <thead class="xepan-hover-hand">{cols}{col}
+        <th></th>
+        <th><span>Name </span></th>
+        <th data-hide="phone"><span>Category</span></th>
+        <th><span style="border-bottom:1px solid gray;">Created By &nbsp;</span><br/><span>Assign To</span></th>
+        <!-- <th><span>Last Communication</span></th> -->
+        <th id="{$score_sortid}"><span>Score {$score_sort}</span></th>
+        <th><span>Visits</span></th>
+        <th id="{$priority_sortid}"><span>Priority {$priority_sort}</span></th>
+        <th id="{$created_at_sortid}"><span>Created at {$created_at_sort}</span></th>{/}{/}
+      </thead>{/}
+      {$subheader}
+      <tbody>{rows}{row}
+        <tr data-id="{$id}" class="{$odd_even}">{cols}
+          <td>{$selected}</td>
+          <td>{avatar}<img alt="" src="{image}img/samples/scarlet-159.png{/}"/>{/}
+              {$name}
+              <a href="#" data-id="{$id}" class="user-link do-view-lead">{$organization_name_with_name}</a>
+              <span class="user-subhead">{source}Source{/}
+                <h6>[{city}{/}] - [{$type}]</h6>
+              </span>
+          </td>
+          <td><a data-type="checklist" data-value="{$existing_associated_catagories}" data-title="Associated Categories" data-pk="{$id}" style="cursor:pointer; cursor: hand;" class="catagory-associated"></a></td>
+          <td>
+            <div title="Lead Created By" style="border-bottom:1px solid gray;">{$created_by}</div>
+            <div title="Lead Assign To">{$assign_to}<br/>{$assign_at}</div>
+          </td>
+          <!-- <td>{$last_communication}</td> -->
+          <td><a href="#" data-id="{$id}" class="do-view-lead-score"><span class="alert alert-warning">{score}0{/}</span></a></td>
+          <td><a href="#" data-id="{$id}" class="do-view-lead-visitor"><span class="alert alert-success">{$total_visitor}</span></a></td>
+          <td><span class="alert alert-danger">{$priority}</span></td>
+          <td>{$created_at}</td>
+          <td>{$action}</td>{/}
+        </tr>{/}{/}
+        {not_found}
+        <div class="row">
+          <div role="alert" class="col-md-12 text-center alert alert-warning"><span class="icon-attention fa fa-exclamation-triangle"> &nbsp;{$not_found_message}</span></div>
+        </div>{/}
+      </tbody>{totals}
+      <tfoot>
+        <tr class="totals">
+          {cols}{col}
+          <td {$tdparam}>
+          {$content}
+          </td>
+          {/}{/}
+        </tr>
+      </tfoot>{/}
+    </table>{$Paginator}
+  </div>
+</div>

@@ -1,0 +1,81 @@
+{paginatoratk}
+.atk-box-small.atk-actions.atk-align-center(id='{$_name}')
+  | {prev}
+  a.disabled « Prev
+  | {/}
+  |     {first}{/}
+  |     {points_left}{/}
+  |     {rows}
+  |     {row}
+  a.itemlits(data-skip='{$pn}', href='{$href}', class='{cur}ui-state-active ui-corner-all{/}') {$label}
+  | {/}
+  a(href='#') 2
+  a(href='#') 3
+  a.disabled(href='#') …
+  a(href='#') 19
+  a(href='#') 20
+  a(href='#') 21
+  |     {/rows}
+  |     {points_right}{/}
+  |     {last}{/}
+  |     {next}
+  a.disabled Next »
+  | {/}
+{/paginatoratk}
+{paginatorcube}
+style.
+  .pagination > li{
+    padding-left: 0px !important;
+    padding-right: 0px !important;
+  }
+.paginator.hidden-xs(style='margin:5px 5px 0 0; float: left;')
+  select(id="ipp-selector-{$_name}")
+    option 5
+    option 10
+    option 25
+    option 50
+    option 100
+    option 250
+    option 500
+    //- option All
+ul.pagination.pull-left(id='{$_name}')
+  li
+  {prev}
+  li
+    a(data-skip='{$pn}', href='{$href}', class='{cur}ui-state-active ui-corner-all{/}') {$label}
+  {/prev}
+  {first}
+  li
+    a(data-skip='{$pn}', href='{$href}', class='{cur}ui-state-active ui-corner-all{/}') {$label}
+  {/first}
+  {points_left}
+  li
+    span(data-skip='{$pn}', href='#points_left', class='{cur}ui-state-active ui-corner-all{/}') {$label}
+  {/}
+  {rows}{row}
+  li(class="{cur}active{/} hidden-xs")
+    a(data-skip='{$pn}', href='{$href}', class='{cur}active{/}') {$label}
+  {/row}
+  li
+    a(href='#') 2
+  li.active
+    a(href='#') 3
+  li
+    a(href='#') 4
+  li
+    a(href='#') 5
+  {/rows}
+  {points_right}
+  li(class="hidden-xs")
+    span(data-skip='{$pn}', href='#points_right', class='{cur}ui-state-active ui-corner-all{/}') {$label}
+  {/}
+  {last}
+  li(class="hidden-xs")
+    a(data-skip='{$pn}', href='{$href}', class='{cur}ui-state-active ui-corner-all{/}') {$label}
+  {/last}
+  {next}
+  li
+    a(data-skip='{$pn}', href='{$href}', class='{cur}ui-state-active ui-corner-all{/}') {$label}
+  {/next}
+
+{/}

@@ -1,0 +1,212 @@
+
+/*  =================   TOOLBAR RELATED CSS  ================= */
+
+/*XEPAN TOOLBAR CSS*/
+.xepan-toolbar{
+	width: 15%;
+	background-color:rgb(80,80,80);
+	z-index:99999999 ;
+	border:2px solid rgb(38,46,59);
+	position:fixed;
+	top:25px;
+	color: rgb(186,204,226);
+	/*height: 100%;*/
+	max-height: 400px;
+	overflow-y:scroll;
+	overflow-x:initial;
+}
+
+/*DRAG HANDLER*/
+.xepan-tools-options-drag-handler{
+	text-align: right;
+}
+
+/*GROUPS CSS*/
+.xepan-cms-group-panel{
+	margin-top:2px;
+	margin-bottom: 2px; 
+    background-color: rgb(80,80,80);
+}
+
+/*GROUP HEADING*/
+.xepan-cms-group-panel > h1{
+	font-size: 16px;
+    height: 100%;
+    line-height: 25px;
+    background-color: rgb(48,48,48);
+}
+
+.xepan-cms-group-panel > h1 > span{
+	color:white;
+	margin-left:20px;
+	text-transform: capitalize;
+}
+
+/*GROUP SECTION CSS*/
+
+/*TOOLS BAR PANEL CSS*/
+.xepan-cms-tools-bar-panel{
+	padding: 5px;
+	width:100%;
+}
+
+/*TOOL BAR PANEL CSS*/
+.xepan-tool-bar-tool{
+	border: 1px solid #fff;     
+	float: left;     
+	font-size: 10px;     
+	height: 70px;
+	line-height: 1.4;     
+	padding: 5px;     
+	text-align: center;
+	margin-bottom:5px; 
+}
+
+.xepan-tool-bar-tool:hover{
+	background-color: rgb(48,48,48);
+}
+
+.xepan-tool-bar-tool > i{
+	font-size: 20px;
+}
+
+/**************************************************************/
+/****************************TOOLBAR OPTION PANEL**************/
+
+.xepan-tools-options{
+	width: 15%;
+	background-color:rgb(80,80,80);
+	z-index:99999999;
+	border:2px solid rgb(38,46,59);
+	position:fixed !important;
+	right:0;
+	top: 25px;
+	color: rgb(186,204,226);
+	/*height: 100%;*/
+	overflow-y: auto;
+	height: 400px;	
+}
+
+/*OPTIONS GROUP HEADING*/
+.xepan-tool-options > h1{
+	font-size: 18px;
+    height: 100%;
+    line-height: 25px;
+    background-color: rgb(48,48,48);
+}
+
+.xepan-tool-options > h1 > span{
+	color:white;
+	margin-left:20px;
+	text-transform: capitalize;
+}
+/*TOOL OPTION HEADING*/
+.xepan-tool-option > h3{
+	font-size: 16px;
+    height: 100%;
+    line-height: 25px;
+    background-color: rgb(48,48,48);	
+}
+
+/*TOOL OPTIONS ALL HTML TAG CSS*/
+.xepan-tool-option{
+	padding: 5px;
+}
+
+.xepan-tools-options input{
+	background: rgb(48,48,48);
+	width: 100%;
+	line-height: 1;    
+	border: 0;    
+	border-radius: 0;
+	-webkit-appearance: none;
+	transition:all 0.3s ease-in-out 0s;
+	padding: 5px;	
+}
+
+.xepan-tools-options input:hover{
+	outline:1px solid rgb(186,204,226) !important;
+	transition:all 0.3s ease-in-out 0s;
+}
+
+.xepan-tools-options select{
+	background: rgb(48,48,48);
+	width: 100%;
+	line-height: 1;    
+	border: 0;    
+	border-radius: 0;
+	-webkit-appearance: none;
+	transition:all 0.3s ease-in-out 0s;
+	padding: 3px;
+}
+
+.xepan-tools-options select:hover{
+	outline:1px solid rgb(186,204,226) !important;
+	transition:all 0.3s ease-in-out 0s;
+}
+
+.xepan-tools-options select > option{
+	padding-left: 5px;
+	border-bottom: 1px solid  rgb(80,80,80);
+}
+.xepan-tools-options textarea{
+
+}
+.xepan-tools-options {
+
+}
+
+
+/*================================Live Edit/Editing css=======================*/
+.xepan-component {
+	-webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
+	-moz-box-sizing: border-box;    /* Firefox, other Gecko */
+	box-sizing: border-box;         /* Opera/IE 8+ */
+}
+
+.xepan-component:empty:after {
+	min-height: 20px;
+	content: " (" attr(emptytext) ")";
+}
+
+.xepan-component-hover-selector{
+	outline: 1px dotted rgb(68,192,240);
+	z-index: 9999999;
+	position:relative !important;
+	-webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
+	-moz-box-sizing: border-box;    /* Firefox, other Gecko */
+	box-sizing: border-box;         /* Opera/IE 8+ */
+
+}
+
+.xepan-component-hover-bar{
+	z-index: 9999999;
+	position: absolute !important;
+	margin-left: 3px;
+	top: -10px;
+	width: 100%;
+	padding-right:4px;
+	padding-left:4px; 
+}
+
+.xepan-component-drag-handler{
+	float: left;
+	z-index: 9999999;
+	cursor: pointer;
+}
+
+.xepan-component-remove{
+	float: right;
+	right:20px;
+}
+
+.xepan-selected-component {
+	outline: 2px dotted rgb(68,192,240);
+}
+
+.ui-sortable-placeholder {
+	outline: 2px solid red;
+	background-color:rgb(200,80,80);
+	min-height: 20px;
+	visibility: visible;
+}

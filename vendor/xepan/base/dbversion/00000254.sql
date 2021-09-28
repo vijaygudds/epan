@@ -1,0 +1,1 @@
+ALTER TABLE `post` ADD COLUMN `allowed_menus` varchar(255);

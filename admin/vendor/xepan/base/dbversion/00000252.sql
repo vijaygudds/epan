@@ -1,0 +1,1 @@
+ALTER TABLE `communication` ADD COLUMN `sub_type_3` varchar(255);

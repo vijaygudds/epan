@@ -1,0 +1,1 @@
+ALTER TABLE `webpage` ADD `parent_page_id` INT(11) NULL;

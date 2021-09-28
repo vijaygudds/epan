@@ -1,0 +1,27 @@
+nav.navbar.navbar-default.xepan-component(id='{$_name}' class='{$Class}' style='{$style}'  role='navigation' xepan-component='xepan/cms/Tool_BootStrapMenu' xbootmenu-align="right" xepan-component-name="BootStrap Menu")
+	.navbar-inner-container(style="width:80%;margin:0 auto;" inner-width="80" inner-unit="%")
+		.navbar-header
+			button.navbar-toggle(type='button', data-toggle='collapse', data-target='.navbar-ex1-collapse')
+				span.sr-only Toggle navigation
+				span.icon-bar
+				span.icon-bar
+				span.icon-bar
+			div.navbar-brand-wrapper.navbar-brand
+				a.xepan-brand(title="Brand Name") Brand Name
+		.collapse.navbar-collapse.navbar-ex1-collapse
+			ul#xepan-boostrap-ul.nav.navbar-nav.navbar-right
+				li.active
+					a(href='#') Home
+				li
+					a(href='#') About
+		script.
+			$(document).ready(function(){
+				$('\#{$_name} .dropdown-toggle').dropdown();
+				
+				$('\#{$_name} .dropdown-submenu a').on("click", function(e){
+				    $(this).next('ul').toggle();
+				    e.stopPropagation();
+				    e.preventDefault();
+				});
+			});
+

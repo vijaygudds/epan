@@ -1,0 +1,29 @@
+.xepan-grid.main-box.clearfix(id="{$_name}" class="{$class}")
+  {Pannel}
+  header.main-box-header.clearfix.atk-actions(class=" {$class} ")
+    div.filter-block
+      .pull-right {$grid_buttons} 
+      .form-group.pull-right.xepan-filter-form
+        div(class="form-control pull-left")|{$quick_search}
+          i(class="fa fa-search search-icon")
+  {/Pannel}
+  .main-box-body.clearfix
+    .row
+      {header}{cols}{col}{/}{/}{/}
+      {rows}{row}
+      div(class="{$odd_even} col-md-{col-width}4{/}" data-id="{$id}")
+        {cols}
+        .col-lg-12.col-md-4.col-sm-4.col-xs-12
+          .main-box.infographic-box.colored.emerald-bg
+            i.fa.fa-envelope
+            span.headline {$widget}
+            span.value 4.658
+            span      &nbsp;
+      {/}
+      {/}{/}
+      {not_found}
+      {$not_found_message}
+      {/}
+
+      {totals}{cols}{col}{$content}{/}{/}{/}
+    {$Paginator}

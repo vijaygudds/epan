@@ -1,0 +1,38 @@
+div(id='{$_name}' class="{$class} row" style="{$style}")
+  .widget.archieve
+    h3 Archieve
+    div.panel-group
+      {rows}{row}
+      div.panel.panel-default
+        div.panel-heading
+          h3.panel-title(style= 'word-spacing: 40px;' )
+            a(href="\#{$id}" data-parent="\#{$id}" data-toggle="collapse" class="accordion-toggle")
+              | {$year} 
+              span {$year_post_count}
+              i.fa.fa-angle-right.pull-right
+        div.panel-collapse.collapse(id="{$id}" style="height: auto;")
+          div.panel-body
+            div.media.accordion-inner
+              div.media-body
+                {month_lister}
+                {/}
+      {/}{/}
+    {not_found}
+    div.full-width.alert.alert-warning(role="alert")
+      strong.glyphicon.glyphicon-warning-sign &nbsp;Warning!
+        span &nbsp;{$not_found_message}
+    {/}
+style.
+  a.accordion-toggle i{
+    line-height:54px!important;
+  } 
+  .panel-title{
+    font-size:20px!important;
+    text-align:center!important;
+  }   
+  .widget h3{
+    margin-top:10px!important;
+  }
+  .panel-heading{
+    padding:0px 15px!important;
+  }

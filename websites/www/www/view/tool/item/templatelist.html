@@ -1,0 +1,36 @@
+<div id="{$_name}" class="xepan-grid main-box clearfix {$class}">
+  <div class="page-header"> 
+    <div class="row">
+      {header}{cols}{col}{/}{/}{/}
+      {rows}{row}{cols}
+      <div data-id="{$id}" class="{$odd_even} col-md-{col-width}4{/} xepan-recent-work-col">
+        <div class="recent-work-wrap"><img src="{$first_image}" alt="" onerror1="this.src='vendor/xepan/commerce/templates/view/tool/cart/images/not-found.png'" class="img-responsive"/>
+          <div class="overlay">
+            <div style="height:100%;" class="recent-work-inner text-center">
+              <h3 style="height: 80px;"><a href="?page=details&commerce_item_id={$id}">{$name}</a></h3>
+              <div style="border:2px solid white;" data-id="{$id}" class="btn btn-block btn-lg xepan-change-template" onclick = $.univ.newWindow('http://{$sku}.epan.in')>Live Preview</div>
+                {specification_wrapper}
+                        {specification}
+                        {rows}{row}
+                        <div class="col-md-6">
+                            {$name}
+                        </div>
+                        <div class ="col-md-6">    
+                            {$value}
+                        </div>        
+                        {/}{/}
+                        {/specification}
+                {/}
+                {$Addtocart}
+            </div>
+          </div>
+        </div>
+      </div>{/}{/}{/}
+      {not_found}
+      <div class="row">
+        <div role="alert" class="col-md-12 text-center alert alert-warning"><span class="icon-attention fa fa-exclamation-triangle"> &nbsp;{$not_found_message}</span></div>
+      </div>{/}
+      {totals}{cols}{col}{$content}{/}{/}{/}
+    </div>{$Paginator}
+  </div>
+</div>

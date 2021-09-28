@@ -1,0 +1,95 @@
+#email-box.clearfix
+  #email-header-mobile.visible-xs.visible-sm.clearfix
+      #email-header-title-mobile.pull-left
+      a.user-link()
+        a.btn.btn-success.email-compose-btn.pull-right
+          i.fa.fa-pencil-square-o
+          |  Compose Message
+  .row
+    .col-lg-3
+      #msg-navigation.email-nav-nano.has-scrollbar()
+        .email-nav-nano-content(tabindex='0', style="overflow-y:hidden")
+          //- a.btn.btn-success.email-compose-btn.hidden-xs.hidden-sm
+          //-   i.fa.fa-pencil-square-o
+          //-   |  Compose Message
+          div.mobile-email-navigation-tool.mobile-email-navigation-tool-closed
+            div.mobile-email-navigation-tool-options  
+              {message_navigation}Message Navigation{/}
+        .nano-pane(style='display: none;')
+          .nano-slider(style='transform: translate(0px, 0px);')
+      //- #email-content.email-content-nano.has-scrollbar(style='height: 639px')
+      //-   //- {message_lister}Message Lister{/}
+      //-   .compose-message-view-popup(style="display:nones")
+      //-     //- {$message_compose_view}
+      //-   div.email-detail(style="display:nones")
+      //-     {$message_detail}
+
+    
+    .main-box.clearfix.col-lg-9(style="border:0px solid #e7ebee")
+      //- header.main-box-header.clearfix
+      //-   h2 Conversation
+      .main-box-body.clearfix
+        {$form}
+        .conversation-wrapper
+          .conversation-content
+            .slimScrollDiv(style='position: relative; overflow: hidden; width: auto; height: 352px;')
+              .conversation-inner(style='overflow-y: scroll;overflow-x: hidden; width: auto; height: 352px;')
+                {message_lister}Message Lister{/}
+
+              .slimScrollBar(style='background: rgb(0, 0, 0) none repeat scroll 0% 0%; width: 7px; position: absolute; top: 40px; opacity: 0.4; display: none; border-radius: 7px; z-index: 99; right: 1px; height: 158.648px;')
+              .slimScrollRail(style='width: 7px; height: 100%; position: absolute; top: 0px; border-radius: 7px; background: rgb(51, 51, 51) none repeat scroll 0% 0%; opacity: 0.2; z-index: 90; right: 1px; display: none;')
+          .compose-message-view-popup(style="display:nones")
+            {$message_compose_view}
+          //- .conversation-new-message
+          //-   form
+          //-     .form-group
+          //-       textarea.form-control(rows='2', placeholder='Enter your message...')
+          //-     .clearfix
+          //-       button.btn.btn-success.pull-right(type='submit') Send message
+
+script.
+    $(document).ready(function() {
+        $('#page-wrapper').addClass('nav-small');
+
+        //-   $('.email-compose-btn').click(function() {
+        //-     $('.compose-message-view-popup').slideToggle();    
+        //- });
+
+        $('.email-compose-btn').click(function() {
+          if($('.compose-message-view-popup').hasClass('slide-up')) {
+            $('.compose-message-view-popup').addClass('slide-down', 1000, 'easeOutBounce');
+            $('.compose-message-view-popup').removeClass('slide-up'); 
+          } else {
+            $('.compose-message-view-popup').removeClass('slide-down');
+            $('.compose-message-view-popup').addClass('slide-up', 1000, 'easeOutBounce'); 
+          }
+      });
+
+      });      
+
+style.
+  #email-box{
+    margin-bottom:20px!important;
+  }
+ 
+  .select2{
+    width:100%!important;
+  }
+
+  .unread{
+    font-weight:700!important;
+  }
+  .msg-attachment li{
+    width:10%;
+    float:left;
+  }
+  .msg-attachment embed{
+    width:60px;
+    height:50px;
+  }
+  .conversation-wrapper .conversation-body > .time{
+    right:100px!important;
+  }
+  .main-box{
+    border:0px !important;
+  }

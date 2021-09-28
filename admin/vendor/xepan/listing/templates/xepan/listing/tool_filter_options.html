@@ -1,0 +1,70 @@
+
+<div id="{$_name}" style="display:none" for-xepan-component="xepan/listing/Tool_Filter" class="xepan-tool-options">
+  <table class="table table-condensed table-hover xepan-cms-tool-table">
+    <!-- Listing List -->
+      <tr class="xepan-tool-option">
+        <td class="xepan-tool-option-value">
+          <div class="xepan-tool-option-title">Select Listing</div>
+          <select id="xepan-listing-id" data-attr="listing_id" data-defaultvalue="0">
+          </select>
+        </td>
+      </tr>
+
+      <!-- status_to_show -->
+      <tr class="xepan-tool-option">
+        <td class="xepan-tool-option-value"> 
+          <div class="xepan-tool-option-title">Select Filter</div>
+          <select id="listing_filter_to_show" data-attr="list_filter_id"></select>
+        </td>
+      </tr>
+      <!-- result page -->
+      <tr class="xepan-tool-option">
+        <td class="xepan-tool-option-value"> 
+          <div class="xepan-tool-option-title">Filter Result Page</div>
+          <input data-attr="result_page"/>
+        </td>
+      </tr>
+
+      <!-- reload class -->
+      <tr class="xepan-tool-option">
+        <td class="xepan-tool-option-value"> 
+          <div class="xepan-tool-option-title">List Reload Selector</div>
+          <input data-attr="reload_class"/>
+        </td>
+      </tr>
+
+  </table>
+  <script>
+    $('#{$_name} [data-attr]').on('change',function(){
+    	$(current_selected_component).attr($(this).data('attr'),$(this).val());
+    });
+    
+    $('#{$_name}').on('show',function(event){
+      // all listing
+      $.ajax({
+        url: 'index.php?page=xepan_listing_getrecord_list',
+        type: 'GET',
+        data: { },
+        success: function ( data ){
+          $('#{$_name} #xepan-listing-id').html(data);
+        }
+      });
+      
+    	$('#{$_name} [data-attr]').each(function(index,value){
+    		$(this).val($(current_selected_component).attr($(this).data('attr')));				
+    	});
+    });
+
+    $('#{$_name} #xepan-listing-id').on('change',function(){
+        $.ajax({
+          url: 'index.php?page=xepan_listing_getrecord_listfilter',
+          type: 'GET',
+          data: {'listing_id':$(this).val()},
+          success: function ( data ){
+            $('#{$_name} #listing_filter_to_show').html(data);
+          }
+      });
+    });
+
+  </script>
+</div>

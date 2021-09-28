@@ -1,0 +1,1 @@
+ALTER TABLE `graphical_report_widget` ADD COLUMN `is_active`  tinyint(4) NULL DEFAULT NULL;
