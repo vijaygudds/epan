@@ -22,20 +22,20 @@ $config['only_xepan_projects']= false;
 $config['hidden_xepan_marketing']= false;
 $config['only_xepan_marketing']= false;
 
-$config['hidden_xepan_accounts']= false;
-$config['only_xepan_accounts']= false;
+$config['hidden_xepan_accounts']= true;
+$config['only_xepan_accounts']= true;
 
-$config['hidden_xepan_commerce']= false;
-$config['only_xepan_commerce']= false;
+$config['hidden_xepan_commerce']= true;
+$config['only_xepan_commerce']= true;
 
-$config['hidden_xepan_production']= false;
-$config['only_xepan_production']= false;
+$config['hidden_xepan_production']= true;
+$config['only_xepan_production']= true;
 
 $config['hidden_xepan_crm']= false;
 $config['only_xepan_crm']= false;
 
-$config['hidden_xepan_cms']= false;
-$config['only_xepan_cms']= false;
+$config['hidden_xepan_cms']= true;
+$config['only_xepan_cms']= true;
 
 
 $config['epan_base_path'] = "http://www.xavoc.com";
