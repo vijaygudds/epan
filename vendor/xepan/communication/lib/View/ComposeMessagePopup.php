@@ -146,12 +146,14 @@ class View_ComposeMessagePopup extends \View{
 					$f->displayError('message_to',"must not be empty Message to");
 				}
 				$to_emp = $this->add('xepan\hr\Model_Employee');
+				$to_emp->addCondition('status','Active');
 				foreach (explode(',', $f['message_to']) as $name => $id) {
 					$to_emp->load($id);
 					$to_raw[] = ['name'=>$to_emp['name'],'id'=>$id];
 				}
 				if($f['cc']){
 						$cc_emp = $this->add('xepan\hr\Model_Employee');
+						$cc_emp->addCondition('status','Active');
 						foreach (explode(',', $f['cc']) as $name => $id) {
 							$cc_emp->load($id);
 							$cc_raw[] = ['name'=>$cc_emp['name'],'id'=>$id];
