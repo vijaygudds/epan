@@ -37,6 +37,12 @@ $config['only_xepan_crm']= false;
 $config['hidden_xepan_cms']= true;
 $config['only_xepan_cms']= true;
 
+$config['hidden_xepan_commerce']= false;
+$config['only_xepan_commerce']= false;
+
+// $config['TopMenuBar'] = "XEC_DEFAULT";
+$config['TopMenuBar'] = "Bhawani";
+
 
 $config['epan_base_path'] = "http://www.xavoc.com";
 $config['epan_api_base_path'] = "http://www.epan.in/api/v1";

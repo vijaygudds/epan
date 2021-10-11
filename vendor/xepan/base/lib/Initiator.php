@@ -443,7 +443,7 @@ class Initiator extends \Controller_Addon {
         }
 
         $menu_config = $this->add('xepan\base\Model_Config_Menus')
-                        ->addCondition('name','XEC_DEFAULT')
+                        ->addCondition('name',$this->app->getConfig('TopMenuBar'))
                         ->tryLoadAny();
         if($menu_config->loaded()){
             $this->drawMenus(json_decode($menu_config['value'],true));

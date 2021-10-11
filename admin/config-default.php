@@ -13,6 +13,10 @@ $config['tmail']['transport'] = 'Echo';
 // $config['js']['versions']['jqueryui']='1.11.master';
 // $config['js']['versions']['jquery']='';
 
+// to be overridden by config.php
+// $config['TopMenuBar'] = "XEC_DEFAULT";
+// $config['TopMenuBar'] = "Bhawani";
+
 $config['developer_mode'] = true;
 $config['all_rights_to_superuser'] = true;
 $config['status_icon'] = [];
