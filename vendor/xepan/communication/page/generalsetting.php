@@ -45,6 +45,12 @@ class page_generalsetting extends \xepan\communication\page_sidebar{
 		$b->js('click')->univ()->frameURL('Set System Default Email',$this->app->url('../setdefaultemail'));
 	}
 
+	function page_empgroup(){
+		$model = $this->add('xepan\hr\Model_Employee_Group');
+        $crud = $this->add('xepan\base\CRUD');
+        $crud->setModel($model);
+	}
+
 
 	function page_setdefaultemail(){
 		$model = $this->add('xepan\communication\Model_Config_DefaultEmailSmsAndOther');

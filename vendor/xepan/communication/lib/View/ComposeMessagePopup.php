@@ -50,13 +50,37 @@ class View_ComposeMessagePopup extends \View{
 		$f->setLayout(['view/emails/internalmsgcompose']);
 
 		$send_to_all_field = $f->addField('Checkbox','send_to_all', "Send Message to All Employee`s");
+		
+		
+
+		// throw new \Exception($grp_employee->count()->getOne(), 1);
+		$grp_model = $this->add('xepan\hr\Model_Employee_Group');
+		$grp_model->addCondition('is_active',true);
+		// $grp_field = $f->addField('xepan/base/DropDown','group');
+		// $grp_field->validate_values=false;
+		// $grp_field->setModel('xepan\base\Model_Employee_Association');
+		
+		
+
+
+
+
+
 		$message_to_field = $f->addField('xepan\base\DropDown','message_to')->addClass('xepan-push');
 		$message_to_field->validate_values=false;
 
 
-
 		$cc_field = $f->addField('xepan\base\DropDown','cc')->addClass('xepan-push');
 		$cc_field->validate_values=false;
+
+		foreach ($grp_model as $to_field_msg) {
+				$msg_to [] = $to_field_msg['id'];
+				$message_to_field->js(true)->append("<option value='g_".$to_field_msg['id']."'>".$to_field_msg['name']." </option>")->trigger('change');
+			}
+		foreach ($grp_model as $cc_field_msg) {
+				$msg_cc [] = $cc_field_msg['id'];
+				$cc_field->js(true)->append("<option value='g_".$cc_field_msg['id']."'>".$cc_field_msg['name']." </option>")->trigger('change');
+			}
 
 		if($this->mode == 'msg-reply'){
 			$msg_to=$msg_model->getReplyMessageFromTo()['to'][0];
@@ -69,7 +93,7 @@ class View_ComposeMessagePopup extends \View{
 			$this->subject="Re: ".$msg_model['title'];
 			$this->message="<br/><br/><br/><br/><blockquote>".$msg_model['description']."<blockquote>";
 		}
-		
+			
 			// $msg_cc=$msg_model['cc_raw'];
 			// foreach ($msg_cc as $cc_field_msg) {
 			// 	$msg_cc [] = $cc_field_msg['id'];
@@ -125,14 +149,19 @@ class View_ComposeMessagePopup extends \View{
 		$multi_upload_field->setModel($filestore_image);
 		
 		$send_to_all_field->js(true)->univ()->bindConditionalShow([
-			''=>['message_to','cc'],
+			''=>['group','message_to','cc'],
 			'*'=>[]
 		],'div.atk-form-row');
+		
+		// $grp_field->js(true)->univ()->bindConditionalShow([
+		// 	''=>['message_to'],
+		// 	'*'=>[]
+		// ],'div.atk-form-row');
 
 		$f->addSubmit('Send message')->addClass('btn btn-success pull-right xepan-margin-top-small');
 		
 		if($f->isSubmitted()){
-
+			
 			$to_raw = [];
 			$cc_raw = [];
 			if($f['send_to_all']){
@@ -142,24 +171,54 @@ class View_ComposeMessagePopup extends \View{
 					$to_raw[] = ['name'=>$emp['name'],'id'=>$emp->id];
 				}
 			}else{
+						
+				
 				if(!$f['message_to']){
-					$f->displayError('message_to',"must not be empty Message to");
+					$f->displayError('message_to','must not be empty Message to Field');
 				}
+
 				$to_emp = $this->add('xepan\hr\Model_Employee');
 				$to_emp->addCondition('status','Active');
+				$group_to = [];
 				foreach (explode(',', $f['message_to']) as $name => $id) {
-					$to_emp->load($id);
-					$to_raw[] = ['name'=>$to_emp['name'],'id'=>$id];
+					if(strpos($id,"g_")=== 0){
+							$group_to[] = str_replace("g_","",$id);  
+					}else{
+						$to_emp->load($id);
+						$to_raw[] = ['name'=>$to_emp['name'],'id'=>$id];
+					}
 				}
+
+				if(!empty($group_to)){
+					$query= 'select DISTINCT contact.* FROM contact left outer JOIN employee_group_association on contact.id=employee_group_association.employee_id where employee_group_association.group_id in('.implode(',', $group_to).') and status = "Active"';
+					$grp_emp=$this->api->db->dsql()->expr($query)->get();
+					foreach ($grp_emp as $emp) {
+						$to_raw[] = ['name'=>$emp['first_name']." ".$emp['last_name'],'id'=>$emp['id']];
+					}
+				}
+
 				if($f['cc']){
-						$cc_emp = $this->add('xepan\hr\Model_Employee');
-						$cc_emp->addCondition('status','Active');
-						foreach (explode(',', $f['cc']) as $name => $id) {
+					$group_cc = [];
+					$cc_emp = $this->add('xepan\hr\Model_Employee');
+					$cc_emp->addCondition('status','Active');
+					foreach (explode(',', $f['cc']) as $name => $id) {
+						if(strpos($id,"g_")=== 0){
+						    $group_cc[] = str_replace("g_","",$id); 
+						}else{
 							$cc_emp->load($id);
 							$cc_raw[] = ['name'=>$cc_emp['name'],'id'=>$id];
+						}
+					}
+					if(!empty($group_cc)){
+						$query= 'select DISTINCT contact.* FROM contact left outer JOIN employee_group_association on contact.id=employee_group_association.employee_id where employee_group_association.group_id in('.implode(',', $group_cc).') and status = "Active"';
+						$grp_emp=$this->api->db->dsql()->expr($query)->get();
+						foreach ($grp_emp as $emp) {
+							$cc_raw[] = ['name'=>$emp['first_name']." ".$emp['last_name'],'id'=>$emp['id']];
+						}
 					}
 				}
 			}
+
 			
 			$send_msg = $this->add('xepan\communication\Model_Communication_MessageSent');
 			if($this->related_contact_id)
@@ -175,7 +234,7 @@ class View_ComposeMessagePopup extends \View{
 			$send_msg['description'] = $f['message'];
 			$send_msg->save();
 
-			if($f['message_to'] OR $f['send_to_all']){
+			if(!$f['message_to'] OR $f['send_to_all']){
 				foreach (explode(',', $f['message_to']) as $name => $id) {
 					$comm_read_model = $this->add('xepan\base\Model_Contact_CommunicationReadEmail');
 					$comm_read_model['is_read'] = false;
@@ -198,11 +257,15 @@ class View_ComposeMessagePopup extends \View{
 
 			$upload_images_array = array();
 			if($this->mode == "msg-fwd"){
+				// throw new \Exception("msg-fwd", 1); 
+				
 				$attach_m = $this->add('xepan\communication\Model_Communication_Attachment');
 				$attach_m->addCondition('communication_id', $this->communication_id);
 				foreach ($attach_m as  $existing_attachment_model) {
 						$upload_images_array [] = $existing_attachment_model['file_id'];
 				}
+							
+					// var_dump($upload_images_array);				
 			}else{
 				$upload_images_array = explode(",",$f['attachment']);
 			}

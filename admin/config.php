@@ -1,8 +1,8 @@
 <?php
 
-$config['websocket-notifications'] =  true;
+$config['websocket-notifications'] =  false;
 #$config['websocket-server']='ws://207.244.112.145:8889';
-$config['websocket-server']='ws://178.162.212.44:8889';
+// $config['websocket-server']='ws://167.172.188.230:8889';
 
 $config['hidden_report_menu'] = false;
 $config['hidden_user_menu'] = false;

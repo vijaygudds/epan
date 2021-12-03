@@ -35,6 +35,7 @@ class Initiator extends \Controller_Addon {
     	$m->addItem(['Company Information','icon'=>'fa fa-cog'],$this->app->url('xepan_communication_generalsetting_companyinfo'));
     	$m->addItem(['Branch','icon'=>'fa fa-cog'],$this->app->url('xepan_base_branch'));
     	$m->addItem(['Email Settings','icon'=>'fa fa-envelope'],$this->app->url('xepan_communication_generalsetting_emailsetting'));
+    	$m->addItem(['Employee Grouping','icon'=>'fa fa-envelope'],$this->app->url('xepan_communication_generalsetting_empgroup'));
     	$m->addItem(['SMS Settings','icon'=>'fa fa-mobile'],$this->app->url('xepan_communication_generalsetting_smssettings'));
     	$m->addItem(['TimeZone Setting','icon'=>'fa fa-cog'],$this->app->url('xepan_communication_generalsetting_timezone'));
     	$m->addItem(['IP Restrictions (For Admin Access)','icon'=>'fa fa-cog'],$this->app->url('xepan_communication_generalsetting_iprestrictions'));

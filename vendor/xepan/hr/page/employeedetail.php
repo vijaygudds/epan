@@ -237,6 +237,20 @@ class page_employeedetail extends \xepan\base\Page {
 			$portfolio_view->setIdField('contact_id');
 			$portfolio_view->setModel($employee,['graphical_report_id','branch_id','department','post','user','remark','salary_template','allow_login_from_anywhere'],['graphical_report_id','department_id','post_id','user_id','remark','allow_login_from_anywhere','branch_id']);
 			$f=$portfolio_view->form;
+			$emp_group = $this->add('xepan\hr\Model_Employee_Group');
+			$emp_group->addCondition('is_active',true);
+			$permitted_group_field = $f->addField('xepan/base/DropDown','emp_group');
+			$permitted_group_field->enableMultiSelect();
+			$permitted_group_field->setModel($emp_group);
+
+			$grp_alowed = array_column($this->add('xepan\hr\Model_Employee_Association')
+								->addCondition('employee_id',$employee->id)
+								// ->addCondition('group_id',$employee->id)
+								->getRows()
+								,'group_id'
+							);
+			$permitted_group_field->set($grp_alowed);
+
 
 			$permitted_emails_field = $f->addField('xepan/base/DropDown','permitted_emails');
 			$permitted_emails_field->enableMultiSelect();
@@ -281,7 +295,22 @@ class page_employeedetail extends \xepan\base\Page {
 				$this->add('xepan\hr\Model_Post_Email_Association')
 								->addCondition('employee_id',$employee->id)
 								->deleteAll();
-								
+				$this->add('xepan\hr\Model_Employee_Association')
+								->addCondition('employee_id',$employee->id)
+								// ->addCondition('group',$employee->id)
+								->deleteAll();
+				
+				if($f['emp_group']){
+
+						foreach (explode(",",$f['emp_group']) as $emp_group_id) {
+							$this->add('xepan\hr\Model_Employee_Association')
+								->set('employee_id',$employee->id)
+								->set('group_id',$emp_group_id)
+								->save();
+						}
+						
+					}
+
 				if($f['permitted_emails']){
 						foreach (explode(",",$f['permitted_emails']) as $email_setting_id) {
 							$this->add('xepan\hr\Model_Post_Email_Association')
@@ -294,6 +323,13 @@ class page_employeedetail extends \xepan\base\Page {
 
 				$f->js(null,$f->js()->univ()->successMessage('Updated'))->reload()->execute();				
 			}else{
+
+			$group_alowed_names = array_column($this->add('xepan\hr\Model_Employee_Association')
+								->addCondition('employee_id',$employee->id)
+								->getRows()
+								,'group'
+							);
+			$portfolio_view->template->trySet('emp_group',implode(", ", $group_alowed_names));		
 			
 			$emails_alowed_names = array_column($this->add('xepan\hr\Model_Post_Email_Association')
 								->addCondition('employee_id',$employee->id)
