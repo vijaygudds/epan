@@ -1,3 +1,3 @@
 <?php
 
-$config['dsn']='mysql://root:winserver@localhost/epan';
+$config['dsn']='mysql://root:winserver@localhost/bhawani';
