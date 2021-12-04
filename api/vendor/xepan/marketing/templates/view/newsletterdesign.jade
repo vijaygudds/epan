@@ -1,0 +1,34 @@
+.email-detail-nano-content(tabindex='0', style='right: -13px;')
+  #email-detail-inner
+    #email-detail-subject.clearfix
+      .row
+        .col-md-1
+          span.subject Name:
+        .col-md-11  
+          {$content_name}
+      .row
+        .col-md-1
+          span.subject Subject: 
+        .col-md-8
+          .atk-form-row{$title}
+        .col-md-3.pull-right  
+          span.atk-form-row Category: {$marketing_category}{$marketing_category_id}
+    #email-detail-sender.clearfix
+      .picture.hidden-xs 
+        {$avatar} 
+      .users
+        .from.clearfix
+          .name
+            | {$created_by}
+      .tools
+        .date
+          | {$created_at}
+        .btns
+          .btn-group 
+               {$action}
+          div.text-muted     
+            | {$is_template}   
+    #email-body
+      .atk-form-row{$message_blog}
+      span.small.text-muted Hint : type {$unsubscribe } for unsubscription link 
+{$Content}

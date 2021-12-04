@@ -1,0 +1,146 @@
+.xepan-tool-options(id='{$_name}' style="display:none" for-xepan-component='xepan/blog/Tool_PostList')
+	.xepan-cms-group-panel.clearfix
+		//- h3.collapsed(data-toggle="collapse" data-target="#collapse-post-list" aria-expanded="false")
+		//- 	span|Post Item Options
+		#collapse-post-list.xepan-cms-tools-bar-panel.row-fluid.collapse.in
+			.panel-body(style="padding-top:0px;padding-bottom:0px;")
+				.xepan-cms-groups-panel.collapse.in(id="xepan-cms-groups-panel")
+				.xepan-cms-group-panel.clearfix
+					div.panel.panel-heading.panel-primary.collapsed(data-toggle="collapse" data-target="#show-hide-post-list-option" aria-expanded="false")
+						span Hide/ Show
+						i.fa.fa-chevron-down.pull-right
+				#show-hide-post-list-option.xepan-cms-tools-bar-panel.row-fluid.collapse
+					table.table.table-condensed.table-hover.xepan-cms-tool-table
+						tr.xepan-tool-option
+							td.xepan-tool-option-title Title
+							td.xepan-tool-option-value 
+								select#show_title(data-attr='show_title' data-defaultvalue="true")
+									option(value="true") Yes																					
+									option(value="false") No
+						tr.xepan-tool-option
+							td.xepan-tool-option-title Description
+							td.xepan-tool-option-value
+								select#show_description(data-attr='show_description' data-defaultvalue="true")
+									option(value="true") Yes
+									option(value="false") No
+						tr.xepan-tool-option
+							td.xepan-tool-option-title Paginator
+							td.xepan-tool-option-value 
+								select#show_paginator(data-attr='show_paginator')
+									option(value="true") Yes
+									option(value="false") No
+						tr.xepan-tool-option
+							td.xepan-tool-option-title Set By Order
+							td.xepan-tool-option-value
+								select#set_by_order(data-attr='set_by_order' data-defaultvalue="order_by_id")
+									option(value="order_by_id") Id
+									option(value="order_by_recent_post") Recent Post First
+									option(value="order_by_created_at") Created Date
+						tr.xepan-tool-option
+							td.xepan-tool-option-title Show Image
+							td.xepan-tool-option-value 
+								select#show_image(data-attr='show_image' data-defaultvalue="true")
+									option(value="true") Yes
+									option(value="false") No
+						tr.xepan-tool-option
+							td.xepan-tool-option-title Show Paginator
+							td.xepan-tool-option-value 
+								select#show_paginator(data-attr='show_paginator' data-defaultvalue="true" data-togglevalue="true" data-toggleclass=".xepan-commerce-itemlist-option-toggle")
+									option(value="true") Yes
+									option(value="false") No
+						tr.xepan-commerce-itemlist-option-toggle.xepan-tool-option
+							td.xepan-tool-option-title Item in Row
+							td.xepan-tool-option-value
+								input#paginator_set_rows_per_page(data-attr='paginator_set_rows_per_page')
+						tr.xepan-tool-option
+							td.xepan-tool-option-title Paginator Rows Per Page
+							td.xepan-tool-option-value 
+								input#paginator_set_rows_per_page(data-attr='paginator_set_rows_per_page')
+						tr.xepan-tool-option
+							td.xepan-tool-option-title Social Share
+							td.xepan-tool-option-value
+								select#show_socialshare(data-attr='add_socialshare' data-defaultvalue="true" data-togglevalue="true" data-toggleclass=".xepan-blog-postlist-socialshare-option-toggle")
+									option(value="true") Yes
+									option(value="false") No
+						tr.xepan-blog-postlist-socialshare-option-toggle.xepan-tool-option
+							td.xepan-tool-option-value(colspan="2")
+								select.chosen-select.post-list-option-social-multiselect(id="{$_name}_multiselect" style="width:100%;" multiple="" data-attr='include_socialshare' multiselect)
+									option(value="email") Email
+									option(value="facebook") Facebook
+									option(value="googleplus") Googleplus
+									option(value="pinterest") Pinterest
+									option(value="linkedin") Linkedin
+									option(value="stumbleupon") stumbleupon
+									option(value="twitter") Twitter
+									option(value="whatsapp") Whatsapp
+						tr.xepan-blog-postlist-socialshare-option-toggle.xepan-tool-option
+							td.xepan-tool-option-title Theme
+							td.xepan-tool-option-value
+								select(id="{$_name}" data-attr='socialshare_theme' data-defaultvalue="flat")
+									option(value="flat") Flat
+									option(value="classic") Classic
+									option(value="minima") Minima
+									option(value="plain") Plain
+				.xepan-cms-group-panel.clearfix
+					div.panel.panel-heading.panel-primary.collapsed(data-toggle="collapse" data-target="#post-list-other-options" aria-expanded="false")
+						span Others
+						i.fa.fa-chevron-down.pull-right
+				#post-list-other-options.xepan-cms-tools-bar-panel.row-fluid.collapse
+					table.table.table-condensed.table-hover.xepan-cms-tool-table
+						tr.xepan-tool-option
+							td.xepan-tool-option-title Description Page URL
+							td.xepan-tool-option-value 
+								input#description_page_url(data-attr='description_page_url')
+				div.panel.panel-heading.panel-primary.collapsed(data-toggle="collapse" data-target="#post-list-option-category" aria-expanded="false")
+					span Category
+					i.fa.fa-chevron-down.pull-right
+				#post-list-option-category.xepan-cms-tools-bar-panel.row-fluid.collapse
+					table.table.table-condensed.table-hover.xepan-cms-tool-table
+						tr.xepan-tool-option
+							td.xepan-tool-option-value(colspan="2")
+								select.chosen-select.post-list-option-category-multiselect(id="{$_name}_post_cat_multiselect" style="width:100%;" multiple="" data-attr='show_post_of_category' multiselect)
+	<link rel="stylesheet" type="text/css" href="vendor/xepan/blog/templates/css/chosen.css"/>
+	script(src="vendor/xepan/blog/templates/js/chosen.jquery.js")
+	script.
+		$.ajax({
+			url: 'index.php?page=xepan_blog_getcategory',
+			type: 'GET',
+			data: { },
+			success: function ( data ){
+				$('\#{$_name}_post_cat_multiselect').html(data);
+				
+				$('\#{$_name}_post_cat_multiselect').chosen();
+				$('\#{$_name}_post_cat_multiselect').chosen({allow_single_deselect: true });
+			}
+		});
+		
+		$('\#{$_name} [data-attr]').on('change',function(){
+			$(current_selected_component).attr($(this).data('attr'),$(this).val());
+			// show or hide the toggle class
+			if($(this).data('toggleclass')){
+				var value = $(this).data('togglevalue').toString();
+				if($(this).val() === value){
+					$($(this).data('toggleclass')).show();
+				}else
+					$($(this).data('toggleclass')).hide();
+			}
+		});
+
+		$('\#{$_name}').on('show',function(event){
+			$('\#{$_name} [data-attr]').each(function(index,value){
+				var default_value = $(this).attr('data-defaultvalue');
+				if($(current_selected_component).attr($(this).data('attr')))
+					default_value = $(current_selected_component).attr($(this).data('attr'));
+				
+				$(this).val(default_value);
+			});
+	
+			//- chosen multiselect options
+			if(typeof $(current_selected_component).attr('show_post_of_category') === 'undefined' ){
+				$("\#{$_name}_post_cat_multiselect").val("\{\}").trigger("chosen:updated");
+			}else{
+				var str = $(current_selected_component).attr('show_post_of_category');
+				$("\#{$_name}_post_cat_multiselect").val(str.split(',')).trigger("chosen:updated");
+			}
+		
+		});

@@ -1,0 +1,23 @@
+.xepan-component(id="{$_name}"  class=' {$class}' style=' {$style}' xepan-component='xepan/cms/Tool_PopupToolTip' xepan-component-name="Modal Popup")
+	.modal.fade.xpopup(id="myModal11_{$_name}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true")
+		.modal-dialog
+			.modal-content
+				.modal-header
+					button(type="button" class="close" data-dismiss="modal")
+						span(aria-hidden="true")
+							|&times;
+						span.sr-only
+							|Close
+					.xepan-component.xepan-editable-text.mce-content-body.desc.editor(xepan-component="xepan/cms/Tool_Text" emptytext="Edit this text" contenteditable="true")
+						|Edit this text
+				.modal-body
+					.xepan-component.xepan-sortable-component.xepan-cms-container.ui-sortable(xepan-component="xepan/cms/Tool_Container" emptytext="Container" style="width:85%;margin:0 auto;")
+					//- .epan-container.epan-sortable-component.epan-component
+				.modal-footer
+					button.btn.btn-default.xpopup-btn(type="button"  data-dismiss="modal" style="display:none;")|Close
+					button.btn.btn-default.xpopup-btn(type="button"  style="display:none;")|Save changes
+
+			//- <!-- Button trigger modal -->
+	.btn.btn-primary.xpopup_trigger(data-toggle="modal" data-target="myModal11_{$_name}")
+		|Launch demo modal
+	//- <!-- Modal -->	

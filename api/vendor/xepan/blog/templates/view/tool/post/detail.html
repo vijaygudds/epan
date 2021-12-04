@@ -1,0 +1,80 @@
+
+<div id="{$_name}" class="blog">
+  <div class="row">
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+      <h2 id="xepan-blog-title" xepan-component="xepan/cms/Tool_Text" class="xepan-component xepan-editable-text xepan-blog-title">{$title}</h2>
+      <hr/>
+    </div>
+    <div class="col-md-12">{image_wrapper}<img src="{$image}" style="height:auto; width='100%' max-width:100%" alt="" class="img-responsive img-blog"/>{/}</div>
+  </div>
+  <div class="row">
+    {created_at_wrapper}
+    <div class="col-md-4 col-sm-12 col-xs-12 col-lg-4 post-detail-created-at">
+        <div class="list-group-item">
+          {$created_at_date}
+          <span class="pull-right">
+            <i class="fa fa-calendar"></i>
+          </span>
+        </div>
+    </div>
+    {/}
+    {created_by_wrapper}
+    <div class="col-md-4 col-sm-12 col-xs-12 col-lg-4 post-detail-created-by">
+      <div class="list-group-item">
+        {$created_by}
+          <span class="pull-right">
+            <i class="fa fa-user"></i>
+          </span>
+      </div>
+    </div>
+    {/}
+    {comment_count_wrapper}
+    <div class="col-md-4 col-sm-12 col-xs-12 col-lg-4 post-detail-comment-count">
+      <div class="list-group-item">
+        <a href="#">{$comment_count}</a>
+        <span class="pull-right">
+          <i class="fa fa-comment"></i>
+        </span>
+      </div>
+    </div>
+    {/}
+  </div>
+  {sharewrapper}
+  <div class="container post_share_wrapper" style="width:100%;">
+      <div id="postshare{$id}"></div>
+  </div>
+  {/}
+  <div class="row">
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+      <div id="xepan-blog-description" xepan-component="xepan/cms/Tool_Text" emptytext="No Content found" class="xepan-component xepan-editable-text xepan-blog-description">
+        {$post_description}
+      </div>
+      {tag_wrapper}
+        <div class="post-tags">
+          <strong>Tags : </strong>
+          <a href="#">{$tag}</a>
+        </div>
+      {/}
+      {$editing_mode}
+      <div class="post-detail-micro-data-wrapper">
+        {$micro_data}
+      </div>
+    </div>
+  </div>
+  {$comments}
+  {$Content}
+  <style type="text/css" media="screen">
+    .blog textarea {
+      width: 100%;
+    }
+    .xepan-blog-description iframe{
+      width:100% !important;
+      max-width:100% !important;
+      height:314px !important;
+    } 
+    .jssocials-shares{
+      display: block !important;
+    }
+
+  </style>
+</div>

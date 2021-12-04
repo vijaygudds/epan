@@ -1,0 +1,62 @@
+
+<div id="{$_name}" style="{$style}" class="{$class} tool-gallery-portfolio">
+  <div class="row">
+    <div class="col-cs-12">
+      <ul id="filter-list">
+        <li data-filter="all" class="filter">ALL</li>{$category}
+        {category_list}
+        {$Content}
+        {rows}{row}
+        <li data-filter="{$name}" class="filter">{$name}</li>{/}{/}
+        {/}
+      </ul>
+    </div>
+  </div>
+  <div class="container" style="width:100%;">
+      <ul class="portfolio_items">
+        {$item_list}
+        {item}
+        {$Content}
+        <li class="portfolio {$gallery_cat}">
+          <div class="post_thumb">
+            {$image_wrapper}
+            {$video_wrapper}
+            <div class="portfolio-overlay">
+              <div class="overlay-inner">{name_wrapper}
+                <h3>{$name}</h3>{/}
+                {description_wrapper}
+                <p>{$description}</p>{/}
+                {fancybox_wrapper}
+                  <a href='{$image_path}' class="fancybox {$fancy_class}">
+                    <i class="fa fa-camera"></i></a>
+                {/}
+                {link_wrapper}
+                  <a href="{$link}" class="fancybox {$fancy_class}">
+                    <i class="fa fa-link">
+                    </i>
+                  </a>
+                {/}
+              </div>
+            </div>
+          </div>
+        </li>
+        {/}
+      </ul>
+  </div>
+  <script>
+    $('.portfolio_items').mixitup({
+    	targetSelector: '.portfolio',
+    	transitionSpeed: 450
+    });
+    $('#{$_name} a.fancybox-img').fancybox();
+    $('#{$_name} a.fancybox-video').fancybox({
+      type:'iframe'
+    });
+
+  </script>
+  <style type="text/css">
+    #{$_name} .portfolio.mix_all:last-child{
+      display: none !important;
+    }
+  </style>
+</div>

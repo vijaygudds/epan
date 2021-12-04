@@ -1,0 +1,54 @@
+
+<div class="row panel panel-default">
+  <div class="panel-heading"><span>Task/Request Information</span></div>
+  <div class="panel-body"> 
+    <div class="row xepan-push">
+      <div class="col-md-12 atk-form-field atk-form-row"><strong>Task/Request Name: </strong>{$task_name}</div>
+      <div class="col-md-3 atk-form-field atk-form-row"><strong>Created By: </strong>{created_by}You{/created_by}</div>
+      <div class="col-md-3 atk-form-field atk-form-row"><strong>Assign To: </strong>{$assign_to_id} {$assign_to}</div>
+      <div class="col-md-3 atk-form-field atk-form-row"><strong>Task/Request Priority: </strong>{$priority}</div>
+      <div class="col-md-3 atk-form-field atk-form-row"><!-- <strong>Is Regular Work: </strong>{$is_regular_work}<br/> --><strong>Describe on end:</strong><br/> {$describe_on_end}</div>
+    </div>
+    <div class="row xepan-push">
+      <div class="col-md-4 atk-form-field atk-form-row"><strong>Starting Date: </strong>{$starting_date}</div>
+      <div class="col-md-4 atk-form-field atk-form-row"><strong>Deadline: </strong>{$deadline}</div>
+      <div class="col-md-4 atk-form-field atk-form-row"><strong>Estimate Time: </strong>{$estimate_time}<span class="small text-muted">Hint : Enter value in hours</span></div>
+    </div>
+    <div class="row xepan-push">
+      <div class="col-md-12 atk-form-field atk-form-row">{$Content}</div>
+    </div>
+    <div class="row xepan-push">
+      <div class="col-md-12 atk-form-field atk-form-row"></div><strong>Description:</strong>{$description1}
+      {$description} 
+    </div>
+  </div>
+</div>
+<div class="row panel panel-default">
+  <div class="panel-heading"><span>Set Task Reminder</span></div>
+  <div class="panel-body">
+    <div class="row xepan-push">
+      <div class="col-md-12 atk-form-field atk-form-row">{$set_reminder}</div>
+    </div>
+    <div class="row xepan-push">
+      <div class="col-md-4 atk-form-field atk-form-row"><strong>Remind AT:</strong>{$reminder_time}</div>
+      <div class="col-md-4 atk-form-field atk-form-row"><strong>Remind Medium:    </strong>{$remind_via}</div>
+      <div class="col-md-4 atk-form-field atk-form-row"><strong>Remind To:</strong>{$notify_to}    </div>
+    </div>
+    <div class="row xepan-push">
+      <div class="col-md-4 atk-form-field atk-form-row">{$snooze_reminder}</div>
+    </div>
+    <div class="row xepan-push">
+      <div class="col-md-6 atk-form-field atk-form-row"><strong>Snooze Duration:</strong>{$snooze_duration}</div>
+      <div class="col-md-6 atk-form-field atk-form-row"><strong>Snooze Unit:</strong>{$remind_unit}</div>
+    </div>
+  </div>
+</div>
+<div style="{display_wrapper}display:none;{/}" class="row panel panel-default">
+  <div class="panel-heading"><span>Make Task Recurring</span></div>
+  <div class="panel-body">
+    <div class="row xepan-push">
+      <div class="col-md-6 atk-form-field atk-form-row">{$is_recurring}</div>
+      <div class="col-md-6 atk-form-field atk-form-row"><strong>Remind Medium:    </strong>{$recurring_span}</div>
+    </div>
+  </div>
+</div>

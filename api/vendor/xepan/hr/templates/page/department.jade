@@ -1,0 +1,70 @@
+.main-box.clearfix
+  header.main-box-header.clearfix
+    //- h2.pull-left Departments
+    .filter-block.pull-right
+      .form-group.pull-left
+        input.form-control(type='text', placeholder='Search...')
+        i.fa.fa-search.search-icon
+      a.btn.btn-primary.pull-right(href='#')
+        i.fa.fa-plus-circle.fa-lg
+        |  Add Department
+  .main-box-body.clearfix
+    .table-responsive
+      {$Content}
+    {DepartmentList}{DepartmentListTemplate}
+    .table-responsive(id="{$_name}")
+      table.table.user-list.table-hover
+        thead
+          tr
+            th
+              a(href='#')
+                span Department
+            th.text-right
+              a.asc(href='#')
+                span Production Level
+            th.text-center
+              span Status
+            th.text-center
+              a.desc(href='#')
+                span Post
+            th  
+        tbody
+          {rows}{row}
+          tr
+            td
+              | {$name}
+            td.text-right
+              | {$production_level}
+            td.text-center
+              span.label.label-success {$status}
+            td.text-center
+              a(href='index.php?page=xepan_hr_post')
+                | {$posts}
+                //- |2 Edit
+            td(style='width: 15%;')
+              a.table-link(href='#')
+                span.fa-stack
+                  i.fa.fa-square.fa-stack-2x
+                  i.fa.fa-pencil.fa-stack-1x.fa-inverse
+              a.table-link.danger(href='#')
+                span.fa-stack
+                  i.fa.fa-square.fa-stack-2x
+                  i.fa.fa-trash-o.fa-stack-1x.fa-inverse
+          {/row}{/rows}{$Paginator}{/DepartmentListTemplate}
+    ul.pagination.pull-right
+      li
+        a(href='#')
+          i.fa.fa-chevron-left
+      li
+        a(href='#') 1
+      li
+        a(href='#') 2
+      li
+        a(href='#') 3
+      li
+        a(href='#') 4
+      li
+        a(href='#') 5
+      li
+        a(href='#')
+          i.fa.fa-chevron-right

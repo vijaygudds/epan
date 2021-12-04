@@ -1,0 +1,32 @@
+{
+    "name": "xepan/marketing",
+    "type": "library",
+    "description": "Marketing Application for xEpan Platform",
+    "homepage": "https://github.com/xepan/marketing",
+    "keywords": ["xEpan","SaaS","ERP","Digital Marketing","Marketing"],
+    "license": "MIT",
+    "minimum-stability" : "dev",
+    "authors": [
+        {
+            "name": "Xavoc Technocrats Pvt. Ltd.",
+            "email": "info@xavoc.com"
+        }
+    ],
+    "source": {
+        "url": "git@github.com:xepan/marketing.git",
+        "type": "git",
+        "reference": "origin/master"
+    },
+    "require": {
+        "xepan/base" : "dev-master",
+        "xepan/mail": "^2.3",
+        "facebook/php-sdk-v4" : "~5.0",
+        "linkedinapi/linkedin": "^1.1",
+        "guzzlehttp/guzzle": "^6.2",
+        "abraham/twitteroauth": "^0.6.4",
+        "php": ">=5.3"
+    },
+    "autoload": {
+        "psr-0": { "autocomplete": "lib" }
+    }
+}

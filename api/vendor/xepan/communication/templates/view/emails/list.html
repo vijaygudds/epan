@@ -1,0 +1,90 @@
+
+<div id="{$_name}" class="xepan-communication-email-list {$class}">
+  <div tabindex="0" style="right: -13px;" class="email-content-nano-content">
+    <header id="email-header" class="clearfix">
+      <div class="xepan-push">{$search_form}</div>
+      <div id="email-header-tools">
+        <div class="btn-group">
+          <button style="display:none" data-placement="bottom" data-toggle="tooltip" title="Back to Inbox" type="button" data-original-title="back-inbox" class="btn btn-primary back-inbox"><i class="fa fa-arrow-left"></i></button>
+        </div>
+        <div class="btn-group">
+          <button title="" type="button" data-toggle="dropdown" data-original-title="Select" class="btn btn-primary dropdown-toggle has-tooltip"><i class="fa fa-square-o"></i><span class="caret"></span></button>
+          <ul class="dropdown-menu">
+            <li><a href="#" class="all-select">All</a></li>
+            <li><a href="#" class="select-none">None</a></li>
+            <li><a href="#" class="select-read">Read</a></li>
+            <li><a href="#" class="select-unread">Unread</a></li>
+            <li><a href="#" class="select-starred">Starred</a></li>
+            <li><a href="#" class="select-unstarred">Unstarred</a></li>
+          </ul>
+        </div>
+        <div class="btn-group">
+          <button data-placement="bottom" data-toggle="tooltip" title="" type="button" data-original-title=" Fetch And Refresh Emails" class="fetch-refresh btn btn-primary"><i class="fa fa-refresh"></i></button>
+          <button data-placement="bottom" data-toggle="tooltip" title="Mark Spam" type="button" data-original-title="Spam" class="btn btn-primary do-spam"><i class="fa fa-exclamation-circle"></i></button>
+          <button data-placement="bottom" data-toggle="tooltip" title="" type="button" data-original-title="Erase" class="do-delete btn btn-primary"><i class="fa fa-trash-o"></i></button>
+          <button data-placement="bottom" data-toggle="tooltip" title="" type="button" data-original-title="Mark All As Read" class="mark-allread btn btn-primary"><i class="fa fa-check-square-o"></i></button>
+        </div>
+        <div class="btn-group">
+          <button title="" type="button" data-toggle="dropdown" data-original-title="Select" class="btn btn-primary dropdown-toggle has-tooltip">More<span class="caret"></span>
+          </button>
+          <ul class="dropdown-menu">
+            <li><a href="#" class="do-unread">Mark as Unread</a></li>
+            <li><a href="#" class="do-notspam">Mark as Not Spam</a></li>
+          </ul>
+        </div>
+      </div>
+      <div id="email-header-pagination" class="pull-right">
+        <div class="pull-right xepan-push">{$paginator}</div>
+      </div>
+      <div class="col-md-4"></div>
+      <div class="col-md-4">{$message}</div>
+      <div class="col-md-4">       </div>
+    </header>
+    <ul id="email-list">{rows}{row}
+      <li data-id="{$id}" class="clickable-row {$unread} {$draft}">
+        <div data-id="{$id}" class="chbox">
+          <div class="checkbox-nice">
+            <input data-id="{$id}" id="m-checkbox-{$id}" type="checkbox"/>
+            <label for="m-checkbox-{$id}"></label>
+          </div>
+        </div>
+        <div data-id="{$id}" class="star"><a data-id="{$id}" data-starred="{$is_starred}" class="{$starred}"></a></div>
+        <div style="overflow:hidden" data-id="{$id}" class="name">{communication_with}Mila Kunis{/}</div>
+        <div data-id="{$id}" class="message"><span class="label label-success">{$email_name}</span><span class="subject">{subject}Like your new movie -{/}&nbsp;</span><span class="body">{body}Hi beauty, I watched your movies last night.{/}</span></div>
+        <div data-id="{$id}" class="meta-info">{check_attach}<a href="#" class="attachment"><i class="fa fa-paperclip"></i></a>{/}<i class="fa fa-reply" style="color:{$replied_color}" title="Someone has replied to this email"></i><span class="date">{callback_date}9:34 am{/}</span></div>
+      </li>{/}{/}
+    </ul>
+  </div>
+  <div class="nano-pane">
+    <div style="height: 600px; transform: translate(0px, 0px);" class="nano-slider"></div>
+  </div>
+</div>
+<script>
+  $('li.draft-message').removeClass('clickable-row');  
+  
+  $("li.clickable-row  div:not(.chbox, .star,.checkbox-nice)").click(function(){
+      $("#email-list").hide();
+      $(".nano-slider").css('height','0px');
+      $(".email-detail").show();
+      $(".back-inbox").show();
+  });
+  
+  $('button.back-inbox').click(function(){
+      $("#email-list").show();
+      $(".nano-slider").css('height','500px');
+      $(".email-detail").hide();
+  
+  });
+  
+</script>
+<style>
+  .pull-right.xepan-push > .paginator{
+    margin-top:0px!important;
+  }
+  #email-header-tools{
+    margin-left:auto;
+  }  
+  #email-header{
+    padding-bottom:0px;
+  }    
+</style>

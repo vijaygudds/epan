@@ -1,0 +1,69 @@
+.xepan-grid.main-box.clearfix.atk-table.atk-table-zebra.atk-table-bordered(id="{$_name}" class="{$class}")
+    {Pannel}
+    header.main-box-header.clearfix.atk-actions(class=" {$class} ")
+        div.filter-block( style="100%")
+            .pull-right {$grid_buttons} 
+            .form-group.pull-right.xepan-filter-form
+                span 
+                    i(class="fa fa-search search-icon" style="position: unset;")
+                    input#searchInput(value='Type To Filter' class=" pull-left")
+                //- span(class="form-control pull-left")|{$quick_search}
+    {/Pannel}
+    .main-box-body.clearfix.table-responsive
+            table.table.user-list.table-hover.footable.toggle-circle-filled(style="width:100%")
+                {header}
+                thead.xepan-hover-hand
+                    {cols}{col}
+                    th.text-center Transaction List 
+                    {/}{/}
+                {/}
+                {$subheader}
+
+                tbody#fbody
+                    {rows}{row}
+                    tr(class="{$odd_even}" data-id="{$id}")
+                        {cols}
+                        td
+                            .row
+                                .col-lg-12
+                                    .main-box
+                                        header.main-box-header.clearfix
+                                        .main-box-body.clearfix
+                                            .row
+                                                .col-lg-1.text-muted
+                                                    strong Title : 
+                                                .col-lg-11
+                                                    strong {$name}
+                                            .row
+                                                .col-lg-1.text-muted
+                                                    strong Code : 
+                                                .col-lg-5.small
+                                                    cite {$unique_trnasaction_template_code}
+                                                .col-lg-3
+                                                .col-lg-3
+                                            .row
+                                                .col-lg-1.text-muted
+                                                    strong Detail :
+                                                .col-lg-9
+                                                    | {$detail}
+                                                .col-lg-2.text-right
+                                                    a.story-likes-link(href='#')
+                                                        i.fa.fa-1x {$Run}
+                        {/}
+                    {/}{/}
+                    {not_found}
+                    div.row
+                        .col-md-12.text-center.alert.alert-warning(role="alert")
+                            span.icon-attention.fa.fa-exclamation-triangle  &nbsp;{$not_found_message}
+                    {/}
+
+                {totals}
+                tfoot
+                    tr(class="totals")
+                        {cols}{col}
+                        <td {$tdparam}>
+                        {$content}
+                        </td>
+                        {/}{/}
+                {/}
+            {$Paginator}

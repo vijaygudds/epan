@@ -1,0 +1,13 @@
+ {$Content}
+  .main-box.clearfix
+    .tabs-wrapper.profile-tabs
+      ul.nav.nav-tabs.responsive-tabs
+        li.active
+          a(data-toggle='tab', href='#tab-payslip') Pay Slip
+      .tab-content
+         #tab-payslip.tab-pane.active
+           {$personpayslip}
+//- script.
+//-   $('.responsive-tabs').responsiveTabs({
+//-         accordionOn: ['xs', 'sm']
+//-   });

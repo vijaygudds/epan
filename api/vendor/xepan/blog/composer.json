@@ -1,0 +1,26 @@
+{
+    "name": "xepan/blog",
+    "type": "library",
+    "description": "Blog Appllication for xEpan Platform",
+    "homepage": "https://github.com/xepan/blog",
+    "keywords": ["xEpan","SaaS","ERP","BLOG"],
+    "license": "MIT",
+    "minimum-stability" : "dev",
+    "authors": [
+        {
+            "name": "Xavoc Technocrats Pvt. Ltd.",
+            "email": "info@xavoc.com"
+        }
+    ],
+    "source": {
+        "url": "https://github.com/xepan/blog.git",
+        "type": "git",
+        "reference": "origin/master"
+    },
+    "require": {
+        "xepan/cms": "dev-master"
+    },
+    "autoload": {
+        "psr-0": { "autocomplete": "lib" }
+    }
+}

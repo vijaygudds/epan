@@ -1,0 +1,122 @@
+
+<div id="{$_name}" style="display:none" for-xepan-component="xepan/listing/Tool_ListDetail" class="xepan-tool-options">
+  <table class="table table-condensed table-hover xepan-cms-tool-table">
+    <!-- Listing List -->
+    <tr class="xepan-tool-option">
+      <td class="xepan-tool-option-value">
+        <div class="xepan-tool-option-title">Select Listing</div>
+        <select id="xepan-listing-id" data-attr="listing_id" data-defaultvalue="0">
+        </select>
+      </td>
+    </tr>
+    <tr class="xepan-tool-option">
+      <td class="xepan-tool-option-value"> 
+        <div class="xepan-tool-option-title">Show Public Fields</div>
+        <select id="show_public_fields" data-attr="show_public_fields" data-defaultvalue="1">
+          <option value="1">Yes</option>
+          <option value="0">No</option>
+        </select>
+      </td>
+    </tr>
+    <tr class="xepan-tool-option">
+      <td class="xepan-tool-option-value"> 
+        <div class="xepan-tool-option-title">Show Private Fields</div>
+        <select id="show_private_fields" data-attr="show_private_fields" data-defaultvalue="onLogin">
+          <option value="onLogin">Login Required</option>
+          <option value="0">Never</option>
+          <option value="always">Always</option>
+        </select>
+      </td>
+    </tr>
+    <tr class="xepan-tool-option">
+      <td class="xepan-tool-option-value"> 
+        <div class="xepan-tool-option-title">Show Protected Fields</div>
+        <select id="show_protected_fields" data-attr="show_protected_fields" data-defaultvalue="onPremiumUser">
+          <option value="0">Never</option>
+          <option value="always">Always</option>
+          <option value="onLogin">Login Required</option>
+          <option value="onPremiumUser">Premium User</option>       
+        </select>
+      </td>
+    </tr>
+    <tr class="xepan-tool-option">
+      <td class="xepan-tool-option-value"> 
+        <div class="xepan-tool-option-title">Allow Private Message</div>
+        <select id="allow_private_message" data-attr="allow_private_message" data-defaultvalue="1">
+          <option value="1">Yes</option>
+          <option value="0">No</option>
+        </select>
+      </td>
+    </tr>
+    <tr class="xepan-tool-option">
+      <td class="xepan-tool-option-value"> 
+        <div class="xepan-tool-option-title">Allow Reviews</div>
+        <select id="allow_review" data-attr="allow_review" data-defaultvalue="1">
+          <option value="1">Yes</option>
+          <option value="0">No</option>
+        </select>
+      </td>
+    </tr>
+    <tr class="xepan-tool-option">
+      <td class="xepan-tool-option-value"> 
+        <div class="xepan-tool-option-title">Show Ratings</div>
+        <select id="allow_rating" data-attr="allow_rating" data-defaultvalue="1">
+          <option value="1">Yes</option>
+          <option value="0">No</option>
+        </select>
+      </td>
+    </tr>
+    <tr class="xepan-tool-option">
+      <td class="xepan-tool-option-value">
+        <div class="xepan-tool-option-title">Show Social Share</div>
+        <select id="show_social_share" data-attr="show_social_share" data-defaultvalue="1">
+          <option value="1">Yes</option>
+          <option value="0">No</option>
+        </select>
+      </td>
+    </tr>
+    <tr class="xepan-tool-option">
+      <td class="xepan-tool-option-value">
+        <div class="xepan-tool-option-title">Custom Template</div>
+        <input data-attr="custom_template"/>
+      </td>
+    </tr>
+    <!-- list data set-->
+    <tr class="xepan-tool-option">
+      <td class="xepan-tool-option-value">
+        <div class="xepan-tool-option-title">Show Detail If Permitted</div>
+        <select data-attr="show_detail_if_permitted" data-defaultvalue="0">
+          <option value="1">Yes</option>
+          <option value="0">No</option>
+        </select>
+      </td>
+    </tr>
+
+  </table>
+  <script>
+    $('#{$_name} [data-attr]').on('change',function(){
+    	$(current_selected_component).attr($(this).data('attr'),$(this).val());
+    });
+    
+    $('#{$_name}').on('show',function(event){
+        // all listing
+        $.ajax({
+          url: 'index.php?page=xepan_listing_getrecord_list',
+          type: 'GET',
+          data: { },
+          success: function ( data ){
+            $('#{$_name} #xepan-listing-id').html(data);
+          }
+        });
+
+        $('#{$_name} [data-attr]').each(function(index,value){
+          // setting up default value if no option selected
+          var default_value = $(this).attr('data-defaultvalue');
+          if($(current_selected_component).attr($(this).data('attr')))
+            default_value = $(current_selected_component).attr($(this).data('attr'));
+          
+          $(this).val(default_value);
+        });
+      });
+  </script>
+</div>

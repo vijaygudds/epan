@@ -1,0 +1,456 @@
+<div id="{$_name}" style="display:none;" for-xepan-component="xepan/listing/Tool_List" class="xepan-tool-options" xepan-component-name="List Tool">
+  <div class="xepan-cms-group-panel clearfix">
+    <div id="collapse-xepan-listing-list" class="xepan-cms-tools-bar-panel row-fluid collapse in">
+      <div style="padding-top:0px;padding-bottom:0px;" class="panel-body">
+        <div id="xepan-cms-groups-panel" class="xepan-cms-groups-panel collapse">
+        </div>
+        <div class="xepan-cms-group-panel clearfix">
+          <div data-toggle="collapse" data-target="#{$_name}_showhide" aria-expanded="false" class="panel panel-heading panel-primary collapsed">
+              <span>Hide/ Show</span>
+              <i class="fa fa-chevron-down pull-right"></i>
+          </div>
+        </div>
+        <div id="#{$_name}_showhide" class="xepan-cms-tools-bar-panel row-fluid collapse in">
+            <table class="table table-condensed table-hover xepan-cms-tool-table">
+              <!-- Listing List -->
+              <tr class="xepan-tool-option">
+                <td class="xepan-tool-option-value">
+                  <div class="xepan-tool-option-title">Select Listing</div>
+                  <select id="xepan-listing-id" data-attr="listing_id" data-defaultvalue="0">
+                  </select>
+                </td>
+              </tr>
+
+              <!-- list data set-->
+              <tr class="xepan-tool-option">
+                <td class="xepan-tool-option-value">
+                  <div class="xepan-tool-option-title">Select List Data Set</div>
+                  <select id="xepan-listing-data-set-id" data-attr="list_data_set_id" data-defaultvalue="0">
+                  </select>
+                </td>
+              </tr>
+
+              <!-- list data set-->
+              <tr class="xepan-tool-option">
+                <td class="xepan-tool-option-value">
+                  <div class="xepan-tool-option-title">show list data created by login user</div>
+                  <select data-attr="show_list_data_created_by_login_user" data-defaultvalue="0">
+                    <option value="1">Yes</option>
+                    <option value="0">No</option>
+                  </select>
+                </td>
+              </tr>
+
+              <!-- List Display Type -->
+              <tr class="xepan-tool-option">
+                <td class="xepan-tool-option-value">
+                  <div class="xepan-tool-option-title">Item Type</div>
+                  <select id="data_list" data-attr="show_data_list" data-defaultvalue="all">
+                    <option value="all">All</option>
+                    <option value="new">New</option>
+                    <option value="mostviewed">Most Viewed</option>
+                    <option value="featured">Featured</option>
+                  </select>
+                </td>
+              </tr>
+              <!-- show add button -->
+              <tr class="xepan-tool-option">
+                <td class="xepan-tool-option-value"> 
+                  <div class="xepan-tool-option-title">Show Add Button</div>
+                  <select id="list_add_button" data-attr="show_add_button" data-defaultvalue="1">
+                    <option value="1">Yes</option>
+                    <option value="0">No</option>
+                  </select>
+                </td>
+              </tr>
+              <!-- add status filter -->
+              <tr class="xepan-tool-option">
+                <td class="xepan-tool-option-value">
+                  <div class="xepan-tool-option-title">Data Add Status</div>
+                  <select id="listing_default_data_add_status" data-attr="default_data_add_status" ></select>
+                  </select>
+                </td>
+              </tr>
+
+              <!-- Custom add Button name -->
+              <tr class="xepan-tool-option">
+                <td class="xepan-tool-option-value">
+                  <div class="xepan-tool-option-title">Custom Add Button Name</div>
+                  <input data-attr="add_button_name" data-defaultValue=""/>
+                </td>
+              </tr>
+
+              <!-- ADd Form Layout -->
+              <tr class="xepan-tool-option">
+                <td class="xepan-tool-option-value">
+                  <div class="xepan-tool-option-title">Add/Edit Form Layout</div>
+                  <select id="xepan-listing-form-layout" data-attr="listing_add_edit_form_layout" data-defaultvalue="0">
+                  </select>
+                </td>
+              </tr>
+
+              <!-- Allow add to catagory -->
+              <tr class="xepan-tool-option">
+                <td class="xepan-tool-option-value">
+                  <div class="xepan-tool-option-title">Allow category selection</div>
+                  <select id="xepan-listing-form-allow-category" data-attr="listing_add_allow_category_selection" data-defaultvalue="0">
+                    <option value="true">Yes</option>
+                    <option value="false">No</option>
+                  </select>
+                </td>
+              </tr>
+
+              <!-- show edit button -->
+              <tr class="xepan-tool-option">
+                <td class="xepan-tool-option-value"> 
+                  <div class="xepan-tool-option-title">Show Edit Button</div>
+                  <select id="list_edit_button" data-attr="show_edit_button" data-defaultvalue="1">
+                    <option value="1">Yes</option>
+                    <option value="0">No</option>
+                  </select>
+                </td>
+              </tr>
+
+              <!-- show delete button -->
+              <tr class="xepan-tool-option">
+                <td class="xepan-tool-option-value"> 
+                  <div class="xepan-tool-option-title">Show Delete Button</div>
+                  <select id="list_delete_button" data-attr="show_delete_button" data-defaultvalue="1">
+                    <option value="1">Yes</option>
+                    <option value="0">No</option>
+                  </select>
+                </td>
+              </tr>
+              <!-- show add button -->
+              <tr class="xepan-tool-option">
+                <td class="xepan-tool-option-value"> 
+                  <div class="xepan-tool-option-title">Show Quick Search</div>
+                  <select id="show_quick_search" data-attr="show_quick_search" data-defaultvalue="1">
+                    <option value="1">Yes</option>
+                    <option value="0">No</option>
+                  </select>
+                </td>
+              </tr>
+
+              <!-- show_mark_favourite_btn -->
+              <tr class="xepan-tool-option">
+                <td class="xepan-tool-option-value"> 
+                  <div class="xepan-tool-option-title">Show Favourite Button</div>
+                  <select id="show_mark_favourite_button" data-attr="show_mark_favourite_button" data-defaultvalue="1">
+                    <option value="1">Yes</option>
+                    <option value="0">No</option>
+                  </select>
+                </td>
+              </tr>
+
+              <!-- show_list_data_for_created_by_id_of_list -->
+              <tr class="xepan-tool-option">
+                <td class="xepan-tool-option-value"> 
+                  <div class="xepan-tool-option-title">Show list of data created by only </div>
+                  <select data-attr="show_list_data_for_created_by_id_of_list" data-defaultvalue="0">
+                    <option value="1">Yes</option>
+                    <option value="0">No</option>
+                  </select>
+                  <small>param: "listcreatedby" pass created by id in this param</small>
+                </td>
+              </tr>
+
+              <!-- is_filter_affected -->
+              <tr class="xepan-tool-option">
+                <td class="xepan-tool-option-value"> 
+                  <div class="xepan-tool-option-title">Filter Affected</div>
+                  <select id="is_filter_affected" data-attr="is_filter_affected" data-defaultvalue="1">
+                    <option value="1">Yes</option>
+                    <option value="0">No</option>
+                  </select>
+                </td>
+              </tr>
+
+              <tr class="xepan-tool-option">
+                <td class="xepan-tool-option-value">
+                  <div class="xepan-tool-option-title">Select Filters</div>
+                  <select id="listing-filter-affected-values" style="width:100px;" multiple="" data-attr="filter_values" multiselect="multiselect" class="chosen-select listing-list-option-filter-multiselect"></select>
+                  </select>
+                </td>
+              </tr>
+              <!-- show_public_fields -->
+              <tr class="xepan-tool-option">
+                <td class="xepan-tool-option-value"> 
+                  <div class="xepan-tool-option-title">Show Public Fields</div>
+                  <select id="show_public_fields" data-attr="show_public_fields" data-defaultvalue="1">
+                    <option value="1">Yes</option>
+                    <option value="0">No</option>
+                  </select>
+                </td>
+              </tr>
+
+              <!-- show_private_fields -->
+              <tr class="xepan-tool-option">
+                <td class="xepan-tool-option-value">
+                  <div class="xepan-tool-option-title">Show Private Fields</div>
+                  <select id="show_private_fields" data-attr="show_private_fields" data-defaultvalue="onLogin">
+                    <option value="onLogin">Login Required</option>
+                    <option value="0">Never</option>
+                    <option value="always">Always</option>
+                  </select>
+                </td>
+              </tr>
+
+              <!-- show_premium_fields -->
+              <tr class="xepan-tool-option">
+                <td class="xepan-tool-option-value">
+                  <div class="xepan-tool-option-title">Show Premium Fields</div>
+                  <select id="show_premium_fields" data-attr="show_premium_fields" data-defaultvalue="onPremiumUser">
+                    <option value="0">Never</option>
+                    <option value="always">Always</option>
+                    <option value="onLogin">Login Required</option>
+                    <option value="onPremiumUser">Premium User</option>
+                  </select>
+                </td>
+              </tr>
+
+              <!-- status_to_show -->
+              <tr class="xepan-tool-option">
+                <td class="xepan-tool-option-value"> 
+                  <div class="xepan-tool-option-title">Status to Show</div>
+                  <select id="listing_status_to_show" style="width:100px;" multiple="" data-attr="status_to_show" multiselect="multiselect" class="chosen-select listing-list-option-status-multiselect"></select>
+                  </select>
+                </td>
+              </tr>
+
+              <!-- status_to_show -->
+              <tr class="xepan-tool-option">
+                <td class="xepan-tool-option-value">
+                  <div class="xepan-tool-option-title">Categories</div>
+                  <select id="list_of_categories" style="width:100px;" multiple="" data-attr="list_of_categories" multiselect="multiselect" class="chosen-select listing-list-option-category-multiselect"></select>
+                  </select>
+                </td>
+              </tr>
+
+              <!-- Show Detail Button -->
+              <tr class="xepan-tool-option">
+                <td class="xepan-tool-option-value">
+                  <div class="xepan-tool-option-title">Download Button Selector</div>
+                  <input data-attr="download_button_selector" data-defaultValue=".do-action-download"/>
+                </td>
+              </tr>
+
+              <!-- status_to_show -->
+              <tr class="xepan-tool-option">
+                <td class="xepan-tool-option-value">
+                  <div class="xepan-tool-option-title">Display Sequence</div>
+                  <select id="display_sequence" data-attr="display_sequence" data-defaultvalue="desc">
+                    <option value="lifo">Recently Added First</option>
+                    <option value="fifo">First Added First</option>
+                    <option value="asc">Ascending</option>
+                    <option value="desc">Descending</option>
+
+                    <!-- <option value="alphabetasc">Alphabet Ascending </option> -->
+                    <!-- <option value="alphabetdesc">Alphabet Descending </option> -->
+                  </select>
+                </td>
+              </tr>
+              <tr class="xepan-tool-option">
+                <td class="xepan-tool-option-value">
+                  <div class="xepan-tool-option-title">Display Sequence Based On</div>
+                  <input id="display_sequence_based_on" data-attr="display_sequence_based_on" data-defaultvalue="id" />
+                </td>
+              </tr>
+
+              <tr class="xepan-tool-option">
+                <td class="xepan-tool-option-value">
+                  <div class="xepan-tool-option-title">Custom Template</div>
+                  <input data-attr="custom_template"/>
+                </td>
+              </tr>
+
+             <tr class="xepan-tool-option">
+                <td class="xepan-tool-option-value">
+                  <div class="xepan-tool-option-title">List Detail Page</div>
+                  <input data-attr="list_detail_page"/>
+                </td>
+              </tr>
+              
+              <!-- list data set-->
+              <tr class="xepan-tool-option">
+                <td class="xepan-tool-option-value">
+                  <div class="xepan-tool-option-title">Show Detail If Permitted</div>
+                  <select data-attr="show_detail_if_permitted" data-defaultvalue="0">
+                    <option value="1">Yes</option>
+                    <option value="0">No</option>
+                  </select>
+                </td>
+              </tr>
+
+              <tr class="xepan-tool-option">
+                <td class="xepan-tool-option-value">
+                  <div class="xepan-tool-option-title">Show Paginator</div>
+                  <select data-attr="show_paginator" data-defaultvalue="true">
+                    <option value="true">Yes</option>
+                    <option value="false">No</option>
+                  </select>
+                </td>
+              </tr>
+              
+             <tr class="xepan-tool-option">
+                <td class="xepan-tool-option-value">
+                  <div class="xepan-tool-option-title">Data Limit Per Row</div>
+                  <input data-attr="data_row_limit" data-defaultvalue="0"/>
+                </td>
+              </tr>
+            </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <link rel="stylesheet" type="text/css" href="vendor/xepan/commerce/templates/css/chosen.css"/>
+  <script src="vendor/xepan/commerce/templates/js/chosen.jquery.js"></script>
+
+    <script>
+      $('#{$_name} [data-attr]').on('change',function(){
+        $(current_selected_component).attr($(this).data('attr'),$(this).val());
+        // show or hide the toggle class
+        if($(this).data('toggleclass')){
+          var value = $(this).data('togglevalue').toString();
+          if($(this).val() === value){
+            $($(this).data('toggleclass')).show();
+          }else
+            $($(this).data('toggleclass')).hide();
+        }
+      });
+      
+      $('#{$_name} #xepan-listing-id').on('change',function(){
+        // list status
+        $.ajax({
+          url: 'index.php?page=xepan_listing_getrecord_listingstatus',
+          type: 'GET',
+          data: {'listing_id':$(this).val() },
+          success: function ( data ){
+            $('#{$_name} #listing_status_to_show').html(data);
+            $('#{$_name} #listing_default_data_add_status').html(data);
+            $('#{$_name} #listing_default_data_add_status').val($(current_selected_component).attr('default_data_add_status'));
+
+            $('#{$_name} #listing_status_to_show').chosen();
+            $('#{$_name} #listing_status_to_show').chosen({allow_single_deselect: true });
+            
+            if(typeof $(current_selected_component).attr('status_to_show') === 'undefined' ){
+              $("#{$_name} #listing_status_to_show").val("\{\}").trigger("chosen:updated");
+            }else{
+              var str = $(current_selected_component).attr('status_to_show');
+              $("#{$_name} #listing_status_to_show").val(str.split(',')).trigger("chosen:updated");
+            }
+          }
+        });
+
+        // list status
+        $.ajax({
+          url: 'index.php?page=xepan_listing_getrecord_listingcategory',
+          type: 'GET',
+          data: {'listing_id':$(this).val() },
+          success: function ( data ){
+            $('#{$_name} #list_of_categories').html(data);
+            $('#{$_name} #list_of_categories').chosen();
+            $('#{$_name} #list_of_categories').chosen({allow_single_deselect: true });
+
+            if(typeof $(current_selected_component).attr('list_of_categories') === 'undefined' ){
+              $("#{$_name} #list_of_categories").val("\{\}").trigger("chosen:updated");
+            }else{
+              var str = $(current_selected_component).attr('list_of_categories');
+              $("#{$_name} #list_of_categories").val(str.split(',')).trigger("chosen:updated");
+            }
+          }
+        });
+
+        $.ajax({
+          url: 'index.php?page=xepan_listing_getrecord_listingdataset',
+          type: 'GET',
+          data: {'listing_id':$(this).val() },
+          success: function ( data ){
+            $('#{$_name} #xepan-listing-data-set-id').html(data);
+            $('#{$_name} #xepan-listing-data-set-id').val($(current_selected_component).attr('list_data_set_id'));
+          }
+        });        
+
+        $.ajax({
+          url: 'index.php?page=xepan_listing_getrecord_listlayout',
+          type: 'GET',
+          data: {'list_id':$(this).val() },
+          success: function ( data ){
+            $('#{$_name} #xepan-listing-form-layout').html(data);
+            $('#{$_name} #xepan-listing-form-layout').set($(current_selected_component).attr('listing_add_edit_form_layout'));
+          }
+        });
+
+        $.ajax({
+          url: 'index.php?page=xepan_listing_getrecord_listfilter',
+          type: 'GET',
+          data: {'listing_id':$(this).val() },
+          success: function ( data ){
+            $('#{$_name} #listing-filter-affected-values').html(data);
+            $('#{$_name} #listing-filter-affected-values').chosen();
+            $('#{$_name} #listing-filter-affected-values').chosen({allow_single_deselect: true });
+            if(typeof $(current_selected_component).attr('filter_values') === 'undefined' ){
+              $("#{$_name} #listing-filter-affected-values").val("\{\}").trigger("chosen:updated");
+            }else{
+              var str = $(current_selected_component).attr('filter_values');
+              $("#{$_name} #listing-filter-affected-values").val(str.split(',')).trigger("chosen:updated");
+            }
+          }
+        });
+        // $('.chosen-choices').css('width','120px');
+
+        // get list data model fields 
+        // $.ajax({
+        //   url: 'index.php?page=xepan_listing_getrecord_listingactualfields',
+        //   type: 'GET',
+        //   data: {'listing_id':$(this).val() },
+        //   success: function ( data ){
+        //     $('#{$_name} #display_sequence_based_on').html(data);
+        //     $('#{$_name} #display_sequence_based_on').set($(current_selected_component).attr('display_sequence_based_on'));
+        //   }
+        // });
+      }); 
+
+      $('#{$_name}').on('show',function(event){
+
+        // all listing
+        $.ajax({
+          url: 'index.php?page=xepan_listing_getrecord_list',
+          type: 'GET',
+          data: { },
+          success: function ( data ){
+            $('#{$_name} #xepan-listing-id').html(data);
+            $('#{$_name} #xepan-listing-id').val($(current_selected_component).attr('listing_id')).trigger('change');
+          }
+        });
+
+        $('#{$_name} [data-attr]').each(function(index,value){
+          // setting up default value if no option selected
+          var default_value = $(this).attr('data-defaultvalue');
+          if($(current_selected_component).attr($(this).data('attr')))
+            default_value = $(current_selected_component).attr($(this).data('attr'));
+          
+          $(this).val(default_value);
+        });
+        
+        //- chosen multiselect options
+        if(typeof $(current_selected_component).attr('show_item_of_category') === 'undefined' ){
+          $("#{$_name} .multiselect").val("\{\}").trigger("chosen:updated");
+          // $(current_selected_component).attr('filter_values')
+        }else{
+          var str = $(current_selected_component).attr('show_item_of_category');
+          $("#{$_name} .multiselect").val(str.split(',')).trigger("chosen:updated");
+        }
+
+        // filter values
+        if(typeof $(current_selected_component).attr('filter_values') === 'undefined' ){
+          $("#{$_name} #listing-filter-affected-values").val("\{\}").trigger("chosen:updated");
+        }else{
+          var str = $(current_selected_component).attr('filter_values');
+          $("#{$_name} #listing-filter-affected-values").val(str.split(',')).trigger("chosen:updated");
+        }
+
+      });
+    </script>
+</div>

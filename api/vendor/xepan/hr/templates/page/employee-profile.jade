@@ -1,0 +1,32 @@
+#user-profile
+  .col-lg-12.col-md-12.col-sm-12
+    {$contact_view_full_width}
+  .col-lg-3.col-md-4.col-sm-4
+    {$contact_view}
+  {details}  
+  .col-lg-9.col-md-8.col-sm-8
+    .main-box.clearfix
+      .tabs-wrapper.profile-tabs
+        ul.nav.nav-tabs.responsive-tabs
+          li.active
+            a(data-toggle='tab' href='#tab-portfolio') Portfolio
+          li
+            a(data-toggle='tab' href='#tab-official') Official
+          li
+            a(data-toggle='tab' href='#tab-activity') Activity
+          li
+            a(data-toggle='tab' href='#tab-documents') Documents
+          li
+            a(data-toggle="tab" href='#tab-salary') Salary Ledger
+        .tab-content
+          #tab-portfolio.tab-pane.active
+            {portfolio_view}Please Save Basic Information First{/}
+          #tab-official.tab-pane
+            {$official_info}
+           #tab-activity.tab-pane
+            {$activity_view}
+          #tab-documents.tab-pane
+            {$document_view}
+          #tab-salary.tab-pane
+            {$salary_view}
+  {/}                       

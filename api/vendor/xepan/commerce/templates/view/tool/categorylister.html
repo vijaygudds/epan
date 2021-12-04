@@ -1,0 +1,21 @@
+<div id="{$_name}" class="{$class}" style="{$style}" {$attributes}>
+  {category_list}
+  <ul>
+    {rows}{row}
+      <li data-id="{$id}" class="{$active_category}">
+        <a href="{$url}">{$name} </a>
+            {item_count_wrapper}<small>{$item_count} - items </small>{/}
+            {image_wrapper}
+              <img src="{$category_image_url}"/>
+            {/}
+        {price_wrapper}
+          <p>{$min_price} - {$max_price}</p>
+        {/}
+        {nested_category_wrapper}
+        <div>{$nested_category}</div> 
+        {/}
+      </li>
+    {/}{/}
+  </ul>
+  {/}
+</div>

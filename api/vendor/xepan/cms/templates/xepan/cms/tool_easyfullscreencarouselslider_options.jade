@@ -1,0 +1,40 @@
+.xepan-tool-options(id='{$_name}' style="display:none" for-xepan-component='xepan/cms/Tool_EasyFullscreenCarouselSlider')
+	//- .xepan-cms-group-panel.clearfix
+	//- 	h3.collapsed(data-toggle="collapse" data-target="#collapse-carousel" aria-expanded="false")
+	//- 		span Content Slider
+	//- 	#collapse-carousel.xepan-cms-tools-bar-panel.row-fluid.collapse.in
+	//- 		.panel-body
+	table.table-condensed.table-hover.xepan-cms-tool-table
+		tr.category
+			.xepan-tool-option
+				td.xepan-tool-option-title Gallery
+		tr		
+				td.xepan-tool-option-value(colspan="2")
+					select.chosen-select.option-category(id="{$_name}_dropdown" style="width:150px;" data-attr='slider_category')
+	script.
+
+		$.ajax({
+			url: 'index.php?page=xepan_cms_getAwesomegallery',
+			type: 'GET',
+			data: { },
+			success: function ( data ){
+				//- console.log(data);
+				$('\#{$_name}_dropdown').html(data);
+			}
+		});
+
+		$('\#{$_name} [data-attr]').on('change',function(){
+			$(current_selected_component).attr($(this).data('attr'),$(this).val());
+		});
+
+		$('\#{$_name}').on('show',function(event){
+			$('\#{$_name} [data-attr]').each(function(index,value){
+				$(this).val($(current_selected_component).attr($(this).data('attr')));				
+			});
+		});
+
+		$('.option-category').change(function(event) {
+			$(current_selected_component).attr('data-options',$('.option-category').val());
+			$(current_selected_component).univ().errorMessage('Save and reload Page to see changes');
+		});
+

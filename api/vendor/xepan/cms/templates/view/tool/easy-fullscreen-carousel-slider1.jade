@@ -1,0 +1,53 @@
+.xepan-component.xepan-easy-fullscreen-carousel(id='{$_name}', data-ride='carousel' xepan-component-name="Full Screen Carousel")
+	link(rel="stylesheet" href="vendor/xepan/cms/templates/css/style.css")
+	link(rel="stylesheet" href="vendor/xepan/cms/templates/css/swiper.min.css")
+	script(src="vendor/xepan/cms/templates/js/swiper.jquery.min.js")
+	script(src="vendor/xepan/cms/templates/js/swiper.js")
+	.s-swiper.js__swiper-slider
+		.swiper-wrapper
+			{rows}{row}
+			.s-promo-block-v4.g-fullheight--xs.g-bg-position--center.swiper-slide(class="{$active}" style='background:rgba(0, 0, 0, 0) url("{file}/xepan2/websites/sss/www/img/13.jpg{/}") repeat scroll 0 0;')
+				{show_text_wrapper}
+				.container.g-ver-center--xs
+					.row
+						.col-md-7.col-md-offset-5
+							.g-margin-b-50--xs
+								h1.g-font-size-32--xs.g-font-size-45--sm.g-font-size-60--md.g-color--white
+									{title}
+									| Medical Services
+									br
+									| that You Can Trust
+									{/title}
+								.g-font-size-18--xs.g-font-size-22--sm.g-color--white-opacity
+									{text_to_display}
+									| A clinic is a healthcare facility that is primarily focused on the care of outpatients.
+									{/text_to_display}
+							//- a.text-uppercase.s-btn.s-btn--md.s-btn--white-brd.g-radius--50.g-padding-x-50--xs(href='http://themeforest.net/item/metronic-responsive-admin-dashboard-template/4021469?ref=keenthemes') Read More
+				{/}
+			{/row}
+			.s-promo-block-v4.g-fullheight--xs.g-bg-position--center.swiper-slide(style='background: rgba(0, 0, 0, 0) url("/xepan2/websites/sss/www/img/14.jpg") repeat scroll 0 0;')
+				.container.g-text-right--xs.g-ver-center--xs
+					.row
+						.col-md-7.col-md-offset-5
+							.g-margin-b-50--xs
+								h2.g-font-size-32--xs.g-font-size-45--sm.g-font-size-55--md.g-color--white
+									| Medical Excellence
+									br
+									| Every Day
+								p.g-font-size-18--xs.g-font-size-22--sm.g-color--white-opacity Clinics can be privately operated or publicly managed and funded.
+							a.text-uppercase.s-btn.s-btn--md.s-btn--white-brd.g-radius--50.g-padding-x-50--xs(href='http://themeforest.net/item/metronic-responsive-admin-dashboard-template/4021469?ref=keenthemes') Read More
+			{/rows}
+		.s-swiper__pagination-v1.s-swiper__pagination-v1--bc.s-swiper__pagination-v1--white.js__swiper-pagination
+
+script.
+	$(function() {
+		var header = $(".s-header");
+		$(window).scroll(function() {    
+			var scroll = $(window).scrollTop();
+				if (scroll <= 100) {
+					header.removeClass('s-header__shrink');
+				} else {
+					header.addClass('s-header__shrink');
+				}
+			});
+		});

@@ -1,0 +1,14 @@
+.modal.fade.model-lg(id='{$_name}', aria-labelledby='{$_name}label', role='dialog', class='{$_name} {$class}' style=" {$style}")
+  .modal-dialog(role='document' style='z-index:4096')
+    .modal-content
+      .modal-header
+        button.close(aria-label='Close', data-dismiss='modal', type='button')
+          span(aria-hidden='true') ×
+        h4.modal-title(id='{$_name}label') {title}Untitle{/}
+      .modal-body
+        | {$Content}
+      .modal-footer
+        | {footer}
+        | {$close_button}
+        | {$save_button}
+        | {/}

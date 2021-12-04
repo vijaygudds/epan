@@ -1,0 +1,35 @@
+{
+    "name": "xepan/omnipay-instamojo",
+    "type": "library",
+    "description": "Instamojo API v1.1 driver for the Omnipay PHP payment processing library: credit : gentor/omnipay-instamojo",
+    "keywords": [
+        "gateway",
+        "merchant",
+        "omnipay",
+        "pay",
+        "payment",
+        "purchase",
+        "instamojo"
+    ],
+    "homepage": "https://github.com/xepan/omnipay-instamojo",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Evgeni Nurkov",
+            "email": "evgeni.nurkov@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "autoload": {
+        "psr-0": { "Omnipay\\Instamojo\\" : "src/" }
+    },
+    "require": {
+         "php": ">=5.4"
+    },
+    "require-dev": {
+        "omnipay/tests": "dev-master"
+    },
+    "suggests" : {
+        "omnipay/common": "~2.0"
+    }
+}

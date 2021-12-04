@@ -1,0 +1,95 @@
+
+<div id="{$_name}">
+  <div id="email-box" style="margin-left:0px" class="email-detail-nano has-scrollbar">
+    {back_to_support_ticket_btn_wrapper}    
+    <button title="Back to Support Ticket" class="btn btn-success back-to-support-ticket"><i class="fa fa-arrow-left"></i></button>
+    {/}
+
+    <div tabindex="0" style="right: -13px;" class="email-detail-nano-content">
+      <div id="email-detail-inner">
+        <div id="email-detail-subject" class="clearfix"><span class="subject">{$subject}</span><span class="label label-success">{$status}</span>
+          <div style="margin-right:7%" class="pull-right">{$action}</div>
+        </div>
+        <div id="email-detail-sender" style="height:auto;" class="clearfix">
+          <div class="picture hidden-xs">{avatar}{/}
+          </div>
+          <div style="width:88%" class="users">
+            <div class="from clearfix">
+              <div class="name">{$from_name},  {from_email}|{/}</div>
+              <div class="email hidden-xs"></div>
+            </div>
+            <div class="to">
+              To:
+              {to_lister}
+              {rows}{row} <span>{name} {/} ,&nbsp;{email}{/}&nbsp;&nbsp;</span>{/}{/}
+              {/}
+            </div>
+            <div class="to">
+              Cc:
+              {cc_lister}
+              {rows}{row} <small>{name}{/},&nbsp;{email} {/}&nbsp;&nbsp;</small>{/}{/}
+              {/}
+            </div>
+            <div class="to">Bcc: <small>{$bcc_name}</small></div>
+          </div>
+          <div class="tools">
+            <div class="date">{callback_date}{/}</div>
+          </div>
+        </div>
+        <div id="email-body">
+          <div id="accordion" class="panel-group accordion">
+            <div class="panel panel-default">
+              <div class="panel-heading">
+                <h4 style="height: 20px;overflow: hidden;" class="panel-title"><a href="#collapseTwo" data-parent="#accordion" data-toggle="collapse" class="accordion-toggle collapsed">{collapse_header}{/}</a></h4>
+              </div>
+              <div id="collapseTwo" style="height: 2px;" class="panel-collapse collapse">
+                <div class="panel-body">{email_body}  {/}
+                  <div id="email-detail-attachments">
+                    <div id="email-attachments-header" class="clearfix">
+                      <div class="headline">{check_attach}<i class="fa fa-paperclip">&nbsp;</i><span>Attachments : </span><b>{ticket_attachment}{/}</b>{/}</div>
+                      <div class="tools">
+                      </div>
+                    </div>
+                    <div id="email-attachments-content">{Attachments}
+                      <ul class="clearfix">{rows}{row}
+                        <li>
+                          <div class="img"><a href="#"><img alt="" src="{file}img/samples/hdr/small/img_5.jpg{/}"/></a></div><span class="name"></span><a href="{$file}" download="download">Download</a>{/}
+                        </li>
+                      </ul>{/}{/}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>{$comment_view}
+    {reply_wrapper}    
+    <div class="xepan-crm-reply-tool xepan-crm-reply-tool-closed"><a class="xepan-crm-reply-tool-cog btn-success">Reply</a>
+      <div class="xepan-crm-communication-reply-view">
+        <div class="header btn-primary">Reply To {$to_email}<i class="fa fa-close pull-right close-reply-comment-popup"> </i>
+        </div>
+        <div class="xepan-crm-form-inner">{$reply_form}    </div>
+      </div>
+    </div>{/reply_wrapper}    
+  </div>
+</div>
+<style>
+  .accordion .panel-title > a::after {
+      top: 18%;
+  }
+  .email-detail-nano .xepan-crm-communication-reply-view .col-md-2, 
+  .email-detail-nano .xepan-crm-communication-reply-view .col-md-3,
+  .email-detail-nano .xepan-crm-communication-reply-view .col-md-4,
+  .email-detail-nano .xepan-crm-communication-reply-view .col-md-5,
+  .email-detail-nano .xepan-crm-communication-reply-view .col-md-6 {
+    width:100%!important;
+  }  
+  
+</style>
+<script>
+  $(".xepan-crm-reply-tool-cog").click(function(){
+      $(this).parent('div.xepan-crm-reply-tool').toggleClass("xepan-crm-reply-tool-closed");
+  });
+</script>

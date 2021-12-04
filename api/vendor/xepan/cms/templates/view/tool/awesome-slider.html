@@ -1,0 +1,16 @@
+
+<div id="{$_name}" style=" {$style}" data-awesome-theme="" paginator-position="" xepan-component-name="Awesome Slider" class="xepan-component {$class}"><b contenteditable="true" class="editor"></b>
+  <link rel="stylesheet" type="text/css" href="vendor/xepan/cms/templates/css/awesome/themes/default/default.css"/>
+  <link rel="stylesheet" type="text/css" href="vendor/xepan/cms/templates/css/awesome/themes/bar/bar.css"/>
+  <link rel="stylesheet" type="text/css" href="vendor/xepan/cms/templates/css/awesome/themes/dark/dark.css"/>
+  <link rel="stylesheet" type="text/css" href="vendor/xepan/cms/templates/css/awesome/themes/light/light.css"/>
+  <link rel="stylesheet" type="text/css" href="vendor/xepan/cms/templates/css/awesome/nivo-slider.css"/>
+  <script type="text/javascript" src="vendor/xepan/cms/templates/js/awesome/jquery.nivo.slider.js"></script>{$Content}  
+  <div class="slider-wrapper {theme_css}theme-default{/theme_css}">
+    <div id="slider_{$_name}" class="nivoSlider">
+      {rows}
+      {row}<img src="{$file}" title="{$tag}" data-thumb="{$file}" alt="" data-transition="{$effects}"/>{/row}
+      {/rows}
+    </div>
+  </div>
+</div>

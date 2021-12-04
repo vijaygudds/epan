@@ -1,0 +1,70 @@
+
+<div id="{$_name}">
+  <div id="email-box" style="margin-left:0px" class="email-detail-nano has-scrollbar">
+    <div tabindex="0" style="right: -13px;" class="email-detail-nano-content">
+      <div id="email-detail-inner">
+        <div id="email-detail-subject" class="clearfix"><span class="subject">{subject}FW: Like your new movie{/}</span><span class="label label-success">{status}Work{/}</span></div>
+        <div id="email-detail-sender" style="height:auto;" class="clearfix">
+          <div class="picture hidden-xs">{avatar}{/}
+          </div>
+          <div style="width:88%" class="users">
+            <div class="from clearfix">
+              <div class="name">{communication_with}| Angelina Jolie{/}</div>
+              <div class="email hidden-xs"></div>
+            </div>
+            <div class="to">
+              To:
+              {to_lister}
+              {rows}{row} <span>{name} Me{/} ,&nbsp;{email} Brad Pitt{/}&nbsp;&nbsp;</span>{/}{/}
+              {/}
+            </div>
+            <div class="to">
+              Cc:
+              {cc_lister}
+              {rows}{row} <small>{name}Me{/},&nbsp;{email} Brad Pitt{/}&nbsp;&nbsp;</small>{/}{/}
+              {/}
+            </div>
+            <div class="to">Bcc: <small>{$bcc_name}</small></div>
+          </div>
+          <div class="tools">
+            <div class="date">{callback_date}Sep 12 (6 days ago){/}</div>
+            <div class="btns">
+              <div class="btn-group">
+                <button type="button" class="reply btn btn-success">
+                  <ul>
+                    <li><a data-id="{$id}"><i class="fa fa-mail-reply"></i></a></li>
+                  </ul>
+                </button>
+                <button type="button" data-toggle="dropdown" class="btn btn-success dropdown-toggle"><span class="caret"></span></button>
+                <ul class="dropdown-menu">
+                  <li class="reply"><a data-id="{$id}"><i class="fa fa-mail-reply"></i> Reply</a></li>
+                  <li class="reply-all"><a data-id="{$id}"><i class="fa fa-mail-reply-all"></i> Reply all</a></li>
+                  <li class="forward"><a data-id="{$id}"><i class="fa fa-mail-forward"></i> Forward</a></li>
+                  <li class="print"><a data-id="{$id}"><i class="fa fa-print"></i> Print</a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div id="email-body" style="width:100%;overflow:scroll">{email_body}
+          <p>Hey Scarlett,</p>
+          <p>
+            Well, the way they make shows is, they make one show. That show's called a pilot. Then they
+            show that show to the people who make shows, and on the strength of that one show they decide
+            if they're going to make more shows. <a href="#">Some pilots</a> get picked and become television
+            programs. Some don't, become nothing. She starred in one of the ones that became nothing.
+          </p>{/}
+        </div>
+        <div id="email-detail-attachments">
+          <div id="email-attachments-header" class="clearfix">
+            <div class="headline">{check_attach}<i class="fa fa-paperclip">&nbsp;</i><span>Attachments : </span><b>{attachment_count}( 3 ){/}</b>{/}</div>
+            <div class="tools">
+            </div>
+          </div>
+          <div id="email-attachments-content">{$Attachments}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

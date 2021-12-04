@@ -1,0 +1,88 @@
+
+<div id="{$_name}" style="display:none" for-xepan-component="xepan/cms/Tool_PopupToolTip" class="xepan-tool-options">
+  <table class="table-condensed table-hover xepan-cms-tool-table">
+    <tr>
+      <td>Mode</td>
+      <td>
+        <div class="btn-group btn-group-xs">
+          <button id="popup_edit_mode" type="button" value="edit mode" class="btn btn-success">Edit</button>
+          <button id="popup_view_mode" type="button" value="view mode" class="btn btn-primary">View</button>
+        </div>
+      </td>
+    </tr>
+
+    <tr>
+      <td>Show Button</td>
+      <td>
+        <select data-attr="showmodalbutton" data-defaultvalue="false" id="{$_name}_showmodalbutton">
+          <option value="true">Yes</option>
+          <option value="false">No</option>
+        </select>
+      </td>
+    </tr>
+    <tr>
+      <td>Button Text</td>
+      <td>
+        <input type="text" id="xpopup_trigger_label" data-defaultvalue="Launch demo modal" />
+      </td>
+    </tr>
+    <tr>
+      <td>Show On Page load</td>
+      <td>
+        <select data-attr="modalonpageload" data-defaultvalue="false" id="{$_name}_showonpageload">
+          <option value="true">Yes</option>
+          <option value="false">No</option>
+        </select>
+      </td>
+    </tr>
+
+    <tr>
+      <td>Show Footer Section</td>
+      <td>
+        <select data-attr="showfootersection" data-defaultvalue="true" id="{$_name}_showfootersection">
+          <option value="true">Yes</option>
+          <option value="false">No</option>
+        </select>
+      </td>
+    </tr>
+
+  </table>
+  <script>
+    $('#{$_name} [data-attr]').on('change',function(){
+    	$(current_selected_component).attr($(this).data('attr'),$(this).val());
+    });
+    
+    $('#{$_name}').on('show',function(event){
+    	$('#{$_name} [data-attr]').each(function(index,value){
+        // setting up default value if no option selected
+        var default_value = $(this).attr('data-defaultvalue');
+        if($(current_selected_component).attr($(this).data('attr')))
+          default_value = $(current_selected_component).attr($(this).data('attr'));
+        
+        $(this).val(default_value);
+      });
+
+    });
+    
+    $('#popup_edit_mode').click(function(event) {
+    	//console.log($('#myModal11'+$(current_selected_component).attr('id')));
+    	// $( "div.xpopup" ).css( "background-color", "red" ).removeClass('modal fade');
+    	$(current_selected_component).find( "div.xpopup" ).removeClass('modal fade').css('display','block');
+    	$(current_selected_component).find( "button.xpopup-btn" ).css('display','inline');
+    
+    	$('#epan-quick-component-options').hide('slideup');
+    
+    });
+    
+    $('#popup_view_mode').click(function(event) {
+    	$(current_selected_component).find( "div.xpopup" ).addClass('modal fade').css('display','none');
+    	$(current_selected_component).find( "button.xpopup-btn" ).css('display','none');
+    	// $('#myModal11'+$(current_selected_component).attr('id')).addClass('modal fade');
+    });
+    
+    $('#xpopup_trigger_label').change(function(event) {
+    	$(current_selected_component).find('div.xpopup_trigger').html($("#xpopup_trigger_label").val());
+    });
+
+  </script>
+</div>

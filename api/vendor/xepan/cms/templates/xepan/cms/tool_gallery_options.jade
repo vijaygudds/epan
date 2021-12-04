@@ -1,0 +1,82 @@
+.xepan-tool-options(id='{$_name}' style="display:none" for-xepan-component='xepan/cms/Tool_Gallery')
+	.xepan-cms-group-panel.clearfix
+		#collapse-item-list.xepan-cms-tools-bar-panel.row-fluid.collapse.in
+			.panel-body(style="padding-top:0px;padding-bottom:0px;")
+				.xepan-cms-groups-panel.collapse.in(id="xepan-cms-groups-panel")
+				//- .xepan-cms-group-panel.clearfix
+				//- 	div.panel.panel-heading.panel-primary.collapsed(data-toggle="collapse" data-target="#show-hide-gallery-option" aria-expanded="false")
+				//- 		span Hide/ Show
+				//- 		i.fa.fa-chevron-down.pull-right
+				#show-hide-gallery-option.xepan-cms-tools-bar-panel.row-fluid.collapse.in
+					table.table.table-condensed.table-hover.xepan-cms-tool-table
+						tr.xepan-tool-option
+							td.xepan-tool-option-title Gallery Type
+							td.xepan-tool-option-value
+								select#gallery_type(data-attr='gallery_type' data-defaultvalue="portfolio" data-togglevalue="portfolio" data-toggleclass=".xepan-cms-gallery-p-option")
+									option(value="portfolio") Portfolio
+									option(value="googlegallery") Google Gallery
+						tr.xepan-tool-option.xepan-cms-gallery-p-option
+							td.xepan-tool-option-title Detail Page
+							td.xepan-tool-option-value
+								input#detail_page(data-attr='detail_page')
+						tr.show-text.xepan-cms-gallery-p-option
+							td.xepan-tool-option-title Show Fancybox
+							td.xepan-tool-option-value
+								select#show_fancybox(data-attr='show_fancybox' data-defaultvalue="true")
+									option(value="true") Yes
+									option(value="false") No
+						tr.show-text.xepan-cms-gallery-p-option
+							td.xepan-tool-option-title Show Link
+							td.xepan-tool-option-value
+								select#show_link(data-attr='show_link' data-defaultvalue="true")
+									option(value="true") Yes
+									option(value="false") No
+						tr.show-text
+							td.xepan-tool-option-title Show Title
+							td.xepan-tool-option-value 
+								select#show_title(data-attr='show_title' data-defaultvalue="true")
+									option(value="true") Yes
+									option(value="false") No
+						tr.show-description
+							td.xepan-tool-option-title Show Description
+							td.xepan-tool-option-value
+								select#show_title(data-attr='show_description' data-defaultvalue="true")
+									option(value="true") Yes
+									option(value="false") No
+						tr.category
+							td.xepan-tool-option-title Category
+							td.xepan-tool-option-value(colspan="2")
+								select.chosen-select.option-category(id="{$_name}_dropdown" style="width:100%;" data-attr='img_gallery_category')
+	script.
+		$.ajax({
+			url: 'index.php?page=xepan_cms_getimagegallerycategory',
+			type: 'GET',
+			data: { },
+			success: function ( data ){
+				//- console.log(data);
+				$('\#{$_name}_dropdown').html(data);
+			}
+		});
+		
+		$('\#{$_name} [data-attr]').on('change',function(){
+			$(current_selected_component).attr($(this).data('attr'),$(this).val());
+
+			if($(this).data('toggleclass')){
+				var value = $(this).data('togglevalue').toString();
+				if($(this).val() === value){
+					$($(this).data('toggleclass')).show();
+				}else
+					$($(this).data('toggleclass')).hide();
+			}
+		});
+
+		$('\#{$_name}').on('show',function(event){
+			$('\#{$_name} [data-attr]').each(function(index,value){
+				// setting up default value if no option selected
+				var default_value = $(this).attr('data-defaultvalue');
+				if($(current_selected_component).attr($(this).data('attr')))
+					default_value = $(current_selected_component).attr($(this).data('attr'));
+				
+				$(this).val(default_value);
+			});
+		});

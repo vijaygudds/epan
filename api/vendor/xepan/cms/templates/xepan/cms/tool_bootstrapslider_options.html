@@ -1,0 +1,100 @@
+
+<div id="{$_name}" style="display:none" for-xepan-component="xepan/cms/Tool_BootStrapSlider" class="xepan-tool-options">
+  <table class="table-condensed table-hover xepan-cms-tool-table">
+    <tr>
+      <td>
+        <div class="input-group input-group-sm">
+          <input type="text" id="epan-slideshow-add-slide-input" class="form-control"/><span class="input-group-btn">
+            <button id="epan-slideshow-add-slide-button" type="button" class="btn btn-default">Add Image</button></span>
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <div id="epan-slideshow-options" class="panel-group">
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <h3 class="panel-title"></h3><a data-toggle="collapse" data-parent="#epan-slideshow-options" href="#epan-slideshow-slide-list">Added Slides</a>
+            </div>
+            <div id="epan-slideshow-slide-list" class="panel-collapse collapse in">
+              <div class="panel-body">
+                <ul id="epan-slideshow-options-slide-list"></ul>
+              </div>
+            </div>
+            <button id="epan-slideshow-option-delete-last-slide" role="button" class="btn btn-warning btn-block btn-sm">Delete Last Slide</button>
+          </div>
+        </div>
+      </td>
+    </tr>
+  </table>
+  <script>
+    $('#{$_name} [data-attr]').on('change',function(){
+    	$(current_selected_component).attr($(this).data('attr'),$(this).val());
+    });
+    
+    $('#{$_name}').on('show',function(event){
+    	$('#{$_name} [data-attr]').each(function(index,value){
+    		$(this).val($(current_selected_component).attr($(this).data('attr')));				
+    	});
+    });
+    
+    $('#epan-slideshow-add-slide-button').click(function(event) {
+    	
+    	var fm = $('<div/>').dialogelfinder({
+    			url : '?page=xepan_base_elconnector',
+    			lang : 'en',
+    			width : 840,
+    			destroyOnClose : true,
+    			getFileCallback : function(files, fm) {
+    				console.log(files.url);
+    				$('#epan-slideshow-add-slide-input').val(files.url);
+    				$(current_selected_component).find('.item').removeClass('active')
+    				$('<div class="item active"><img src="'+files.url+'" style="width:100%; max-width:100%; height:auto; "/></div>')
+    					.appendTo('#'+$(current_selected_component).attr('id')+ ' .carousel-inner');
+    				
+    				{$component_type}_options.show();
+    				console.log(files);
+    			},
+    			commandsOptions : {
+    				getfile : {
+    					oncomplete : 'close',
+    					folders : true
+    				}
+    			}
+    		}).dialogelfinder('instance');
+    	});
+    
+    $('#epan-slideshow-option-delete-last-slide').click(function(event) {
+    	if($('#'+$(current_selected_component).attr('id')+ ' .item').length == 1){
+    		$('body').univ().errorMessage('Cannot Delete Last Slide.. Either delete slideshow or add another slide first to delete this slide.');
+    		return;
+    	}
+    	$('#'+$(current_selected_component).attr('id')+ ' .item:last-child').remove();
+    	$('#'+$(current_selected_component).attr('id')+ ' .item').removeClass('active');
+    	$('#'+$(current_selected_component).attr('id')+ ' .item:last-child').addClass('active');
+    	{$component_type}_options.show();
+    });
+    
+    $('#epan-slideshow-options-slide-list').sortable({
+    	stop : function(event,ui) {
+    		$('#'+$(current_selected_component).attr('id') + ' .item:nth-child('+(epan_slideshow_option_item_moving+1)+')').insertBefore('#'+$(current_selected_component).attr('id') + ' .item:nth-child('+ ((ui.item.index()*1)+1)+')');
+    		console.log('moving from ' + (epan_slideshow_option_item_moving+1) + ' to ' + (ui.item.index()*1)+1);
+    	},
+    	start: function(event,ui){
+    		epan_slideshow_option_item_moving = ui.item.index();
+    	}
+    });
+    
+    
+    
+    var {$component_type}_options = {
+    	show: function (){
+    		$('#epan-slideshow-options-slide-list').children().remove();
+    		$(current_selected_component).find('.item').each(function(index, el) {
+    			slide = $('<li>').html($(el).find('img').attr('src')).appendTo('#epan-slideshow-options-slide-list');
+    		});
+    		$('#epan-slideshow-options-slide-list').selectable();
+    	}
+    }
+  </script>
+</div>

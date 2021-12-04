@@ -1,0 +1,158 @@
+.xepan-tool-options(id='{$_name}' style="display:none;" for-xepan-component='xepan/cms/Tool_Icon')
+	//- h3.collapsed(data-toggle="collapse" data-target="#collapse-xepan-icon" aria-expanded="false")
+	//- #collapse-xepan-icon.xepan-cms-tools-bar-panel.row-fluid.collapse.in
+	//- 	.xepan-toolbar-panel-body
+	table.table-condensed.table-hover.xepan-cms-tool-table
+		tr
+			.xepan-tool-option
+				td.xepan-tool-option-value(colspan="2")
+					div.input-group.input-group-sm
+						span.input-group-btn
+							button#xepan-cms-icon-dialog-btn.btn.btn-default.btn-sm(data-align="left" data-icon="fa-leaf" role="iconpicker") Select Icon
+								i.fa.fa-leaf
+						span.input-group-addon(style="padding:0px;margin:0px;background-color:white;")
+							select#xepan-cms-icon-size(data-attr='icon-size' data-defaultvalue="fa-1x")
+								option(value="fa-1x" selected="selected") 1x
+								option(value="fa-2x" ) 2x
+								option(value="fa-3x" ) 3x
+								option(value="fa-4x" ) 4x
+								option(value="fa-5x" ) 5x
+						input#xepan-cms-icon-class(type="text" class="form-control" value="fa-leaf" data-attr="icon-class")
+		tr
+			.xepan-tool-option
+				td.xepan-tool-option-title Link
+				td.xepan-tool-option-value
+					input#xepan-cms-icon-link(data-attr='icon-link' style="width:80%;")
+		tr
+			.xepan-tool-option
+				td.xepan-tool-option-title Target
+				td.xepan-tool-option-value
+					select#xepan-cms-icon-target(data-attr='icon-link-target' data-defaultvalue="none")
+							option(value="none" selected) None
+							option(value="window") New Window
+		tr
+			.xepan-tool-option
+				td.xepan-tool-option-title Alignment
+				td.xepan-tool-option-value
+					div.btn-group.btn-group-xs
+						button.btn.btn-default.xepan-cms-icon-alignment(type="button" aria-label="Left Align" icon-align="text-left" title="Left")
+							span.glyphicon.glyphicon-align-left
+						button.btn.btn-default.xepan-cms-icon-alignment.active(type="button" aria-label="Left Align" icon-align="text-center" title="Center")
+							span.glyphicon.glyphicon-align-center
+						button.btn.btn-default.xepan-cms-icon-alignment(type="button" aria-label="Left Align" icon-align="text-right" title="Right")
+							span.glyphicon.glyphicon-align-right
+								
+	script.
+		$('\#{$_name} [data-attr]').on('change',function(){
+			$(current_selected_component).attr($(this).data('attr'),$(this).val());
+		});
+
+		$('\#{$_name}').on('show',function(event){
+			$('\#{$_name} [data-attr]').each(function(index,value){
+				$(this).val($(current_selected_component).attr($(this).data('attr')));
+			});
+
+			$('\#{$_name} #xepan-cms-icon-dialog-btn').iconpicker('setIcon',$(current_selected_component).attr('icon-class'));
+			
+			$('\#{$_name} .xepan-cms-icon-alignment').removeClass('active');
+			$('\#{$_name} .xepan-cms-icon-alignment[icon-align="'+$(current_selected_component).attr('icon-align')+'"]').addClass('active');
+		});
+
+		//- icon input box changed
+		$('\#{$_name} #xepan-cms-icon-class').on('change',function(){
+			$(current_selected_component).removeClass (function (index, className) {
+				return (className.match (/(^|\s)fa-\S+/g) || []).join(' ');
+			}).addClass($(this).val());
+		});
+
+		//- icon size chnage event
+		$('\#{$_name} #xepan-cms-icon-size').on('change',function(){
+			$(current_selected_component).removeClass (function (index, className) {
+				return (className.match (/(^|\s)fa-\S+/g) || []).join(' ');
+			}).addClass($('\#{$_name} #xepan-cms-icon-class').val())
+			.addClass($(this).val());
+		});
+
+		//-icon link event
+		$('\#{$_name} #xepan-cms-icon-link').change(function(){
+			var link  = $(this).val();
+			if(link.length > 0){
+				if($('#xepan-cms-icon-target').val() == "window"){
+					$(current_selected_component).attr('onClick',"window.open('"+link+"', '_blank');");
+				}else
+					$(current_selected_component).attr('onClick',"location.href = '"+link+"';");
+
+			}else{
+				$(current_selected_component).removeAttr('onClick');
+			}
+		}); 
+
+		//-  target into new window or reload the page
+		$('\#{$_name} #xepan-cms-icon-target').change(function(){
+			var link = $('#xepan-cms-icon-link').val();
+			if($(this).val() == "window"){
+				$(current_selected_component).attr('onClick',"window.open('"+link+"', '_blank');");
+			}else
+				$(current_selected_component).attr('onClick',"location.href = '"+link+"';");
+
+			if(link.length < 0){
+				$(current_selected_component).removeAttr('onClick');
+			}
+		});
+
+		//- icon picker
+		$('\#{$_name} #xepan-cms-icon-dialog-btn').iconpicker({ 
+		    align: 'left', // Only in div tag
+		    arrowClass: 'btn-danger',
+		    arrowPrevIconClass: 'glyphicon glyphicon-chevron-left',
+		    arrowNextIconClass: 'glyphicon glyphicon-chevron-right',
+		    cols: 10,
+		    footer: true,
+		    header: true,
+		    icon: 'fa-leaf',
+		    iconset: 'fontawesome',
+		    labelHeader: '{0} of {1} pages',
+		    labelFooter: '{0} - {1} of {2} icons',
+		    placement: 'bottom', // Only in button tag
+		    rows: 5,
+		    search: true,
+		    searchText: 'Search',
+		    selectedClass: 'btn-success',
+		    unselectedClass: ''
+		});
+
+		//- icon picker on change
+		$('\#{$_name} #xepan-cms-icon-dialog-btn').on('change', function(e) {
+		   $(current_selected_component).removeClass (function (index, className) {
+				return (className.match (/(^|\s)fa-\S+/g) || []).join(' ');
+			}).addClass(e.icon)
+			.addClass($('\#{$_name} #xepan-cms-icon-size').val())
+			.attr('icon-class',e.icon);
+
+		   $('\#{$_name} #xepan-cms-icon-class').val(e.icon);
+		});
+
+		//- icon Alignment
+		$('\#{$_name} .xepan-cms-icon-alignment').click(function(){
+			var old_selected = $(current_selected_component).attr('icon-align');
+			if(old_selected == undefined || old_selected=="undefined")
+				old_selected = "text-center";
+
+			var reg_exp = old_selected;
+			$(current_selected_component).removeClass (function (index, className) {
+				return (className.match(reg_exp) || []).join(' ');
+			}).addClass($(this).attr('icon-align'));
+			$('\#{$_name} .xepan-cms-icon-alignment').removeClass('active');
+			$(this).addClass('active');
+			$(current_selected_component).attr('icon-align',$(this).attr('icon-align'));
+		});
+
+		$('body').on('beforeSave',function(){
+			$('body').find('i.xepan-cms-icon').each(function(index, el) {
+				if($(el).attr('icon-link').length>0) $(el).attr('onclick',"window.open('"+$(el).attr('icon-link')+"', '"+($(el).attr('icon-link-target')=='none'?'_self':'_blank')+"');");
+			});
+		});
+
+		$('body').on('afterSave',function(){
+			$('body').find('i.xepan-cms-icon').removeAttr('onclick');
+		});

@@ -1,0 +1,22 @@
+.xepan-tool-options(id='{$_name}' style="display:none" for-xepan-component='xepan/blog/Tool_Archieve')
+	table.table.table-condensed.table-hover.xepan-cms-tool-table
+		tr.xepan-tool-option
+			td.xepan-tool-option-title Show Month
+			td.xepan-tool-option-value
+				select#show_month(data-attr='show_month')
+					option true
+					option false
+		tr.xepan-tool-option
+			td.xepan-tool-option-title Month's Blog Page Url
+			td.xepan-tool-option-value 
+				input#redirect_page_url(data-attr='redirect_page_url')																																												
+	script.
+		$('\#{$_name} [data-attr]').on('change',function(){
+			$(current_selected_component).attr($(this).data('attr'),$(this).val());
+		});
+
+		$('\#{$_name}').on('show',function(event){
+			$('\#{$_name} [data-attr]').each(function(index,value){
+				$(this).val($(current_selected_component).attr($(this).data('attr')));				
+			});
+		})

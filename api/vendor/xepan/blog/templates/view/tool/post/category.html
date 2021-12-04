@@ -1,0 +1,47 @@
+
+<div id="{$_name}" style="{$style}" class="{$class} row">
+  <div class="widget categories">
+    <h3>Categories</h3>
+    <div class="row">
+      <div class="col-sm-12">
+        <ul class="list-group">{rows}{row}
+          <div class="seprate-li-content">
+            <li class="list-group-item"><a href="{$url}" style="font-size:20px">{$name} <span class="pull-right badge">{$post_count}</span></a></li>{post_wrapper}     
+            {cat_post}
+            {rows}{row}
+            <div class="row blog-post-content">
+              <div class="col-sm-12"><a href="{$post_detail_page_url}" class=" {$active_class}"> <small class="{$color}">{title}asdadas{/}</small></a></div>
+            </div>{/rows}{/row}
+            {/cat_post}
+            {/}    
+          </div>{/}{/}
+        </ul>
+      </div>
+    </div>{not_found}
+    <div role="alert" class="full-width alert alert-warning"><strong class="glyphicon glyphicon-warning-sign">&nbsp;Warning!<span>&nbsp;{$not_found_message}</span></strong></div>{/}
+    {paginator_wrapper}
+    <div style="float:none; clear:both" class="xshop-item-paginator">{$Paginator}</div>{/}
+  </div>
+</div>
+<style>
+  .blog-post-content{
+    border-right: 1px solid #ddd;
+    border-left: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
+  }
+  .seprate-li-content{
+    margin-bottom:5px;
+  }
+  .seprate-li-content .list-group-item{
+    border-top-left-radius:8px!important;
+    border-top-right-radius :8px!important; 
+  }
+  .widget.categories a.active {
+    font-weight: bold;
+  }
+  
+  .row.blog-post-content{
+    width:100%;
+    margin:auto;
+  }
+</style>

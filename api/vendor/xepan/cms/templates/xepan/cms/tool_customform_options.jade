@@ -1,0 +1,52 @@
+.xepan-tool-options(id='{$_name}' style="display:none" for-xepan-component='xepan/cms/Tool_CustomForm')
+	//- h3.collapsed(data-toggle="collapse" data-target="#collapse-item-images" aria-expanded="false")
+	//- 		span|Custom Form Option
+	//- #collapse-item-images.xepan-cms-tools-bar-panel.row-fluid.collapse.in
+	//- 	.panel-body
+	//- 		.xepan-cms-groups-panel.collapse.in(id="xepan-cms-groups-panel")
+	//- 		.xepan-cms-group-panel.clearfix
+	//- 			div.panel.panel-heading.panel-primary.collapsed(data-toggle="collapse" data-target="#show-hide-item-image" aria-expanded="false")
+	//- 				span Custom Form
+	//- 		#show-hide-item-image.xepan-cms-tools-bar-panel.row-fluid.collapse
+	table.table-condensed.table-hover.xepan-cms-tool-table
+		tr
+			.xepan-tool-option
+				td.xepan-tool-option-title Custom Form
+				td.xepan-tool-option-value
+					select(id="custom_form_{$id}" data-attr='customformid')
+		tr
+			.xepan-tool-option
+				td.xepan-tool-option-title Custom Template
+				td.xepan-tool-option-value 
+					input#custom_form_layout(data-attr='template')
+		tr
+			.xepan-tool-option
+				td.xepan-tool-option-title Success URL
+				td.xepan-tool-option-value 
+					input#custom-form-sucess-url(data-attr='custom_form_success_url' data-shortname="success_url")
+	script.
+
+		$('\#{$_name} [data-attr]').on('change',function(){
+			$(current_selected_component).attr($(this).data('attr'),$(this).val());
+			$(current_selected_component).univ().errorMessage('Save and reload Page to see changes');
+		});
+
+		$('\#{$_name}').on('show',function(event){
+			$('\#{$_name} [data-attr]').each(function(index,value){
+				$(this).val($(current_selected_component).attr($(this).data('attr')));
+				//- $(current_selected_component).attr('customformid',$(this).val());
+			});
+		
+			$.ajax({
+					url: 'index.php?page=xepan_cms_admin_getforms',
+					type: 'GET',
+					data: { },
+					success: function(data){
+
+						$('\#custom_form_{$id}').html(data);
+						//- console.log($(current_selected_component).attr('customformid'));
+						$('\#custom_form_{$id}').val($(current_selected_component).attr('customformid'));
+					}
+			});
+		});
+

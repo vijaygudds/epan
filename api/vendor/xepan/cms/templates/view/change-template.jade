@@ -1,0 +1,46 @@
+.xepan-grid.main-box.clearfix(id='{$_name}', class='{$class}')
+  | {Pannel}
+  header.main-box-header.clearfix.atk-actions(class='{$class}')
+    .filter-block
+      .pull-right {$grid_buttons} 
+      .form-group.pull-right.xepan-filter-form
+        .form-control.pull-left
+          | {$quick_search}
+          i.fa.fa-search.search-icon
+  | {/Pannel}
+  .main-box-body.clearfix
+    .row
+      | {header}{cols}{col}{/}{/}{/}
+      | {rows}{row}
+      div(data-id='{$id}', class='{$odd_even} col-md-{col-width}4{/}')
+        | {cols}
+        .col-lg-12.col-md-6.col-sm-6
+          .main-box.clearfix.project-box.green-box
+            .main-box-body.clearfix
+              .project-box-header.green-bg
+                .name
+                  a.newsletter-preview(href='#' data-id="{$id}" style="width: 100%;white-space:nowrap;overflow: hidden;text-overflow: ellipsis;") {$name}
+              .project-box-content
+                //- small.text-muted {$title}
+                //- iframe(src='index.php?page=xepan_marketing_newsletterpreview&cut_page=1&content_id={$id}', style=' max-height: 300px; height: 300px;-moz-transform-scale(0.5);', frameborder='0')
+                {$Apply_Now}
+              .project-box-ultrafooter.clearfix
+                .col-md-1
+                .col-md-5.pull-left {$action}
+                .col-md-2
+                .col-md-4.pull-right
+                  | {$edit}
+                  | {$delete}
+      | {/}
+      |       {/}{/}
+      |       {not_found}
+      .row
+        .col-md-12.text-center.alert.alert-warning(role='alert')
+          span.icon-attention.fa.fa-exclamation-triangle   {$not_found_message}
+      | {/}
+      |       {totals}{cols}{col}{$content}{/}{/}{/}
+    | {$Paginator}
+style(type='text/css', media='screen').
+  .project-box-content {
+  padding: 0px 0px 0px !important;
+  }

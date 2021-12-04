@@ -1,0 +1,47 @@
+.xepan-tool-options(id='{$_name}' style="display:none" for-xepan-component='xepan/blog/Tool_CategoryList')
+	//- h3 Blog Category Options
+	table.table.table-condensed.table-hover.xepan-cms-tool-table
+		tr.xepan-tool-option
+			td.xepan-tool-option-title Show Post Count
+			td.xepan-tool-option-value 
+				select#show_post_count(data-attr='show_post_count')
+					option true
+					option false
+		tr.xepan-tool-option
+			td.xepan-tool-option-title Category Count
+			td.xepan-tool-option-value 
+				input#category_count(data-attr='category_count')
+		tr.xepan-tool-option
+			td.xepan-tool-option-title Category List Url
+			td.xepan-tool-option-value 
+				input#redirect_page_url(data-attr='redirect_page_url') 
+		tr.xepan-tool-option
+			td.xepan-tool-option-title Post Detail Page
+			td.xepan-tool-option-value 
+				input#post_detail_page(data-attr='post_detail_page')
+		tr.xepan-tool-option
+			td.xepan-tool-option-title Order
+			td.xepan-tool-option-value 
+				select#order(data-attr='order')
+					option true	
+					option false 
+		tr.xepan-tool-option
+			td.xepan-tool-option-title Group
+			td.xepan-tool-option-value 
+				input#group(data-attr='group') 					
+		tr.xepan-tool-option
+			td.xepan-tool-option-title Show Posts
+			td.xepan-tool-option-value 
+				select#show_post(data-attr='show_post')
+					option true
+					option false																									
+	script.
+		$('\#{$_name} [data-attr]').on('change',function(){
+			$(current_selected_component).attr($(this).data('attr'),$(this).val());
+		});
+
+		$('\#{$_name}').on('show',function(event){
+			$('\#{$_name} [data-attr]').each(function(index,value){
+				$(this).val($(current_selected_component).attr($(this).data('attr')));				
+			});
+		})

@@ -1,0 +1,53 @@
+
+<div id="{$_name}" data-ride="carousel" class="xepan-component xepan-easy-fullscreen--carousel">
+  <link rel="stylesheet" href="vendor/xepan/cms/templates/css/normalize.css"/>
+  <link rel="stylesheet" href="vendor/xepan/cms/templates/css/app.css"/>
+  <script src="vendor/xepan/cms/templates/js/slider.js"></script>
+  <script src="vendor/xepan/cms/templates/js/app.js"></script>
+  <div id="main-slider">{rows}{row}
+    <div style="background-image: url(&quot;https://unsplash.it/1920/1200?image=817&quot;);" class="slide slide-{slide_no}1{/}">
+      <div class="container">
+        <div class="vertical-hook"></div>
+        <div class="vertical-container">
+          <header>
+            <h1>{title}Slide One{/}</h1>
+            <p>{text_to_display}This is slide one{/}</p>
+          </header>
+        </div>
+      </div>
+    </div>{/row}
+    <div style="background-image: url(&quot;https://unsplash.it/1920/1200?image=617&quot;);" class="slide slide-2">
+      <div class="container">
+        <div class="vertical-hook"></div>
+        <div class="vertical-container">
+          <header>
+            <h1>Slide Two</h1>
+            <p>This is slide two</p>
+          </header>
+        </div>
+      </div>
+    </div>
+    <div style="background-image: url(&quot;https://unsplash.it/1920/1200?image=317&quot;);" class="slide slide-3">
+      <div class="container">
+        <div class="vertical-hook"></div>
+        <div class="vertical-container">
+          <header>
+            <h1>Slide Three</h1>
+            <p>This is slide three</p>
+          </header>
+        </div>
+      </div>
+    </div>
+    <div style="background-image: url(&quot;https://unsplash.it/1920/1200?image=417&quot;);" class="slide slide-4">
+      <div class="container">
+        <div class="vertical-hook"></div>
+        <div class="vertical-container">
+          <header>
+            <h1>Slide Four</h1>
+            <p>This is slide Four				</p>
+          </header>
+        </div>
+      </div>
+    </div>{/rows}				
+  </div>
+</div>

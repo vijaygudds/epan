@@ -1,0 +1,62 @@
+.main-box.feed.xepan-grid.xepan-tasklist-grid(id="{$_name}" class="{$class}")
+  a(href= "{title_url}\#{/}")
+    h2.text-center {$task_view_title}
+  {$grid_buttons} 
+  {$quick_search}
+  {$filterform}
+  header.main-box-header.clearfix
+  .main-box-body.clearfix
+    {$header}
+    {nested_template}
+    ul(id="{$assign_to_sortid}" style = "cursor:pointer; cursor:hand;") {$assign_to_sort}
+      {rows}{row}
+      {cols}  
+      li.clearfix
+        .img
+          {$avatar}
+        .title(class="task-item" data-id= "{$id}" title="{$description}")
+          a(href='#') [{$task_no}] :
+          {$task_name}
+          {$last_comment_time}
+        .post-time
+          i.fa.fa-calendar
+            span.text-muted.text-small &nbsp;{$starting_date}
+          br
+          i.fa.fa-comment(style="font-size:16px;color:{$comment_color};" title="total comment {$comment_count}") &nbsp;{$comment_count}&nbsp;
+          i.fa.fa-paperclip(style="font-size:16px;color:green;" title="total attachment {$attachment_count}") &nbsp;{$attachment_count}
+          {alarm_wrapper}
+          i.fa.fa-bell
+          {/}
+          br
+          {status_wrapper}  
+          span(class="label label-xs label-primary") {$dashboard_sport_for_action}  
+          {/}
+          {action_wrapper}  
+          {$action}
+          {/}
+          {$delete} 
+          span(class="label label-xs label-{$color}" title="task priority : {$priority}") {$priority_name} 
+          {contact_info_wrapper}
+          span.do-view-contact(style="cursor:pointer; cursor:hand;" data-id = "{$related_id}") [{$contact_name} :: {$contact_organization} {$dummy_spot}]
+          {/}
+        .time-ago
+          i.fa.fa-clock-o(title="Total Duration {$total_duration}")&nbsp; {total_duration}0.00{/}
+          br
+          {play_pause_wrapper}  
+          div(style ="display:{$display_play_pause};")
+            span.fa.current_task_btn.btn.btn-primary.btn-block(class='{$icon} {$running-task}', data-action='{$event_action}', data-id='{$id}', style='cursor:pointer; cursor: hand; ')
+              span.duration(style="margin-left:10px;")
+          {/}
+      {/}
+      {/}{/}
+    {not_found}
+    div.row
+        .col-md-12.text-center.alert.alert-warning(role="alert")
+            span.icon-attention.fa.fa-exclamation-triangle  &nbsp;{$not_found_message}
+    {/}
+    {/}
+    {$Paginator}
+    style.
+      .xepan-tasklist-grid .post-time li{
+        padding:1px;
+      }

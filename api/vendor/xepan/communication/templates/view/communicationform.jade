@@ -1,0 +1,139 @@
+.row.xepan-push
+	.col-md-9.col-lg-9.col-xs-12.col-sm-12.atk-form-row
+		{$title}
+	.col-md-3.col-lg-3.col-xs-12.col-sm-12.atk-form-row
+		{$date}
+.row.xepan-push
+	.col-md-6.col-lg-6.col-xs-12.col-sm-12.atk-form-row 	
+		|Communication Type: {$type}
+	.col-md-6.col-lg-6.col-xs-12.col-sm-12.atk-form-row
+		|Communication Sub Type: {$sub_type}
+	.col-md-6.col-lg-6.col-xs-12.col-sm-12.atk-form-row
+		|Status: {$status}
+	.col-md-6.col-lg-6.col-xs-12.col-sm-12.atk-form-row
+		|Calling Status: {$calling_status}
+.row.xepan-push
+	.col-md-12.col-lg-12.col-xs-12.col-sm-12.atk-form-row
+		{$body}
+.row.xepan-push
+	{$signature}
+.row.xepan-push
+	.col-md-4.col-lg-4.col-xs-12.col-sm-12.atk-form-row
+		.atk-form-row.atk-form-field.form-email|From Email-Id: {$from_email}
+	.col-md-2.col-lg-2.col-xs-12.col-sm-12.atk-form-row
+		| Notify via Email {$notify_email}
+	.col-md-6.col-lg-6.col-xs-12.col-sm-12.atk-form-row
+		| Notify On Emails {$notify_email_to}
+.row.xepan-push.atk-form-row
+	.col-md-4.col-lg-4.col-xs-12.col-sm-12
+		{$email_to}
+	.col-md-4.col-lg-4.col-xs-12.col-sm-12
+		{$cc_mails}
+	.col-md-4.col-lg-4.col-xs-12.col-sm-12
+		{$bcc_mails}	
+.row.xepan-push
+	.col-md-4.col-lg-4.col-xs-12.col-sm-12.atk-form-row
+		|From Number: {$from_phone}
+	.col-md-4.col-lg-4.col-xs-12.col-sm-12.atk-form-row
+		|To: {$called_to}
+	.col-md-4.col-lg-4.col-xs-12.col-sm-12.atk-form-row	 
+		|Employee: {$from_person}
+.row.xepan-push
+	.col-md-4.col-lg-4.col-xs-12.col-sm-12.atk-form-row
+		|From Number: {$from_number}
+	.col-md-4.col-lg-4.col-xs-12.col-sm-12.atk-form-row
+		|To: {$sms_to}
+	.col-md-4.col-lg-4.col-xs-12.col-sm-12
+
+{score_button_wrapper}
+.row.xepan-push
+	.col-md-4.col-lg-2.col-xs-12.col-sm-12
+	.col-md-2.col-lg-4.col-xs-12.col-sm-12
+		button(id ="#btn-thumbsup" type="button" class = "score-add btn-block btn btn-default" onclick="dodajAktywne(this)" style= "height:80px;") UP
+	.col-md-2.col-lg-4.col-xs-12.col-sm-12
+		button(id ="#btn-thumbsdown" type="button" class ="score-remove btn-block btn btn-default" style= "height:80px;" onclick="dodajAktywne(this)") DOWN
+	.col-md-4.col-lg-4.col-xs-12.col-sm-12
+{/}
+
+{followup_form_wrapper}
+.row.xepan-push
+	.col-md-4.col-lg-4.col-xs-12.col-sm-12.atk-form-row
+		{$follow_up}
+.row.xepan-push
+	.col-md-4.col-lg-4.col-xs-12.col-sm-12.atk-form-row
+		span Title: 
+		{$task_title}
+	.col-md-4.col-lg-4.col-xs-12.col-sm-12.atk-form-row
+		span Starting On: 
+		{$starting_at}
+	.col-md-4.col-lg-4.col-xs-12.col-sm-12.atk-form-row
+		span Assign To: 
+		{$assign_to}
+.row.xepan-push
+	.col-md-12.col-lg-12.col-xs-12.col-sm-12.atk-form-row
+		span Description:
+		{$description}
+.row.xepan-push
+	.col-md-4.col-lg-4.col-xs-12.col-sm-12.atk-form-row
+		{$set_reminder}
+.row.xepan-push
+	.col-md-4.col-lg-4.col-xs-12.col-sm-12.atk-form-row
+		span Remind At:
+		{$reminder_time}
+	.col-md-4.col-lg-4.col-xs-12.col-sm-12.atk-form-row
+		span Remind Medium:
+		{$remind_via}
+	.col-md-4.col-lg-4.col-xs-12.col-sm-12.atk-form-row
+		span Remind To:
+		{$notify_to}
+.row.xepan-push
+	.col-md-4.col-lg-4.col-xs-12.col-sm-12.atk-form-row
+		{$force_remind}
+.row.xepan-push
+	.col-md-4.col-lg-4.col-xs-12.col-sm-12.atk-form-row
+		span Snooze Duration:
+		{$snooze_duration}
+	.col-md-4.col-lg-4.col-xs-12.col-sm-12.atk-form-row
+		span Snooze Unit:
+		{$remind_unit}
+.row.score-input
+	{$score}
+{/}
+.row.xepan-push
+	.col-md-12.col-lg-12.col-xs-12.col-sm-12
+		{$FormButtons}
+		{$Content}									
+style.
+	.form-communication .select2{
+		width:100%!important;
+	}
+	.large-button {
+		height: 70px;
+	}
+
+script.
+	function dodajAktywne(elem, add_remove) {
+		if($(elem).hasClass('score-add')){
+			if($('.score-add').hasClass('btn-default')){
+				$('.score-add').removeClass('btn-default').addClass('btn-success');
+				$('.score-remove').removeClass('btn-danger').addClass('btn-default');
+				$('.score-input input').val('10');
+			}else{
+				$('.score-add').removeClass('btn-success').addClass('btn-default');
+				$('.score-remove').removeClass('btn-danger').addClass('btn-default');
+				$('.score-input input').val('0');
+			}
+		}
+
+		if($(elem).hasClass('score-remove')){
+			if($('.score-remove').hasClass('btn-default')){
+				$('.score-remove').removeClass('btn-default').addClass('btn-danger');
+				$('.score-add').removeClass('btn-success').addClass('btn-default');
+				$('.score-input input').val('-10');
+			}else{
+				$('.score-remove').removeClass('btn-danger').addClass('btn-default');
+				$('.score-add').removeClass('btn-success').addClass('btn-default');
+				$('.score-input input').val('0');
+			}
+		}
+	}	

@@ -1,0 +1,146 @@
+#user-profile
+  | {$Content}
+  .row
+    .col-lg-12.col-md-12.col-sm-12
+      {contact_view_full_width}
+      {$Content}
+      div.main-box
+        header.main-box-header.clearfix.text-center
+          h1 Add New Lead
+        div.main-box-body.clearfix
+          div.row
+            div.form-group.col-xs-8
+              .panel.panel-default(style='margin-bottom:0px;')
+                .panel.panel-heading.panle-primary General Information
+                .panel-body
+                  div.row
+                    div.col-xs-6
+                      div.form-group.atk-form-row.atk-form-field
+                        {$first_name}
+                    div.col-xs-6
+                      div.form-group.atk-form-row.atk-form-field
+                        {$last_name}
+                  div.row
+                    div.col-xs-6
+                      div.form-group.atk-form-row.atk-form-field
+                        {$organization}
+                    div.col-xs-6
+                      div.form-group.atk-form-row.atk-form-field
+                        {$post}
+                  div.row
+                    div.col-xs-6
+                      div.form-group.atk-form-row.atk-form-field
+                        {$website}
+              .panel.panel-default(style='margin-bottom:0px;')
+                .panel.panel-heading.panle-primary Address
+                .panel-body
+                  div.row
+                    div.form-group.col-xs-6.atk-form-row.atk-form-field
+                      {$address}
+                    div.col-xs-6
+                      div.form-group.atk-form-row.atk-form-field
+                        | Country 
+                        {$country_id}
+                      div.form-group.atk-form-row.atk-form-field
+                        | State
+                        {$state_id}    
+                      div.form-group.atk-form-row.atk-form-field
+                        {$city}
+                      div.form-group.atk-form-row.atk-form-field
+                        {$pin_code}
+              .panel.panel-default(style='margin-bottom:0px;')
+                .panel.panel-heading.panle-primary Miscellaneous Information
+                .panel-body
+                  div.row
+                    div.form-group.col-xs-12.atk-form-row.atk-form-field
+                      | Lead Note\ Remark\ Interest\ Narration
+                      {$remark}
+                  div.row
+                    div.form-group.col-xs-6.atk-form-field.atk-form-row
+                      | Lead Source
+                      {$source}
+                    div.form-group.col-xs-6.atk-form-row.atk-form-field
+                      | Lead Assign to Employee
+                      {$assign_to_id}
+            
+            div.form-group.col-xs-4
+              .panel.panel-default(style='margin-bottom:0px;')
+                .panel.panel-heading.panle-primary Official Email
+                .panel-body         
+                  div.row
+                    div.form-group.col-xs-12.atk-form-row.atk-form-field
+                      {$email_1}
+                    div.form-group.col-xs-12.atk-form-row.atk-form-field
+                      {$email_2}
+              .panel.panel-default(style='margin-bottom:0px;')
+                .panel.panel-heading.panle-primary Personal Email
+                .panel-body
+                  div.row
+                    div.form-group.col-xs-12.atk-form-row.atk-form-field
+                      {$email_3}
+                    div.form-group.col-xs-12.atk-form-row.atk-form-field
+                      {$email_4}
+              .panel.panel-default(style='margin-bottom:0px;')
+                .panel.panel-heading.panle-primary Official Contact
+                .panel-body
+                  div.row
+                    div.form-group.col-xs-12.atk-form-row.atk-form-field
+                      {$contact_no_1}
+                    div.form-group.col-xs-12.atk-form-row.atk-form-field
+                      {$contact_no_2}
+              .panel.panel-default(style='margin-bottom:0px;')
+                .panel.panel-heading.panle-primary Personal Contact
+                .panel-body
+                  div.row
+                    div.form-group.col-xs-12.atk-form-row.atk-form-field
+                      {$contact_no_3}
+                    div.form-group.col-xs-12.atk-form-row.atk-form-field
+                      {$contact_no_4}
+          .panel.panel-default(style='margin-bottom:0px;')
+            .panel.panel-heading.panle-primary Lead Category
+            .panel-body
+              div.row
+                div.form-group.col-xs-12.atk-form-row.atk-form-field
+                  {$category}
+          div.row
+            div.form-group.col-xs-12.atk-form-row.atk-form-field
+              {$want_to_add_next_lead}
+        {$form_buttons}
+      {/}
+    .col-lg-3.co-md-3.col-sm-3
+      {$contact_view}
+    //-include ../../../base/templates/view/profile.jade
+    {other_details}
+    .col-lg-9.col-md-8.col-sm-8
+      .main-box.clearfix
+        .tabs-wrapper.profile-tabs
+          ul.nav.nav-tabs.responsive-tabs
+            li.active
+              a(data-toggle='tab', href='#tab-details') Details
+            li
+              a(data-toggle='tab', href='#tab-opportunity') Opportunity
+            li
+              a(data-toggle='tab', href='#tab-activity') Activity  
+            li.tab-extrenal-info
+              a(data-toggle='tab', href='#tab-external-info') External Information  
+          .tab-content
+            
+             #tab-details.tab-pane.active
+                  {details}
+                  .alert.alert-warning
+                    i.fa.fa-warning.fa-fw.fa-lg
+                    strong Warning!
+                    |  Please Fill the basic information first. 
+                  {/details}
+
+                
+             #tab-opportunity.tab-pane
+                {$opportunity}
+   
+             #tab-activity.tab-pane
+                {$activity}
+             #tab-external-info.tab-pane
+                .view-related-lead-extrenal-info
+                  {$extra_info}
+                  {$extra_info_message}
+    {/}         

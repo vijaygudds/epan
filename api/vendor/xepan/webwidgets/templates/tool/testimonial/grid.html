@@ -1,0 +1,48 @@
+
+<div id="{$_name}" class="xepan-grid main-box clearfix atk-table atk-table-zebra atk-table-bordered {$class}">{Pannel}
+  <header class="main-box-header clearfix atk-actions  {$class} ">
+    <div style="100%" class="filter-block">
+      <div class="pull-right">{$grid_buttons} </div>
+      <div class="form-group pull-right xepan-filter-form"><span class="form-control pull-left">{$quick_search}<i class="fa fa-search search-icon"></i></span></div>
+    </div>
+  </header>{/Pannel}
+  <div class="main-box-body clearfix table">
+    <table style="width:100%" class="table user-list table-hover">{header}
+      <thead>{cols}{col}
+        <th></th>
+        <th><span>Customer</span></th>
+        <th><span>    </span></th>{/}{/}
+      </thead>{/}
+      {$subheader}
+      <tbody>{rows}{row}
+        <tr data-id="{$id}" class="{$odd_even}">{cols}
+          <td><img src="{$file}" class="img-circle"/></td>
+          <td>{$customer_name}</td>
+          <td>{title_wrapper}
+            <h4>{$title}</h4>{/}<span>{$description}</span>
+            <div>{created_at_wrapper}<span class="small text-muted">Created At : {$created_at}</span>{/}</div>
+          </td>{/}
+        </tr>{/}{/}
+        {not_found}
+        {$not_found_message}
+        {/}
+      </tbody>{totals}
+      <tfoot>
+        <tr class="totals">
+          {cols}{col}
+          <td {$tdparam}>
+          {$content}
+          </td>
+          {/}{/}
+        </tr>
+      </tfoot>{/}
+    </table>{$Paginator}
+  </div>
+</div>
+<style>
+  .img-circle {
+      border-radius: 50%;
+      height: 50px;
+      width:50px;
+  }
+</style>

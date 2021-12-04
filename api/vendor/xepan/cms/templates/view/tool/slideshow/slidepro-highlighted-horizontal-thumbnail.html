@@ -1,0 +1,26 @@
+<div id="{$_name}" class="{$class} slider-pro" style="{$style}">
+	{$Content}
+    {lister_wrapper}
+    <div class="sp-slides">
+        {rows}{row}
+        <div class="sp-slide">
+            <img class="sp-image" src="vendor/xepan/cms/templates/css/slidepro/images/blank.gif" 
+                    data-src="{$file}"
+                    data-small="{$file}"
+                    data-medium="{$file}"
+                    data-large="{$file}"
+                    data-retina="{$file}"/> 
+            {$layer_wrapper}
+        </div>
+        {/}{/}
+    </div>
+    {/}
+    
+    {thumbnail_wrapper}
+    <div class="sp-thumbnails">
+        {rows}{row}
+            {img_thumb_wrapper} <img class="sp-thumbnail" src="{$file}"/>{/}
+        {/}{/}
+    </div>
+    {/}
+</div>

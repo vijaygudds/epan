@@ -1,0 +1,62 @@
+
+<div id="{$_name}" class="xepan-grid main-box clearfix atk-table atk-table-zebra atk-table-bordered {$class}">{Pannel}
+  <header class="main-box-header clearfix atk-actions  {$class} ">
+    <div style="100%" class="filter-block">
+      <div class="pull-right">{$grid_buttons}</div>
+      <div class="form-group pull-right xepan-filter-form"><span class="form-control pull-left">{$quick_search}<i class="fa fa-search search-icon"></i></span></div>
+    </div>
+  </header>{/Pannel}
+  <div class="main-box-body clearfix table-responsive">
+    <table style="width:100%" class="table user-list table-hover footable toggle-circle-filled">{header}
+      <thead class="xepan-hover-hand">{cols}{col}
+        <th id="{$order_no_sortid}"><span>Jobcard {$order_no_sort} </span></th>
+        <th id="{$days_elapsed_sortid}" data-hide="phone"><span>Duration {$name_sort} </span></th>
+        <th id="{$order_item_quantity_sortid}"><span>Quantity {$order_item_quantity_sort} </span></th>
+        <th id="{$toreceived_sortid}" data-hide="phone"><span>toreceived {$toreceived_sort} </span></th>
+        <th id="{$processing_sortid}" data-hide="phone"><span>Received/ processing {$processing_sort} </span></th>
+        <th id="{$completed_sortid}" data-hide="phone"><span>Completed {$completed_sort} </span></th>
+        <th id="{$forwarded_sortid}" data-hide="phone"><span>forwarded {$forwarded_sort}</span>Received \ Pending  </th>
+        <th id="{$completed_sortid}" data-hide="phone"><span>dispatched {$dispatched_sort}</span>Received \ Pending  </th>
+        <th id="{$name_sortid}"><span>Status</span></th>
+        <th></th>{/}{/}
+      </thead>{/}
+      {$subheader}
+      <tbody>{rows}{row}
+        <tr data-id="{$id}" class="{$odd_even}">{cols}
+          <td style="width: 30%;"><a href="{url}?page=xepan_production_jobcarddetail&amp;document_id={$id}{/}" title="Jobcard No. {$id} " style="margin-left: 0px;" class="user-link">{$id}<small><a href="{url}?page=xepan_commerce_salesorderdetail&amp;document_id={$order_document_id}{/}" title="Order No. {$order_no}" class="user-subhead">{order_no}order not found{/}<span>[ {$order_item} ]</span></a>
+                <div href="{url}?page=xepan_commerce_customerdetail&amp;contact_id={$id}{/}" class="user-subhead">{customer_name}Not Found{/}</div></small></a>
+            <p title="Base Unit" class="label label-default"> Base Unit: {$item_base_unit}</p>
+            <p title="Jobcard Department" class="label label-primary">{$department}</p>
+          </td>
+          <td>
+            <div>{days_elapsed}{/} Days</div><small>created at: {$created_at}</small>
+          </td>
+          <td><span>Order Qty ( {$order_item_quantity} {$order_item_unit} )</span></td>
+          <td><span>{$toreceived}</span></td>
+          <td><span>{$processing}</span></td>
+          <td><span>{$completed}</span></td>
+          <td><span>{$forwarded}</span><br/><small class="label label-success">{$receivedbynext} </small>/<small class="label label-danger">{pendingbynext}0{/}</small></td>
+          <td><span>{$dispatched}  </span><br/><small class="label label-success">{receivedbydispatch}0{/} </small>/<small class="label label-danger">{pendingbydispatch}0{/}</small></td>
+          <td><span>{$action}</span></td>
+          <td style="width: 10%;">
+            {$edit}
+            {$delete}
+          </td>{/}
+        </tr>{/}{/}
+        {not_found}
+        <div class="row">
+          <div role="alert" class="col-md-12 text-center alert alert-warning"><span class="icon-attention fa fa-exclamation-triangle"> &nbsp;{$not_found_message}</span></div>
+        </div>{/}
+      </tbody>{totals}
+      <tfoot>
+        <tr class="totals">
+          {cols}{col}
+          <td {$tdparam}>
+          {$content}
+          </td>
+          {/}{/}
+        </tr>
+      </tfoot>{/}
+    </table>{$Paginator}
+  </div>
+</div>

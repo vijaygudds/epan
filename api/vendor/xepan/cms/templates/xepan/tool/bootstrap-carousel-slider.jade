@@ -1,0 +1,12 @@
+.xepan-component(href='#none' target="" id='{$_name}' class='slide {$class}' style='{$style}' xepan-component='xepan/cms/Tool_BootStrapSlider' xepan-component-name="BootStrap Carousel")
+	.carousel-inner
+			//- <!-- Controls -->
+	a.left.carousel-control(href="#_{$_name_}" data-slide="prev")
+		span.glyphicon.glyphicon-chevron-left
+	a.right.carousel-control(href="#_{$_name_}" data-slide="next")
+		span.glyphicon.glyphicon-chevron-right
+
+	script.
+		$(function(){
+				$('#_{$_name_}').carousel();
+		});

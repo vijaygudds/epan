@@ -1,0 +1,53 @@
+div(id='{$_name}' class="{$class} row" style="{$style}")
+	{rows}{row}
+	.blog
+		.row(style="margin-left:0px !important; margin-right:0px; !important")
+			.col-xs-12.col-sm-12.col-md-12.col-lg-12
+				{title_wrapper}
+				h2 {$title}
+				{/}
+				hr
+			.col-md-12
+				{image_wrapper}
+				a(href="{$url}")
+					img(style = "height:auto; width:100%; max-width:100%;" src="{$image}")
+				{/}
+		.row(style="margin-top:30px")
+				//- .col-xs-12.col-sm-12.col-md-3.col-lg-3.text-center
+				ul.list-group
+					li.list-group-item.pull-left(style="width:33%;")
+						{$created_at_date}
+						span.pull-right
+							i.fa.fa-calendar
+					li.list-group-item.pull-left(style="width:33%;")
+						{$created_by}																		
+						span.pull-right
+							i.fa.fa-user
+					li.list-group-item.pull-left(style="width:33%;")
+						a(href='?page=blog-item&post_id={$id}') {$comment_count}
+						span.pull-right
+							i.fa.fa-comment
+			.col-xs-12.col-sm-12.col-md-12.col-lg-12
+				//- {title_wrapper}
+				//- h2 {$title}
+				//- {/}
+				{desription_wrapper}
+				div(style = "height:50px; overflow: hidden; text-overflow: ellipsis; ") {$description}
+				{/}
+				a.btn.btn-primary.readmore.blog-post-detail(href="{$url}")
+					| Read More 
+					i.fa.fa-angle-right
+				div(id="postshare{$id}") {$socialshare}
+				hr			
+	div(style="padding-bottom:25px;")
+	{$micro_data}
+	{/}{/}
+	{not_found}
+	div.full-width.alert.alert-warning(role="alert")
+		strong.glyphicon.glyphicon-warning-sign &nbsp;Warning!
+			span &nbsp;{$not_found_message}
+	{/}
+	{paginator_wrapper}
+	.xshop-item-paginator(style='float:none; clear:both')
+		{$Paginator}
+	{/}	

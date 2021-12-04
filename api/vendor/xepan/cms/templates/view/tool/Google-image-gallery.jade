@@ -1,0 +1,22 @@
+.xepan-component(id='{$_name}')
+	//- {$Content}
+	link(rel="stylesheet" type="text/css" href="vendor/xepan/cms/templates/css/image-gallery/ImageGalleryDefault.css")
+
+	link(rel="stylesheet" type="text/css" href="vendor/xepan/cms/templates/css/image-gallery/ImageGalleryComponent.css")
+	script(src="vendor/xepan/cms/templates/js/image-gallery/ImageGalleryModernizr.custom.js")
+	div.main
+	ul#og-grid.og-grid
+		{rows}
+		{row}
+		li
+			a(href="#55657" data-largesrc="{$image}" data-title="{$name}" data-description='{$description}')
+				img.xepan-commerce-gallery-image-to-zoom(style="margin:0 auto 0 auto;width:180px;height:180px;" src="{image}logo.png{/image}")
+		{/row}
+		{/rows}
+
+
+script(src="vendor/xepan/cms/templates/js/image-gallery/ImageGalleryGrid1.js")
+script.
+	$(function() {
+		Grid.init();
+	});	

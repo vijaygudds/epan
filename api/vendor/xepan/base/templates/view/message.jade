@@ -1,0 +1,71 @@
+a.btn.dropdown-toggle(data-toggle='dropdown')
+  i.fa.fa-envelope-o
+  span.count.inter-msg-count {message_count}{/}
+ul.dropdown-menu.notifications-list.messages-list.dropdown-menu-right
+  li.pointer
+    .pointer-inner
+      .arrow
+  {rows}{row}
+  li.item
+    a(href='#')
+      {avatar}
+      img(src='img/samples/messages-photo-2.png', alt='')
+      {/}
+      span.content
+        span.content-headline
+          | {name}Emma Watson{/}
+        span.content-text
+          {title}
+          | Look, just because I don't be givin' no man a foot massage don't make it
+          | right for Marsellus to throw...
+          {/}
+      span.time
+        i.fa.fa-clock-o
+        | {callback_date}13 min.{/}      
+  {/}{/}
+  {$no_record_found}
+  li.item-footer
+    a(href='?page=xepan_communication_internalmsg')
+      | View all messages
+  //- li.item.first-item
+  //-   a(href='#')
+  //-     img(src='img/samples/messages-photo-1.png', alt='')
+  //-     span.content
+  //-       span.content-headline
+  //-         | {name}George Clooney{/}
+  //-       span.content-text
+  //-         {title}
+  //-         | Look, just because I don't be givin' no man a foot massage don't make it
+  //-         | right for Marsellus to throw...{/}
+  //-     span.time
+  //-       i.fa.fa-clock-o
+  //-       | 13 min.
+  //- li.item
+  //-   a(href='#')
+  //-     img(src='img/samples/messages-photo-2.png', alt='')
+  //-     span.content
+  //-       span.content-headline
+  //-         | Emma Watson
+  //-       span.content-text
+  //-         | Look, just because I don't be givin' no man a foot massage don't make it
+  //-         | right for Marsellus to throw...
+  //-     span.time
+  //-       i.fa.fa-clock-o
+  //-       | 13 min.
+  //- li.item
+  //-   a(href='#')
+  //-     img(src='img/samples/messages-photo-3.png', alt='')
+  //-     span.content
+  //-       span.content-headline
+  //-         | Robert Downey Jr.
+  //-       span.content-text
+  //-         | Look, just because I don't be givin' no man a foot massage don't make it
+  //-         | right for Marsellus to throw...
+  //-     span.time
+  //-       i.fa.fa-clock-o
+  //-       | 13 min.
+
+style.
+  .notifications-list .item a .time{
+    background:white none repeat scroll 0 0;
+  }

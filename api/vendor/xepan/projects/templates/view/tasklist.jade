@@ -1,0 +1,35 @@
+.main-box.feed.xepan-grid.xepan-tasklist-grid(id="{$_name}" class="{$class}")
+  span.pending-task-search {$quick_search}
+  header.main-box-header.clearfix
+    h2.pull-left {$task_view_title}
+  .main-box-body.clearfix
+    {$header}
+    {nested_template}
+    {rows}{row}
+    ul
+      {cols}  
+      li.clearfix
+        .img
+          img(alt='', src='img/samples/robert-300.jpg')
+        .title
+          a(href='#') {$created_by_id} : 
+          |  {$}{$task_name}
+        .post-time
+            span.fa.current_task_btn(class='{$icon} {$running-task}', data-action='{$event_action}', data-id='{$id}', style='cursor:pointer; cursor: hand; ')
+                span.duration(style="margin-left:10px;")
+        .time-ago
+          {$action}
+          {trash}
+          span.fa-stack
+            i.fa.fa-square.fa-stack-2x
+            i.fa.fa-trash-o.fa-stack-1x.fa-inverse
+          {/}
+          {/}
+    {/}{/}
+    {not_found}
+    div.row
+        .col-md-12.text-center.alert.alert-warning(role="alert")
+            span.icon-attention.fa.fa-exclamation-triangle  &nbsp;{$not_found_message}
+    {/}
+    {/}
+    {$Paginator}

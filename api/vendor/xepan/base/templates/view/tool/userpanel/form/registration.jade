@@ -1,0 +1,97 @@
+.panel.panel-default(id="{$_name}")
+  .panel-heading.text-center
+    strong  Registration
+  .panel-body(style="margin-top:30px;margin-bottom:30px;")
+    form(role='form', action='#', method='POST')
+      fieldset
+        .row
+          .col-sm-12.col-md-12
+            .form-group.atk-form-row.atk-form-field
+              .input-group
+                span.input-group-addon
+                  i.glyphicon.glyphicon-user
+                .xepan-form-field{$first_name}    
+            .form-group.atk-form-row.atk-form-field
+              .input-group
+                span.input-group-addon
+                  i.glyphicon.glyphicon-user
+                .xepan-form-field{$last_name}    
+            .form-group.atk-form-row.atk-form-field
+              .input-group
+                span.input-group-addon
+                  i.fa.fa-envelope
+                .xepan-form-field{$username}
+            .form-group.atk-form-row.atk-form-field
+              .input-group
+                span.input-group-addon
+                  i.fa.fa-key
+                .xepan-form-field{$password}
+            .form-group.atk-form-row.atk-form-field
+              .input-group
+                span.input-group-addon
+                  i.fa.fa-key
+                .xepan-form-field{$retype_password}
+            {country_wrapper}
+            .form-group.atk-form-row.atk-form-field
+              .input-group
+                span.input-group-addon
+                  i.fa.fa-map-marker
+                .xepan-form-field{$country}
+            {/}
+            {state_wrapper}
+            .form-group.atk-form-row.atk-form-field
+              .input-group
+                span.input-group-addon
+                  i.fa.fa-map-marker
+                .xepan-form-field{$state}
+            {/}
+            {city_wrapper}
+            .form-group.atk-form-row.atk-form-field
+              .input-group
+                span.input-group-addon
+                  i.fa.fa-map-marker
+                .xepan-form-field{$city}
+            {/}
+            {address_wrapper}
+            .form-group.atk-form-row.atk-form-field
+              .input-group
+                span.input-group-addon
+                  i.fa.fa-map-marker
+                .xepan-form-field{$address}
+            {/}
+            {pin_code_wrapper}
+            .form-group.atk-form-row.atk-form-field
+              .input-group
+                span.input-group-addon
+                  i.fa.fa-map-marker
+                .xepan-form-field{$pin_code}
+            {/}
+            {mobile_no_wrapper}
+            .form-group.atk-form-row.atk-form-field
+              .input-group
+                span.input-group-addon
+                  i.fa.fa-mobile
+                .xepan-form-field{$mobile_no}
+            {/}
+            {tnc_wrapper}
+            .form-group
+              span.input-group-addon
+                .col-md-2
+                  {$tnc} 
+                .col-md-10
+                  a(href = "{$tnc_page_url}" target='_blank') I accept Terms and conditions of usage 
+            {/}  
+        .ro(style="padding-bottom:20px;")             
+        .row
+          .col-xs-12
+            button.btn.btn-success.col-xs-12(type='submit') Register
+        
+  .panel-footer.text-center
+    {login_wrapper}
+    a.back-login.xepan-login-panl-loadview(style="cursor:pointer; cursor: hand;" href="index.php" data-showview="login_view")  Back To Login 
+     #login-box-footer
+    {/}
+style.
+    #{$_name} input{
+      width:100%;
+    }      

@@ -1,0 +1,82 @@
+
+<div id="{$_name}" style="display:none" for-xepan-component="xepan/cms/Tool_ImageWithDescription" class="xepan-tool-options">
+  <div class="xepan-cms-group-panel clearfix">
+    <h3 data-toggle="collapse" data-target="#collapse-carousel" aria-expanded="false" class="collapsed"><span>Image With Description</span></h3>
+    <div id="collapse-carousel" class="xepan-cms-tools-bar-panel row-fluid collapse in">
+      <div class="panel-body">
+        <table class="table table-condensed table-hover">
+          <tr>
+            <td>Mode</td>
+          </tr>
+          <tr>
+            <td>
+              <div class="btn-group">
+                <button type="button" id="ImageWithDescription-edit" class="btn btn-default btn-xs">Edit Mode</button>
+                <button type="button" id="ImageWithDescription-active" class="btn btn-default btn-xs">Active Mode</button>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td>Direction</td>
+          </tr>
+          <tr>
+            <td>
+              <div class="btn-group">
+                <button type="button" id="ImageWithDescription-bottom" class="btn btn-default btn-xs">Bottom</button>
+                <button type="button" id="ImageWithDescription-right" class="btn btn-default btn-xs">Right</button>
+                <button type="button" id="ImageWithDescription-top" class="btn btn-default btn-xs">Top</button>
+                <button type="button" id="ImageWithDescription-left" class="btn btn-default btn-xs">Left</button>
+              </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </div>
+  <script>
+    $('#{$_name} [data-attr]').on('change',function(){
+    	$(current_selected_component).attr($(this).data('attr'),$(this).val());
+    });
+    
+    $('#{$_name}').on('show',function(event){
+    	$('#{$_name} [data-attr]').each(function(index,value){
+    		$(this).val($(current_selected_component).attr($(this).data('attr')));				
+    	});
+    });
+    
+    $('#ImageWithDescription-bottom').click(function(event) {
+    	$(current_selected_component).find('.desc').removeClass('rightslide upslide leftslide');
+    });
+    
+    $('#ImageWithDescription-left').click(function(event) {
+    	$(current_selected_component).find('.desc').removeClass('rightslide upslide leftslide');
+    	$(current_selected_component).find('.desc').addClass('leftslide');
+    });
+    
+    $('#ImageWithDescription-top').click(function(event) {
+    	$(current_selected_component).find('.desc').removeClass('rightslide upslide leftslide');
+    	$(current_selected_component).find('.desc').addClass('upslide');
+    });
+    
+    $('#ImageWithDescription-right').click(function(event) {
+    	$(current_selected_component).find('.desc').removeClass('rightslide upslide leftslide');
+    	$(current_selected_component).find('.desc').addClass('rightslide');
+    });
+    
+    $('#ImageWithDescription-active').click(function(event) {
+    	$(current_selected_component).find('.imagepluscontainer-edit').removeClass('imagepluscontainer-edit').addClass('imagepluscontainer');
+    });
+    
+    $('#ImageWithDescription-edit').click(function(event) {
+    	$(current_selected_component).find('.imagepluscontainer').removeClass('imagepluscontainer').addClass('imagepluscontainer-edit');
+    });
+    
+    if($(current_selected_component).find('div:nth-child(1)').hasClass('imagepluscontainer-edit')){
+    	$('#ImageWithDescription-active').removeClass('btn-success')
+    	$('#ImageWithDescription-edit').addClass('btn-success')
+    }else{
+    	$('#ImageWithDescription-edit').removeClass('btn-success')
+    	$('#ImageWithDescription-active').addClass('btn-success')
+    }
+  </script>
+</div>

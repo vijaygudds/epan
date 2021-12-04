@@ -1,0 +1,33 @@
+.xepan-grid.main-box.clearfix(id='{$_name}', class='{$class}')
+    {Pannel}
+    header.main-box-header.clearfix.atk-actions(class='{$class}')
+        .filter-block
+          {filter_wrapper}
+          .pull-right {$grid_buttons}
+              .form-group.pull-right.xepan-filter-form
+                  .form-control.pull-left
+                      | {$quick_search}
+              i.fa.fa-search.search-icon
+          {/}
+    {/Pannel}
+    .main-box-body.clearfix
+    .row
+      | {header}{cols}{col}{$descr}{sort}{/}{/}{/}{/}
+      | {rows}{row}
+      div(id="{$id}" data-id="{$id}"  class='{$odd_even} col-md-4 col-sm-12 col-lg-4 col-xs-12')
+        .thumbnail(style="background-color: #fff;border: 1px solid #ddd;border-radius: 4px;display: block;line-height: 1.42857;margin-bottom: 20px;padding: 4px;transition: border 0.2s ease-in-out 0s;")
+            div(style="height:300px;overflow:auto;width:100%;")
+                {$preview_image}
+            .caption
+                h3 {$name}
+                p
+                    {$ApplyNow}
+                    {$preview}
+      | {/}{/}
+      | {not_found}
+      .row
+        .col-md-12.text-center.alert.alert-warning(role='alert')
+          span.icon-attention.fa.fa-exclamation-triangle    {$not_found_message}
+      | {/}
+      | {totals}{cols}{col}{$content}{/}{/}{/}
+    | {$Paginator}

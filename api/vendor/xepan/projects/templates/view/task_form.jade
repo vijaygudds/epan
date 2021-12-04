@@ -1,0 +1,73 @@
+.row.panel.panel-default
+  .panel-heading
+    span Task/Request Information
+  .panel-body  
+    .row.xepan-push
+      .col-md-4.atk-form-field.atk-form-row
+        strong Task/Request Name: 
+        {$task_name}
+      .col-md-4.atk-form-field.atk-form-row
+        strong Assign To: 
+        {$assign_to_id} {$assign_to}
+      .col-md-4.atk-form-field.atk-form-row
+        strong Task/Request Priority: 
+        {$priority}
+    .row.xepan-push
+      .col-md-4.atk-form-field.atk-form-row
+        strong Starting Date: 
+        {$starting_date}
+      .col-md-4.atk-form-field.atk-form-row
+        strong Deadline: 
+        {$deadline}
+      .col-md-4.atk-form-field.atk-form-row
+        strong Estimate Time: 
+        {$estimate_time}
+        span.small.text-muted Hint : Enter value in hours
+    .row.xepan-push
+      .col-md-12.atk-form-field.atk-form-row
+        {$Content}
+    .row.xepan-push
+      .col-md-12.atk-form-field.atk-form-row
+      strong Description:
+      {$description1}
+      {$description} 
+
+.row.panel.panel-default
+  .panel-heading
+    span Set Task Reminder
+  .panel-body
+    .row.xepan-push
+      .col-md-12.atk-form-field.atk-form-row
+        {$set_reminder}
+    .row.xepan-push
+      .col-md-4.atk-form-field.atk-form-row
+        strong Remind AT:
+        {$reminder_time}
+      .col-md-4.atk-form-field.atk-form-row
+        strong Remind Medium:    
+        {$remind_via}
+      .col-md-4.atk-form-field.atk-form-row
+        strong Remind To:
+        {$notify_to}    
+    .row.xepan-push
+      .col-md-4.atk-form-field.atk-form-row
+        {$snooze_reminder}
+    .row.xepan-push
+      .col-md-6.atk-form-field.atk-form-row
+        strong Snooze Duration:
+        {$snooze_duration}
+      .col-md-6.atk-form-field.atk-form-row
+        strong Snooze Unit:
+        {$remind_unit}
+
+
+.row.panel.panel-default(style="{display_wrapper}display:none;{/}")
+  .panel-heading
+    span Make Task Recurring
+  .panel-body
+    .row.xepan-push
+      .col-md-6.atk-form-field.atk-form-row
+        {$is_recurring}
+      .col-md-6.atk-form-field.atk-form-row
+        strong Remind Medium:    
+        {$recurring_span}

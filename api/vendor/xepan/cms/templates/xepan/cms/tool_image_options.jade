@@ -1,0 +1,108 @@
+.xepan-tool-options(id='{$_name}' style="display:none" for-xepan-component='xepan/cms/Tool_Image')
+    table.table.table-condensed.table-hover.xepan-cms-tool-table
+      tbody
+        tr
+          td.text-center
+            i.glyphicon.glyphicon-picture 
+            br 
+            | Image
+          td
+            input#xepan-image-option-src(type='text', disabled='true')
+            .btn-group
+              button#xepan-image-option-select.btn.btn-primary.btn-xs(type='button') Select
+              button#xepan-image-option-default.btn.btn-default.btn-xs(type='button') Default
+        tr
+          td.text-center 
+            | ALT Text 
+          td
+            input#xepan-image-option-alt(type='text')
+        tr
+          td.text-center
+            i.fa.fa-pencil
+            br 
+            | css class
+          td(colspan='2')
+            input#xepan-image-option-class(type='text')
+        tr
+          td.text-center
+            i.glyphicon.glyphicon-link
+            br 
+            | Link
+          td(colspan='2')
+            input#xepan-image-link(type='text', placeholder='')
+        tr
+          td.text-center
+            i.fa.fa-code
+            br 
+            | base64
+          td(colspan='2')
+            textarea#xepan-image-base64data(placeholder='')
+script(type='text/javascript').
+  // ========== OPTION TO COMPONENT EFFECT ==============
+  //
+  // $(your_option_html_element).click(function(event,ui){
+  // 		$(current_selected_component).what to do ???
+  // })
+  $('#xepan-image-option-default').click(function(event) {
+    $(current_selected_component).find('img').attr('src','vendor/xepan/cms/templates/images/epan-logo.png');
+    $('#xepan-image-option-src').val('vendor/xepan/cms/templates/images/epan-logo.png');
+  });
+  $('#xepan-image-option-class').change(function(event) {
+    $(current_selected_component).removeClass($(current_selected_component).find('img').attr('data-extra-classes'));
+    $(current_selected_component).find('img').attr('data-extra-classes',$(this).val());
+    $(current_selected_component).find('img').addClass($(this).val());
+  });
+  $('#xepan-image-link').change(function(event) {
+    $(current_selected_component).attr('xepan-image-link',$(this).val());
+    $(current_selected_component).find('a').attr('href',$(this).val());
+    $(current_selected_component).univ().errorMessage('Save and reload Page to see changes');
+  });
+
+  $('#xepan-image-option-alt').change(function(event){
+    $(current_selected_component).find('img').attr('alt',$(this).val()); 
+  });
+
+  $('#xepan-image-option-select').click(function(event) {
+    if($('#xepan-image-base64data').val().length > 0){
+      alert("Please clear base64 data first");
+      return;
+    }
+  
+    var fm = $('<div/>').dialogelfinder({
+    url : '?page=xepan_base_elconnector',
+    lang : 'en',
+    width : 840,
+    destroyOnClose : true,
+    getFileCallback : function(files, fm) {
+    console.log(files.url);
+    $('#xepan-image-option-src').val(files.url);
+    $(current_selected_component).find('img').attr('src',files.url);
+    },
+    commandsOptions : {
+    getfile : {
+    oncomplete : 'close',
+    folders : true
+    }
+    }
+  }).dialogelfinder('instance');
+  });
+
+  $('#xepan-image-base64data').change(function(event){
+    $('#xepan-image-option-src').val("")
+    $(current_selected_component).find('img').attr('src',$(this).val());
+  });
+
+  $('\#{$_name}').on('show',function(event){
+    var src_val = $(current_selected_component).find('img').attr('src');
+
+    if(src_val.startsWith("data:")){
+      $('#xepan-image-base64data').val(src_val);
+      $('#xepan-image-option-src').val('');
+    }else{
+      $('#xepan-image-option-src').val(src_val);
+      $('#xepan-image-base64data').val('');
+    }
+    $('#xepan-image-link').val($(current_selected_component).find('a').attr('href'));
+    $('#xepan-image-option-alt').val($(current_selected_component).find('img').attr('alt'));
+
+  });

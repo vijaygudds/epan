@@ -1,0 +1,112 @@
+
+<div id="{$_name}" style="display:none" for-xepan-component="xepan/cms/Tool_SVG" class="xepan-tool-options">
+  <table class="table table-condensed table-hover xepan-cms-tool-table">
+    <tbody>
+      <tr>
+        <td class="text-center"><i class="glyphicon glyphicon-picture"> </i><br/>Image</td>
+        <td>
+          <input id="xepan-svg-option-src" type="text" disabled="true" class="btn btn-xs"/>
+          <div class="btn-group">
+            <button id="xepan-svg-option-select" type="button" class="btn btn-primary btn-xs">Select</button>
+            <button id="xepan-svg-option-default" type="button" class="btn btn-default btn-xs">Default</button>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td>
+           
+          Edit SVG
+        </td>
+        <td colspan="2"> 
+          <input id="xepan-svg-edit-option-class" type="button" value="Edit Image"/>
+        </td>
+      </tr>
+      <tr>
+        <td class="text-center"><i class="fa fa-pencil"></i><br/>CSS Class</td>
+        <td colspan="2">
+          <input id="xepan-svg-option-class" type="text"/>
+        </td>
+      </tr>
+      <tr>
+        <td class="text-center"><i class="glyphicon glyphicon-link"></i><br/>Link</td>
+        <td colspan="2">
+          <input id="xepan-svg-link" type="text" placeholder=""/>
+        </td>
+      </tr>
+      <tr>
+        <td class="text-center"><i class="fa fa-code"></i><br/>base64</td>
+        <td colspan="2">
+          <textarea id="xepan-svg-base64data" placeholder=""></textarea>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <script type="text/javascript">
+    // ========== OPTION TO COMPONENT EFFECT ==============
+    //
+    // $(your_option_html_element).click(function(event,ui){
+    // 		$(current_selected_component).what to do ???
+    // })
+    $('#xepan-svg-edit-option-class').click(function(event) {
+    var url = "vendor/xepan/cms/templates/svgEditor/editor/svg-editor.html?url=..%2F..%2F..%2F..%2F..%2F..%2F"+ $('#xepan-svg-option-src').val() +"&dimensions=500,400&canvas_expansion=5&initFill[color]=0000FF";
+    window.open(url);
+    });
+    $('#xepan-svg-option-default').click(function(event) {
+    $(current_selected_component).find('img').attr('src','templates/images/logo.png');
+    $('#xepan-svg-option-src').val('vendor/xepan/cms/templates/images/epan-logo.svg');
+    });
+    $('#xepan-svg-option-class').change(function(event) {
+    $(current_selected_component).removeClass($(current_selected_component).find('img').attr('data-extra-classes'));
+    $(current_selected_component).find('img').attr('data-extra-classes',$(this).val());
+    $(current_selected_component).find('img').addClass($(this).val());
+    });
+    $('#xepan-svg-link').change(function(event) {
+    $(current_selected_component).attr('xepan-svg-link',$(this).val());
+    $(current_selected_component).find('a').attr('href',$(this).val());
+    $(current_selected_component).univ().errorMessage('Save and reload Page to see changes');
+    });
+    $('#xepan-svg-option-select').click(function(event) {
+    if($('#xepan-svg-base64data').val().length > 0){
+      alert("Please clear base64 data first");
+      return;
+    }
+    
+    var fm = $('<div/>').dialogelfinder({
+    url : '?page=xepan_base_elconnector',
+    lang : 'en',
+    width : 840,
+    destroyOnClose : true,
+    getFileCallback : function(files, fm) {
+    console.log(files.url);
+    $('#xepan-svg-option-src').val(files.url);
+    $(current_selected_component).find('img').attr('src',files.url);
+    },
+    commandsOptions : {
+    getfile : {
+    oncomplete : 'close',
+    folders : false
+    }
+    }
+    }).dialogelfinder('instance');
+    });
+    
+    $('#xepan-svg-base64data').change(function(event){
+      $('#xepan-svg-option-src').val("")
+      $(current_selected_component).find('img').attr('src',$(this).val());
+    });
+    
+    $('#{$_name}').on('show',function(event){
+    var src_val = $(current_selected_component).find('img').attr('src');
+    
+    if(src_val.startsWith("data:")){
+    $('#xepan-svg-base64data').val(src_val);
+    $('#xepan-svg-option-src').val('');
+    }else{
+    $('#xepan-svg-option-src').val(src_val);
+    $('#xepan-svg-base64data').val('');
+    console.log(src_val);
+    }
+    $('#xepan-svg-link').val($(current_selected_component).find('a').attr('href'));
+    });
+  </script>
+</div>
