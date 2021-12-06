@@ -127,7 +127,9 @@ class View_ComposeMessagePopup extends \View{
 		}
 		if($this->mode == 'msg-fwd'){
 			$this->subject="Fwd: ".$msg_model['title'];
-			$this->message="<br/><br/><br/><br/><blockquote> ---------- Forwarded message ----------<br>".$msg_model['description']."</blockquote>";
+			$this->message="<br/><br/><br/><br/>Forwarded By:- ".$this->app->employee['name']."
+
+			<blockquote> ---------- Forwarded message ----------<br>".$msg_model['description']."</blockquote>";
 
 			$attach_m = $this->add('xepan\communication\Model_Communication_Attachment');
 			$attach_m->addCondition('communication_id', $this->communication_id);
@@ -140,7 +142,14 @@ class View_ComposeMessagePopup extends \View{
 		$cc_field->setAttr(['multiple'=>'multiple']);
 		$f->addField('line','subject')->set($this->subject);
 		$message_field = $f->addField('xepan\base\RichText','message')->validate('required');
-		$message_field->set($this->message);
+		if(empty($this->message)){
+			$message_field->set("<br/><br/><br/><br/>Created By:-<b style='font-size:18px'>".$this->app->employee['name']."
+
+			<b><br/>".$this->message);
+			
+		}else{
+			$message_field->set($this->message);
+		}
 		$message_field->options = ['toolbar1'=>"styleselect | bold italic fontselect fontsizeselect | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image | forecolor backcolor",'menubar'=>false];
 		
 		$multi_upload_field = $f->addField('xepan\base\Form_Field_Upload','attachment',"")
