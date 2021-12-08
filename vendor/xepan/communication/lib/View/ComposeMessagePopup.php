@@ -127,7 +127,7 @@ class View_ComposeMessagePopup extends \View{
 		}
 		if($this->mode == 'msg-fwd'){
 			$this->subject="Fwd: ".$msg_model['title'];
-			$this->message="<br/><br/><br/><br/>Forwarded By:- ".$this->app->employee['name']."
+			$this->message="<br/><br/><br/><br/><span readonly contenteditable='false'>Forwarded By:- ".$this->app->employee['name']."</span>
 
 			<blockquote> ---------- Forwarded message ----------<br>".$msg_model['description']."</blockquote>";
 
@@ -143,9 +143,7 @@ class View_ComposeMessagePopup extends \View{
 		$f->addField('line','subject')->set($this->subject);
 		$message_field = $f->addField('xepan\base\RichText','message')->validate('required');
 		if(empty($this->message)){
-			$message_field->set("<br/><br/><br/><br/>Created By:-<b style='font-size:18px'>".$this->app->employee['name']."
-
-			<b><br/>".$this->message);
+			$message_field->set("<small readonly contenteditable='false' style='position: fixed;right: 0;left: auto;top: 0px;color: darkgray;' > Created By: ".$this->app->employee['name']."</small><span style='font-size: 14px;font-weight: 700;position: absolute;bottom: 10px;top: auto;'><br/>Thanks & Regards<br/>".$this->app->employee['name']."<br/>".$this->app->employee['department']."&nbsp;&nbsp;".$this->app->employee['post'].$this->message);
 			
 		}else{
 			$message_field->set($this->message);
