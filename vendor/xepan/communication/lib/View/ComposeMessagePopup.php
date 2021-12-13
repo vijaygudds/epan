@@ -143,7 +143,7 @@ class View_ComposeMessagePopup extends \View{
 		$f->addField('line','subject')->set($this->subject);
 		$message_field = $f->addField('xepan\base\RichText','message')->validate('required');
 		if(empty($this->message)){
-			$message_field->set("<small readonly contenteditable='false' style='position: fixed;right: 0;left: auto;top: 0px;color: darkgray;' > Created By: ".$this->app->employee['name']."</small><span style='font-size: 14px;font-weight: 700;bottom: 10px;top: auto;'><br/>Thanks & Regards<br/>".$this->app->employee['name']."<br/>".$this->app->employee['department']."&nbsp;&nbsp;".$this->app->employee['post'].$this->message);
+			$message_field->set("<small readonly contenteditable='false' style='position: absolute;right: 50%;left: auto;top: 0px;color: darkgray;' > Created By: ".$this->app->employee['name']."</small><span style='font-size: 14px;font-weight: 700;bottom: 10px;top: auto;'><br/>Thanks & Regards<br/>".$this->app->employee['name']."<br/>".$this->app->employee['department']."&nbsp;&nbsp;".$this->app->employee['post'].$this->message);
 			
 		}else{
 			$message_field->set($this->message);
