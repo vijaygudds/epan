@@ -11,7 +11,7 @@ class Model_Employee extends \xepan\base\Model_Contact{
 	];
 
 	public $actions=[
-		'Active'=>['view','edit','delete','deactivate','communication'],
+		'Active'=>['view','edit','delete','deactivate','communication','group'],
 		'InActive'=>['view','edit','delete','activate','communication'],
 		'DeactivateRequest'=>['view','edit','delete','deactivate','activate']
 	];
@@ -434,6 +434,54 @@ class Model_Employee extends \xepan\base\Model_Contact{
 		$this->save();
 		if(($user = $this->ref('user_id')) && $user->loaded()) $user->activate();
 	}
+	function page_group($page){
+
+            $f = $page->add('Form');
+			$emp_group = $this->add('xepan\hr\Model_Employee_Group');
+			$emp_group->addCondition('is_active',true);
+			$permitted_group_field = $f->addField('xepan/base/DropDown','employee_group');
+			$permitted_group_field->enableMultiSelect();
+			$permitted_group_field->setModel($emp_group);
+			$f->addSubmit('Assign');
+			$grp_alowed = array_column($this->add('xepan\hr\Model_Employee_Association')
+								->addCondition('employee_id',$this->id)
+								// ->addCondition('group_id',$employee->id)
+								->getRows()
+								,'group_id'
+							);
+			$permitted_group_field->set($grp_alowed);
+		if($f->isSubmitted()){
+
+			$this->add('xepan\hr\Model_Employee_Association')
+								->addCondition('employee_id',$this->id)
+								// ->addCondition('group',$employee->id)
+								->deleteAll();
+				
+				if($f['employee_group']){
+
+						foreach (explode(",",$f['employee_group']) as $emp_group_id) {
+							$this->add('xepan\hr\Model_Employee_Association')
+								->set('employee_id',$this->id)
+								->set('group_id',$emp_group_id)
+								->save();
+						}
+						
+					}
+						
+					// $f->js(null,$f->js()->univ()->successMessage('Updated'))->reload()->execute();
+			return $this->app->js(true,$page->js()->univ()->closeDialog())->univ()->successMessage('Group Assign SuccessFully');
+		}else{
+				$group_alowed_names = array_column($this->add('xepan\hr\Model_Employee_Association')
+									->addCondition('employee_id',$this->id)
+									->getRows()
+									,'group'
+								);
+				// throw new \Exception(implode(", ", $group_alowed_names), 1);
+				
+				$permitted_group_field->template->trySet(implode(", ", $group_alowed_names));		
+			}
+	}
+
 
 	function updateSearchString($m){
 
