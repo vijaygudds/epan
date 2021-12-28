@@ -302,10 +302,11 @@ class page_lead extends \xepan\base\Page{
 					'communication_for'=>'x5~4',
 					'communication_sub_for'=>'x6~4',
 					'call_direction'=>'x7~4',
+					'meeting_direction'=>'x8~4',
 					'email_to'=>'x41~12',
 					'cc_mails'=>'x42~12',
 					'bcc_mails'=>'x43~12',
-					'title'=>'x8~12',
+					// 'title'=>'x8~12',
 					'body'=>'x9~12',
 					'from_email'=>'x10~6',
 					'from_phone'=>'x11~6',
@@ -402,7 +403,7 @@ class page_lead extends \xepan\base\Page{
 
 			$type_field = $form->addField('dropdown','communication_type');
 			$type_field->setEmptyText('Please select communication By');
-			$type_field->setValueList([/*'Email'=>'Email',*/'Call'=>'Call','Received'=>'Received','Meeting'=>'Meeting'/*,'TeleMarketing'=>'TeleMarketing','Personal'=>'Personal','Comment'=>'Comment','SMS'=>'SMS'*/]);
+			$type_field->setValueList([/*'Email'=>'Email',*/'Call'=>'Call'/*,'Received'=>'Received'*/,'Meeting'=>'Meeting'/*,'TeleMarketing'=>'TeleMarketing','Personal'=>'Personal','Comment'=>'Comment','SMS'=>'SMS'*/]);
 
 			$sub_type_field = $form->addField('dropdown','sub_type')->setEmptyText('Please Select');
 			$sub_type_field->setValueList(array_combine($sub_type_array,$sub_type_array));
@@ -418,11 +419,14 @@ class page_lead extends \xepan\base\Page{
 			$status_field = $form->addField('dropdown','call_direction');
 			$status_field->setValueList(['Called'=>'Called (Out)','Received'=>'Received (In)'])->setEmptyText('Please Select');
 
+			$status_field = $form->addField('dropdown','meeting_direction');
+		$status_field->setValueList(['Meeting'=>'Meeting','Not Meet'=>'Not Meet'])->setEmptyText('Please Select');
+
 			$email_to_field = $form->addField('email_to');
 			$cc_email_field = $form->addField('cc_mails');
 			$bcc_email_field = $form->addField('bcc_mails');
 
-			$form->addField('title');
+			$form->addField('hidden','title');
 			$form->addField('xepan\base\RichText','body');
 
 			$from_email=$form->addField('dropdown','from_email')->setEmptyText('Please Select From Email');
@@ -503,16 +507,16 @@ class page_lead extends \xepan\base\Page{
 			],'div.col-md-1,div.col-md-2,div.col-md-3,div.col-md-4,div.col-md-6,div.col-md-12');
 
 			$type_field->js(true)->univ()->bindConditionalShow([
-				''=>[],
-				'Email'=>['sub_type','calling_status','sub_type_3','email_to','cc_mails','bcc_mails','title','body','from_email','email_to','cc_mails','bcc_mails'],
-				'Call'=>['sub_type','calling_status','sub_type_3','title','body','from_phone','from_person','called_to','notify_email','notify_email_to','status','calling_status','call_direction','communication_for','communication_sub_for'],
-				'Received'=>['sub_type','calling_status','sub_type_3','title','body','from_phone','from_person','called_to','notify_email','notify_email_to','status','calling_status','call_direction','communication_for','communication_sub_for'],
-				'Meeting'=>['sub_type','calling_status','sub_type_3','title','body','from_phone','from_person','called_to','notify_email','notify_email_to','status','calling_status','call_direction','communication_for','communication_sub_for'],
-				'TeleMarketing'=>['sub_type','calling_status','sub_type_3','title','body','from_phone','called_to'],
-				'Personal'=>['sub_type','calling_status','sub_type_3','title','body','from_person'],
-				'Comment'=>['sub_type','calling_status','sub_type_3','title','body','from_person'],
-				'SMS'=>['sub_type','calling_status','sub_type_3','title','body','from_number','sms_to','sms_settings']
-			],'div.col-md-1,div.col-md-2,div.col-md-3,div.col-md-4,div.col-md-6,div.col-md-12');
+			''=>[],
+			'Email'=>['sub_type','calling_status','sub_type_3','email_to','cc_mails','bcc_mails','title','body','from_email','email_to','cc_mails','bcc_mails'],
+			'Call'=>['sub_type','calling_status','sub_type_3','title','body','from_phone','from_person','called_to','notify_email','notify_email_to','status','calling_status','call_direction','communication_for','communication_sub_for'],
+			'Received'=>['sub_type','calling_status','sub_type_3','title','body','from_phone','from_person','called_to','notify_email','notify_email_to','status','calling_status','call_direction','communication_for','communication_sub_for'],
+			'Meeting'=>['sub_type','meeting_direction','sub_type_3','title','body','from_phone','from_person','called_to','notify_email','notify_email_to','status','calling_status','meeting_direction','communication_for','communication_sub_for'],
+			'TeleMarketing'=>['sub_type','calling_status','sub_type_3','title','body','from_phone','called_to'],
+			'Personal'=>['sub_type','calling_status','sub_type_3','title','body','from_person'],
+			'Comment'=>['sub_type','calling_status','sub_type_3','title','body','from_person'],
+			'SMS'=>['sub_type','calling_status','sub_type_3','title','body','from_number','sms_to','sms_settings']
+		],'div.col-md-1,div.col-md-2,div.col-md-3,div.col-md-4,div.col-md-6,div.col-md-12');
 
 			$crud->addHook('formSubmit',function($crud,$form)use($model){
 				$model['lead_cat_id'] = $form['lead_category'];
@@ -562,6 +566,11 @@ class page_lead extends \xepan\base\Page{
 						if(!$form['sms_to']) $form->displayError('sms_to','Please specify "sms_to" value');
 						if(!$form['sms_settings']) $form->displayError('sms_settings','Please specify "sms_settings"');
 							break;
+						case "Meeting":
+						if(!$form['meeting_direction']) $form->displayError('meeting_direction','Please specify "Meeting Direction"');
+						// if(!$form['from_phone']) $form->displayError('from_phone','From Phone must not be empty');
+						// if(!$form['called_to']) $form->displayError('called_to','Called to  must not be empty');
+						break;	
 						default:
 							# code...
 							break;
@@ -749,7 +758,21 @@ class page_lead extends \xepan\base\Page{
 					$employee_name=$this->add('xepan\hr\Model_Employee')->load($form['from_person'])->get('name');
 					$communication->setFrom($form['from_phone'],$employee_name);
 				}
-
+			case 'Meeting':
+					$send_settings = $form['from_phone'];
+					if($form['status']=='Meeting'){
+						
+						$communication['from_id']=$this->contact->id;
+						$communication['to_id']=$form['from_person']; // actually this is to person this time
+						$communication['direction']='Meet';
+						$communication->setFrom($form['from_phone'],$this->contact['name']);
+					}else{					
+						$communication['from_id']=$form['from_person']; // actually this is to person this time
+						$communication['to_id']=$this->contact->id;
+						$communication['direction']='Not Meet';
+						$employee_name=$this->add('xepan\hr\Model_Employee')->load($form['from_person'])->get('name');
+						$communication->setFrom($form['from_phone'],$employee_name);
+					}	
 				
 				$communication['status']=$form['status'];
 				$_to_field='called_to';
