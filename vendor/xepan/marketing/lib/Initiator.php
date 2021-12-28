@@ -71,6 +71,7 @@ class Initiator extends \Controller_Addon {
 	}
 
 	function populateApplicationMenus(){
+		
 		if(!$this->app->getConfig('hidden_xepan_marketing',false)){
 			// $m = $this->app->top_menu->addMenu('Marketing');
 			// $m->addItem(['Dashboard','icon'=>'fa fa-dashboard'],'xepan_marketing_dashboard');
@@ -126,6 +127,14 @@ class Initiator extends \Controller_Addon {
 						[	'name'=>'Category Management',
 							'icon'=>'fa fa-sitemap',
 							'url'=>'xepan_marketing_marketingcategory'
+						],
+						[	'name'=>'Lead Category Management',
+							'icon'=>'fa fa-sitemap',
+							'url'=>'xepan_marketing_leadcategory'
+						],
+						[	'name'=>'Communication For',
+							'icon'=>'fa fa-gears',
+							'url'=>'xepan_marketing_communicationfor'
 						],
 						[	'name'=>'Lead',
 							'icon'=>'fa fa-users',
@@ -222,7 +231,10 @@ class Initiator extends \Controller_Addon {
     }
 
      function exportEntities($app,&$array){
+
         $array['Lead'] = ['caption'=>'Lead','type'=>'xepan\base\Basic','model'=>'xepan\marketing\Model_Lead'];
+        $array['LeadCategory'] = ['caption'=>'LeadCategory','type'=>'xepan\base\Basic','model'=>'xepan\marketing\Model_LeadCategory'];
+        $array['CommunicationFor'] = ['caption'=>'CommunicationFor','type'=>'xepan\base\Basic','model'=>'xepan\marketing\Model_For'];
         $array['Opportunity'] = ['caption'=>'Opportunity','type'=>'xepan\base\Basic','model'=>'xepan\marketing\Model_Opportunity'];
         $array['MarketingCategory'] = ['caption'=>'MarketingCategory','type'=>'xepan\base\Basic','model'=>'xepan\marketing\Model_MarketingCategory'];
         $array['Campaign'] = ['caption'=>'Campaign','type'=>'xepan\base\Basic','model'=>'xepan\marketing\Model_Campaign'];
