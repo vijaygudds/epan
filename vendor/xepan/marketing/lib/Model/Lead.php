@@ -18,10 +18,16 @@ class Model_Lead extends \xepan\base\Model_Contact{
 		
 		$config_m = $this->add('xepan\marketing\Model_Config_LeadSource');
 		$config_m->tryLoadAny();
-
+		$this->hasOne('xepan\marketing\Model_LeadSubCategory','lead_cat_id');
+		$this->hasOne('xepan\marketing\Model_LeadSubCategory','lead_cat_sub_id');
 		$this->getElement('source')->enum(explode(',', $config_m['lead_source']));
 
 		$this->getElement('created_by_id')->defaultValue($this->app->employee->id);
+		// $lead_j = $this->join('lead.contact_id');
+		$this->addField('landmark')->caption('LandMark/Area');
+		$this->addField('mohla_falla')->caption('Mohla/Falla');
+		$this->addField('tehsil')->caption('Tehsil/city');
+		$this->addField('post_office_wardno')->caption('Post Office/Ward No');
 
 		$this->addExpression('open_count')->set(function($m,$q){
 			return $this->add('xepan\marketing\Model_Opportunity',['table_alias'=>'open_count'])
@@ -768,4 +774,16 @@ class Model_Lead extends \xepan\base\Model_Contact{
 
 		return $this;
 	}
-} 
+
+	function page_communication($page){
+		$tabs = $page->add('TabsDefault');
+		$communication_tab = $tabs->addTab('Communication');
+        $followup_tab = $tabs->addTab('Followups');
+		$comm = $communication_tab->add('xepan\communication\View_CommunicationNew')->addClass('Communication-view');
+		$comm->setModel($this);
+		$comm->setCommunicationsWith($this);
+
+		$this->app->hook('communication_rendered',[$this->id,$followup_tab]);
+
+	} 
+}

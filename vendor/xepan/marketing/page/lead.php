@@ -93,8 +93,19 @@ class page_lead extends \xepan\base\Page{
 		$this->crud = $crud = $this->add('xepan\hr\CRUD',null,null,['grid/lead-grid']);
 
 		$this->formLayout($crud,$lead, $other_fields);
+		$form = $crud->form;
+		$lead_cat = $form->addField('DropDown','lead_category');
+		// $lead_cat->setEmptytext('Please Select');
+		$lead_cat->setModel('xepan\marketing\LeadCategory');
+		$lead_subcat=$form->addField('DropDown','lead_sub_category');
+		// $lead_subcat->setEmptytext('Please Select');
+		$lead_subcat_m = $this->add('xepan\marketing\Model_LeadSubCategory');
+		if($this->app->stickyGET('leadcategory_id')){
+			$lead_subcat_m->addCondition('category_id',$this->app->stickyGET('leadcategory_id'));
+		}
+		$lead_subcat->setModel($lead_subcat_m);
 
-		$crud->setModel($lead,['first_name','last_name','organization','address','pin_code','city','country_id','state_id','remark','source','assign_to_id','emails_str','contacts_str'],['emails_str','contacts_str','name','organization_name_with_name','source','city','type','score','total_visitor','created_by_id','created_by','assign_to_id','assign_to','assign_at','effective_name','code','organization','existing_associated_catagories','created_at','priority','branch_id'])->setOrder('created_at','desc');
+		$crud->setModel($lead,['first_name','last_name','organization',/*'address',*/'pin_code','landmark','mohla_falla','tehsil','post_office_wardno','city','country_id','state_id','remark','source','assign_to_id','emails_str','contacts_str'],['emails_str','contacts_str','name','organization_name_with_name','source','city','type','score','total_visitor','created_by_id','created_by','assign_to_id','assign_to','assign_at','effective_name','code','organization','existing_associated_catagories','created_at','priority','branch_id'])->setOrder('created_at','desc');
 		$export = $crud->grid->add('misc\Export');
 		
 		$crud->grid->addHook('formatRow',function($g){
@@ -103,7 +114,7 @@ class page_lead extends \xepan\base\Page{
 		});
 		if($crud->isEditing('edit')){
 			$cats =$crud->form->model->getAssociatedCategories();
-			$crud->form->getElement('categories')->set($cats);
+			$crud->form->getElement('occupation')->set($cats);
 
 			$crud->form->getElement('emails')->set(str_replace('<br/>', ', ',trim($crud->form->model['emails_str'])));
 			$crud->form->getElement('numbers')->set(str_replace('<br/>', ', ',trim($crud->form->model['contacts_str'])));
@@ -199,6 +210,9 @@ class page_lead extends \xepan\base\Page{
 		$emp_field->js('change',$frm->js()->submit());
 		$emp_assign_field->js('change',$frm->js()->submit());
 
+		// $lead_cat->js('change',$lead_subcat->js()->reload(null,null,[$this->app->url(null,['cut_object'=>$lead_subcat->name]),'leadcategory_id'=>$lead_cat->js()->val()]));
+
+		$lead_cat->js('change',[$lead_subcat->js(null,[$lead_subcat->js()->select2('destroy')])->reload(null,null,[$this->app->url(null,['cut_object'=>$lead_subcat->name]),'leadcategory_id'=>$lead_cat->js()->val()])]);
 
 		// $grid->addColumn('category');
 		// $grid->addMethod('format_marketingcategory',function($grid,$field){				
@@ -250,22 +264,28 @@ class page_lead extends \xepan\base\Page{
 					'first_name'=>'General Information~c1~4',
 					'last_name'=>'c2~4',
 					'organization'=>'c3~4',
-					'city'=>'c4~4', // closed to make panel default collapsed
-					'country_id~'=>'c5~4',
-					'country'=>'c5',
-					'state_id~'=>'c6~4',
-					'state'=>'c6',
-					'emails'=>'c7~12~comma seperated emails',
-					'numbers'=>'c8~12~comma seperated numbers',
-					'remark'=>'c9~12',
-					'source'=>'c10~4',
-					'assign_to_id~Assigned to Employee'=>'c11~4',
-					'categories'=>'c12~4',
-					'score~Score (Is Lead Positive or Negative)'=>'c13~2~or leave as it is for nutral',
-					'score_buttons~'=>'c14~3',
+					'lead_category'=>'c4~4',
+					'lead_sub_category'=>'c5~4',
+					'source'=>'c6~4',
+					'numbers'=>'c7~4~comma seperated numbers',
+					'emails'=>'c8~4~comma seperated emails',
+					'occupation'=>'c9~4',
+					'assign_to_id~Assigned to Employee'=>'c10~4',
+					'score~Score (Is Lead Positive or Negative)'=>'c11~2~or leave as it is for nutral',
+					'score_buttons~'=>'c12~3',
+					'landmark'=>'Address Info~a1~4',
+					'mohla_falla'=>'c8~4',
+					'tehsil'=>'c9~4',
+					'post_office_wardno'=>'c10~4',
+					'city'=>'c11~4', // closed to make panel default collapsed
+					'pin_code'=>'a12~4', // closed to make panel default collapsed
+					'state_id~'=>'c13~4',
+					'state'=>'c13',
+					'country_id~'=>'c14~4',
+					'country'=>'c14',
+					'remark'=>'c12~12',
 					
-					'address'=>'Extended Info~a1~12',
-					'pin_code'=>'a2~12'];
+					/*'pin_code'=>'a2~12'*/];
 
 		
 
@@ -279,19 +299,21 @@ class page_lead extends \xepan\base\Page{
 					'sub_type~'.$config_m['sub_type_1_label_name']?:"Product/ Service/ Related To"=>'x2~4',
 					'calling_status~'.$config_m['sub_type_2_label_name']?:"Communication Result"=>'x3~4',
 					'sub_type_3~'.$config_m['sub_type_3_label_name']?:"Communication Remark"=>'x4~4',
-					'call_direction'=>'x5~4',
+					'communication_for'=>'x5~4',
+					'communication_sub_for'=>'x6~4',
+					'call_direction'=>'x7~4',
 					'email_to'=>'x41~12',
 					'cc_mails'=>'x42~12',
 					'bcc_mails'=>'x43~12',
-					'title'=>'x15~12',
-					'body'=>'x6~12',
-					'from_email'=>'x7~6',
-					'from_phone'=>'x8~6',
-					'from_person'=>'x9~6',
-					'called_to'=>'x10~6',
-					'from_number'=>'x11~6',
-					'sms_to'=>'x12~6',
-					'sms_settings'=>'x13~6',
+					'title'=>'x8~12',
+					'body'=>'x9~12',
+					'from_email'=>'x10~6',
+					'from_phone'=>'x11~6',
+					'from_person'=>'x12~6',
+					'called_to'=>'x13~6',
+					'from_number'=>'x14~6',
+					'sms_to'=>'x15~6',
+					'sms_settings'=>'x16~6',
 					'follow_up'=>'f1~12',
 					'followup_assign_to'=>'f2~4',
 					'starting_at'=>'f3~3',
@@ -310,6 +332,8 @@ class page_lead extends \xepan\base\Page{
 
 		if($crud->isEditing('edit')){
 			unset($layout_array['communication_type']);unset($layout_array['sub_type']);
+			unset($layout_array['communication_for']);unset($layout_array['communication_for']);
+			unset($layout_array['communication_sub_for']);unset($layout_array['communication_sub_for']);
 			unset($layout_array['calling_status']);unset($layout_array['call_direction']);
 			unset($layout_array['title']);unset($layout_array['body']);
 			unset($layout_array['from_email']);unset($layout_array['from_phone']);
@@ -333,7 +357,7 @@ class page_lead extends \xepan\base\Page{
 
 		$emails_field = $form->addField('emails');
 		$number_field = $form->addField('numbers');
-		$categories_field = $form->addField('xepan\base\DropDown','categories');
+		$categories_field = $form->addField('xepan\base\DropDown','occupation');
 		$categories_field->setModel($this->add('xepan\marketing\Model_MarketingCategory'));
 		$categories_field->enableMultiSelect();
 		// $categories_field->setEmptyText("Please Select");
@@ -357,9 +381,28 @@ class page_lead extends \xepan\base\Page{
 
 			$sub_type_array = explode(",",$config_m['sub_type']);
 
+			$for_type_field = $form->addField('Dropdown','communication_for');
+			$for_type_field->setEmptyText('Please select communication For');
+			$for_type_field->setModel('xepan\marketing\Communication_For');
+			
+			$subfor_type_field = $form->addField('DropDown','communication_sub_for');
+			$subfor_type_field->setEmptyText('Please select communication Sub For');
+			$subfor_m = $this->add('xepan\marketing\Model_Communication_SubFor');
+			$subfor_type_field->setModel($subfor_m);
+			
+			if($this->app->stickyGET('for_id')){
+				$subfor_m->addCondition('for_id',$this->app->stickyGET('for_id'));
+			}
+
+			$for_type_field->js('change',[$subfor_type_field->js(null,[$subfor_type_field->js()->select2('destroy')])->reload(null,null,[$this->app->url(null,['cut_object'=>$subfor_type_field->name]),'for_id'=>$for_type_field->js()->val()])]);
+
+			// $com_purpose = $form->addField('DropDown','commmunication_purpose');
+			// $com_purpose->setEmptyText('Please Select Communication Purpose');
+			// $com_purpose->setValueList(['LOAN'=>'LOAN','LEGAL'=>'LEGAL','MARKETING'=>'MARKETING','RECOVERY'=>'RECOVERY','BIKEAUCTION'=>'BIKEAUCTION']);
+
 			$type_field = $form->addField('dropdown','communication_type');
-			$type_field->setEmptyText('Please select communication type');
-			$type_field->setValueList(['Email'=>'Email','Call'=>'Call','TeleMarketing'=>'TeleMarketing','Personal'=>'Personal','Comment'=>'Comment','SMS'=>'SMS']);
+			$type_field->setEmptyText('Please select communication By');
+			$type_field->setValueList([/*'Email'=>'Email',*/'Call'=>'Call','Received'=>'Received','Meeting'=>'Meeting'/*,'TeleMarketing'=>'TeleMarketing','Personal'=>'Personal','Comment'=>'Comment','SMS'=>'SMS'*/]);
 
 			$sub_type_field = $form->addField('dropdown','sub_type')->setEmptyText('Please Select');
 			$sub_type_field->setValueList(array_combine($sub_type_array,$sub_type_array));
@@ -462,7 +505,9 @@ class page_lead extends \xepan\base\Page{
 			$type_field->js(true)->univ()->bindConditionalShow([
 				''=>[],
 				'Email'=>['sub_type','calling_status','sub_type_3','email_to','cc_mails','bcc_mails','title','body','from_email','email_to','cc_mails','bcc_mails'],
-				'Call'=>['sub_type','calling_status','sub_type_3','title','body','from_phone','from_person','called_to','notify_email','notify_email_to','status','calling_status','call_direction'],
+				'Call'=>['sub_type','calling_status','sub_type_3','title','body','from_phone','from_person','called_to','notify_email','notify_email_to','status','calling_status','call_direction','communication_for','communication_sub_for'],
+				'Received'=>['sub_type','calling_status','sub_type_3','title','body','from_phone','from_person','called_to','notify_email','notify_email_to','status','calling_status','call_direction','communication_for','communication_sub_for'],
+				'Meeting'=>['sub_type','calling_status','sub_type_3','title','body','from_phone','from_person','called_to','notify_email','notify_email_to','status','calling_status','call_direction','communication_for','communication_sub_for'],
 				'TeleMarketing'=>['sub_type','calling_status','sub_type_3','title','body','from_phone','called_to'],
 				'Personal'=>['sub_type','calling_status','sub_type_3','title','body','from_person'],
 				'Comment'=>['sub_type','calling_status','sub_type_3','title','body','from_person'],
@@ -470,7 +515,8 @@ class page_lead extends \xepan\base\Page{
 			],'div.col-md-1,div.col-md-2,div.col-md-3,div.col-md-4,div.col-md-6,div.col-md-12');
 
 			$crud->addHook('formSubmit',function($crud,$form)use($model){
-
+				$model['lead_cat_id'] = $form['lead_category'];
+				$model['lead_cat_sub_id'] = $form['lead_sub_category'];
 				// Manage communications
 				if($form['communication_type']){
 					
@@ -587,7 +633,7 @@ class page_lead extends \xepan\base\Page{
 					$m->addPhone(trim($no),'Official',null,null,null,false);
 				}
 
-				$cats_from_field = is_array($crud->form['categories'])?$crud->form['categories']:explode(",",$crud->form['categories']);
+				$cats_from_field = is_array($crud->form['occupation'])?$crud->form['occupation']:explode(",",$crud->form['occupation']);
 				// var_dump($cats_from_field);
 				$cat_diff = array_diff($m->getAssociatedCategories(),$cats_from_field);
 				foreach ($cats_from_field as $cat) {
@@ -662,26 +708,29 @@ class page_lead extends \xepan\base\Page{
 		$this->contact = $m;
 					
 		$communication = $this->add('xepan\communication\Model_Communication_'.$commtype);
+		// $communication = $this->add('xepan\communication\Model_Communication_Call');
 
 		$communication['from_id']=$form['from_person'];
+		$communication['communication_type']=$form['communication_type'];
 		$communication['to_id']= $this->contact->id;
 		$communication['sub_type']=$form['sub_type'];
 		$communication['calling_status']=$form['calling_status'];
 		$communication['sub_type_3']=$form['sub_type_3'];
 		$communication['score']=$form['score'];
-		
+		$communication['communication_for_id'] = $form['communication_for'];
+		$communication['communication_subfor_id'] = $form['communication_sub_for'];
 
 		switch ($commtype) {
-			case 'Email':
-				$send_settings = $form->add('xepan\communication\Model_Communication_EmailSetting');
-				$send_settings->tryLoad($form['from_email']?:-1);
-				$_from = $send_settings['from_email'];
-				$_from_name = $send_settings['from_name'];
-				$_to_field='email_to';
-				$communication['from_id']=$this->app->employee->id;
-				$communication->setFrom($_from,$_from_name);
-				$communication['direction']='Out';
-				break;
+			// case 'Email':
+			// 	$send_settings = $form->add('xepan\communication\Model_Communication_Email');
+			// 	$send_settings->tryLoad($form['from_email']?:-1);
+			// 	$_from = $send_settings['from_email'];
+			// 	$_from_name = $send_settings['from_name'];
+			// 	$_to_field='email_to';
+			// 	$communication['from_id']=$this->app->employee->id;
+			// 	$communication->setFrom($_from,$_from_name);
+			// 	$communication['direction']='Out';
+			// 	break;
 			case 'TeleMarketing':
 				$communication['from_id']=$form['from_person'];
 				$communication['status'] = 'Called';	
@@ -701,60 +750,60 @@ class page_lead extends \xepan\base\Page{
 					$communication->setFrom($form['from_phone'],$employee_name);
 				}
 
-
+				
 				$communication['status']=$form['status'];
 				$_to_field='called_to';
 
 				break;
 
-			case 'SMS':
+			// case 'SMS':
 				
-				$send_settings = $this->add('xepan\communication\Model_Epan_SMSSetting');
-				$send_settings->load($form['from_sms']);
-				$communication['from_id'] = $this->app->employee->id;
-				$communication['description'] = $form['body'];
-				$_from = $this->app->employee->id;
-				$_from_name = $this->app->employee['name'];
-				$_to_field='sms_to';
-				foreach (explode(",", $form[$_to_field]) as $nos) {
-					$communication->addTo($nos,$this->contact['name']);
+			// 	$send_settings = $this->add('xepan\communication\Model_Epan_SMSSetting');
+			// 	$send_settings->load($form['from_sms']);
+			// 	$communication['from_id'] = $this->app->employee->id;
+			// 	$communication['description'] = $form['body'];
+			// 	$_from = $this->app->employee->id;
+			// 	$_from_name = $this->app->employee['name'];
+			// 	$_to_field='sms_to';
+			// 	foreach (explode(",", $form[$_to_field]) as $nos) {
+			// 		$communication->addTo($nos,$this->contact['name']);
 					
-				}
-				$communication->setFrom($_from,$_from_name);
-				$communication['direction']='Out';
-				$communication['communication_channel_id'] = $form['from_sms'];
-				$communication['title'] = 'SMS: '.substr(strip_tags($thformis['body']),0,35)." ...";
-				break;
-			case 'Personal':
-				$_from = $form['from_person'];
-				$_from_name = $this->add('xepan\base\Model_Contact')->load($_from)->get('name');
-				$_to = $this->contact->id;
-				$_to_name = $this->contact['name'];
-				$_to_field=null;
-				$communication->addTo($_to, $_to_name);
-				$communication->setFrom($_from,$_from_name);
-				break;
-			case 'Comment':
-				$_from = $form['from_person'];
-				$_from_name = $this->add('xepan\base\Model_Contact')->load($_from)->get('name');
-				$_to = $this->contact->id;
-				$_to_name = $this->contact['name'];
-				$_to_field=null;
-				$communication->addTo($_to, $_to_name);
-				$communication->setFrom($_from,$_from_name);
-				break;	
-			default:
-				break;
+			// 	}
+			// 	$communication->setFrom($_from,$_from_name);
+			// 	$communication['direction']='Out';
+			// 	$communication['communication_channel_id'] = $form['from_sms'];
+			// 	$communication['title'] = 'SMS: '.substr(strip_tags($thformis['body']),0,35)." ...";
+			// 	break;
+			// case 'Personal':
+			// 	$_from = $form['from_person'];
+			// 	$_from_name = $this->add('xepan\base\Model_Contact')->load($_from)->get('name');
+			// 	$_to = $this->contact->id;
+			// 	$_to_name = $this->contact['name'];
+			// 	$_to_field=null;
+			// 	$communication->addTo($_to, $_to_name);
+			// 	$communication->setFrom($_from,$_from_name);
+			// 	break;
+			// case 'Comment':
+			// 	$_from = $form['from_person'];
+			// 	$_from_name = $this->add('xepan\base\Model_Contact')->load($_from)->get('name');
+			// 	$_to = $this->contact->id;
+			// 	$_to_name = $this->contact['name'];
+			// 	$_to_field=null;
+			// 	$communication->addTo($_to, $_to_name);
+			// 	$communication->setFrom($_from,$_from_name);
+			// 	break;	
+			// default:
+			// 	break;
 		}
 		
 		$communication->setSubject($form['title']);
 		$communication->setBody($form['body']);
 
-		if($_to_field){
-			foreach (explode(',',$form[$_to_field]) as $to) {
-				$communication->addTo(trim($to));
-			}			
-		}
+		// if($_to_field){
+		// 	foreach (explode(',',$form[$_to_field]) as $to) {
+		// 		$communication->addTo(trim($to));
+		// 	}			
+		// }
 		
 		if($form['bcc_mails']){
 			foreach (explode(',',$form['bcc_mails']) as $bcc) {
@@ -870,7 +919,7 @@ class page_lead extends \xepan\base\Page{
 		$tyop = $f->addField('DropDown','type_of_pages')->setValueList($array);
 		$url_select = $f->addField('line','url_selector')->set($pages_selector)->validate('required');
 		$f->addField('text','html_code');
-		$category_field = $f->addField('Dropdown','categories');
+		$category_field = $f->addField('Dropdown','occupation');
 		$category_field->setModel('xepan\marketing\Model_MarketingCategory');
 		$category_field->setAttr(['multiple'=>'multiple']);
 
@@ -880,7 +929,7 @@ class page_lead extends \xepan\base\Page{
 		// $tyop->js('change',$url_select->js()->reload(['type_of_pages'=>$tyop->js()->val()]));
 	
 		if($f->isSubmitted()){
-			$category = $f['categories'];
+			$category = $f['occupation'];
 			$category_array = explode(",", $category);			
 
 			$this->grab('http://searchpage.null/root',$f['html_code'],$f['url_selector']);
