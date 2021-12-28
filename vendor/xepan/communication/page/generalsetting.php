@@ -50,6 +50,11 @@ class page_generalsetting extends \xepan\communication\page_sidebar{
         $crud = $this->add('xepan\base\CRUD');
         $crud->setModel($model);
 	}
+	function page_communication_for(){
+		$model = $this->add('xepan\communication\Model_For');
+        $crud = $this->add('xepan\hr\CRUD');
+        $crud->setModel($model);
+	}
 
 
 	function page_setdefaultemail(){
