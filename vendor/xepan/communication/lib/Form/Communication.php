@@ -18,7 +18,7 @@ class Form_Communication extends \Form {
 		$this->addClass('form-communication');
 		$this->setLayout('view\communicationform');
 		$type_field = $this->addField('dropdown','type');
-		$type_field->setValueList(['Email'=>'Email','Call'=>'Call','TeleMarketing'=>'TeleMarketing','Personal'=>'Personal','Comment'=>'Comment','SMS'=>'SMS']);
+		$type_field->setValueList([/*'Email'=>'Email',*/'Call'=>'Call','Meeting'=>'Meeting'/*,'TeleMarketing'=>'TeleMarketing','Personal'=>'Personal','Comment'=>'Comment','SMS'=>'SMS'*/]);
 		$type_field->set($edit_model['communication_type']);
 
 		$config_m = $this->add('xepan\communication\Model_Config_SubType');
@@ -44,10 +44,30 @@ class Form_Communication extends \Form {
 			$date_field = $this->addField('DateTimePicker','date')->set($edit_model['created_at']);
 		}		
 		
+		/*for*/
+		$for_type_field = $this->addField('Dropdown','communication_for');
+		$for_type_field->setEmptyText('Please select communication For');
+		$for_type_field->setModel('xepan\marketing\Communication_For');
+		
+		$subfor_type_field = $this->addField('DropDown','communication_sub_for');
+		$subfor_type_field->setEmptyText('Please select communication Sub For');
+		$subfor_m = $this->add('xepan\marketing\Model_Communication_SubFor');
+		$subfor_type_field->setModel($subfor_m);
+			
+		if($this->app->stickyGET('for_id')){
+			$subfor_m->addCondition('for_id',$this->app->stickyGET('for_id'));
+		}
+
+		$for_type_field->js('change',[$subfor_type_field->js(null,[$subfor_type_field->js()->select2('destroy')])->reload(null,null,[$this->app->url(null,['cut_object'=>$subfor_type_field->name]),'for_id'=>$for_type_field->js()->val()])]);
+
+
 		$status_field = $this->addField('dropdown','status')->set($edit_model['status']);
 		$status_field->setValueList(['Called'=>'Called','Received'=>'Received'])->setEmptyText('Please Select');
 
-		$this->addField('title')->validate('required')->set($edit_model['title']);
+		$status_field = $this->addField('dropdown','meeting_direction');
+		$status_field->setValueList(['Meeting'=>'Meeting','Not Meet'=>'Not Meet'])->setEmptyText('Please Select');
+
+		$this->addField('hidden','title')->set($edit_model['title']);
 		$this->addField('xepan\base\RichText','body')->validate('required')->set($edit_model['description']);
 		$from_email=$this->addField('dropdown','from_email')->setEmptyText('Please Select From Email');
 		$my_email = $this->add('xepan\hr\Model_Post_Email_MyEmails');
@@ -160,6 +180,7 @@ class Form_Communication extends \Form {
 		$type_field->js(true)->univ()->bindConditionalShow([
 			'Email'=>['from_email','email_to','cc_mails','bcc_mails'],
 			'Call'=>['from_email','from_phone','from_person','called_to','notify_email','notify_email_to','status','calling_status'],
+			'Meeting'=>['from_email','from_phone','from_person','called_to','notify_email','notify_email_to','meeting_direction','calling_status'],
 			'TeleMarketing'=>['from_phone','called_to'],
 			'Personal'=>['from_person'],
 			'Comment'=>['from_person'],
@@ -263,6 +284,9 @@ class Form_Communication extends \Form {
 
 				$_to_field='called_to';
 				break;
+			case "Meeting":
+						if(!$this['meeting_direction']) $this->displayError('meeting_direction','Please specify "Meeting Direction"');
+				break;	
 			case 'SMS':
 				if(!$this['from_number'])
 					$this->displayError('from_number','from_number is required');
@@ -286,7 +310,7 @@ class Form_Communication extends \Form {
     }
 
     function process(){
-    	
+    	$_to_field ='';
     	if(!$this->contact || ! $this->contact instanceof \xepan\base\Model_Contact)
     		throw $this->exception('Please setContact() on this form first');
 
@@ -296,12 +320,23 @@ class Form_Communication extends \Form {
 		if($this->edit_communication_id){
 			$communication->load($this->edit_communication_id);
 		}
+
+		if(!$this['title']){
+					if(!$this['sub_type'] && !$this['calling_status']){
+						$this->displayError('sub_type','Sub type, Calling Status or Title must be filled');
+					}
+					$this['title'] = $this['sub_type']. ' - ' . $this['calling_status'];
+				}
+
+
 		$communication['from_id']=$this['from_person'];
 		$communication['to_id']=$this->contact->id;
 		$communication['sub_type']=$this['sub_type'];
 		$communication['calling_status']=$this['calling_status'];
 		$communication['sub_type_3']=$this['sub_type_3'];
 		$communication['score']=$this['score'];
+		$communication['communication_for_id'] = $this['communication_for'];
+		$communication['communication_subfor_id'] = $this['communication_sub_for'];
 
 		switch ($commtype) {
 			case 'Email':
@@ -315,22 +350,27 @@ class Form_Communication extends \Form {
 				$communication->setFrom($_from,$_from_name);
 				$communication['direction']='Out';
 				break;
-			case 'TeleMarketing':
-				$this['status'] = 'Called';	
+			// case 'TeleMarketing':
+			// 	$this['status'] = 'Called';	
 			case 'Call':
 				$send_settings = $this['from_phone'];
 				if($this['status']=='Received'){
-					$communication['from_id']=$this->contact->id;
-					$communication['to_id']=$this['from_person']; // actually this is to person this time
-					$communication['direction']='In';
-					$communication->setFrom($this['from_phone'],$this->contact['name']);
-				}else{					
-					$communication['from_id']=$this['from_person']; // actually this is to person this time
-					$communication['to_id']=$this->contact->id;
-					$communication['direction']='Out';
-					$employee_name=$this->add('xepan\hr\Model_Employee')->load($this['from_person'])->get('name');
-					$communication->setFrom($this['from_phone'],$employee_name);
-				}
+						$communication['from_id']=$this->contact->id;
+						$communication['to_id']=$this['from_person']; // actually this is to person this time
+						$_to_field='from_phone';
+						$communication['direction']='In';
+						$communication['status']='Received';
+						$communication->setFrom($this['from_phone'],$this->contact['name']);
+					}else{					
+						$communication['from_id']=$this['from_person']; // actually this is to person this time
+						$communication['to_id']=$this->contact->id;
+						$communication['direction']='Out';
+						$communication['status']='Called';
+						$employee_name=$this->add('xepan\hr\Model_Employee')->load($this['from_person'])->get('name');
+						$communication->setFrom($this['from_phone'],$employee_name);
+					$_to_field='called_to';
+					}
+				// $communication['status']=$this['status'];
 
 				if($this['notify_email']){
 					if(!$this['notify_email_to'])
@@ -339,11 +379,28 @@ class Form_Communication extends \Form {
 					$send_settings = $this->add('xepan\communication\Model_Communication_EmailSetting');
 					$send_settings->tryLoad($this['from_email']?:-1);
 				}
-
-				$communication['status']=$this['status'];
-				$_to_field='called_to';
-
 				break;
+				case 'Meeting':
+					$send_settings = $this['from_phone'];
+					if($this['meeting_direction']=='Meeting'){
+						
+						$communication['from_id']=$this->contact->id;
+						$communication['to_id']=$this['from_person']; // actually this is to person this time
+						$communication['direction']='Meet';
+						$communication['status']='Meet';
+						$communication->setFrom($this['from_phone'],$this->contact['name']);
+					}else{					
+						$communication['from_id']=$this['from_person']; // actually this is to person this time
+						$communication['to_id']=$this->contact->id;
+						$communication['direction']='Not Meet';
+						$communication['status']='Not Meet';
+						$employee_name=$this->add('xepan\hr\Model_Employee')->load($this['from_person'])->get('name');
+						$communication->setFrom($this['from_phone'],$employee_name);
+					}	
+
+				// $communication['status']=$this['status'];
+				break;
+
 
 			case 'SMS':
 				if(!$this['from_number'])
