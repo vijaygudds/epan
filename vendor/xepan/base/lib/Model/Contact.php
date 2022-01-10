@@ -35,7 +35,8 @@ class Model_Contact extends \xepan\base\Model_Table{
 		$this->hasOne('xepan\base\Country','country_id')->display(array('form' => 'xepan\base\Country'));
 		$this->hasOne('xepan\base\State','state_id')->display(array('form' => 'xepan\base\State'));
 		$this->hasOne('xepan\base\Branch','branch_id')->defaultValue(@$this->app->branch->id);
-
+		$this->hasOne('xepan\marketing\Model_LeadCategory','lead_cat_id');
+		$this->hasOne('xepan\marketing\Model_LeadSubCategory','lead_cat_sub_id');
 		$this->addField('type');
 		$this->getElement('type')->defaultValue($this->type);
 		
@@ -60,7 +61,7 @@ class Model_Contact extends \xepan\base\Model_Table{
 		$this->addField('created_at')->type('datetime')->defaultValue(@$this->app->now)->sortable(true);
 		$this->addField('updated_at')->type('datetime')->defaultValue(@$this->app->now);
 		$this->addField('assign_at')->type('datetime')->defaultValue(@$this->app->now)->sortable(true);
-
+		
 		$this->addField('search_string')->type('text')->system(true)->defaultValue(null);
 		$this->addField('freelancer_type')->enum(['Public','Company','Not Applicable'])->defaultValue('Not Applicable');
 		$this->addField('related_with');
