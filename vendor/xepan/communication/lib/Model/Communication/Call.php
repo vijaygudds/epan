@@ -20,12 +20,12 @@ class Model_Communication_Call extends Model_Communication {
 		$this->addCondition('communication_type','Call');	
 		$this->getElement('status')->defaultValue('Called');
 
-		$this->addHook('beforeSave',function($m){
-			if($m['status']=='Called') 
-				$m['direction']='Out';
-			else
-				$m['direction']='In';
-		});
+	// 	$this->addHook('beforeSave',function($m){
+	// 		if($m['status']=='Called') 
+	// 			$m['direction']='Out';
+	// 		else
+	// 			$m['direction']='In';
+	// 	});
 	}
 
 	function setFrom($number,$person){

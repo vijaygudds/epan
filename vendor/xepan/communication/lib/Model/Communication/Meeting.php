@@ -20,12 +20,12 @@ class Model_Communication_Meeting extends Model_Communication {
 		$this->addCondition('communication_type','Meeting');	
 		$this->getElement('status')->defaultValue('Meet');
 
-		$this->addHook('beforeSave',function($m){
-			if($m['status']=='Meeting') 
-				$m['direction']='Meet';
-			else
-				$m['direction']='Not Meet';
-		});
+		// $this->addHook('beforeSave',function($m){
+		// 	if($m['status']=='Meeting') 
+		// 		$m['direction']='Meet';
+		// 	else
+		// 		$m['direction']='Not Meet';
+		// });
 	}
 
 	function setFrom($number,$person){

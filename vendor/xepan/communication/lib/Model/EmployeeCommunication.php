@@ -122,5 +122,17 @@ class Model_EmployeeCommunication extends \xepan\hr\Model_Employee{
 			
 		// });
 
+		$this->addExpression('reply_need_by_me')->set(function($m,$q){
+			$reply_me = $this->add('xepan\communication\Model_Communication',['table_alias'=>'employeecommnbyme']);
+
+			return $reply_me->addCondition('created_at','>=',$this->from_date)
+						->addCondition('created_at','<',$this->api->nextDate($this->to_date))
+						->addCondition([['from_id',$q->getField('id')],['created_by_id',$q->getField('id')]])
+						->addCondition('reply_need',true)
+						->count('reply_need');
+						
+						;
+		});
+
 	}
 }

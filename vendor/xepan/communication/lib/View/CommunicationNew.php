@@ -590,6 +590,8 @@ class View_CommunicationNew extends \View {
 				}
 
 				if(!$form['body']) $form->displayError('body','Please specify content');
+				if(!$form['communication_for']) $form->displayError('communication_for','Please specify Communication For');
+				if(!$form['communication_sub_for']) $form->displayError('communication_sub_for','Please specify Communication For');
 				switch ($form['communication_type']) {
 					case 'Email':
 						if(!$form['title']) $form->displayError('title','Please specify title');
@@ -657,37 +659,41 @@ class View_CommunicationNew extends \View {
 					$_to_field='called_to';
 				case 'Call':
 					$send_settings = $form['from_phone'];
-					if($form['status']=='Received'){
+					if($form['call_direction']=='Received'){
 						$communication['from_id']=$this->contact->id;
 						$communication['to_id']=$form['from_person']; // actually this is to person this time
 						$communication['direction']='In';
+						$communication['satus']='Received';
 						$communication->setFrom($form['from_phone'],$this->contact['name']);
 					}else{					
 						$communication['from_id']=$form['from_person']; // actually this is to person this time
 						$communication['to_id']=$this->contact->id;
 						$communication['direction']='Out';
+						$communication['satus']='Called';
 						$employee_name=$this->add('xepan\hr\Model_Employee')->load($form['from_person'])->get('name');
 						$communication->setFrom($form['from_phone'],$employee_name);
 					}
 					break;
 				case 'Meeting':
 					$send_settings = $form['from_phone'];
-					if($form['status']=='Meeting'){
+					if($form['meeting_direction']=='Meeting'){
 						
 						$communication['from_id']=$this->contact->id;
 						$communication['to_id']=$form['from_person']; // actually this is to person this time
 						$communication['direction']='Meet';
+						$communication['status']='Meet';
 						$communication->setFrom($form['from_phone'],$this->contact['name']);
 					}else{					
 						$communication['from_id']=$form['from_person']; // actually this is to person this time
 						$communication['to_id']=$this->contact->id;
 						$communication['direction']='Not Meet';
+						$communication['status']='Not Meet';
 						$employee_name=$this->add('xepan\hr\Model_Employee')->load($form['from_person'])->get('name');
 						$communication->setFrom($form['from_phone'],$employee_name);
 					}	
 
 					
-					$communication['status']=$form['status'];
+					// $communication['status']=$form['status'];
 					$_to_field='called_to';
 
 					break;
