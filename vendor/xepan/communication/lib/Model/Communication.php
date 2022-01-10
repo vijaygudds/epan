@@ -54,6 +54,7 @@ class Model_Communication extends \xepan\base\Model_Table{
 		$this->addField('description')->type('text');
 
 		$this->addField('tags');
+		$this->addField('reply_need')->type('boolean');
 
 		$this->addField('sub_type')->enum(explode(',', $config_m['sub_type']))->caption($config_m['sub_type_1_label_name']?:"Product/ Service/ Related To");
 		$this->addField('calling_status')->enum(explode(',', $config_m['calling_status']))->caption($config_m['sub_type_2_label_name']?:"Communication Result");
