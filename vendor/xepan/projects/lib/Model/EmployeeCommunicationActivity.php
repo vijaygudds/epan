@@ -97,6 +97,84 @@ class Model_EmployeeCommunicationActivity extends \xepan\hr\Model_Employee{
 						->addCondition('created_by_id',$q->getField('id'))
 						->count();
 		});
+		$this->addExpression('total_received_msg')->set(function($m,$q){
+
+			$rec_msg =  $this->add('xepan\communication\Model_Communication_AbstractMessage')
+						->addCondition([
+							['to_raw','like','%"'.$q->getField('id').'"%'],
+							['cc_raw','like','%"'.$q->getField('id').'"%']
+							]);
+			$rec_msg->addCondition('created_at','>=',$this->from_date)
+						->addCondition('created_at','<',$this->api->nextDate($this->to_date));
+
+			return $rec_msg->count();
+		});
+		$this->addExpression('total_reply_want')->set(function($m,$q){
+			$comm = $this->add('xepan\communication\Model_Communication',['table_alias'=>'emprplywant']);
+
+				return $comm->addCondition('created_at','>=',$this->from_date)
+						->addCondition('created_at','<',$this->api->nextDate($this->to_date))
+						->addCondition('created_by_id',$m->getElement('id'))
+						->addCondition('reply_need',true)
+						->count()
+						;
+			// return $this->add('xepan\base\Model_Contact_CommunicationReadMessage',['table_alias'=>'empcoredmsgwant'])
+			// 			->addCondition('created_at','>=',$this->from_date)
+			// 			->addCondition('created_at','<',$this->api->nextDate($this->to_date))
+			// 			->addCondition('from_id',$q->getField('id'))
+			// 			->addCondition('communication_id',$comm['id'])
+			// 			->count();
+		});
+		$this->addExpression('total_reply_given')->set(function($m,$q){
+			$comm = $this->add('xepan\communication\Model_Communication')
+						->addCondition('created_at','>=',$this->from_date)
+						->addCondition('created_at','<',$this->api->nextDate($this->to_date))
+						// ->addCondition('created_by_id',$q->getField('id'))
+						->addCondition('reply_need',true)
+						->tryLoadAny()
+						;
+			// return	$comm->count();		
+			return $this->add('xepan\base\Model_Contact_CommunicationReadMessage',['table_alias'=>'empcoredmsggivn'])
+						->addCondition('created_at','>=',$this->from_date)
+						->addCondition('created_at','<',$this->api->nextDate($this->to_date))
+						->addCondition('contact_id',$q->getField('id'))
+						// ->addCondition('communication_id',$comm['id'])
+						->count();
+		});
+
+		$this->addExpression('total_read_msg')->set(function($m,$q){
+				// $comm = $this->add('xepan\communication\Model_Communication',['table_alias'=>'empcomread'])
+				// 		->addCondition('created_at','>=',$this->from_date)
+				// 		->addCondition('created_at','<',$this->api->nextDate($this->to_date))
+				// 		->addCondition('created_by_id',$q->getField('id'))
+				// 		->tryLoadAny()
+				// 		;
+				return $this->add('xepan\base\Model_Contact_CommunicationReadEmail')
+						->addCondition('created_at','>=',$this->from_date)
+						->addCondition('created_at','<',$this->api->nextDate($this->to_date))
+						->addCondition('contact_id',$q->getField('id'))
+						// ->addCondition('communication_id',$comm['id'])
+						->addCondition('is_read',true)
+						->count();
+		});
+		$this->addExpression('total_unread_msg')->set(function($m,$q){
+				// $comm = $this->add('xepan\communication\Model_Communication')
+				// 		->addCondition('created_at','>=',$this->from_date)
+				// 		->addCondition('created_at','<',$this->api->nextDate($this->to_date))
+				// 		->addCondition('created_by_id',$q->getField('id'))
+				// 		->tryLoadAny()
+				// 		;
+				return $this->add('xepan\base\Model_Contact_CommunicationReadEmail')
+						->addCondition('created_at','>=',$this->from_date)
+						->addCondition('created_at','<',$this->api->nextDate($this->to_date))
+						->addCondition('contact_id',$q->getField('id'))
+						// ->addCondition('communication_id',$comm('id'))
+						->addCondition('is_read',false)
+						->count();
+		});
+
+
+
 		// $this->addExpression('total_received_emails')->set(function($m,$q){
 		// 	return $this->add('xepan\communication\Model_Communication_Email_Received')
 		// 				->addCondition('to_id',$q->getField('id'))

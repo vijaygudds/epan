@@ -39,7 +39,7 @@ class View_Detail extends \View{
 				$task_form->layout->template->tryDel('display_wrapper');
 			}
 
-			$task_form->setModel($model_task,['assign_to_id','reminder_time','task_name','is_regular_work','describe_on_end','description','starting_date','deadline','priority','estimate_time','set_reminder','remind_via','remind_unit','notify_to','is_recurring','recurring_span','snooze_duration']);
+			$task_form->setModel($model_task,['is_daily','assign_to_id','reminder_time','task_name','is_regular_work','describe_on_end','description','starting_date','deadline','priority','estimate_time','set_reminder','remind_via','remind_unit','notify_to','is_recurring','recurring_span','snooze_duration']);
 			
 			$task_form->getElement('notify_to')->set($temp)->js(true)->trigger('changed');
 			$task_form->getElement('remind_via')->set($temp1)->js(true)->trigger('changed');

@@ -22,6 +22,9 @@ class page_report_employee extends \xepan\base\Page{
 				'FormButtons~&nbsp;'=>'c4~3'
 			]);
 			
+		$department = $this->app->stickyGET('department');
+
+		$post_model = $this->app->employee->ref('post_id');		
 		$date = $form->addField('DateRangePicker','date_range');
 		$set_date = $this->app->today." to ".$this->app->today;
 		if($from_date){
@@ -31,13 +34,35 @@ class page_report_employee extends \xepan\base\Page{
 		$emp_field = $form->addField('xepan\base\Basic','employee');
 		$emp_field->setModel('xepan\projects\Model_EmployeeCommunicationActivity');
 		$dept_field = $form->addField('DropDown','department')->setEmptyText('Please Select Department');
-		$dept_field->setModel('xepan\hr\Model_Department');
+		$employee_comm = $this->add('xepan\projects\Model_EmployeeCommunicationActivity',['from_date'=>$from_date?:$this->app->today,'to_date'=>$to_date?:$this->api->nextDate($this->app->today)]);
+		$model_department = $this->add('xepan\hr\Model_Department');
+		switch ($post_model['permission_level']) {
+			case "Department":
+				$model_department->addCondition('id',$this->app->employee['department_id']);
+				$dept_field->set($this->app->employee['department_id']);
+				$dept_field->setAttr('disabled',true);
+				$department = $this->app->employee['department_id'];
+
+				$employee_comm->addCondition('department_id',$this->app->employee['department_id']);
+				break;
+			case ($post_model['permission_level'] == 'Individual' || $post_model['permission_level'] == 'Sibling'):
+				$model_department->addCondition('id',$this->app->employee['department_id']);
+				$dept_field->set($this->app->employee['department_id']);
+				$dept_field->setAttr('disabled',true);
+				$department = $this->app->employee['department_id'];
+
+				$employee_comm->addCondition('id',$this->app->employee->id);
+				$emp_field->set($this->app->employee->id);
+				$emp_field->other_field->setAttr('disabled',true);
+				$emp_id = $this->app->employee->id;
+				break;
+		}
+		$dept_field->setModel($model_department);
 		$form->addSubmit('Get Details');
 		// if($from_date)
 			// throw new \Exception($from_date, 1);
 					
 
-		$employee_comm = $this->add('xepan\projects\Model_EmployeeCommunicationActivity',['from_date'=>$from_date?:$this->app->today,'to_date'=>$to_date?:$this->api->nextDate($this->app->today)]);
 
 		if($_GET['from_date']){
 			$employee_comm->from_date = $_GET['from_date'];

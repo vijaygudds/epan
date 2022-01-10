@@ -64,7 +64,8 @@ class page_report_task extends \xepan\base\Page{
 		// adding grid
 		$grid = $this->add('xepan\hr\Grid');
 		$employee_task->setOrder('name','asc');
-		$grid->setModel($employee_task,['name','total_task','self_task','task_assigned_to_me','task_assigned_by_me','received_task','submitted_task','rejected_task','task_complete_in_deadline','task_complete_after_deadline']);
+		$grid->setModel($employee_task,['name','total_task','self_task','pending_task','pending_for_receiving','inProgress_task','task_assigned_to_me','task_assigned_by_me','received_task','submitted_task','rejected_task','overdue_task','task_complete_in_deadline','task_complete_after_deadline']);
+
 		$grid->add('misc\Export',['export_fields'=>['name','total_task','self_task','task_assigned_to_me','task_assigned_by_me','received_task','submitted_task','rejected_task','task_complete_in_deadline','task_complete_after_deadline']]);
 		// handling form submission
 		if($form->isSubmitted()){
@@ -89,6 +90,25 @@ class page_report_task extends \xepan\base\Page{
 		$grid->addFormatter('self_task','template')
 			->setTemplate('<a href="#" class="self_task" data-employee_id="{$id}" data-from_date="'.$from_date.'" data-to_date="'.$to_date.'">{$self_task}</a>','self_task');
 		$grid->js('click')->_selector('.self_task')->univ()->frameURL('Employee Self Task',[$this->app->url('./self_task'),'employee_id'=>$grid->js()->_selectorThis()->data('employee_id'),'from_date'=>$grid->js()->_selectorThis()->data('from_date'),'to_date'=>$grid->js()->_selectorThis()->data('to_date')]);
+
+		// Pending task format
+		$grid->addFormatter('pending_task','template')
+			->setTemplate('<a href="#" class="pending_task" data-employee_id="{$id}" data-from_date="'.$from_date.'" data-to_date="'.$to_date.'">{$pending_task}</a>','pending_task');
+		$grid->js('click')->_selector('.pending_task')->univ()->frameURL('Employee Pending Task',[$this->app->url('./pending_task'),'employee_id'=>$grid->js()->_selectorThis()->data('employee_id'),'from_date'=>$grid->js()->_selectorThis()->data('from_date'),'to_date'=>$grid->js()->_selectorThis()->data('to_date')]);
+		// Pending task format
+		$grid->addFormatter('pending_for_receiving','template')
+			->setTemplate('<a href="#" class="pending_for_receiving" data-employee_id="{$id}" data-from_date="'.$from_date.'" data-to_date="'.$to_date.'">{$pending_for_receiving}</a>','pending_for_receiving');
+		$grid->js('click')->_selector('.pending_for_receiving')->univ()->frameURL('Employee Pending For Receving Task',[$this->app->url('./pending_for_receiving'),'employee_id'=>$grid->js()->_selectorThis()->data('employee_id'),'from_date'=>$grid->js()->_selectorThis()->data('from_date'),'to_date'=>$grid->js()->_selectorThis()->data('to_date')]);
+
+		// inProgress task format
+		$grid->addFormatter('inProgress_task','template')
+			->setTemplate('<a href="#" class="inProgress_task" data-employee_id="{$id}" data-from_date="'.$from_date.'" data-to_date="'.$to_date.'">{$inProgress_task}</a>','inProgress_task');
+		$grid->js('click')->_selector('.inProgress_task')->univ()->frameURL('Employee In Progress Task',[$this->app->url('./inProgress_task'),'employee_id'=>$grid->js()->_selectorThis()->data('employee_id'),'from_date'=>$grid->js()->_selectorThis()->data('from_date'),'to_date'=>$grid->js()->_selectorThis()->data('to_date')]);
+
+		// inProgress task format
+		$grid->addFormatter('overdue_task','template')
+			->setTemplate('<a href="#" class="overdue_task" data-employee_id="{$id}" data-from_date="'.$from_date.'" data-to_date="'.$to_date.'">{$overdue_task}</a>','overdue_task');
+		$grid->js('click')->_selector('.overdue_task')->univ()->frameURL('Employee OverDue Task',[$this->app->url('./overdue_task'),'employee_id'=>$grid->js()->_selectorThis()->data('employee_id'),'from_date'=>$grid->js()->_selectorThis()->data('from_date'),'to_date'=>$grid->js()->_selectorThis()->data('to_date')]);
 		
 		// task assign to me format
 		$grid->addFormatter('task_assigned_to_me','template')
@@ -133,8 +153,11 @@ class page_report_task extends \xepan\base\Page{
 		$employee_id = $_GET['employee_id'];		
 
 		$grid = $this->add('xepan\base\Grid');
-		$model = $this->add('xepan\projects\Model_Task',['table_alias'=>'totaltask1'])
-				->addCondition('assign_to_id',$employee_id)
+		$model = $this->add('xepan\projects\Model_Task',['table_alias'=>'totaltask1']);
+				$model->addCondition(
+							$model->dsql()->orExpr()
+  								->where('assign_to_id',$employee_id)
+  								->where('created_by_id',$employee_id))
 				->addCondition('created_at','>=',$from_date)
 				->addCondition('created_at','<',$this->api->nextDate($to_date))
 				;
@@ -157,6 +180,107 @@ class page_report_task extends \xepan\base\Page{
 				->addCondition('created_at','<',$this->api->nextDate($to_date))
 				;
 		$grid->setModel($model,['task_name','assign_to','created_at','starting_date','status']);
+		$grid->addPaginator($ipp=25);
+		$grid->addQuickSearch(['task_name']);
+	}
+	function page_pending_task(){
+
+		$from_date = $_GET['from_date'];
+		$to_date = $_GET['to_date'];
+		$employee_id = $_GET['employee_id'];		
+
+		$grid = $this->add('xepan\base\Grid');
+		$model = $this->add('xepan\projects\Model_Task',['table_alias'=>'pendingtask1']);
+				$model->addCondition(
+							$model->dsql()->orExpr()
+  								->where('assign_to_id',$employee_id)
+  								->where('created_by_id',$employee_id)
+  							)
+						->addCondition('status','Pending')
+						->addCondition('created_at','>=',$from_date)
+						->addCondition('created_at','<',$this->api->nextDate($to_date))
+
+				// ->addCondition('assign_to_id',$employee_id)
+				// ->addCondition('created_by_id',$employee_id)
+				// ->addCondition('created_at','>=',$from_date)
+				// ->addCondition('created_at','<',$this->api->nextDate($to_date))
+				;
+		$grid->setModel($model,['task_name','created_by','assign_to','created_at','starting_date','status']);
+		$grid->addPaginator($ipp=25);
+		$grid->addQuickSearch(['task_name']);
+	}
+	function page_pending_for_receiving(){
+
+		$from_date = $_GET['from_date'];
+		$to_date = $_GET['to_date'];
+		$employee_id = $_GET['employee_id'];		
+
+		$grid = $this->add('xepan\base\Grid');
+		$model = $this->add('xepan\projects\Model_Task',['table_alias'=>'pendingtask1']);
+				$model->addCondition(
+							$model->dsql()->orExpr()
+  								->where('received_at',null)
+  								->where('received_at','>','created_at')
+  							)
+						->addCondition('assign_to_id',$employee_id)
+						->addCondition('status','Assigned')
+						->addCondition('created_at','>=',$from_date)
+						->addCondition('created_at','<',$this->api->nextDate($to_date))
+
+				// ->addCondition('assign_to_id',$employee_id)
+				// ->addCondition('created_by_id',$employee_id)
+				// ->addCondition('created_at','>=',$from_date)
+				// ->addCondition('created_at','<',$this->api->nextDate($to_date))
+				;
+		$grid->setModel($model,['task_name','created_by','assign_to','created_at','starting_date','status']);
+		$grid->addPaginator($ipp=25);
+		$grid->addQuickSearch(['task_name']);
+	}
+	function page_inProgress_task(){
+
+		$from_date = $_GET['from_date'];
+		$to_date = $_GET['to_date'];
+		$employee_id = $_GET['employee_id'];		
+
+		$grid = $this->add('xepan\base\Grid');
+		$model = $this->add('xepan\projects\Model_Task',['table_alias'=>'pendingtask1']);
+				$model->addCondition(
+							$model->dsql()->orExpr()
+  								->where('assign_to_id',$employee_id)
+  								->where('created_by_id',$employee_id)
+  							)
+						->addCondition('status','Inprogress')
+						->addCondition('created_at','>=',$from_date)
+						->addCondition('created_at','<',$this->api->nextDate($to_date))
+
+				// ->addCondition('assign_to_id',$employee_id)
+				// ->addCondition('created_by_id',$employee_id)
+				// ->addCondition('created_at','>=',$from_date)
+				// ->addCondition('created_at','<',$this->api->nextDate($to_date))
+				;
+		$grid->setModel($model,['task_name','created_by','assign_to','created_at','starting_date','status']);
+		$grid->addPaginator($ipp=25);
+		$grid->addQuickSearch(['task_name']);
+	}
+	function page_overdue_task(){
+		$from_date = $_GET['from_date'];
+		$to_date = $_GET['to_date'];
+		$employee_id = $_GET['employee_id'];		
+
+		$task =  $this->add('xepan\projects\Model_Task',['table_alias'=>'employee_assign_to_assigntask']);
+			$task->addCondition('status',['Pending','Inprogress','Assigned'])
+		    	 	->addCondition($task->dsql()->orExpr()
+		    		->where('assign_to_id',$employee_id)
+		    		->where($task->dsql()->andExpr()
+					->where('created_by_id',$employee_id)
+					->where('assign_to_id',null)));
+			$task->addCondition('deadline','<',$this->app->now);			
+			$task->addCondition('status','<>','Completed');
+			$task->addCondition('created_at','>=',$from_date);
+			$task->addCondition('created_at','<',$this->api->nextDate($to_date));
+					;		
+			$grid = $this->add('xepan\hr\Grid');
+			$grid->setModel($task,['task_name','created_by','assign_to_','description','starting_date','deadline','estimate_time','status','priority','received_at','comment_count']);
 		$grid->addPaginator($ipp=25);
 		$grid->addQuickSearch(['task_name']);
 	}

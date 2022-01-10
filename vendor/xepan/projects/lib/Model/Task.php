@@ -35,6 +35,7 @@ class Model_Task extends \xepan\base\Model_Table
 		$this->addField('estimate_time')/*->display(['form'=>'TimePicker'])*/;
 		$this->addField('status')->defaultValue('Pending');
 		$this->addField('type')->enum(['Task','Followup','Reminder']);
+		$this->addField('is_daily')->type('boolean');//->caption('Is Daily');
 
 		$config = $this->add('xepan\projects\Model_Config_TaskSubtype');
 		$config->tryLoadAny();

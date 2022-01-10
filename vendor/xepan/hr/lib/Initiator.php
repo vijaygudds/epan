@@ -301,11 +301,11 @@ class Initiator extends \Controller_Addon {
                     ]
                 ],
                 'Reports'=>[
-                    [
-                        'name'=>'Employee Attendance Report',
-                        'icon'=>'fa fa-users',
-                        'url'=>'xepan_hr_report_employeeattandance'
-                    ]
+                    // [
+                    //     'name'=>'Employee Attendance Report',
+                    //     'icon'=>'fa fa-users',
+                    //     'url'=>'xepan_hr_report_employeeattandance'
+                    // ]
                 ]
 
             ];

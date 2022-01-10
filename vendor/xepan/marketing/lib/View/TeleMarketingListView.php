@@ -26,6 +26,8 @@ class View_TeleMarketingListView extends \View{
 		}
 
 
+		// $comm_view = $this->add('xepan\communication\View_CommunicationNew',null,'communication_form');
+		// $comm_view->setCommunicationsWith($lead);
 		$comm_form = $this->add('xepan\communication\Form_Communication',null,'communication_form');
 		$comm_form->setContact($lead);
 		$member_phones = $lead->getPhones();

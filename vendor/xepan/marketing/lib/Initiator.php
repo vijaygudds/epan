@@ -7,7 +7,7 @@ class Initiator extends \Controller_Addon {
 
 	function init(){
 		parent::init();
-
+		
 		if($_GET['xepan_landing_contact_id'] || $_GET['xepan_landing_campaign_id'] || $_GET['xepan_landing_content_id'] || $_GET['xepan_landing_emailsetting_id'])
 			$this->landingResponse();	
 	}
@@ -189,7 +189,7 @@ class Initiator extends \Controller_Addon {
 						]
 				],
 				'Reports'=>[
-					[	'name'=>'Employee Lead Report',
+					[	'name'=>'Lead Report',
 						'icon'=>'fa fa-users',
 						'url'=>'xepan_marketing_report_employeeleadreport'
 					]

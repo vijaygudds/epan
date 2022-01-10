@@ -110,12 +110,12 @@ class Initiator extends \Controller_Addon {
 					]
 				],
 				'Reports'=>[
-					[	'name'=>'Employee Communication Activity Report',
+					/*[	'name'=>'Employee Communication Activity Report',
 						'icon'=>'fa fa-users',
 						'url'=>'xepan_projects_report_employee'
-					],
+					],*/
 					[
-						'name'=>'Employee Task Report',
+						'name'=>'Task Report',
 						'icon'=>'fa fa-users',
 						'url'=>'xepan_projects_report_task'
 					]
