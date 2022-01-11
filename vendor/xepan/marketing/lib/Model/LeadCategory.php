@@ -18,7 +18,7 @@ class Model_LeadCategory extends \xepan\base\Model_Table{
 
 	function init(){
 		parent::init();
-		$this->addField('created_by_id')->system(true)->defaultValue($this->app->employee->id);
+		$this->addField('created_by_id')->system(true)->defaultValue(@$this->app->employee->id);
 		$this->addField('name')->sortable(true);
 		$this->addField('is_active')->type('boolean')->defaultValue('Active');
 		$this->addField('type')->system(true);
