@@ -11,7 +11,7 @@ class Model_Task extends \xepan\base\Model_Table
 	public $force_delete = false;
 	public $actions=[
 		'Pending'=>['submit','mark_complete','stop_recurrence','reset_deadline','stop_reminder'],
-		'Inprogress'=>['submit','mark_complete','stop_recurrence','stop_reminder'],
+		'Inprogress'=>['submit',/*'mark_complete',*/'stop_recurrence','stop_reminder'],
 		'Assigned'=>['receive','reject','stop_recurrence','reset_deadline','stop_reminder'],
 		'Submitted'=>['mark_complete','reopen','stop_recurrence','stop_reminder'],
 		'Completed'=>['stop_recurrence']
