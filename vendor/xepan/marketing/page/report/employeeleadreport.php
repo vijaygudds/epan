@@ -53,17 +53,15 @@ class page_report_employeeleadreport extends \xepan\base\Page{
 		}
 		if($from_date){
 			$emp_model->from_date = $from_date;
-			$emp_model->addCondition('created_at',$from_date);
-		}
-		if($to_date){
-			$emp_model->addCondition('created_at','>',$this->api->nextDate($to_date));
+			$emp_model->addCondition('created_at','>=',$from_date);
 		}
 		if($to_date){
 			$emp_model->to_date = $to_date;
+			$emp_model->addCondition('created_at','<',$this->api->nextDate($to_date));
 		}
-		if($department){
-			$emp_model->addCondition('department_id',$department);
-		}
+		// if($department){
+		// 	$emp_model->addCondition('department_id',$department);
+		// }
 		if($lead_cat){
 			$emp_model->addCondition('lead_cat_id',$lead_cat);
 		}
@@ -73,7 +71,7 @@ class page_report_employeeleadreport extends \xepan\base\Page{
 
 
 		$grid = $this->add('xepan\hr\Grid');//,null,null,['view/report/employee-lead-report-gridview']);
-		$grid->setModel($emp_model);
+		$grid->setModel($emp_model,['name','address','city','pin_code','created_at','emails_str','contacts_str','last_communication']);
 		$grid->add('misc/Export',['export_fields'=>['name','total_lead_created','total_lead_assign_to','total_followup','open_opportunity','qualified_opportunity','needs_analysis_opportunity','quoted_opportunity','negotiated_opportunity','win_opportunity','loss_opportunity']]);
 		$grid->addPaginator(50);
 
