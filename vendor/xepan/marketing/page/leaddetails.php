@@ -14,7 +14,7 @@ class page_leaddetails extends \xepan\base\Page {
 		$action = $this->api->stickyGET('action')?:'view';
 		$lead= $this->add('xepan\marketing\Model_Lead');
 
-		
+		 
 		$lead->addExpression('weekly_communication')->set(function($m,$q){
 			$comm = $m->add('xepan/communication/Model_Communication');
 			// $comm->addCondition('sent_on','>',date('Y-m-d',strtotime('-8 week')));
@@ -43,26 +43,101 @@ class page_leaddetails extends \xepan\base\Page {
 
 		if($action=="add"){
 			$base_validator = $this->add('xepan\base\Controller_Validator');
-
+			// $form = $this->add('Form');
 			$form = $this->add('Form',['validator'=>$base_validator],'contact_view_full_width',['form/empty']);
-			$form->setLayout(['page/leadprofile','contact_view_full_width']);
-			$form->setModel($lead,['first_name','last_name','address','city','country_id','state_id','pin_code','organization','post','website','source','remark','assign_to_id']);
-			$form->addField('line','email_1')->validate('email');
-			$form->addField('line','email_2');
-			$form->addField('line','email_3');
-			$form->addField('line','email_4');
+			// $lead->getElement('state_id')->display(['form'=>'xepan\base\Basic']);
+			// $lead->getElement('country_id')->display(['form'=>'xepan\base\Basic']);
+
+			$t = $lead->getElement('assign_to_id')->getModel();
+			$t->addCondition('type','Employee');
+
+			$config_m = $this->add('xepan\communication\Model_Config_SubType');
+			$config_m->tryLoadAny();
+			$form->add('xepan\base\Controller_FLC')
+			->makePanelCollepsible()
+			->closeOtherPanels()
+			->addContentSpot()
+			->layout([
+					'first_name'=>'General Information~c1~4',
+					'last_name'=>'c2~4',
+					'organization'=>'c3~4',
+					'lead_category'=>'c4~4',
+					'lead_sub_category'=>'c5~4',
+					'source'=>'c6~4',
+					'numbers'=>'c7~4~comma seperated numbers',
+					'emails'=>'c8~4~comma seperated emails',
+					'occupation'=>'c9~4',
+					'assign_to_id~Assigned to Employee'=>'c10~4',
+					'score~Score (Is Lead Positive or Negative)'=>'c11~2~or leave as it is for nutral',
+					'score_buttons~'=>'c12~3',
+					'landmark'=>'Address Info~a1~4',
+					'mohla_falla'=>'c8~4',
+					'tehsil'=>'c9~4',
+					'post_office_wardno'=>'c10~4',
+					'city'=>'c11~4', // closed to make panel default collapsed
+					'pin_code'=>'a12~4', // closed to make panel default collapsed
+					'country_id~'=>'c13~4',
+					'country'=>'c13',
+					'state_id~'=>'c14~4',
+					'state'=>'c14',
+					'remark'=>'c12~12'
+				]);
+			$lead_cat = $form->addField('DropDown','lead_category');
+			// $lead_cat->setEmptytext('Please Select');
+			$lead_cat->setModel('xepan\marketing\LeadCategory');
+			$lead_subcat=$form->addField('DropDown','lead_sub_category');
+			// $lead_subcat->setEmptytext('Please Select');
+			$lead_subcat_m = $this->add('xepan\marketing\Model_LeadSubCategory');
+			if($this->app->stickyGET('leadcategory_id')){
+				$lead_subcat_m->addCondition('category_id',$this->app->stickyGET('leadcategory_id'));
+			}
+			$lead_subcat->setModel($lead_subcat_m);
+
+			$form->setModel($lead,['first_name','last_name','organization',/*'address',*/'pin_code','landmark','mohla_falla','tehsil','post_office_wardno','city','country_id','state_id','remark','source','assign_to_id','emails_str','contacts_str'],['emails_str','contacts_str','name','organization_name_with_name','source','city','type','score','total_visitor','created_by_id','created_by','assign_to_id','assign_to','assign_at','effective_name','code','organization','existing_associated_catagories','created_at','priority','branch_id'])->setOrder('created_at','desc');
 			
-			$form->addField('line','contact_no_1');
-			$form->addField('line','contact_no_2');
-			$form->addField('line','contact_no_3');
-			$form->addField('line','contact_no_4');
+
+			$lead_cat->js('change',[$lead_subcat->js(null,[$lead_subcat->js()->select2('destroy')])->reload(null,null,[$this->app->url(null,['cut_object'=>$lead_subcat->name]),'leadcategory_id'=>$lead_cat->js()->val()])]);
+
+			$emails_field = $form->addField('emails');
+			$number_field = $form->addField('numbers');
+			$categories_field = $form->addField('xepan\base\DropDown','occupation');
+			$categories_field->setModel($this->add('xepan\marketing\Model_MarketingCategory'));
+			$categories_field->enableMultiSelect();
+
 			$form->addField('Checkbox','want_to_add_next_lead')->set(true);
+			// if($cntry_id = $this->app->stickyGET('country_id')){			
+			// 	$state_field->getModel()->addCondition('country_id',$cntry_id);
+			// }
+
 
 			$country_field =  $form->getElement('country_id');
 			$country_field->getModel()->addCondition('status','Active');
 			$state_field = $form->getElement('state_id');
 			$state_field->getModel()->addCondition('status','Active');
 			$state_field->dependsOn($country_field);
+
+			// $country_field->js('change',$form->js()->atk4_form('reloadField','state_id',[$this->app->url(),'country_id'=>$state_field->js()->val()]));
+
+
+
+			// $form = $this->add('Form',['validator'=>$base_validator],'contact_view_full_width',['form/empty']);
+			// $form->setLayout(['page/leadprofile','contact_view_full_width']);
+			// $form->setModel($lead,['first_name','last_name','address','city','country_id','state_id','pin_code','organization','post','website','source','remark','assign_to_id']);
+			// $form->addField('line','email_1')->validate('email');
+			// $form->addField('line','email_2');
+			// $form->addField('line','email_3');
+			// $form->addField('line','email_4');
+			
+			// $form->addField('line','contact_no_1');
+			// $form->addField('line','contact_no_2');
+			// $form->addField('line','contact_no_3');
+			// $form->addField('line','contact_no_4');
+
+			// $country_field =  $form->getElement('country_id');
+			// $country_field->getModel()->addCondition('status','Active');
+			// $state_field = $form->getElement('state_id');
+			// $state_field->getModel()->addCondition('status','Active');
+			// $state_field->dependsOn($country_field);
 			// if($cntry_id = $this->app->stickyGET('country_id')){			
 			// 	$state_field->getModel()->addCondition('country_id',$cntry_id);
 			// }
@@ -70,18 +145,19 @@ class page_leaddetails extends \xepan\base\Page {
 			// $country_field->js('change',$form->js()->atk4_form('reloadField','state_id',[$this->app->url(),'country_id'=>$state_field->js()->val()]));
 			// $country_field->js('change',$state_field->js()->reload(null,null,[$this->app->url(null,['cut_object'=>$state_field->name]),'country_id'=>$country_field->js()->val()]));
 
-			$categories_field = $form->addField('DropDown','category');
-			$categories_field->setModel($this->add('xepan\marketing\Model_MarketingCategory'));
-			$categories_field->addClass('multiselect-full-width');
-			$categories_field->setAttr(['multiple'=>'multiple']);
-			$categories_field->setEmptyText("Please Select");
+			// $categories_field = $form->addField('DropDown','category');
+			// $categories_field->setModel($this->add('xepan\marketing\Model_MarketingCategory'));
+			// $categories_field->addClass('multiselect-full-width');
+			// $categories_field->setAttr(['multiple'=>'multiple']);
+			// $categories_field->setEmptyText("Please Select");
 
 			$form->addSubmit('Add');
 
 			if($form->isSubmitted()){
-
-				if($form['category'] == null)
-					$form->displayError('category','Please associate lead with category');
+				$lead['lead_cat_id'] = $form['lead_category'];
+				$lead['lead_cat_sub_id'] = $form['lead_sub_category'];
+				if($form['lead_category'] == null)
+					$form->displayError('lead_category','Please associate lead with Lead Category');
 
 				if(!$form['source'])
 					$form->displayError('source','mandatory');
@@ -92,6 +168,16 @@ class page_leaddetails extends \xepan\base\Page {
 					$new_lead_model = $form->getModel();
 						
 					$this->app->hook('new_lead_added',[$new_lead_model]);
+
+					foreach (explode(",",$form['numbers']) as $no) {
+						if(!$no) continue;
+						$lead->addPhone(trim($no),'Official',null,null,null,false);
+					}
+
+					foreach (explode(",",$form['emails']) as $email) {
+						if(!$email) continue;
+						$lead->addEmail(trim($email),'Official',null,null,null,false);
+					}
 
 					if($form['email_1']){
 						$new_lead_model->checkEmail($form['email_1'],null,'email_1');

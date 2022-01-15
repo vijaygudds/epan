@@ -52,7 +52,7 @@ class Model_EmployeeTask extends \xepan\projects\Model_Employee{
 						->addCondition(
 							$this->dsql()->orExpr()
   								->where('assign_to_id',$q->getField('id'))
-  								->where('created_by_id',$q->getField('id'))
+  								// ->where('created_by_id',$q->getField('id'))
   							)
 						->addCondition('status','Pending')
 						->addCondition('created_at','>=',$this->from_date)
@@ -65,7 +65,7 @@ class Model_EmployeeTask extends \xepan\projects\Model_Employee{
 						->addCondition(
 							$this->dsql()->orExpr()
   								->where('received_at',null)
-  								->where('received_at','>','created_at')
+  								// ->where('received_at','>','created_at')
   							)
 						->addCondition('assign_to_id',$q->getField('id'))
 						->addCondition('status','Assigned')
@@ -90,7 +90,7 @@ class Model_EmployeeTask extends \xepan\projects\Model_Employee{
 
 		$this->addExpression('overdue_task')->set(function($m,$q){
 			$task =  $this->add('xepan\projects\Model_Task',['table_alias'=>'employee_assign_to_assigntask']);
-			$task->addCondition('status',['Pending','Inprogress','Assigned'])
+			$task->addCondition('status',['Pending','Inprogress','Assigned','Submitted'])
 		    	 	->addCondition($task->dsql()->orExpr()
 		    		->where('assign_to_id',$q->getField('id'))
 		    		->where($task->dsql()->andExpr()

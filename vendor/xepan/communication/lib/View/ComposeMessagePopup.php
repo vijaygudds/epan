@@ -50,6 +50,7 @@ class View_ComposeMessagePopup extends \View{
 		$f->setLayout(['view/emails/internalmsgcompose']);
 
 		$send_to_all_field = $f->addField('Checkbox','send_to_all', "Send Message to All Employee`s");
+		$f->addField('Checkbox','reply_need', "select if you want reply");
 		
 		
 
@@ -239,9 +240,35 @@ class View_ComposeMessagePopup extends \View{
 			$send_msg['cc_raw'] = json_encode($cc_raw);
 			$send_msg['title'] = $f['subject'];
 			$send_msg['description'] = $f['message'];
+			// if($f['reply_need']){
+				$send_msg['reply_need'] = $f['reply_need'];
+			// }
 			$send_msg->save();
-
+			if($f['reply_need']){
+					foreach (explode(',', $f['message_to']) as $name => $id) {
+						$comm_read_model = $this->add('xepan\base\Model_Contact_CommunicationReadMessage');
+						$comm_read_model['is_read'] = false;
+						$comm_read_model['reply_need'] = $f['reply_need'];
+						$comm_read_model['communication_id'] = $send_msg->id;
+						$comm_read_model['contact_id'] = $id;
+						$comm_read_model['type'] = "TO";
+						$comm_read_model->save();
+					}
+				}
+			
 			if(!$f['message_to'] OR $f['send_to_all']){
+				$all_emp = $this->add('xepan\hr\Model_Employee');
+				$all_emp->addCondition('status','Active');
+				foreach ($all_emp as $emp) {
+					$comm_read_model = $this->add('xepan\base\Model_Contact_CommunicationReadEmail');
+					$comm_read_model['is_read'] = false;
+					$comm_read_model['communication_id'] = $send_msg->id;
+					$comm_read_model['contact_id'] = $emp['id'];
+					$comm_read_model['type'] = "TO";
+					$comm_read_model->save();
+				}
+			}
+			if($f['message_to']){
 				foreach (explode(',', $f['message_to']) as $name => $id) {
 					$comm_read_model = $this->add('xepan\base\Model_Contact_CommunicationReadEmail');
 					$comm_read_model['is_read'] = false;
@@ -249,7 +276,7 @@ class View_ComposeMessagePopup extends \View{
 					$comm_read_model['contact_id'] = $id;
 					$comm_read_model['type'] = "TO";
 					$comm_read_model->save();
-				}
+				}	
 			}
 			if($f['cc']){
 				foreach (explode(',', $f['cc']) as $name => $id) {
@@ -261,6 +288,7 @@ class View_ComposeMessagePopup extends \View{
 					$comm_read_model->save();
 				}	
 			}
+
 
 			$upload_images_array = array();
 			if($this->mode == "msg-fwd"){

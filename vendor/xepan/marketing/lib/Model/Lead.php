@@ -18,8 +18,8 @@ class Model_Lead extends \xepan\base\Model_Contact{
 		
 		$config_m = $this->add('xepan\marketing\Model_Config_LeadSource');
 		$config_m->tryLoadAny();
-		$this->hasOne('xepan\marketing\Model_LeadSubCategory','lead_cat_id');
-		$this->hasOne('xepan\marketing\Model_LeadSubCategory','lead_cat_sub_id');
+		// $this->hasOne('xepan\marketing\Model_LeadSubCategory','lead_cat_id');
+		// $this->hasOne('xepan\marketing\Model_LeadSubCategory','lead_cat_sub_id');
 		$this->getElement('source')->enum(explode(',', $config_m['lead_source']));
 
 		$this->getElement('created_by_id')->defaultValue($this->app->employee->id);
@@ -566,6 +566,8 @@ class Model_Lead extends \xepan\base\Model_Contact{
 					$email_array = ['personal'=>[],'official'=>[]];
 					$contact_array = ['personal'=>[],'official'=>[]];
 					$category = [];
+					$lead_cat = [];
+					$lead_subcat = [];
 
 					$lead = $this->add('xepan\marketing\Model_Lead');
 					foreach ($record as $field => $value) {
@@ -577,6 +579,16 @@ class Model_Lead extends \xepan\base\Model_Contact{
 							$category = explode(",",$value);
 							continue;
 						}
+						// // Lead category selection
+						// if($field == "lead_category" && $value){
+						// 	$lead_cat = explode(",",$value);
+						// 	continue;
+						// }
+						// // Lead category selection
+						// if($field == "lead_sub_category" && $value){
+						// 	$lead_subcat = explode(",",$value);
+						// 	continue;
+						// }
 
 						// official contact
 						if(strstr($field, 'official_contact') && $value){
@@ -600,6 +612,18 @@ class Model_Lead extends \xepan\base\Model_Contact{
 							continue;
 						}
 
+						if($field == "lead_cat_id"){
+							$lead_category = $this->add('xepan\marketing\Model_LeadCategory')->addCondition('name','like',$value)->tryLoadAny();
+							if(!$lead_category->loaded())
+								continue;
+							$value = $lead_category->id;
+						}
+						if($field == "lead_cat_sub_id"){
+							$lead_sub_category = $this->add('xepan\marketing\Model_LeadSubCategory')->addCondition('name','like',$value)->tryLoadAny();
+							if(!$lead_sub_category->loaded())
+								continue;
+							$value = $lead_sub_category->id;
+						}
 						if($field == "country"){
 							$country = $this->add('xepan\base\Model_Country')->addCondition('name','like',$value)->tryLoadAny();
 							if(!$country->loaded())

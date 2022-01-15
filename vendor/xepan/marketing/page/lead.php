@@ -115,6 +115,19 @@ class page_lead extends \xepan\base\Page{
 		if($crud->isEditing('edit')){
 			$cats =$crud->form->model->getAssociatedCategories();
 			$crud->form->getElement('occupation')->set($cats);
+			$lead_cat_m = $this->add('xepan\marketing\Model_LeadCategory');
+			$lead_cat_m->addCondition('id',$crud->model['lead_cat_id']);
+			$lead_cat_m->tryLoadAny();
+			// throw new \Exception($lead_cat_m->id, 1);
+			
+			$crud->form->getElement('lead_category')->set($lead_cat_m->id);
+			$lead_subcat_m = $this->add('xepan\marketing\Model_LeadCategory');
+			$lead_subcat_m->addCondition('id',$crud->model['lead_cat_sub_id']);
+			$lead_subcat_m->tryLoadAny();
+			// throw new \Exception($lead_cat_m->id, 1);
+			
+			$crud->form->getElement('lead_sub_category')->set($lead_subcat_m->id);
+
 
 			$crud->form->getElement('emails')->set(str_replace('<br/>', ', ',trim($crud->form->model['emails_str'])));
 			$crud->form->getElement('numbers')->set(str_replace('<br/>', ', ',trim($crud->form->model['contacts_str'])));
@@ -521,6 +534,7 @@ class page_lead extends \xepan\base\Page{
 			$crud->addHook('formSubmit',function($crud,$form)use($model){
 				$model['lead_cat_id'] = $form['lead_category'];
 				$model['lead_cat_sub_id'] = $form['lead_sub_category'];
+				if(!$form['numbers']) $form->displayError('numbers','Please specify "Mobile No"');
 				// Manage communications
 				if($form['communication_type']){
 					
@@ -746,35 +760,39 @@ class page_lead extends \xepan\base\Page{
 				$_to_field='called_to';
 			case 'Call':
 				$send_settings = $form['from_phone'];
-				if($form['status']=='Received'){
-					$communication['from_id']=$this->contact->id;
-					$communication['to_id']=$form['from_person']; // actually this is to person this time
-					$communication['direction']='In';
-					$communication->setFrom($form['from_phone'],$this->contact['name']);
-				}else{					
-					$communication['from_id']=$form['from_person']; // actually this is to person this time
-					$communication['to_id']=$this->contact->id;
-					$communication['direction']='Out';
-					$employee_name=$this->add('xepan\hr\Model_Employee')->load($form['from_person'])->get('name');
-					$communication->setFrom($form['from_phone'],$employee_name);
-				}
+				if($form['call_direction']=='Received'){
+						$communication['from_id']=$this->contact->id;
+						$communication['to_id']=$form['from_person']; // actually this is to person this time
+						$communication['direction']='In';
+						$communication['status']='Received';
+						$communication->setFrom($form['from_phone'],$this->contact['name']);
+					}else{					
+						$communication['from_id']=$form['from_person']; // actually this is to person this time
+						$communication['to_id']=$this->contact->id;
+						$communication['direction']='Out';
+						$communication['status']='Called';
+						$employee_name=$this->add('xepan\hr\Model_Employee')->load($form['from_person'])->get('name');
+						$communication->setFrom($form['from_phone'],$employee_name);
+					}
 			case 'Meeting':
 					$send_settings = $form['from_phone'];
-					if($form['status']=='Meeting'){
+					if($form['meeting_direction']=='Meeting'){
 						
 						$communication['from_id']=$this->contact->id;
 						$communication['to_id']=$form['from_person']; // actually this is to person this time
 						$communication['direction']='Meet';
+						$communication['status']='Meet';
 						$communication->setFrom($form['from_phone'],$this->contact['name']);
 					}else{					
 						$communication['from_id']=$form['from_person']; // actually this is to person this time
 						$communication['to_id']=$this->contact->id;
 						$communication['direction']='Not Meet';
+						$communication['status']='Not Meet';
 						$employee_name=$this->add('xepan\hr\Model_Employee')->load($form['from_person'])->get('name');
 						$communication->setFrom($form['from_phone'],$employee_name);
 					}	
 				
-				$communication['status']=$form['status'];
+				// $communication['status']=$form['status'];
 				$_to_field='called_to';
 
 				break;
@@ -863,7 +881,8 @@ class page_lead extends \xepan\base\Page{
 		$form->addSubmit('Download Sample File');
 		
 		if($_GET['download_sample_csv_file']){
-			$output = ['first_name','last_name','address','city','state','country','pin_code','organization','post','website','source','remark','personal_email_1','personal_email_2','official_email_1','official_email_2','personal_contact_1','personal_contact_2','official_contact_1','official_contact_2','category'];
+			// $output = ['first_name','last_name','address','city','state','country','pin_code','organization','post','website','source','remark','personal_email_1','personal_email_2','official_email_1','official_email_2','personal_contact_1','personal_contact_2','official_contact_1','official_contact_2','category'];
+			$output = ['first_name','last_name','landmark','mohla_falla','tehsil','post_office_wardno','address','city','state','country','pin_code','organization','post','website','source','remark','personal_email_1','official_email_1','personal_contact_1','personal_contact_2','category','lead_cat_id','lead_cat_sub_id'];
 
 			$output = implode(",", $output);
 	    	header("Content-type: text/csv");

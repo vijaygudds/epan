@@ -11,9 +11,9 @@ class View_Lister_InternalMSGList extends \CompleteLister{
 			$unread_msg = $this->add('xepan\base\Model_Contact_CommunicationReadEmail');
 			$unread_msg->addCondition('communication_id',$_POST['mark_id']);
 			$unread_msg->addCondition('contact_id',$this->app->employee->id);
-			$unread_msg->addCondition('is_read',true);
 			$unread_msg->tryLoadAny();
-			if(!$unread_msg->loaded()){
+			if($unread_msg->loaded()){
+				$unread_msg['is_read']=true;
 					$unread_msg->save();
 			}
 			exit;
@@ -88,6 +88,7 @@ class View_Lister_InternalMSGList extends \CompleteLister{
 		$unread_msg->addCondition('is_read',true);
 		$unread_msg->tryLoadAny();
 		if($unread_msg->loaded()){
+			
 			$this->current_row['unread']='';
 			$this->current_row['class']='danger';
 		}else{

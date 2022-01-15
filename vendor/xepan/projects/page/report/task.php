@@ -64,7 +64,7 @@ class page_report_task extends \xepan\base\Page{
 		// adding grid
 		$grid = $this->add('xepan\hr\Grid');
 		$employee_task->setOrder('name','asc');
-		$grid->setModel($employee_task,['name','total_task','self_task','pending_task','pending_for_receiving','inProgress_task','task_assigned_to_me','task_assigned_by_me','received_task','submitted_task','rejected_task','overdue_task','task_complete_in_deadline','task_complete_after_deadline']);
+		$grid->setModel($employee_task,['name','total_task','self_task','task_assigned_to_me','task_assigned_by_me','pending_task','pending_for_receiving','inProgress_task','received_task','submitted_task','rejected_task','overdue_task','task_complete_in_deadline','task_complete_after_deadline']);
 
 		$grid->add('misc\Export',['export_fields'=>['name','total_task','self_task','task_assigned_to_me','task_assigned_by_me','received_task','submitted_task','rejected_task','task_complete_in_deadline','task_complete_after_deadline']]);
 		// handling form submission
@@ -367,7 +367,7 @@ class page_report_task extends \xepan\base\Page{
 				->addCondition('completed_at','>=',$from_date)
 				->addCondition('completed_at','<',$this->api->nextDate($to_date))
 				;
-		$grid->setModel($model,['task_name','assign_to','created_at','starting_date','status']);
+		$grid->setModel($model,['task_name','assign_to','created_at','starting_date','deadline','status']);
 		$grid->addPaginator($ipp=25);
 		$grid->addQuickSearch(['task_name']);
 		

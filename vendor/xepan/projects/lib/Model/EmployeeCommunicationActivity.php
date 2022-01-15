@@ -99,14 +99,15 @@ class Model_EmployeeCommunicationActivity extends \xepan\hr\Model_Employee{
 		});
 		$this->addExpression('total_received_msg')->set(function($m,$q){
 
-			$rec_msg =  $this->add('xepan\communication\Model_Communication_AbstractMessage')
-						->addCondition([
+			$rec_msg =  $this->add('xepan\communication\Model_Communication');
+			
+			$rec_msg->addCondition([
 							['to_raw','like','%"'.$q->getField('id').'"%'],
-							['cc_raw','like','%"'.$q->getField('id').'"%']
+							// ['cc_raw','like','%"'.$q->getField('id').'"%']
 							]);
-			$rec_msg->addCondition('created_at','>=',$this->from_date)
-						->addCondition('created_at','<',$this->api->nextDate($this->to_date));
-
+			$rec_msg->addCondition('communication_type','AbstractMessage')
+					->addCondition('created_at','>=',$this->from_date)
+					->addCondition('created_at','<',$this->api->nextDate($this->to_date));
 			return $rec_msg->count();
 		});
 		$this->addExpression('total_reply_want')->set(function($m,$q){
