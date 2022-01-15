@@ -64,9 +64,9 @@ class page_report_task extends \xepan\base\Page{
 		// adding grid
 		$grid = $this->add('xepan\hr\Grid');
 		$employee_task->setOrder('name','asc');
-		$grid->setModel($employee_task,['name','total_task','self_task','task_assigned_to_me','task_assigned_by_me','pending_task','pending_for_receiving','inProgress_task','received_task','submitted_task','rejected_task','overdue_task','task_complete_in_deadline','task_complete_after_deadline']);
+		$grid->setModel($employee_task,['name','total_task','self_task','task_assigned_to_me','task_assigned_by_me','pending_task','pending_for_receiving','inProgress_task','pending_for_approval','submitted_task','rejected_task','overdue_task','task_complete_in_deadline','task_complete_after_deadline']);
 
-		$grid->add('misc\Export',['export_fields'=>['name','total_task','self_task','task_assigned_to_me','task_assigned_by_me','received_task','submitted_task','rejected_task','task_complete_in_deadline','task_complete_after_deadline']]);
+		$grid->add('misc\Export',['export_fields'=>['name','total_task','self_task','task_assigned_to_me','task_assigned_by_me','pending_for_approval','submitted_task','rejected_task','task_complete_in_deadline','task_complete_after_deadline']]);
 		// handling form submission
 		if($form->isSubmitted()){
 			$grid->js()->reload(
@@ -120,10 +120,10 @@ class page_report_task extends \xepan\base\Page{
 			->setTemplate('<a href="#" class="task_assigned_by_me" data-employee_id="{$id}" data-from_date="'.$from_date.'" data-to_date="'.$to_date.'">{$task_assigned_by_me}</a>','task_assigned_by_me');
 		$grid->js('click')->_selector('.task_assigned_by_me')->univ()->frameURL('Task assign by me',[$this->app->url('./task_assigned_by_me'),'employee_id'=>$grid->js()->_selectorThis()->data('employee_id'),'from_date'=>$grid->js()->_selectorThis()->data('from_date'),'to_date'=>$grid->js()->_selectorThis()->data('to_date')]);
 
-		// received_task format
-		$grid->addFormatter('received_task','template')
-			->setTemplate('<a href="#" class="received_task" data-employee_id="{$id}" data-from_date="'.$from_date.'" data-to_date="'.$to_date.'">{$received_task}</a>','received_task');
-		$grid->js('click')->_selector('.received_task')->univ()->frameURL('Received Task',[$this->app->url('./received_task'),'employee_id'=>$grid->js()->_selectorThis()->data('employee_id'),'from_date'=>$grid->js()->_selectorThis()->data('from_date'),'to_date'=>$grid->js()->_selectorThis()->data('to_date')]);
+		// pending_for_approval format
+		$grid->addFormatter('pending_for_approval','template')
+			->setTemplate('<a href="#" class="pending_for_approval" data-employee_id="{$id}" data-from_date="'.$from_date.'" data-to_date="'.$to_date.'">{$pending_for_approval}</a>','pending_for_approval');
+		$grid->js('click')->_selector('.pending_for_approval')->univ()->frameURL('Received Task',[$this->app->url('./pending_for_approval'),'employee_id'=>$grid->js()->_selectorThis()->data('employee_id'),'from_date'=>$grid->js()->_selectorThis()->data('from_date'),'to_date'=>$grid->js()->_selectorThis()->data('to_date')]);
 
 		// task_complete_in_deadline format
 		$grid->addFormatter('task_complete_in_deadline','template')
@@ -268,12 +268,13 @@ class page_report_task extends \xepan\base\Page{
 		$employee_id = $_GET['employee_id'];		
 
 		$task =  $this->add('xepan\projects\Model_Task',['table_alias'=>'employee_assign_to_assigntask']);
-			$task->addCondition('status',['Pending','Inprogress','Assigned'])
-		    	 	->addCondition($task->dsql()->orExpr()
-		    		->where('assign_to_id',$employee_id)
-		    		->where($task->dsql()->andExpr()
-					->where('created_by_id',$employee_id)
-					->where('assign_to_id',null)));
+			$task->addCondition('status',['Pending','Inprogress','Assigned','Submitted']);
+		   //  	 	->addCondition($task->dsql()->orExpr()
+		   //  		->where('assign_to_id',$employee_id)
+		   //  		->where($task->dsql()->andExpr()
+					// ->where('created_by_id',$employee_id)
+					// ->where('assign_to_id',null)));
+			$task->addCondition('assign_to_id',$employee_id);			
 			$task->addCondition('deadline','<',$this->app->now);			
 			$task->addCondition('status','<>','Completed');
 			$task->addCondition('created_at','>=',$from_date);
@@ -321,16 +322,17 @@ class page_report_task extends \xepan\base\Page{
 		$grid->addQuickSearch(['task_name']);
 	}
 
-	function page_received_task(){
+	function page_pending_for_approval(){
 		$from_date = $_GET['from_date'];
 		$to_date = $_GET['to_date'];
 		$employee_id = $_GET['employee_id'];		
 
 		$grid = $this->add('xepan\base\Grid');
 		$model = $this->add('xepan\projects\Model_Task',['table_alias'=>'taskassigntome1'])
-				->addCondition('assign_to_id',$employee_id)
-				->addCondition('received_at','>=',$from_date)
-				->addCondition('received_at','<',$this->api->nextDate($to_date))
+				->addCondition('created_by_id',$employee_id)
+				->addCondition('status','Submitted')
+				->addCondition('created_at','>=',$from_date)
+				->addCondition('created_at','<',$this->api->nextDate($to_date))
 				;
 		$grid->setModel($model,['task_name','assign_to','created_at','starting_date','status']);
 		$grid->addPaginator($ipp=25);

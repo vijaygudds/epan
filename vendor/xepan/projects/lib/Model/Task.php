@@ -36,6 +36,7 @@ class Model_Task extends \xepan\base\Model_Table
 		$this->addField('status')->defaultValue('Pending');
 		$this->addField('type')->enum(['Task','Followup','Reminder']);
 		$this->addField('is_daily')->type('boolean');//->caption('Is Daily');
+		$this->addField('work_pending')->type('boolean');//->caption('Is Daily');
 
 		$config = $this->add('xepan\projects\Model_Config_TaskSubtype');
 		$config->tryLoadAny();
@@ -518,10 +519,15 @@ class Model_Task extends \xepan\base\Model_Table
 		}else{
 			$form = $p->add('Form');
 			$form->addField('text','comment');
+			$form->addField('checkbox','work_pending');
 			$form->addSubmit('Save');
 				
 			if($form->isSubmitted()){			
 				$this->mark_complete();
+				if($form['work_pending']){
+					$this['work_pending'] = true;
+					$this->save();
+				}
 				// if($this['assign_to_id'] == $this['created_by_id']){
 				// $this->app->employee
 			 //            ->addActivity("Task '".$this['task_name']."' completed by '".$this->app->employee['name']."'",null, $this['assign_to_id'] /*Related Contact ID*/,null,null,null);

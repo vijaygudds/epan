@@ -90,12 +90,13 @@ class Model_EmployeeTask extends \xepan\projects\Model_Employee{
 
 		$this->addExpression('overdue_task')->set(function($m,$q){
 			$task =  $this->add('xepan\projects\Model_Task',['table_alias'=>'employee_assign_to_assigntask']);
-			$task->addCondition('status',['Pending','Inprogress','Assigned','Submitted'])
-		    	 	->addCondition($task->dsql()->orExpr()
-		    		->where('assign_to_id',$q->getField('id'))
-		    		->where($task->dsql()->andExpr()
-					->where('created_by_id',$q->getField('id'))
-					->where('assign_to_id',null)));
+			$task->addCondition('status',['Pending','Inprogress','Assigned','Submitted']);
+		   //  	 	->addCondition($task->dsql()->orExpr()
+		   //  		->where('assign_to_id',$q->getField('id'))
+		   //  		->where($task->dsql()->andExpr()
+					// ->where('created_by_id',$q->getField('id'))
+					// ->where('assign_to_id',null)));
+			$task->addCondition('assign_to_id',$q->getField('id'));			
 			$task->addCondition('deadline','<',$this->app->now);			
 			$task->addCondition('status','<>','Completed');
 			$task->addCondition('created_at','>=',$this->from_date);
@@ -113,11 +114,12 @@ class Model_EmployeeTask extends \xepan\projects\Model_Employee{
 						;
 		})->sortable(true);
 
-		$this->addExpression('received_task')->set(function($m,$q){
+		$this->addExpression('pending_for_approval')->set(function($m,$q){
 			return $this->add('xepan\projects\Model_Task',['table_alias'=>'received_task'])
-						->addCondition('assign_to_id',$q->getField('id'))
-						->addCondition('received_at','>=',$this->from_date)
-						->addCondition('received_at','<',$this->api->nextDate($this->to_date))
+						->addCondition('created_by_id',$q->getField('id'))
+						->addCondition('status','Submitted')
+						->addCondition('created_at','>=',$this->from_date)
+						->addCondition('created_at','<',$this->api->nextDate($this->to_date))
 						->count()
 						;
 		});
