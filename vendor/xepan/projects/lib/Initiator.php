@@ -118,6 +118,11 @@ class Initiator extends \Controller_Addon {
 						'name'=>'Task Report',
 						'icon'=>'fa fa-users',
 						'url'=>'xepan_projects_report_task'
+					],
+					[
+						'name'=>'FollowUp Report',
+						'icon'=>'fa fa-users',
+						'url'=>'xepan_projects_report_followup'
 					]
 				]
 			];

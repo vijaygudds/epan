@@ -58,8 +58,13 @@ class page_report_employeecommunication extends \xepan\base\Page{
 				'date_range'=>'Filter~c1~2',
 				'employee'=>'c2~3',
 				'department'=>'c3~3',
-				// 'communication_type'=>'c3~2',
-				'FormButtons~&nbsp;'=>'c4~2'
+				'communication_type'=>'c4~3',
+				'communication_sub_type'=>'c5~3',
+				'communication_for'=>'c6~3',
+				'communication_sub_for'=>'c7~3',
+				'communication_result'=>'c8~3',
+				'communication_action'=>'c9~3',
+				'FormButtons~&nbsp;'=>'c10~2'
 			]);
 
 		$date = $form->addField('DateRangePicker','date_range');
@@ -85,7 +90,28 @@ class page_report_employeecommunication extends \xepan\base\Page{
 				
 		$dept_field = $form->addField('xepan\base\DropDown','department');
 		$model_department = $this->add('xepan\hr\Model_Department');
+		$type_field = $form->addField('xepan\base\DropDown','communication_type')->setValueList(['Call'=>'Call','Meeting'=>'Meeting'])->setEmptyText('All');
+		$subtype_field = $form->addField('xepan\base\DropDown','communication_sub_type');
+		$subtype_field->setEmptytext('All');
+		$subtype_field->setValueList(array_combine($this->sub_type_1_norm_unnorm_array,$this->sub_type_1_norm_unnorm_array));
+		$for_field = $form->addField('xepan\base\DropDown','communication_for');
+		$for_field->setModel('xepan\marketing\Communication_For');
+		$for_field->setEmptytext('All');
+		$subfor_m = $this->add('xepan\marketing\Model_Communication_SubFor');
+		if($this->app->stickyGET('for_id')){
+				$subfor_m->addCondition('for_id',$this->app->stickyGET('for_id'));
+			}
+		$sub_for_field = $form->addField('xepan\base\DropDown','communication_sub_for');
+		$sub_for_field->setEmptytext('All');
+		$sub_for_field->setModel($subfor_m);
+		$result_field = $form->addField('xepan\base\DropDown','communication_result');
+		$result_field->setEmptytext('All');
+		$result_field->setValueList(array_combine($this->sub_type_2_norm_unnorm_array,$this->sub_type_2_norm_unnorm_array));
+		$action_field = $form->addField('xepan\base\DropDown','communication_action');
+		$action_field->setEmptytext('All');
+		$action_field->setValueList(array_combine($this->sub_type_3_norm_unnorm_array,$this->sub_type_3_norm_unnorm_array));
 
+		$for_field->js('change',[$sub_for_field->js(null,[$sub_for_field->js()->select2('destroy')])->reload(null,null,[$this->app->url(null,['cut_object'=>$sub_for_field->name]),'for_id'=>$for_field->js()->val()])]);
 
 		switch ($post_model['permission_level']) {
 			case "Department":
@@ -118,19 +144,44 @@ class page_report_employeecommunication extends \xepan\base\Page{
 		$form->addSubmit('Get Details')->addClass('btn btn-primary');
 		
 		// record model
-		$emp_model = $this->add('xepan\communication\Model_EmployeeCommunication',['from_date'=>$from_date,'to_date'=>$to_date]);
-		$emp_model->addCondition('status','Active');
+		$emp_model = $this->add('xepan\communication\Model_Communication',['from_date'=>$from_date,'to_date'=>$to_date]);
+		$emp_model->addCondition('communication_type','<>',['AbstractMessage','Email']);
+		// $emp_model->addCondition('status','Active');
+		// $emp_j = $emp_model->join('employee','created_by_id');
+		// $emp_j->addField('department_id');	
+
+
 		if($emp_id){
-			$emp_model->addCondition('id',$emp_id);
+			$emp_model->addCondition('created_by_id',$emp_id);
 		}
 		if($from_date){
 			$emp_model->from_date = $this->from_date;
+			$emp_model->addCondition('created_at','>=',$from_date);
 		}
 		if($to_date){
 			$emp_model->to_date = $this->to_date;
+			$emp_model->addCondition('created_at','<',$this->api->nextDate($to_date));
 		}
-		if($department){
-			$emp_model->addCondition('department_id',$department);
+		// if($department){
+		// 	$emp_model->addCondition('department_id',$department);
+		// }
+		if($this->api->stickyGET('communication_type')){
+			$emp_model->addCondition('communication_type',$this->api->stickyGET('communication_type'));
+		}
+		if($this->api->stickyGET('communication_sub_type')){
+			$emp_model->addCondition('sub_type',$this->api->stickyGET('communication_sub_type'));
+		}
+		if($this->api->stickyGET('communication_for')){
+			$emp_model->addCondition('communication_for_id',$this->api->stickyGET('communication_for'));
+		}
+		if($this->api->stickyGET('communication_sub_for')){
+			$emp_model->addCondition('communication_subfor_id',$this->api->stickyGET('communication_sub_for'));
+		}
+		if($this->api->stickyGET('communication_result')){
+			$emp_model->addCondition('calling_status',$this->api->stickyGET('communication_result'));
+		}
+		if($this->api->stickyGET('communication_action')){
+			$emp_model->addCondition('sub_type_3',$this->api->stickyGET('communication_action'));
 		}
 
 
@@ -198,7 +249,14 @@ class page_report_employeecommunication extends \xepan\base\Page{
 				});
 		}
 
-		$grid->setModel($emp_model,$model_field_array);
+		$grid->setModel($emp_model->setOrder('created_at','desc'));//,['from','to','communication_for','communication_subfor','to_raw','title','description','communication_sub_type','communication_result','action_on_communication','communication_type','created_at','to_contact_str']);//,$model_field_array);
+
+		// $grid->addHook('formatRow',function($g){
+		// 		// $g->current_row_html['message'] = $g->model['message'];
+		// 	$g->current_row_html['description']= '<a href="javascript:void(0)" onclick="'.$g->js()->univ()->newWindow($this->app->url('xepan_communication_report_msg',['communication_id'=>$g->model['id']])).'"><span class="btn btn-success">View Communication</span></a>';
+		// 	});
+
+
 		$order = $grid->addOrder();
 		$grid->addpaginator(10);
 		// $grid->template->tryDel('Pannel');
@@ -210,7 +268,13 @@ class page_report_employeecommunication extends \xepan\base\Page{
 						'employee_id'=>$form['employee'],
 						'from_date'=>$date->getStartDate()?:0,
 						'to_date'=>$date->getEndDate()?:0,
-						'department'=>$form['department']
+						'department'=>$form['department'],
+						'communication_type'=>$form['communication_type'],
+						'communication_sub_type'=>$form['communication_sub_type'],
+						'communication_for'=>$form['communication_for'],
+						'communication_sub_for'=>$form['communication_sub_for'],
+						'communication_result'=>$form['communication_result'],
+						'communication_action'=>$form['communication_action']
 					]
 			)->execute();
 		}
