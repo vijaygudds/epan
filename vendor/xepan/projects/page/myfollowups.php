@@ -163,7 +163,7 @@ class page_myfollowups extends \xepan\base\Page{
 					break;
 			}
 		}else{
-			$my_followups_model->addCondition([['assign_to_id',$_GET['filter_for_employee_id']],['created_by_id',$_GET['filter_for_employee_id']]]);
+			$my_followups_model->addCondition([['assign_to_id',$this->app->employee->id],['created_by_id',$this->app->employee->id]]);
 		}
 		
 		if(!$my_followups->isEditing()){
@@ -171,13 +171,13 @@ class page_myfollowups extends \xepan\base\Page{
 				$my_followups_model->addCondition('starting_date','<=',$this->app->nextDate($this->end_date));
 				// status
 			}else{
-				$my_followups_model->addCondition('starting_date','>',$this->start_date);
-				$my_followups_model->addCondition('starting_date','<=',$this->app->nextDate($this->end_date));
+				$my_followups_model->addCondition('starting_date','>=',$this->start_date);
+				$my_followups_model->addCondition('deadline','<',$this->app->nextDate($this->end_date));
 			}
 		}
 
 
-		$my_followups_model->addCondition('status','<>','Completed');
+		// $my_followups_model->addCondition('status','<>','Completed');
 
 	    $my_followups_model->setOrder('updated_at','desc');
 		

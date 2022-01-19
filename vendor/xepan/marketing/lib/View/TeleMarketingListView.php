@@ -124,6 +124,7 @@ class View_TeleMarketingListView extends \View{
 
 		$model_communication = $this->add('xepan\communication\Model_Communication');
 		$model_communication->addCondition([['to_id',$contact_id],['from_id',$contact_id]]);
+		$model_communication->addCondition('communication_type','<>',['AbstractMessage','Email']);
 
 		$model_communication->setOrder('id','desc');
 
