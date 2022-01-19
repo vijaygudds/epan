@@ -807,6 +807,8 @@ class Model_Lead extends \xepan\base\Model_Contact{
 		$comm->setModel($this);
 		$comm->setCommunicationsWith($this);
 
+		// $comm->addSuccessJs($this->app->js(null,$page->js()->univ()->closeDialog())->_selector('.communication_lister, .view-pending-followup, .view-communication')->trigger('reload'));
+
 		$this->app->hook('communication_rendered',[$this->id,$followup_tab]);
 
 	} 

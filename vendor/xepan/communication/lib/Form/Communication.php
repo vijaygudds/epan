@@ -14,6 +14,8 @@ class Form_Communication extends \Form {
 		if($this->edit_communication_id){
 			$edit_model->load($this->edit_communication_id);
 		}
+		// throw new \Exception($this->edit_communication_id, 1);
+		
 
 		$this->addClass('form-communication');
 		$this->setLayout('view\communicationform');
@@ -45,13 +47,21 @@ class Form_Communication extends \Form {
 		}		
 		
 		/*for*/
+		$for_m = $this->add('xepan\marketing\Model_Communication_For');
 		$for_type_field = $this->addField('Dropdown','communication_for');
-		$for_type_field->setEmptyText('Please select communication For');
-		$for_type_field->setModel('xepan\marketing\Communication_For');
+		// $for_type_field->setEmptyText('Please select communication For');
 		
-		$subfor_type_field = $this->addField('DropDown','communication_sub_for');
-		$subfor_type_field->setEmptyText('Please select communication Sub For');
 		$subfor_m = $this->add('xepan\marketing\Model_Communication_SubFor');
+		$subfor_type_field = $this->addField('DropDown','communication_sub_for');
+		// $subfor_type_field->setEmptyText('Please select communication Sub For');
+		if($edit_model->loaded()){
+			$for_m->addCondition('id',$edit_model['communication_for_id']);
+			$subfor_m->addCondition('id',$edit_model['communication_subfor_id']);
+			$for_type_field->setAttr('disabled');
+			$subfor_type_field->setAttr('disabled');
+		}
+		$for_type_field->setModel($for_m);
+		
 		$subfor_type_field->setModel($subfor_m);
 			
 		if($this->app->stickyGET('for_id')){
@@ -64,7 +74,7 @@ class Form_Communication extends \Form {
 		$status_field = $this->addField('dropdown','status')->set($edit_model['status']);
 		$status_field->setValueList(['Called'=>'Called','Received'=>'Received'])->setEmptyText('Please Select');
 
-		$status_field = $this->addField('dropdown','meeting_direction');
+		$status_field = $this->addField('dropdown','meeting_direction')->set($edit_model['status']);
 		$status_field->setValueList(['Meeting'=>'Meeting','Not Meet'=>'Not Meet'])->setEmptyText('Please Select');
 
 		$this->addField('hidden','title')->set($edit_model['title']);
@@ -136,16 +146,17 @@ class Form_Communication extends \Form {
 			$this->layout->template->del('score_button_wrapper');
 			$this->layout->template->del('followup_form_wrapper');
 		}
-
+		$starting_date_field=null;
 		if(!$edit_model->loaded()){
 			$follow_up_field = $this->addField('checkbox','follow_up','Add Followup');
 			// $task_title_field = $this->addField('task_title');
 			$starting_date_field = $this->addField('DateTimePicker','starting_at');
 			$starting_date_field->js(true)->val('');
-			$assign_to_field = $this->addField('DropDown','assign_to');
-			$assign_to_field->setModel('xepan\hr\Model_Employee')->addCondition('status','Active');
-			$assign_to_field->set($this->app->employee->id);
-			$description_field = $this->addField('text','description');
+			// $assign_to_field = $this->addField('DropDown','assign_to');
+			// $assign_to_field->setModel('xepan\hr\Model_Employee')->addCondition('status','Active');
+			// $assign_to_field->set($this->app->employee->id);
+			// $assign_to_field->setAttr('disabled');
+			// $description_field = $this->addField('text','description');
 
 			$set_reminder_field = $this->addField('checkbox','set_reminder');
 			$remind_via_field = $this->addField('DropDown','remind_via')->setValueList(['Email'=>'Email','SMS'=>'SMS','Notification'=>'Notification'])->setAttr(['multiple'=>'multiple'])->setEmptyText('Please Select A Value');
@@ -171,7 +182,7 @@ class Form_Communication extends \Form {
 			],'div.atk-form-row');
 		}
 
-		$this->layout->add('xepan\projects\View_EmployeeFollowupSchedule',['employee_field'=>$assign_to_field,'date_field'=>$starting_date_field],'existing_schedule');
+		$this->layout->add('xepan\projects\View_EmployeeFollowupSchedule',[/*'employee_field'=>$assign_to_field,*/'date_field'=>$starting_date_field],'existing_schedule');
 
 		/**********************************
 			FOLLOWUP END
@@ -503,8 +514,8 @@ class Form_Communication extends \Form {
 				$model_task['task_name'] = 'Followup '. $this->contact['name_with_type'];
 				$model_task['created_by_id'] = $this->app->employee->id;
 				$model_task['starting_date'] = $this['starting_at'];
-				$model_task['assign_to_id'] = $this['assign_to'];
-				$model_task['description'] = $this['description'];
+				$model_task['assign_to_id'] = $this->app->employee->id;
+				$model_task['description'] = $this['body'];
 				$model_task['related_id'] = $this->contact->id;
 				
 				if($this['set_reminder']){

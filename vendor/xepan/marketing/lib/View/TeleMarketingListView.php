@@ -25,9 +25,21 @@ class View_TeleMarketingListView extends \View{
 			// $title->js('reload')->reload();
 		}
 
+		if($contact_id){
+			$crud = $this->add('xepan\hr\CRUD',['allow_add'=>false,'entity_name'=>'Followup','grid_class'=>'xepan\projects\View_TaskList'],'followup');
+			$my_followups_model = $this->add('xepan\projects\Model_FollowUp');
+			$my_followups_model->addCondition('status','<>','Completed');
+			$my_followups_model->addCondition([
+												['assign_to_id',$contact_id],
+												['created_by_id',$contact_id]
+											]
+										);
+			$crud->setModel($my_followups_model->setOrder('created_at','desc'));
+			$crud->grid->addPaginator(5);
+		}
 
-		// $comm_view = $this->add('xepan\communication\View_CommunicationNew',null,'communication_form');
-		// $comm_view->setCommunicationsWith($lead);
+		// $comm_form = $this->add('xepan\communication\View_CommunicationNew',null,'communication_form');
+		// $comm_form->setCommunicationsWith($lead);
 		$comm_form = $this->add('xepan\communication\Form_Communication',null,'communication_form');
 		$comm_form->setContact($lead);
 		$member_phones = $lead->getPhones();

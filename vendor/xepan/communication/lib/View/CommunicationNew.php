@@ -23,7 +23,7 @@ class View_CommunicationNew extends \View {
 	public $success_js = null;
 
 	public $contact=null;
-
+	public $edit_communication_id=null;
 	public $is_editing = false;
 
 	public $acl_controller = null;
@@ -34,7 +34,6 @@ class View_CommunicationNew extends \View {
 
 	function init(){
 		parent::init();
-
 		$this->template->loadTemplateFromString($this->myTemplate());
 
 		$this->config_subtype = $this->add('xepan\communication\Model_Config_SubType');
@@ -373,7 +372,10 @@ class View_CommunicationNew extends \View {
 
 
 	function manageCalled(){
-
+		$m = $this->add('xepan\communication\Model_Communication');
+		if($this->edit_communication_id){	
+			$m->load($this->edit_communication_id);
+		}	
 		$config_m = $this->add('xepan\communication\Model_Config_SubType');
 		$config_m->tryLoadAny();
 		$form = $this->add('Form');
@@ -435,14 +437,18 @@ class View_CommunicationNew extends \View {
 		$down_btn->js('click',[$score_field->js()->val(-10),$up_btn->js()->removeClass('btn-success'),$this->js()->_selectorThis()->addClass('btn-danger')]);
 
 		$sub_type_array = explode(",",$config_m['sub_type']);
-
+		$for_m = $this->add('xepan\marketing\Model_Communication_For');
+		$subfor_m = $this->add('xepan\marketing\Model_Communication_SubFor');
+		if($this->edit_communication_id){
+			$for_m->addCondition('id',$m['communication_for_id']);
+			$subfor_m->addCondition('id',$m['communication_subfor_id']);
+		}
 		$for_type_field = $form->addField('Dropdown','communication_for');
-		$for_type_field->setEmptyText('Please select communication For');
-		$for_type_field->setModel('xepan\marketing\Communication_For');
+		// $for_type_field->setEmptyText('Please select communication For');
+		$for_type_field->setModel($for_m);
 		
 		$subfor_type_field = $form->addField('DropDown','communication_sub_for');
-		$subfor_type_field->setEmptyText('Please select communication Sub For');
-		$subfor_m = $this->add('xepan\marketing\Model_Communication_SubFor');
+		// $subfor_type_field->setEmptyText('Please select communication Sub For');
 		$subfor_type_field->setModel($subfor_m);
 			
 		if($this->app->stickyGET('for_id')){
@@ -455,24 +461,25 @@ class View_CommunicationNew extends \View {
 		// $com_purpose->setEmptyText('Please Select Communication Purpose');
 		// $com_purpose->setValueList(['LOAN'=>'LOAN','LEGAL'=>'LEGAL','MARKETING'=>'MARKETING','RECOVERY'=>'RECOVERY','BIKEAUCTION'=>'BIKEAUCTION']);
 
-		$type_field = $form->addField('dropdown','communication_type');
+		$type_field = $form->addField('dropdown','communication_type')->set($m['communication_type']);
 		$type_field->setEmptyText('Please select communication By');
 		$type_field->setValueList([/*'Email'=>'Email',*/'Call'=>'Call','Meeting'=>'Meeting'/*,'TeleMarketing'=>'TeleMarketing','Personal'=>'Personal','Comment'=>'Comment','SMS'=>'SMS'*/]);
 
-		$sub_type_field = $form->addField('dropdown','sub_type')->setEmptyText('Please Select');
+		$sub_type_field = $form->addField('dropdown','sub_type')->set($m['sub_type']);
+		$sub_type_field->setEmptyText('Please Select');
 		$sub_type_field->setValueList(array_combine($sub_type_array,$sub_type_array));
 
 		$calling_status_array = explode(",",$config_m['calling_status']);
-		$calling_status_field = $form->addField('dropdown','calling_status')->setEmptyText('Please Select');
+		$calling_status_field = $form->addField('dropdown','calling_status')->set($m['calling_status'])->setEmptyText('Please Select');
 		$calling_status_field->setValueList(array_combine($calling_status_array,$calling_status_array));
 
 		$sub_type_3_array = explode(",",$config_m['sub_type_3']);
-		$sub_type_3_field = $form->addField('DropDown','sub_type_3')->setEmptyText('Please Select');
+		$sub_type_3_field = $form->addField('DropDown','sub_type_3')->set($m['sub_type_3'])->setEmptyText('Please Select');
 		$sub_type_3_field->setValueList(array_combine($sub_type_3_array,$sub_type_3_array));
 
-		$status_field = $form->addField('dropdown','call_direction');
+		$status_field = $form->addField('dropdown','call_direction')->set($m['status']);
 		$status_field->setValueList(['Called'=>'Called (Out)','Received'=>'Received (In)'])->setEmptyText('Please Select');
-		$status_field = $form->addField('dropdown','meeting_direction');
+		$status_field = $form->addField('dropdown','meeting_direction')->set($m['status']);
 		$status_field->setValueList(['Meeting'=>'Meeting','Not Meet'=>'Not Meet'])->setEmptyText('Please Select');
 
 		$email_to_field = $form->addField('email_to');
@@ -480,7 +487,7 @@ class View_CommunicationNew extends \View {
 		$bcc_email_field = $form->addField('bcc_mails');
 
 		$form->addField('hidden','title');
-		$form->addField('xepan\base\RichText','body');
+		$form->addField('xepan\base\RichText','body')->set($m['description']);
 
 		$from_email=$form->addField('dropdown','from_email')->setEmptyText('Please Select From Email');
 		$my_email = $form->add('xepan\hr\Model_Post_Email_MyEmails');
@@ -762,7 +769,8 @@ class View_CommunicationNew extends \View {
 				$communication['direction']='Out';
 				$communication->save();
 			}
-			$form->js(null)->reload()->univ()->successMessage('Communication added')->execute();		
+			// $form->js(null,[$this->app->js(null,$this->success_js))->univ()->closeDialog()->reload()->univ()->successMessage('Communication added')->execute();
+			$form->js(null,$this->success_js)->reload()->univ()->successMessage('Communication added')->execute();		
 		}	
 	}
 

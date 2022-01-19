@@ -162,7 +162,7 @@ class Initiator extends \Controller_Addon {
 						],
 						[	'name'=>'Tele Marketing',
 							'icon'=>'fa fa-phone',
-							'url'=>'xepan_marketing_telemarketing'
+							'url'=>'xepan_marketing_telemarketinglistview'
 						],
 						[	'name'=>'Campaign',
 							'icon'=>'fa fa-bullhorn',
