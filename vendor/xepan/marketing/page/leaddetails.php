@@ -68,19 +68,20 @@ class page_leaddetails extends \xepan\base\Page {
 					'emails'=>'c8~4~comma seperated emails',
 					'occupation'=>'c9~4',
 					'assign_to_id~Assigned to Employee'=>'c10~4',
-					'score~Score (Is Lead Positive or Negative)'=>'c11~2~or leave as it is for nutral',
-					'score_buttons~'=>'c12~3',
+					// 'score~Score (Is Lead Positive or Negative)'=>'c11~2~or leave as it is for nutral',
+					// 'score_buttons~'=>'c12~3',
 					'landmark'=>'Address Info~a1~4',
 					'mohla_falla'=>'c8~4',
-					'tehsil'=>'c9~4',
+					'village'=>'c9~4',
 					'post_office_wardno'=>'c10~4',
-					'city'=>'c11~4', // closed to make panel default collapsed
-					'pin_code'=>'a12~4', // closed to make panel default collapsed
-					'country_id~'=>'c13~4',
-					'country'=>'c13',
-					'state_id~'=>'c14~4',
-					'state'=>'c14',
-					'remark'=>'c12~12'
+					'tehsil'=>'c11~4',
+					'city'=>'c12~4', // closed to make panel default collapsed
+					'pin_code'=>'a13~4', // closed to make panel default collapsed
+					'country'=>'c14~4',
+					'country_id~'=>'c14',
+					'state'=>'c15~4',
+					'state_id~'=>'c15',
+					'remark'=>'c16~12'
 				]);
 			$lead_cat = $form->addField('DropDown','lead_category');
 			// $lead_cat->setEmptytext('Please Select');
@@ -93,7 +94,7 @@ class page_leaddetails extends \xepan\base\Page {
 			}
 			$lead_subcat->setModel($lead_subcat_m);
 
-			$form->setModel($lead,['first_name','last_name','organization',/*'address',*/'pin_code','landmark','mohla_falla','tehsil','post_office_wardno','city','country_id','state_id','remark','source','assign_to_id','emails_str','contacts_str'],['emails_str','contacts_str','name','organization_name_with_name','source','city','type','score','total_visitor','created_by_id','created_by','assign_to_id','assign_to','assign_at','effective_name','code','organization','existing_associated_catagories','created_at','priority','branch_id'])->setOrder('created_at','desc');
+			$form->setModel($lead,['first_name','last_name','organization',/*'address',*/'pin_code','landmark','mohla_falla','village','tehsil','post_office_wardno','city','country_id','state_id','remark','source','assign_to_id','emails_str','contacts_str'],['emails_str','contacts_str','name','organization_name_with_name','source','city','type','score','total_visitor','created_by_id','created_by','assign_to_id','assign_to','assign_at','effective_name','code','organization','existing_associated_catagories','created_at','priority','branch_id'])->setOrder('created_at','desc');
 			
 
 			$lead_cat->js('change',[$lead_subcat->js(null,[$lead_subcat->js()->select2('destroy')])->reload(null,null,[$this->app->url(null,['cut_object'=>$lead_subcat->name]),'leadcategory_id'=>$lead_cat->js()->val()])]);
@@ -164,6 +165,7 @@ class page_leaddetails extends \xepan\base\Page {
 				
 				try{
 					$this->api->db->beginTransaction();
+					$form->model['address'] = $form['landmark'].", ".$form['mohla_falla'].", ".$form['village'].", ".$form['tehsil'].", ".$form['post_office_wardno'].", ".$form['city'].", ".$form['pin_code'].", ".$form['state'].", ".$form['country'];
 					$form->save();
 					$new_lead_model = $form->getModel();
 						

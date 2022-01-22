@@ -108,7 +108,7 @@ class View_TeleMarketingListView extends \View{
 		// $this->add('xepan\hr\CRUD',null,'opportunity_form',['grid\miniopportunity-grid'])->setModel($opportunity_model,['title','description','status','assign_to_id','fund','discount_percentage','closing_date'],['title','description','status','assign_to_id','fund','discount_percentage','closing_date']);
 
 		$model_telecommunication = $this->add('xepan\marketing\Model_TeleCommunication');
-		$view_teleform = $this->add('View',null,'top');
+		// $view_teleform = $this->add('View',null,'top');
 		$view_teleform_url = $this->api->url(null,['cut_object'=>$view_teleform->name]);
 		
 		// opportunity, filter form
@@ -117,8 +117,8 @@ class View_TeleMarketingListView extends \View{
 		$type_field = $form->addField('xepan\base\DropDown','communication_type');
 		$type_field->setAttr(['multiple'=>'multiple']);
 		$type_field->setValueList(['TeleMarketing'=>'TeleMarketing','Email'=>'Email','Support'=>'Support','Call'=>'Call','Newsletter'=>'Newsletter','SMS'=>'SMS','Personal'=>'Personal']);
-		$form->addField('search');
-		$form->addSubmit('Filter')->addClass('btn btn-primary btn-block');
+		// $form->addField('search');
+		// $form->addSubmit('Filter')->addClass('btn btn-primary btn-block');
 
 
 
@@ -146,27 +146,27 @@ class View_TeleMarketingListView extends \View{
 		$view_conversation->setModel($model_communication)->setOrder('created_at','desc');
 		$view_conversation->add('Paginator',['ipp'=>10]);
 
-		$temp = ['TeleMarketing','Email','Support','Call','Newsletter','SMS','Personal'];
-		$type_field->set($_GET['comm_type']?explode(",", $_GET['comm_type']):$temp)->js(true)->trigger('changed');
+		// $temp = ['TeleMarketing','Email','Support','Call','Newsletter','SMS','Personal'];
+		// $type_field->set($_GET['comm_type']?explode(",", $_GET['comm_type']):$temp)->js(true)->trigger('changed');
 		
-		$form->on('click','.positive-lead',function($js,$data)use($lead,$model_communication,$title){
-				$this->app->hook('pointable_event',['telemarketing_response',['lead'=>$lead,'comm'=>$model_communication,'score'=>true]]);
+		// $form->on('click','.positive-lead',function($js,$data)use($lead,$model_communication,$title){
+		// 		$this->app->hook('pointable_event',['telemarketing_response',['lead'=>$lead,'comm'=>$model_communication,'score'=>true]]);
 			
-		$js_array = [
-			$js->univ()->successMessage('Positive Marking Done'),
-			$title->js()->_selector('.lead-score')->trigger('reload'),
-			];
-		return $js_array;
-		});
+		// $js_array = [
+		// 	$js->univ()->successMessage('Positive Marking Done'),
+		// 	$title->js()->_selector('.lead-score')->trigger('reload'),
+		// 	];
+		// return $js_array;
+		// });
 		
-		$form->on('click','.negative-lead',function($js,$data)use($lead,$model_communication,$title){
-			$this->app->hook('pointable_event',['telemarketing_response',['lead'=>$lead,'comm'=>$model_communication],'score'=>false]);
-			$js_array = [
-			$js->univ()->successMessage('Negative Marking Done'),
-			$title->js()->_selector('.lead-score')->trigger('reload'),
-			];
-		return $js_array;
-		});
+		// $form->on('click','.negative-lead',function($js,$data)use($lead,$model_communication,$title){
+		// 	$this->app->hook('pointable_event',['telemarketing_response',['lead'=>$lead,'comm'=>$model_communication],'score'=>false]);
+		// 	$js_array = [
+		// 	$js->univ()->successMessage('Negative Marking Done'),
+		// 	$title->js()->_selector('.lead-score')->trigger('reload'),
+		// 	];
+		// return $js_array;
+		// });
 
 		$this->template->trySetHtml('name',$lead['name']);
 		$this->template->trySetHtml('address',$lead['address']);
