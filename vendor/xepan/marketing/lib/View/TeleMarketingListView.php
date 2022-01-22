@@ -40,24 +40,24 @@ class View_TeleMarketingListView extends \View{
 
 		// $comm_form = $this->add('xepan\communication\View_CommunicationNew',null,'communication_form');
 		// $comm_form->setCommunicationsWith($lead);
-		$comm_form = $this->add('xepan\communication\Form_Communication',null,'communication_form');
-		$comm_form->setContact($lead);
-		$member_phones = $lead->getPhones();
-		$comm_form->getElement('email_to')->set($lead['emails_str']);
-		$comm_form->getElement('notify_email_to')->set($lead['emails_str']);
-		$comm_form->getElement('from_number')->set($lead['contacts_str']);
-		$body_field = $comm_form->getElement('body');
-		$body_field->options = ['toolbar1'=>"styleselect | bold italic fontselect fontsizeselect | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image | forecolor backcolor",'menubar'=>false];
-		$called_to_field = $comm_form->getElement('called_to');
+		// $comm_form = $this->add('xepan\communication\Form_Communication',null,'communication_form');
+		// $comm_form->setContact($lead);
+		// $member_phones = $lead->getPhones();
+		// $comm_form->getElement('email_to')->set($lead['emails_str']);
+		// $comm_form->getElement('notify_email_to')->set($lead['emails_str']);
+		// $comm_form->getElement('from_number')->set($lead['contacts_str']);
+		// $body_field = $comm_form->getElement('body');
+		// $body_field->options = ['toolbar1'=>"styleselect | bold italic fontselect fontsizeselect | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image | forecolor backcolor",'menubar'=>false];
+		// $called_to_field = $comm_form->getElement('called_to');
 
-		$comm_form->getElement('type')->set('Call');
-		$comm_form->getElement('status')->set('Called');
+		// $comm_form->getElement('type')->set('Call');
+		// $comm_form->getElement('status')->set('Called');
 
-		$nos=[];
-		foreach ($member_phones as $no) {
-			$nos[$no] = $no;
-		}
-		$called_to_field->setValueList($nos);
+		// $nos=[];
+		// foreach ($member_phones as $no) {
+		// 	$nos[$no] = $no;
+		// }
+		// $called_to_field->setValueList($nos);
 
 		// $comm_form->getElement('follow_up')->;
 		// $comm_form->layout->template->del('score_button_wrapper');
@@ -65,47 +65,47 @@ class View_TeleMarketingListView extends \View{
 
 		$view_conversation = $this->add('xepan\communication\View_Lister_Communication',['contact_id'=>$contact_id, 'type' =>'TeleMarketing'],'communication_list');
 
-		$comm_form->addSubmit('Create Communication')->addClass('btn btn-success');
-		if($comm_form->isSubmitted()){
-			$communication_model = $comm_form->process();
+		// $comm_form->addSubmit('Create Communication')->addClass('btn btn-success');
+		// if($comm_form->isSubmitted()){
+		// 	$communication_model = $comm_form->process();
 
-			$reload_array=
-						[
-						$comm_form->js()->univ()->successMessage('Communication Created'),
-						$view_conversation->js()->reload()						
-						];
+		// 	$reload_array=
+		// 				[
+		// 				$comm_form->js()->univ()->successMessage('Communication Created'),
+		// 				$view_conversation->js()->reload()						
+		// 				];
 
-			$comm_form->js(null,$reload_array)->reload()->execute();
-		}		
+		// 	$comm_form->js(null,$reload_array)->reload()->execute();
+		// }		
 
-		$followup_form = $this->add('Form',null,'followup_form');
+		// $followup_form = $this->add('Form',null,'followup_form');
 		
-		$followup_form->addField('task_title');
-		$starting_date_field = $followup_form->addField('DateTimePicker','starting_at');
-		$starting_date_field->js(true)->val('');
-		$assign_to_field = $followup_form->addField('DropDown','assign_to');
-		$assign_to_field->setModel('xepan\hr\Model_Employee')->addCondition('status','Active');
-		$assign_to_field->set($this->app->employee->id);
-		$followup_form->addField('text','description');
-		$followup_form->addSubmit('Follow up')->addClass('btn btn-info');
+		// $followup_form->addField('task_title');
+		// $starting_date_field = $followup_form->addField('DateTimePicker','starting_at');
+		// $starting_date_field->js(true)->val('');
+		// $assign_to_field = $followup_form->addField('DropDown','assign_to');
+		// $assign_to_field->setModel('xepan\hr\Model_Employee')->addCondition('status','Active');
+		// $assign_to_field->set($this->app->employee->id);
+		// $followup_form->addField('text','description');
+		// $followup_form->addSubmit('Follow up')->addClass('btn btn-info');
 
-		if($followup_form->isSubmitted()){
-			$model_task = $this->add('xepan\projects\Model_Task');
-			$model_task['type'] = 'Followup';
-			$model_task['task_name'] = $followup_form['task_title'];
-			$model_task['created_by_id'] = $followup_form->app->employee->id;
-			$model_task['starting_date'] = $followup_form['starting_at'];
-			$model_task['assign_to_id'] = $followup_form['assign_to'];
-			$model_task['description'] = $followup_form['description'];
-			$model_task['related_id'] = $contact_id;
-			$model_task->save();
+		// if($followup_form->isSubmitted()){
+		// 	$model_task = $this->add('xepan\projects\Model_Task');
+		// 	$model_task['type'] = 'Followup';
+		// 	$model_task['task_name'] = $followup_form['task_title'];
+		// 	$model_task['created_by_id'] = $followup_form->app->employee->id;
+		// 	$model_task['starting_date'] = $followup_form['starting_at'];
+		// 	$model_task['assign_to_id'] = $followup_form['assign_to'];
+		// 	$model_task['description'] = $followup_form['description'];
+		// 	$model_task['related_id'] = $contact_id;
+		// 	$model_task->save();
 
-			$followup_form->js(null,$followup_form->js()->reload())->univ()->successMessage('Followup Created')->execute();
-		}
+		// 	$followup_form->js(null,$followup_form->js()->reload())->univ()->successMessage('Followup Created')->execute();
+		// }
 
-		$opportunity_model = $this->add('xepan\marketing\Model_Opportunity')
-							  ->addCondition('lead_id',$contact_id);	
-		$this->add('xepan\hr\CRUD',null,'opportunity_form',['grid\miniopportunity-grid'])->setModel($opportunity_model,['title','description','status','assign_to_id','fund','discount_percentage','closing_date'],['title','description','status','assign_to_id','fund','discount_percentage','closing_date']);
+		// $opportunity_model = $this->add('xepan\marketing\Model_Opportunity')
+		// 					  ->addCondition('lead_id',$contact_id);	
+		// $this->add('xepan\hr\CRUD',null,'opportunity_form',['grid\miniopportunity-grid'])->setModel($opportunity_model,['title','description','status','assign_to_id','fund','discount_percentage','closing_date'],['title','description','status','assign_to_id','fund','discount_percentage','closing_date']);
 
 		$model_telecommunication = $this->add('xepan\marketing\Model_TeleCommunication');
 		$view_teleform = $this->add('View',null,'top');
