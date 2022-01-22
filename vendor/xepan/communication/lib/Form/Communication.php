@@ -336,7 +336,11 @@ class Form_Communication extends \Form {
 					if(!$this['sub_type'] && !$this['calling_status']){
 						$this->displayError('sub_type','Sub type, Calling Status or Title must be filled');
 					}
-					$this['title'] = $this['communication_sub_for']. ' - ' .$this['sub_type']. ' - ' . $this['calling_status'];
+					$subfor = $this->add('xepan\marketing\Model_Communication_SubFor');
+					if($this['communication_sub_for']){
+						$subfor->load($this['communication_sub_for']);
+					}
+					$this['title'] = $subfor['name']. ' - ' .$this['sub_type']. ' - ' . $this['calling_status'];
 				}
 
 
