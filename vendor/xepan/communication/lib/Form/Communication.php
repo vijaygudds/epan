@@ -78,7 +78,7 @@ class Form_Communication extends \Form {
 		$status_field->setValueList(['Meeting'=>'Meeting','Not Meet'=>'Not Meet'])->setEmptyText('Please Select');
 
 		$this->addField('hidden','title')->set($edit_model['title']);
-		$this->addField('xepan\base\RichText','body')->validate('required')->set($edit_model['description']);
+		$this->addField('xepan\base\RichText','body')->set($edit_model['description']);
 		$from_email=$this->addField('dropdown','from_email')->setEmptyText('Please Select From Email');
 		$my_email = $this->add('xepan\hr\Model_Post_Email_MyEmails');
 		$from_email->setModel($my_email);
@@ -336,6 +336,12 @@ class Form_Communication extends \Form {
 					if(!$this['sub_type'] && !$this['calling_status']){
 						$this->displayError('sub_type','Sub type, Calling Status or Title must be filled');
 					}
+					if($this['calling_status'] === 'PHONE ATTEND'){
+						if(!$this['body']){
+							$this->displayError('body',' Communication Description is Required');
+						}	
+					}
+					
 					$subfor = $this->add('xepan\marketing\Model_Communication_SubFor');
 					if($this['communication_sub_for']){
 						$subfor->load($this['communication_sub_for']);
