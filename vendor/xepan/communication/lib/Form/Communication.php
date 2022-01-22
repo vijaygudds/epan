@@ -336,7 +336,7 @@ class Form_Communication extends \Form {
 					if(!$this['sub_type'] && !$this['calling_status']){
 						$this->displayError('sub_type','Sub type, Calling Status or Title must be filled');
 					}
-					$this['title'] = $this['sub_type']. ' - ' . $this['calling_status'];
+					$this['title'] = $this['communication_sub_for']. ' - ' .$this['sub_type']. ' - ' . $this['calling_status'];
 				}
 
 
