@@ -74,6 +74,9 @@ class View_ComposeMessagePopup extends \View{
 		$cc_field = $f->addField('xepan\base\DropDown','cc')->addClass('xepan-push');
 		$cc_field->validate_values=false;
 
+		$bcc_field = $f->addField('xepan\base\DropDown','bcc')->addClass('xepan-push');
+		$bcc_field->validate_values=false;	
+		
 		foreach ($grp_model as $to_field_msg) {
 				$msg_to [] = $to_field_msg['id'];
 				$message_to_field->js(true)->append("<option value='g_".$to_field_msg['id']."'>".$to_field_msg['name']." </option>")->trigger('change');
@@ -82,6 +85,15 @@ class View_ComposeMessagePopup extends \View{
 				$msg_cc [] = $cc_field_msg['id'];
 				$cc_field->js(true)->append("<option value='g_".$cc_field_msg['id']."'>".$cc_field_msg['name']." </option>")->trigger('change');
 			}
+		foreach ($grp_model as $bcc_field_msg) {
+				$msg_bcc [] = $bcc_field_msg['id'];
+				$bcc_field->js(true)->append("<option value='g_".$bcc_field_msg['id']."'>".$bcc_field_msg['name']." </option>")->trigger('change');
+			}
+
+
+
+
+
 
 		if($this->mode == 'msg-reply'){
 			$msg_to=$msg_model->getReplyMessageFromTo()['to'][0];
@@ -118,12 +130,20 @@ class View_ComposeMessagePopup extends \View{
 			}
 			$cc_field->set($msg_cc);
 
+			$msg_bcc =[];		
+			foreach ($msg_model->getReplyMessageFromTo()['cc'] as $bcc_field_msg) {
+				$msg_bcc [] = $bcc_field_msg['id'];
+				$bcc_field->js(true)->append("<option value='".$bcc_field_msg['id']."'>".$bcc_field_msg['name']." </option>")->trigger('change');
+			}
+			$bcc_field->set($msg_bcc);
+
 			$this->subject="Re: ".$msg_model['title'];
 			$this->message="<br/><br/><br/><br/><blockquote>".$msg_model['description']."<blockquote>";
 		}
 
 		if($this->mode != "msg-reply" && $this->mode != 'msg-reply-all'){
 			$cc_field->setModel($employee);
+			$bcc_field->setModel($employee);
 			$message_to_field->setModel($employee);
 		}
 		if($this->mode == 'msg-fwd'){
@@ -141,6 +161,7 @@ class View_ComposeMessagePopup extends \View{
 		
 		$message_to_field->setAttr(['multiple'=>'multiple']);
 		$cc_field->setAttr(['multiple'=>'multiple']);
+		$bcc_field->setAttr(['multiple'=>'multiple']);
 		$f->addField('line','subject')->set($this->subject);
 		$message_field = $f->addField('xepan\base\RichText','message')->validate('required');
 		if(empty($this->message)){
@@ -172,6 +193,7 @@ class View_ComposeMessagePopup extends \View{
 			
 			$to_raw = [];
 			$cc_raw = [];
+			$bcc_raw = [];
 			if($f['send_to_all']){
 				$all_emp = $this->add('xepan\hr\Model_Employee');
 				$all_emp->addCondition('status','Active');
@@ -225,6 +247,26 @@ class View_ComposeMessagePopup extends \View{
 						}
 					}
 				}
+				if($f['bcc']){
+					$group_bcc = [];
+					$bcc_emp = $this->add('xepan\hr\Model_Employee');
+					$bcc_emp->addCondition('status','Active');
+					foreach (explode(',', $f['bcc']) as $name => $id) {
+						if(strpos($id,"g_")=== 0){
+						    $group_bcc[] = str_replace("g_","",$id); 
+						}else{
+							$bcc_emp->load($id);
+							$bcc_raw[] = ['name'=>$bcc_emp['name'],'id'=>$id];
+						}
+					}
+					if(!empty($group_bcc)){
+						$query= 'select DISTINCT contact.* FROM contact left outer JOIN employee_group_association on contact.id=employee_group_association.employee_id where employee_group_association.group_id in('.implode(',', $group_bcc).') and status = "Active"';
+						$grp_emp=$this->api->db->dsql()->expr($query)->get();
+						foreach ($grp_emp as $emp) {
+							$bcc_raw[] = ['name'=>$emp['first_name']." ".$emp['last_name'],'id'=>$emp['id']];
+						}
+					}
+				}
 			}
 
 			
@@ -238,6 +280,7 @@ class View_ComposeMessagePopup extends \View{
 			$send_msg['from_raw'] = ['name'=>$this->app->employee['name'],'id'=>$this->app->employee->id];
 			$send_msg['to_raw'] = json_encode($to_raw);
 			$send_msg['cc_raw'] = json_encode($cc_raw);
+			$send_msg['bcc_raw'] = json_encode($bcc_raw);
 			$send_msg['title'] = $f['subject'];
 			$send_msg['description'] = $f['message'];
 			// if($f['reply_need']){
@@ -285,6 +328,16 @@ class View_ComposeMessagePopup extends \View{
 					$comm_read_model['communication_id'] = $send_msg->id;
 					$comm_read_model['contact_id'] = $id;
 					$comm_read_model['type'] = "CC";
+					$comm_read_model->save();
+				}	
+			}
+			if($f['bcc']){
+				foreach (explode(',', $f['bcc']) as $name => $id) {
+					$comm_read_model = $this->add('xepan\base\Model_Contact_CommunicationReadEmail');
+					$comm_read_model['is_read'] = false;
+					$comm_read_model['communication_id'] = $send_msg->id;
+					$comm_read_model['contact_id'] = $id;
+					$comm_read_model['type'] = "BCC";
 					$comm_read_model->save();
 				}	
 			}

@@ -69,11 +69,30 @@ class View_Lister_InternalMSGList extends \CompleteLister{
 			$cc_array[]=$cc['name'];
 		}
 		$this->current_row_html['cc_name'] = implode(", ", $cc_array);
+		
+		$bcc_array=[];
+		$bcc_ids=[];
+		foreach ($this->model['bcc_raw'] as $bcc) {
+			$bcc_array[]=$bcc['name'];
+			if($bcc['name'] === $this->app->employee['name'])
+				$this->current_row_html['bcc_name'] = $bcc['name'];
+		}
+		// if($key = array_search($this->app->employee['name'], $bcc_array)){
+		// 	throw new \Exception($key, 1);
+		// 	$this->current_row_html['bcc_name'] = implode(", ", $bcc_array);
+
+		// }
+		// if($bcc_array[0] === $this->app->employee['name']){
+		// 	// throw new \Exception("Error Processing Request", 1);
+		// }
 
 
 		
-		if($this->model['from_id'] === $this->app->employee->id)
+		if($this->model['from_id'] === $this->app->employee->id){
+			$this->current_row_html['bcc_name'] = implode(", ", $bcc_array);
 			$this->current_row_html['position'] = "left";
+
+		}
 		else
 			$this->current_row_html['position'] = "right";
 		
