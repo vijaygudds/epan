@@ -44,7 +44,7 @@ class Model_Contact extends \xepan\base\Model_Table{
 		$this->addField('last_name');
 
 		$this->addField('address')->type('text');
-		$this->addField('city');
+		$this->addField('city')->caption('City / Destrict');
 		$this->addField('pin_code');
 		$this->addField('status')->enum($this->status)->mandatory(true)->system(true);
 

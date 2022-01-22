@@ -26,6 +26,7 @@ class Model_Lead extends \xepan\base\Model_Contact{
 		// $lead_j = $this->join('lead.contact_id');
 		$this->addField('landmark')->caption('LandMark/Area');
 		$this->addField('mohla_falla')->caption('Mohla/Falla');
+		$this->addField('village');
 		$this->addField('tehsil')->caption('Tehsil/city');
 		$this->addField('post_office_wardno')->caption('Post Office/Ward No');
 
