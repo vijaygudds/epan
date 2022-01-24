@@ -30,8 +30,9 @@ class View_TeleMarketingListView extends \View{
 			$my_followups_model = $this->add('xepan\projects\Model_FollowUp');
 			$my_followups_model->addCondition('status','<>','Completed');
 			$my_followups_model->addCondition([
-												['assign_to_id',$contact_id],
-												['created_by_id',$contact_id]
+												['related_id',$contact_id],
+												['assign_to_id',$this->app->employee->id],
+												['created_by_id',$this->app->employee->id]
 											]
 										);
 			$crud->setModel($my_followups_model->setOrder('created_at','desc'));
@@ -109,14 +110,14 @@ class View_TeleMarketingListView extends \View{
 
 		$model_telecommunication = $this->add('xepan\marketing\Model_TeleCommunication');
 		// $view_teleform = $this->add('View',null,'top');
-		$view_teleform_url = $this->api->url(null,['cut_object'=>$view_teleform->name]);
+		// $view_teleform_url = $this->api->url(null,['cut_object'=>$view_teleform->name]);
 		
 		// opportunity, filter form
-		$form = $view_teleform->add('Form');
-		$form->setLayout('view\teleconversationform');
-		$type_field = $form->addField('xepan\base\DropDown','communication_type');
-		$type_field->setAttr(['multiple'=>'multiple']);
-		$type_field->setValueList(['TeleMarketing'=>'TeleMarketing','Email'=>'Email','Support'=>'Support','Call'=>'Call','Newsletter'=>'Newsletter','SMS'=>'SMS','Personal'=>'Personal']);
+		// $form = $view_teleform->add('Form');
+		// $form->setLayout('view\teleconversationform');
+		// $type_field = $form->addField('xepan\base\DropDown','communication_type');
+		// $type_field->setAttr(['multiple'=>'multiple']);
+		// $type_field->setValueList(['TeleMarketing'=>'TeleMarketing','Email'=>'Email','Support'=>'Support','Call'=>'Call','Newsletter'=>'Newsletter','SMS'=>'SMS','Personal'=>'Personal']);
 		// $form->addField('search');
 		// $form->addSubmit('Filter')->addClass('btn btn-primary btn-block');
 
@@ -128,20 +129,20 @@ class View_TeleMarketingListView extends \View{
 
 		$model_communication->setOrder('id','desc');
 
-		if($form->isSubmitted()){												
-			$view_conversation->js()->reload(['comm_type'=>$form['communication_type'],'search'=>$form['search']])->execute();
-		}
+		// if($form->isSubmitted()){												
+		// 	$view_conversation->js()->reload(['comm_type'=>$form['communication_type'],'search'=>$form['search']])->execute();
+		// }
 		
 		// FILTERS
-		if($_GET['comm_type']){			
-			$model_communication->addCondition('communication_type',explode(",", $_GET['comm_type']));
-		}
+		// if($_GET['comm_type']){			
+		// 	$model_communication->addCondition('communication_type',explode(",", $_GET['comm_type']));
+		// }
 
-		if($search = $this->app->stickyGET('search')){			
-			$model_communication->addExpression('Relevance')->set('MATCH(title,description,communication_type) AGAINST ("'.$search.'")');
-			$model_communication->addCondition('Relevance','>',0);
- 			$model_communication->setOrder('Relevance','Desc');
-		}
+		// if($search = $this->app->stickyGET('search')){			
+		// 	$model_communication->addExpression('Relevance')->set('MATCH(title,description,communication_type) AGAINST ("'.$search.'")');
+		// 	$model_communication->addCondition('Relevance','>',0);
+ 	// 		$model_communication->setOrder('Relevance','Desc');
+		// }
 
 		$view_conversation->setModel($model_communication)->setOrder('created_at','desc');
 		$view_conversation->add('Paginator',['ipp'=>10]);
