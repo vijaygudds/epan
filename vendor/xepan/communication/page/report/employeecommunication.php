@@ -175,7 +175,16 @@ class page_report_employeecommunication extends \xepan\base\Page{
 			$emp_model->addCondition('communication_for_id',$this->api->stickyGET('communication_for'));
 		}
 		if($this->api->stickyGET('communication_sub_for')){
-			$emp_model->addCondition('communication_subfor_id',$this->api->stickyGET('communication_sub_for'));
+			// throw new \Exception($this->api->stickyGET('communication_sub_for'), 1);
+			
+			$emp_model->addCondition(
+							$emp_model->dsql()->orExpr()
+  								->where('communication_subfor_id',$this->api->stickyGET('communication_sub_for'))
+  								// ->where('communication_subfor_id','<>',0)
+  								// ->where('communication_subfor_id','<>',null)
+  							);
+			// $emp_model->addCondition('communication_subfor_id',$this->api->stickyGET('communication_sub_for'));
+			// $emp_model->addCondition('communication_subfor_id','<>',0);
 		}
 		if($this->api->stickyGET('communication_result')){
 			$emp_model->addCondition('calling_status',$this->api->stickyGET('communication_result'));
@@ -249,7 +258,7 @@ class page_report_employeecommunication extends \xepan\base\Page{
 				});
 		}
 
-		$grid->setModel($emp_model->setOrder('created_at','desc'),['from','to','title','description','created_at','status','to_contact_str','communication_for','communication_sub_for','sub_type','sub_type_2','sub_type_3']);//,['from','to','communication_for','communication_subfor','to_raw','title','description','communication_sub_type','communication_result','action_on_communication','communication_type','created_at','to_contact_str']);//,$model_field_array);
+		$grid->setModel($emp_model->setOrder('created_at','desc'),['from','to','title','description','created_at','status','to_contact_str','communication_for','communication_subfor','sub_type','sub_type_2','sub_type_3']);//,['from','to','communication_for','communication_subfor','to_raw','title','description','communication_sub_type','communication_result','action_on_communication','communication_type','created_at','to_contact_str']);//,$model_field_array);
 
 		$grid->addHook('formatRow',function($g){
 				// $g->current_row_html['message'] = $g->model['message'];
