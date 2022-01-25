@@ -279,8 +279,8 @@ class Form_Communication extends \Form {
 					$this->displayError('status','Status is required');
 				if(!$this['calling_status'])
 					$this->displayError('calling_status','Communication Result is required');
-				if(!$this['meeting_direction'])
-					$this->displayError('meeting_direction','meeting_direction is required');
+				// if(!$this['call_direction'])
+				// 	$this->displayError('call_direction','Called Direction is required');
 				
 				if($this['notify_email']){
 					if(!$this['notify_email_to'])
@@ -347,6 +347,15 @@ class Form_Communication extends \Form {
 						if(!$this['body']){
 							$this->displayError('body',' Communication Description is Required');
 						}	
+					}
+					if(!$this['sub_type']){
+						$this->displayError('sub_type',' Communication Sub Type is Required');
+
+					}
+					if($this['communication_for']){
+						if(!$this['communication_sub_for'])
+						$this->displayError('communication_sub_for',' Communication Sub For is Required');
+
 					}
 					
 					$subfor = $this->add('xepan\marketing\Model_Communication_SubFor');
