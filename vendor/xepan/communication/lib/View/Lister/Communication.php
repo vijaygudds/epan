@@ -64,7 +64,7 @@ class View_Lister_Communication extends \CompleteLister{
 					throw $e;
 				}
 
-				$form->js(null,[$this->js()->_selector('.xepan-communication-lister')->trigger('reload'),$this->js()->univ()->successMessage('Done')])
+				$form->js(null,[$this->js()->_selector('.xepan-communication-lister , .xepan-telemarketing-view')->trigger('reload'),$this->js()->univ()->successMessage('Done')])
 						->closest('.dialog')
 						->dialog('close')
 						->execute();

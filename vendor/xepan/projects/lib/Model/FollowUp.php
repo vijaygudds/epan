@@ -84,7 +84,8 @@ class Model_FollowUp extends Model_Task
 				// return $this->app->page_action_result = $this->app->js(true,$p->js()->univ()->closeDialog())->_selector('.communication_lister, .view-pending-followup, .view-communication')->trigger('reload');
 
 
-				$comm->addSuccessJs($this->app->js(null,$p->js()->univ()->closeDialog())->_selector('.view-pending-followup, .communication_lister')->trigger('reload'));
+				$comm->addSuccessJs($this->app->js(null,$p->js()->univ()->closeDialog())->_selector('.view-pending-followup, .xepan-communication-lister , .communication_lister')->trigger('reload'));
+				
 				$this->app->addHook('communication_created',function($app)use($p){
 					$this->mark_complete();
 				});

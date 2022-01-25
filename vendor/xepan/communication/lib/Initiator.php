@@ -55,9 +55,19 @@ class Initiator extends \Controller_Addon {
 	function getTopApplicationMenu(){
 		return ['Reports'=>[
 							[
-								'name'=>'Employee Communication',
+								'name'=>'Communication Details Reports',
 								'icon'=>'fa fa-users',
 								'url'=>'xepan_communication_report_employeecommunication'
+							],
+							[
+								'name'=>'Communication Short Reports',
+								'icon'=>'fa fa-users',
+								'url'=>'xepan_communication_report_totalcommunication'
+							],
+							[
+								'name'=>'Communication Report',
+								'icon'=>'fa fa-users',
+								'url'=>'xepan_communication_report_leadcommunication'
 							],
 							[
 								'name'=>'Message Report',

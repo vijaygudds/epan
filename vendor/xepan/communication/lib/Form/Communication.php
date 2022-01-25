@@ -278,7 +278,9 @@ class Form_Communication extends \Form {
 				if(!$this['status'])
 					$this->displayError('status','Status is required');
 				if(!$this['calling_status'])
-					$this->displayError('calling_status','Status is required');
+					$this->displayError('calling_status','Communication Result is required');
+				if(!$this['meeting_direction'])
+					$this->displayError('meeting_direction','meeting_direction is required');
 				
 				if($this['notify_email']){
 					if(!$this['notify_email_to'])
@@ -333,9 +335,14 @@ class Form_Communication extends \Form {
 		}
 
 		if(!$this['title']){
-					if(!$this['sub_type'] && !$this['calling_status']){
-						$this->displayError('sub_type','Sub type, Calling Status or Title must be filled');
+					if(!$this['calling_status']){
+					$this->displayError('calling_status','Communication Result must be filled');
 					}
+					if(!$this['sub_type']){
+					}
+					// if(!$this['from_number']){
+					// 	$this->displayError('from_number','From Number Must be Filled');
+					// }
 					if($this['calling_status'] === 'PHONE ATTEND'){
 						if(!$this['body']){
 							$this->displayError('body',' Communication Description is Required');

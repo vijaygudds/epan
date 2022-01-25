@@ -588,13 +588,35 @@ class View_CommunicationNew extends \View {
 
 		if($form->isSubmitted()){
 			if($form['communication_type']){
-					
-				if(!$form['title']){
-					if(!$form['sub_type'] && !$form['calling_status']){
-						$form->displayError('sub_type','Sub type, Calling Status or Title must be filled');
+					if(!$form['sub_type']){
+						$form->displayError('sub_type','Sub type must be filled');
 					}
-					$form['title'] = $form['sub_type']. ' - ' . $form['calling_status'];
-				}
+					if($form['communication_type'] === 'Meeting'){
+						if(!$form['meeting_direction']){
+							$form->displayError('meeting_direction','Meeting Direction must be filled');
+						}
+					}else{
+						if(!$form['call_direction']){
+							$form->displayError('call_direction','Called Direction must be filled');
+						}
+					}
+					
+					if(!$form['calling_status']){
+							$form->displayError('calling_status','Communication Result must be filled');
+					}
+
+					if($form['calling_status'] === 'PHONE ATTEND'){
+						if(!$form['body']){
+							$form->displayError('body',' Communication Description is Required');
+						}	
+					}
+					
+					$subfor = $this->add('xepan\marketing\Model_Communication_SubFor');
+					if($form['communication_sub_for']){
+						$subfor->load($form['communication_sub_for']);
+					}
+					$form['title'] = $subfor['name']. ' - ' .$form['sub_type']. ' - ' . $form['calling_status'];
+
 
 				if(!$form['body']) $form->displayError('body','Please specify content');
 				if(!$form['communication_for']) $form->displayError('communication_for','Please specify Communication For');
