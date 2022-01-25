@@ -413,6 +413,11 @@ class page_report_totalcommunication extends \xepan\base\Page{
 		$grid->add("misc\Export");
 
 		if($form->isSubmitted()){
+
+			// if(!$form['communication_for']){
+			// 	if($form['communication_sub_for'])
+			// 		$form->displayError('communication_for','communication_for is Required');
+			// }
 			$grid->js()->reload(
 					[
 						'employee_id'=>$form['employee'],
@@ -635,7 +640,7 @@ class page_report_totalcommunication extends \xepan\base\Page{
 		if($sub_type_3)
 			$comm_model->addCondition('sub_type_3',trim($this->sub_type_3_norm_unnorm_array[$sub_type_3]));
 		if($subforfield)
-			$comm_model->addCondition('subfor',trim($this->sub_for_norm_unnorm_array[$sub_type_3]));
+			$comm_model->addCondition('subfor',trim($this->sub_for_norm_unnorm_array[$subforfield]));
 		
 		if($from_date)
 			$comm_model->addCondition('created_at','>=',$from_date);

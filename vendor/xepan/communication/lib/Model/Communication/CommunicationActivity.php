@@ -22,6 +22,7 @@ class Model_Communication_CommunicationActivity extends \xepan\communication\Mod
 		$this->addExpression('total_communication')->set(function($m,$q){
 		$ttl_com = $this->add('xepan\communication\Model_Communication',['table_alias'=>'totalcom'])
 						->addCondition('created_at','>=',$this->from_date)
+						->addCondition('communication_type','<>',['AbstractMessage'])
 						->addCondition('created_at','<',$this->api->nextDate($this->to_date));
 				if($this->communication_type)		
 						$ttl_com->addCondition('communication_type',$this->communication_type);
