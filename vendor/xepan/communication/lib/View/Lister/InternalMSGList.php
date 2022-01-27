@@ -96,6 +96,11 @@ class View_Lister_InternalMSGList extends \CompleteLister{
 		else
 			$this->current_row_html['position'] = "right";
 		
+		if($this->model['reply_need'] == true){
+			$this->current_row_html['msgreply'] = "reply";
+		}else{
+			$this->current_row_html['msgreply'] = " ";
+		}
 		// if($this->model['is_starred']){
 		// 	$this->current_row['starred']='starred';
 		// }else{
