@@ -29,12 +29,13 @@ class View_TeleMarketingListView extends \View{
 			$crud = $this->add('xepan\hr\CRUD',['allow_add'=>false,'entity_name'=>'Followup','grid_class'=>'xepan\projects\View_TaskList'],'followup');
 			$my_followups_model = $this->add('xepan\projects\Model_FollowUp');
 			$my_followups_model->addCondition('status','<>','Completed');
-			$my_followups_model->addCondition([
-												['related_id',$contact_id],
-												['assign_to_id',$this->app->employee->id],
-												['created_by_id',$this->app->employee->id]
-											]
-										);
+			$my_followups_model->addCondition('related_id',$contact_id);
+			// $my_followups_model->addCondition([
+			// 									['related_id',$contact_id],
+			// 									['assign_to_id',$this->app->employee->id],
+			// 									['created_by _id',$this->app->employee->id]
+			// 								]
+										// );
 			$crud->setModel($my_followups_model->setOrder('created_at','desc'));
 			$crud->grid->addPaginator(5);
 		}

@@ -136,7 +136,7 @@ class page_report_employeemsgcommunication extends \xepan\base\Page{
 					;
 			$grid = $page->add('xepan\hr\Grid');
 			$grid->setModel($msg,['from','to_contact','created_at','department','message']);
-			$grid->addPaginator(50);
+			$grid->addPaginator(100);
 			$grid->addHook('formatRow',function($g){
 				// $g->current_row_html['message'] = $g->model['message'];
 			$g->current_row_html['message']= '<a href="javascript:void(0)" onclick="'.$g->js()->univ()->newWindow($this->app->url('xepan_communication_report_msg',['communication_id'=>$g->model['communication_id']])).'"><span class="btn btn-success">View Message</span></a>';

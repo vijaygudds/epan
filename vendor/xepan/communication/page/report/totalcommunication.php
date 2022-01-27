@@ -351,7 +351,7 @@ class page_report_totalcommunication extends \xepan\base\Page{
 
 
 		$order = $grid->addOrder();
-		$grid->addpaginator(10);
+		$grid->addpaginator(100);
 		// $grid->template->tryDel('Pannel');
 		$grid->add("misc\Export");
 

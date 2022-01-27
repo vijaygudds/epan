@@ -131,11 +131,11 @@ class View_ComposeMessagePopup extends \View{
 			$cc_field->set($msg_cc);
 
 			$msg_bcc =[];		
-			foreach ($msg_model->getReplyMessageFromTo()['cc'] as $bcc_field_msg) {
+			foreach ($msg_model->getReplyMessageFromTo()['bcc'] as $bcc_field_msg) {
 				$msg_bcc [] = $bcc_field_msg['id'];
 				$bcc_field->js(true)->append("<option value='".$bcc_field_msg['id']."'>".$bcc_field_msg['name']." </option>")->trigger('change');
 			}
-			$bcc_field->set($msg_bcc);
+			// $bcc_field->set($msg_bcc);
 
 			$this->subject="Re: ".$msg_model['title'];
 			$this->message="<br/><br/><br/><br/><blockquote>".$msg_model['description']."<blockquote>";
