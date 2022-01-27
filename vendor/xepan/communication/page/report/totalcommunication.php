@@ -557,7 +557,7 @@ class page_report_totalcommunication extends \xepan\base\Page{
 		$sub_type_1 = $this->app->stickyGET('sub_type_1');
 		$sub_type_2 = $this->app->stickyGET('sub_type_2');
 		$sub_type_3 = $this->app->stickyGET('sub_type_3');
-		$subforfield = $this->app->stickyGET('communication_subfor');
+		$subforfield = $this->app->stickyGET('communication_sub_for');
 		$for = $this->app->stickyGET('communication_for');
 
 		$comm_model = $this->add('xepan\communication\Model_Communication');
