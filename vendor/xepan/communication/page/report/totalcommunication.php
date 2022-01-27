@@ -539,9 +539,9 @@ class page_report_totalcommunication extends \xepan\base\Page{
 		foreach ($this->sub_type_3_fields as $name) {
 			$grid->removeColumn($name);
 		}
-			foreach ($this->sub_for_fields as $name) {
-				$grid->removeColumn($name);
-			}
+		foreach ($this->sub_for_fields as $name) {
+			$grid->removeColumn($name);
+		}
 		
 		$grid->js(true)->_load('jquery.sparkline.min');
 
@@ -561,6 +561,7 @@ class page_report_totalcommunication extends \xepan\base\Page{
 		$for = $this->app->stickyGET('communication_for');
 
 		$comm_model = $this->add('xepan\communication\Model_Communication');
+		$comm_model->addCondition('communication_type','<>','AbstractMessage');	
 		if($employee_id)	
 			$comm_model->addCondition('created_by_id',$employee_id);
 
