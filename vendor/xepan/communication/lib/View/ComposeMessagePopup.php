@@ -341,7 +341,12 @@ class View_ComposeMessagePopup extends \View{
 					$comm_read_model->save();
 				}	
 			}
-
+			$comm_read_model_form_emp = $this->add('xepan\base\Model_Contact_CommunicationReadEmail');
+			$comm_read_model_form_emp['is_read'] = false;
+					$comm_read_model_form_emp['communication_id'] = $send_msg->id;
+					$comm_read_model_form_emp['contact_id'] = $this->app->employee->id;
+					$comm_read_model_form_emp['type'] = "From";
+					$comm_read_model_form_emp->save();
 
 			$upload_images_array = array();
 			if($this->mode == "msg-fwd"){

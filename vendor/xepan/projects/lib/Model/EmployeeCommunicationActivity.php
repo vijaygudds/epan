@@ -154,7 +154,7 @@ class Model_EmployeeCommunicationActivity extends \xepan\hr\Model_Employee{
 						->addCondition('created_at','>=',$this->from_date)
 						->addCondition('created_at','<',$this->api->nextDate($this->to_date))
 						->addCondition('contact_id',$q->getField('id'))
-						// ->addCondition('communication_id',$comm['id'])
+						->addCondition('type','<>','From')
 						->addCondition('is_read',true)
 						->count();
 		});
@@ -169,7 +169,7 @@ class Model_EmployeeCommunicationActivity extends \xepan\hr\Model_Employee{
 						->addCondition('created_at','>=',$this->from_date)
 						->addCondition('created_at','<',$this->api->nextDate($this->to_date))
 						->addCondition('contact_id',$q->getField('id'))
-						// ->addCondition('communication_id',$comm('id'))
+						->addCondition('type','<>','From')
 						->addCondition('is_read',false)
 						->count();
 		});
