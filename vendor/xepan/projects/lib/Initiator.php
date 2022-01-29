@@ -121,7 +121,7 @@ class Initiator extends \Controller_Addon {
 						'url'=>'xepan_projects_report_task'
 					],
 					[
-						'name'=>'FollowUp Report',
+						'name'=>'FollowUp Statistics Report',
 						'icon'=>'fa fa-users',
 						'url'=>'xepan_projects_report_followup'
 					]
