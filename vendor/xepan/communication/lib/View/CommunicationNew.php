@@ -443,11 +443,11 @@ class View_CommunicationNew extends \View {
 			$for_m->addCondition('id',$m['communication_for_id']);
 			$subfor_m->addCondition('id',$m['communication_subfor_id']);
 		}
-		$for_type_field = $form->addField('Dropdown','communication_for');
+		$for_type_field = $form->addField('Dropdown','communication_for')->validateNotNull();
 		// $for_type_field->setEmptyText('Please select communication For');
 		$for_type_field->setModel($for_m);
 		
-		$subfor_type_field = $form->addField('DropDown','communication_sub_for');
+		$subfor_type_field = $form->addField('DropDown','communication_sub_for')->validateNotNull();
 		// $subfor_type_field->setEmptyText('Please select communication Sub For');
 		$subfor_type_field->setModel($subfor_m);
 			
@@ -465,7 +465,7 @@ class View_CommunicationNew extends \View {
 		$type_field->setEmptyText('Please select communication By');
 		$type_field->setValueList([/*'Email'=>'Email',*/'Call'=>'Call','Meeting'=>'Meeting'/*,'TeleMarketing'=>'TeleMarketing','Personal'=>'Personal','Comment'=>'Comment','SMS'=>'SMS'*/]);
 
-		$sub_type_field = $form->addField('dropdown','sub_type')->set($m['sub_type']);
+		$sub_type_field = $form->addField('dropdown','sub_type')->set($m['sub_type'])->validateNotNull();
 		$sub_type_field->setEmptyText('Please Select');
 		$sub_type_field->setValueList(array_combine($sub_type_array,$sub_type_array));
 
@@ -474,7 +474,7 @@ class View_CommunicationNew extends \View {
 		$calling_status_field->setValueList(array_combine($calling_status_array,$calling_status_array));
 
 		$sub_type_3_array = explode(",",$config_m['sub_type_3']);
-		$sub_type_3_field = $form->addField('DropDown','sub_type_3')->set($m['sub_type_3'])->setEmptyText('Please Select');
+		$sub_type_3_field = $form->addField('DropDown','sub_type_3')->set($m['sub_type_3']);//->setEmptyText('Please Select');
 		$sub_type_3_field->setValueList(array_combine($sub_type_3_array,$sub_type_3_array));
 
 		$status_field = $form->addField('dropdown','call_direction')->set($m['status']);
@@ -618,9 +618,9 @@ class View_CommunicationNew extends \View {
 					$form['title'] = $subfor['name']. ' - ' .$form['sub_type']. ' - ' . $form['calling_status'];
 
 
-				if(!$form['body']) $form->displayError('body','Please specify content');
-				if(!$form['communication_for']) $form->displayError('communication_for','Please specify Communication For');
-				if(!$form['communication_sub_for']) $form->displayError('communication_sub_for','Please specify Communication For');
+				// if(!$form['body']) $form->displayError('body','Please specify content');
+				// if(!$form['communication_for']) $form->displayError('communication_for','Please specify Communication For');
+				// if(!$form['communication_sub_for']) $form->displayError('communication_sub_for','Please specify Communication For');
 				switch ($form['communication_type']) {
 					case 'Email':
 						if(!$form['title']) $form->displayError('title','Please specify title');

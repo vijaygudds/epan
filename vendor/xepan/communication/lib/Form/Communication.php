@@ -27,7 +27,7 @@ class Form_Communication extends \Form {
 		$config_m->tryLoadAny();
 		$sub_type_array = explode(",",$config_m['sub_type']);
 		
-		$sub_type_field = $this->addField('dropdown','sub_type',$config_m['sub_type_1_label_name'])->set($edit_model['sub_type'])->setEmptyText('Please Select');
+		$sub_type_field = $this->addField('dropdown','sub_type',$config_m['sub_type_1_label_name'])->set($edit_model['sub_type'])->validateNotNull()->setEmptyText('Please Select');
 		$sub_type_field->setValueList(array_combine($sub_type_array,$sub_type_array));
 
 		$calling_status_array = explode(",",$config_m['calling_status']);
@@ -35,7 +35,7 @@ class Form_Communication extends \Form {
 		$calling_status_field->setValueList(array_combine($calling_status_array,$calling_status_array));
 		
 		$sub_type_3_array = explode(",",$config_m['sub_type_3']);
-		$sub_type_field = $this->addField('dropdown','sub_type_3',$config_m['sub_type_3_label_name'])->set($edit_model['sub_type_3'])->setEmptyText('Please Select');
+		$sub_type_field = $this->addField('dropdown','sub_type_3',$config_m['sub_type_3_label_name'])->set($edit_model['sub_type_3']);//->setEmptyText('Please Select');
 		$sub_type_field->setValueList(array_combine($sub_type_3_array,$sub_type_3_array));
 
 		$this->layout->template->set('sub_type_1_label_name',$config_m['sub_type_1_label_name']);
@@ -48,11 +48,11 @@ class Form_Communication extends \Form {
 		
 		/*for*/
 		$for_m = $this->add('xepan\marketing\Model_Communication_For');
-		$for_type_field = $this->addField('Dropdown','communication_for');
+		$for_type_field = $this->addField('Dropdown','communication_for')->validateNotNull();
 		// $for_type_field->setEmptyText('Please select communication For');
 		
 		$subfor_m = $this->add('xepan\marketing\Model_Communication_SubFor');
-		$subfor_type_field = $this->addField('DropDown','communication_sub_for');
+		$subfor_type_field = $this->addField('DropDown','communication_sub_for')->validateNotNull();
 		// $subfor_type_field->setEmptyText('Please select communication Sub For');
 		if($edit_model->loaded()){
 			$for_m->addCondition('id',$edit_model['communication_for_id']);
