@@ -14,7 +14,7 @@ class Model_EmployeeTask extends \xepan\projects\Model_Employee{
 		$this->addExpression('total_task')->set(function($m,$q){
 			$ttl_task = $this->add('xepan\projects\Model_Task',['table_alias'=>'totaltask'])
 						// ->addCondition('assign_to_id',$q->getField('id'))
-						// ->addCondition('created_by_id',$q->getField('id'))
+						->addCondition('type','Task')
 						->addCondition('created_at','>=',$this->from_date)
 						->addCondition('created_at','<',$this->api->nextDate($this->to_date));
 			$ttl_task->addCondition(
@@ -30,6 +30,7 @@ class Model_EmployeeTask extends \xepan\projects\Model_Employee{
 			return $this->add('xepan\projects\Model_Task',['table_alias'=>'self_task'])
 						->addCondition('assign_to_id',$q->getField('id'))
 						->addCondition('created_by_id',$q->getField('id'))
+						->addCondition('type','Task')
 						->addCondition('created_at','>=',$this->from_date)
 						->addCondition('created_at','<',$this->api->nextDate($this->to_date))
 						->count()
@@ -40,6 +41,7 @@ class Model_EmployeeTask extends \xepan\projects\Model_Employee{
 			return $this->add('xepan\projects\Model_Task',['table_alias'=>'task_assigned_to_me'])
 						->addCondition('assign_to_id',$q->getField('id'))
 						->addCondition('created_by_id','<>',$q->getField('id'))
+						->addCondition('type','Task')
 						->addCondition('created_at','>=',$this->from_date)
 						->addCondition('created_at','<',$this->api->nextDate($this->to_date))
 						->count()
@@ -55,6 +57,7 @@ class Model_EmployeeTask extends \xepan\projects\Model_Employee{
   								// ->where('created_by_id',$q->getField('id'))
   							)
 						->addCondition('status','Pending')
+						->addCondition('type','Task')
 						->addCondition('created_at','>=',$this->from_date)
 						->addCondition('created_at','<',$this->api->nextDate($this->to_date))
 						->count()
@@ -67,6 +70,7 @@ class Model_EmployeeTask extends \xepan\projects\Model_Employee{
   								->where('received_at',null)
   								// ->where('received_at','>','created_at')
   							)
+						->addCondition('type','Task')
 						->addCondition('assign_to_id',$q->getField('id'))
 						->addCondition('status','Assigned')
 						->addCondition('created_at','>=',$this->from_date)
@@ -81,6 +85,7 @@ class Model_EmployeeTask extends \xepan\projects\Model_Employee{
   								->where('assign_to_id',$q->getField('id'))
   								->where('created_by_id',$q->getField('id'))
   							)
+						->addCondition('type','Task')
 						->addCondition('status','Inprogress')
 						->addCondition('created_at','>=',$this->from_date)
 						->addCondition('created_at','<',$this->api->nextDate($this->to_date))
@@ -99,6 +104,7 @@ class Model_EmployeeTask extends \xepan\projects\Model_Employee{
 			$task->addCondition('assign_to_id',$q->getField('id'));			
 			$task->addCondition('deadline','<',$this->app->now);			
 			$task->addCondition('status','<>','Completed');
+			$task->addCondition('type','Task');
 			$task->addCondition('created_at','>=',$this->from_date);
 			$task->addCondition('created_at','<',$this->api->nextDate($this->to_date));
 			return $task->count();		
@@ -108,6 +114,7 @@ class Model_EmployeeTask extends \xepan\projects\Model_Employee{
 			return $this->add('xepan\projects\Model_Task',['table_alias'=>'task_assigned_by_me'])
 						->addCondition('created_by_id',$q->getField('id'))
 						->addCondition('assign_to_id','<>',$q->getField('id'))
+						->addCondition('type','Task')
 						->addCondition('created_at','>=',$this->from_date)
 						->addCondition('created_at','<',$this->api->nextDate($this->to_date))
 						->count()
@@ -118,6 +125,7 @@ class Model_EmployeeTask extends \xepan\projects\Model_Employee{
 			return $this->add('xepan\projects\Model_Task',['table_alias'=>'received_task'])
 						->addCondition('created_by_id',$q->getField('id'))
 						->addCondition('status','Submitted')
+						->addCondition('type','Task')
 						->addCondition('created_at','>=',$this->from_date)
 						->addCondition('created_at','<',$this->api->nextDate($this->to_date))
 						->count()
@@ -129,6 +137,7 @@ class Model_EmployeeTask extends \xepan\projects\Model_Employee{
 						->addCondition('assign_to_id',$q->getField('id'))
 						->addCondition('task_complete_in_deadline',true)
 						->addCondition('status','Completed')
+						->addCondition('type','Task')
 						->addCondition('completed_at','>=',$this->from_date)
 						->addCondition('completed_at','<',$this->api->nextDate($this->to_date))
 						->count()
@@ -140,6 +149,7 @@ class Model_EmployeeTask extends \xepan\projects\Model_Employee{
 						->addCondition('assign_to_id',$q->getField('id'))
 						->addCondition('task_complete_in_deadline',false)
 						->addCondition('status','Completed')
+						->addCondition('type','Task')
 						->addCondition('completed_at','>=',$this->from_date)
 						->addCondition('completed_at','<',$this->api->nextDate($this->to_date))
 						->count()
@@ -150,6 +160,7 @@ class Model_EmployeeTask extends \xepan\projects\Model_Employee{
 			return $this->add('xepan\projects\Model_Task',['table_alias'=>'submitted_task'])
 						->addCondition('assign_to_id',$q->getField('id'))
 						->addCondition('status','Submitted')
+						->addCondition('type','Task')
 						->addCondition('submitted_at','>=',$this->from_date)
 						->addCondition('submitted_at','<',$this->api->nextDate($this->to_date))
 						->count()
@@ -159,6 +170,7 @@ class Model_EmployeeTask extends \xepan\projects\Model_Employee{
 		$this->addExpression('rejected_task')->set(function($m,$q){
 			return $this->add('xepan\projects\Model_Task',['table_alias'=>'rejected_task'])
 						->addCondition('assign_to_id',$q->getField('id'))
+						->addCondition('type','Task')
 						->addCondition('rejected_at','>=',$this->from_date)
 						->addCondition('rejected_at','<',$this->api->nextDate($this->to_date))
 						->count()
