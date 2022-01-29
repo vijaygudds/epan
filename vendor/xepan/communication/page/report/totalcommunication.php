@@ -688,7 +688,10 @@ class page_report_totalcommunication extends \xepan\base\Page{
 		$grid->template->tryDel('Pannel');
 		$grid->setModel($comm_model,['title','description','created_at','from','to','created_by','sub_type','calling_status','sub_type_3','status','communication_for','communication_subfor']);
 		$grid->addPaginator(100);
-
+		$grid->addHook('formatRow',function($g){
+				// $g->current_row_html['message'] = $g->model['message'];
+			$g->current_row_html['description']= '<a href="javascript:void(0)" onclick="'.$g->js()->univ()->newWindow($this->app->url('xepan_communication_report_msg',['communication_id'=>$g->model->id])).'"><span class="">View Message</span></a>';	
+		});	
 
 		// if($form->isSubmitted()){
 		// 	$reload_param = [];
