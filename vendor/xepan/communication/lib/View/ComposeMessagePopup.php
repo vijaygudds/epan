@@ -130,11 +130,11 @@ class View_ComposeMessagePopup extends \View{
 			}
 			$cc_field->set($msg_cc);
 
-			$msg_bcc =[];		
-			foreach ($msg_model->getReplyMessageFromTo()['bcc'] as $bcc_field_msg) {
-				$msg_bcc [] = $bcc_field_msg['id'];
-				$bcc_field->js(true)->append("<option value='".$bcc_field_msg['id']."'>".$bcc_field_msg['name']." </option>")->trigger('change');
-			}
+			// $msg_bcc =[];		
+			// foreach ($msg_model->getReplyMessageFromTo()['bcc'] as $bcc_field_msg) {
+			// 	$msg_bcc [] = $bcc_field_msg['id'];
+			// 	$bcc_field->js(true)->append("<option value='".$bcc_field_msg['id']."'>".$bcc_field_msg['name']." </option>")->trigger('change');
+			// }
 			// $bcc_field->set($msg_bcc);
 
 			$this->subject="Re: ".$msg_model['title'];
@@ -194,6 +194,7 @@ class View_ComposeMessagePopup extends \View{
 			$to_raw = [];
 			$cc_raw = [];
 			$bcc_raw = [];
+			$group_to = [];
 			if($f['send_to_all']){
 				$all_emp = $this->add('xepan\hr\Model_Employee');
 				$all_emp->addCondition('status','Active');
@@ -209,7 +210,6 @@ class View_ComposeMessagePopup extends \View{
 
 				$to_emp = $this->add('xepan\hr\Model_Employee');
 				$to_emp->addCondition('status','Active');
-				$group_to = [];
 				foreach (explode(',', $f['message_to']) as $name => $id) {
 					if(strpos($id,"g_")=== 0){
 							$group_to[] = str_replace("g_","",$id);  
@@ -227,8 +227,8 @@ class View_ComposeMessagePopup extends \View{
 					}
 				}
 
+				$group_cc = [];
 				if($f['cc']){
-					$group_cc = [];
 					$cc_emp = $this->add('xepan\hr\Model_Employee');
 					$cc_emp->addCondition('status','Active');
 					foreach (explode(',', $f['cc']) as $name => $id) {
@@ -247,8 +247,19 @@ class View_ComposeMessagePopup extends \View{
 						}
 					}
 				}
+				// if($this->mode == 'msg-reply-all'){
+				// 	$bcc_emp = $this->add('xepan\hr\Model_Employee');
+				// 	$bcc_emp->addCondition('status','Active');
+				// 	foreach ($msg_model->getReplyMessageFromTo()['bcc'] as $bcc) {
+				// 			$bcc_emp->load($bcc['id']);
+				// 			$bcc_raw[] = ['name'=>$bcc['name'],'id'=>$bcc['id']];
+				// 	}
+
+				// }
+
+
+				$group_bcc = [];
 				if($f['bcc']){
-					$group_bcc = [];
 					$bcc_emp = $this->add('xepan\hr\Model_Employee');
 					$bcc_emp->addCondition('status','Active');
 					foreach (explode(',', $f['bcc']) as $name => $id) {
@@ -320,7 +331,21 @@ class View_ComposeMessagePopup extends \View{
 					$comm_read_model['type'] = "TO";
 					$comm_read_model->save();
 				}	
+				if(!empty($group_to)){
+					$query= 'select DISTINCT contact.* FROM contact left outer JOIN employee_group_association on contact.id=employee_group_association.employee_id where employee_group_association.group_id in('.implode(',', $group_to).') and status = "Active"';
+					$grp_emp=$this->api->db->dsql()->expr($query)->get();
+					foreach ($grp_emp as $emp) {
+						$comm_read_model = $this->add('xepan\base\Model_Contact_CommunicationReadEmail');
+						$comm_read_model['is_read'] = false;
+						$comm_read_model['communication_id'] = $send_msg->id;
+						$comm_read_model['contact_id'] = $emp['id'];
+						$comm_read_model['type'] = "TO";
+						$comm_read_model->save();
+					}
+				}
 			}
+
+
 			if($f['cc']){
 				foreach (explode(',', $f['cc']) as $name => $id) {
 					$comm_read_model = $this->add('xepan\base\Model_Contact_CommunicationReadEmail');
@@ -329,6 +354,19 @@ class View_ComposeMessagePopup extends \View{
 					$comm_read_model['contact_id'] = $id;
 					$comm_read_model['type'] = "CC";
 					$comm_read_model->save();
+
+					if(!empty($group_cc)){
+						$query= 'select DISTINCT contact.* FROM contact left outer JOIN employee_group_association on contact.id=employee_group_association.employee_id where employee_group_association.group_id in('.implode(',', $group_cc).') and status = "Active"';
+						$grp_emp=$this->api->db->dsql()->expr($query)->get();
+						foreach ($grp_emp as $emp) {
+							$comm_read_model = $this->add('xepan\base\Model_Contact_CommunicationReadEmail');
+							$comm_read_model['is_read'] = false;
+							$comm_read_model['communication_id'] = $send_msg->id;
+							$comm_read_model['contact_id'] = $emp['id'];
+							$comm_read_model['type'] = "CC";
+							$comm_read_model->save();
+						}
+					}
 				}	
 			}
 			if($f['bcc']){
@@ -339,6 +377,20 @@ class View_ComposeMessagePopup extends \View{
 					$comm_read_model['contact_id'] = $id;
 					$comm_read_model['type'] = "BCC";
 					$comm_read_model->save();
+
+					if(!empty($group_bcc)){
+						$query= 'select DISTINCT contact.* FROM contact left outer JOIN employee_group_association on contact.id=employee_group_association.employee_id where employee_group_association.group_id in('.implode(',', $group_bcc).') and status = "Active"';
+						$grp_emp=$this->api->db->dsql()->expr($query)->get();
+						foreach ($grp_emp as $emp) {
+							$comm_read_model = $this->add('xepan\base\Model_Contact_CommunicationReadEmail');
+							$comm_read_model['is_read'] = false;
+							$comm_read_model['communication_id'] = $send_msg->id;
+							$comm_read_model['contact_id'] = $emp['id'];
+							$comm_read_model['type'] = "BCC";
+							$comm_read_model->save();
+						}
+					}	
+
 				}	
 			}
 			$comm_read_model_form_emp = $this->add('xepan\base\Model_Contact_CommunicationReadEmail');
