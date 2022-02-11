@@ -105,7 +105,7 @@ class page_lead extends \xepan\base\Page{
 		}
 		$lead_subcat->setModel($lead_subcat_m);
 
-		$crud->setModel($lead,['first_name','last_name','organization',/*'address',*/'pin_code','landmark','mohla_falla','tehsil','post_office_wardno','city','country_id','state_id','remark','source','assign_to_id','emails_str','contacts_str'],['emails_str','contacts_str','name','organization_name_with_name','source','city','type','score','total_visitor','created_by_id','created_by','assign_to_id','assign_to','assign_at','effective_name','code','organization','existing_associated_catagories','created_at','priority','branch_id'])->setOrder('created_at','desc');
+		$crud->setModel($lead,['first_name','last_name','organization',/*'address',*/'pin_code','landmark','mohla_falla','village','tehsil','post_office_wardno','city','country_id','state_id','remark','source','assign_to_id','emails_str','contacts_str'],['emails_str','contacts_str','name','organization_name_with_name','source','city','type','score','total_visitor','created_by_id','created_by','assign_to_id','assign_to','assign_at','effective_name','code','organization','existing_associated_catagories','created_at','priority','branch_id'])->setOrder('created_at','desc');
 		$export = $crud->grid->add('misc\Export');
 		
 		$crud->grid->addHook('formatRow',function($g){
@@ -882,7 +882,7 @@ class page_lead extends \xepan\base\Page{
 		
 		if($_GET['download_sample_csv_file']){
 			// $output = ['first_name','last_name','address','city','state','country','pin_code','organization','post','website','source','remark','personal_email_1','personal_email_2','official_email_1','official_email_2','personal_contact_1','personal_contact_2','official_contact_1','official_contact_2','category'];
-			$output = ['first_name','last_name','landmark','mohla_falla','tehsil','post_office_wardno','address','city','state','country','pin_code','organization','post','website','source','remark','personal_email_1','official_email_1','personal_contact_1','personal_contact_2','category','lead_cat_id','lead_cat_sub_id'];
+			$output = ['first_name','last_name','landmark','mohla_falla','village','tehsil','post_office_wardno','address','city','state','country','pin_code','organization','post','website','source','remark','personal_email_1','official_email_1','personal_contact_1','personal_contact_2','category','lead_cat_id','lead_cat_sub_id'];
 
 			$output = implode(",", $output);
 	    	header("Content-type: text/csv");
