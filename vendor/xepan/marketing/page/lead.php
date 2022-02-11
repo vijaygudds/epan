@@ -882,7 +882,7 @@ class page_lead extends \xepan\base\Page{
 		
 		if($_GET['download_sample_csv_file']){
 			// $output = ['first_name','last_name','address','city','state','country','pin_code','organization','post','website','source','remark','personal_email_1','personal_email_2','official_email_1','official_email_2','personal_contact_1','personal_contact_2','official_contact_1','official_contact_2','category'];
-			$output = ['first_name','last_name','landmark','mohla_falla','village','tehsil','post_office_wardno','address','city','state','country','pin_code','organization','post','website','source','remark','personal_email_1','official_email_1','personal_contact_1','personal_contact_2','category','lead_cat_id','lead_cat_sub_id'];
+			$output = ['first_name','last_name','landmark','mohla_falla','village','tehsil','post_office_wardno','address','city','state','country','pin_code','organization','post','website','source','remark','personal_email_1','official_email_1','personal_contact_1','personal_contact_2','category','lead_cat_id','lead_cat_sub_id','assign_to_id'];
 
 			$output = implode(",", $output);
 	    	header("Content-type: text/csv");

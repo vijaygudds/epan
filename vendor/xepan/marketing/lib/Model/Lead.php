@@ -12,9 +12,13 @@ class Model_Lead extends \xepan\base\Model_Contact{
 
 	public $assigable_by_field = 'assign_to_id';
 	public $contact_type = "Contact";
-	
+	public $from_date;
+	public $to_date;
+	public $communication_row;
 	function init(){
 		parent::init();
+		// if(!$this->from_date || !$this->to_date) throw new \Exception("must pass from date and to date");
+		// throw new \Exception($this->from_date, 1);
 		
 		$config_m = $this->add('xepan\marketing\Model_Config_LeadSource');
 		$config_m->tryLoadAny();
@@ -60,6 +64,41 @@ class Model_Lead extends \xepan\base\Model_Contact{
 		/********************************************
 			PRIORITY EXPRESSIONS START
 		*********************************************/
+
+		// $this->addExpression('total_leads')->set(function($m,$q){
+		// 	$last_commu = $m->add('xepan\communication\Model_Communication');
+		// 	$last_commu->addCondition('created_at','>=',$this->from_date)
+		// 				->addCondition('created_at','<',$this->api->nextDate($this->to_date))
+		// 				->addCondition('communication_type','<>','AbstractMessage')
+		// 	->setOrder('id','desc')
+		// 	->setLimit(1);
+		// 	$last_commu->tryLoadAny();
+		// 	$lead = $this->add('xepan\marketing\Model_Lead',['table_alias'=>'totalcom']);
+		// 		$lead->addCondition(
+		// 						$lead->dsql()->orExpr()
+		// 							->where('id',$last_commu['from_id'])
+		// 							->where('id',$last_commu['to_id']));
+		// 		$lead->addCondition('id','<>',$this->app->employee->id);		
+		// 		return $lead->count();
+		// 		// return $last_commu->count();
+		// })->sortable(true);
+
+		$this->addExpression('total_communication')->set(function($m,$q){
+			$com_m = $m->add('xepan\communication\Model_Communication',['table_alias'=>'totalleads']);
+			$com_m->addCondition('created_at','>=',$this->from_date)
+					->addCondition('created_at','<',$this->api->nextDate($this->to_date))
+					->addCondition('communication_type','<>','AbstractMessage');
+			// $com_m->addCondition(
+			// 					$com_m->dsql()->orExpr()
+			// 						->where('from_id',$q->getField('id'))
+			// 						->where('id',$q->getField('id')))
+			$com_m->setOrder('id','desc')
+			->setLimit(1);
+			// $com_m->tryLoadAny();
+			return $com_m->count();								
+		});
+
+
 		$this->addExpression('last_communication')->set(function($m,$q){
 			$last_commu = $m->add('xepan\communication\Model_Communication');
 			$last_commu->addCondition(
@@ -67,6 +106,8 @@ class Model_Lead extends \xepan\base\Model_Contact{
 								->where('from_id',$q->getField('id'))
 								->where('to_id',$q->getField('id'))
 							)
+						->addCondition('created_at','>=',$this->from_date)
+						->addCondition('created_at','<',$this->api->nextDate($this->to_date))
 						->setOrder('id','desc')
 						->setLimit(1);
 			return $q->expr('DATE_FORMAT([0],"%M %d, %Y")',[$last_commu->fieldQuery('created_at')]);
@@ -125,6 +166,34 @@ class Model_Lead extends \xepan\base\Model_Contact{
 
 		$this->addHook('beforeSave',[$this,'updateSearchString']);
 
+	}
+
+	function filterLead($from_date,$to_date,$communication_row=null){
+		// $last_commu = $m->add('xepan\communication\Model_Communication');
+		// $last_commu->addCondition('created_at','>=',$from_date)
+		// 			->addCondition('created_at','<',$this->api->nextDate($to_date))
+		// ->setOrder('id','desc')
+		// ->setLimit(1);
+		// 'select contact.id,contact.first_name, communication.id, communication.title, count(communication.id) FROM contact INNER JOIN communication ON contact.type = 'Contact' OR contact.id = communication.from_id OR contact.id = communication.to_id where communication.type <> 'AbstractMessage' OR communication.created_at >= '2022-01-26' AND communication.created_at < '2022-01-28' GROUP BY contact.id'
+
+		$query= 'select contact.id,contact.first_name, count(communication.id) FROM contact INNER JOIN communication ON contact.id = communication.from_id OR contact.id = communication.to_id where communication.created_at >='.$from_date . ' AND communication.created_at < '. $to_date . ' GROUP BY contact.id';
+		$q=$this->api->db->dsql()->expr($query)->get();
+		return $q;
+
+		// "select contact.id, contact.id, communication.id
+		//     FROM contact
+		//     INNER JOIN communication
+		//           ON contact.id = communication.from_id OR contact.id = communication.to_id"
+		 // $this->join('communication',['from_id','to_id']);
+		// $last_commu->tryLoadany();
+		// return $q->expr('DATE_FORMAT([0],"%M %d, %Y")',[$last_commu->fieldQuery('created_at')]);
+		// $c = $this->add('xepan\base\Model_Contact')
+		// 		->addCondition(
+		// 					$c->dsql()->orExpr()
+		// 						->where('id',$last_commu['from_id'])
+		// 						->where('id',$last_commu['to_id'])
+		// 					);
+		// return 	$c;	
 	}
 
 	function deleteUnsubscribe(){
@@ -637,6 +706,12 @@ class Model_Lead extends \xepan\base\Model_Contact{
 							if(!$state->loaded())
 								continue;
 							$value = $state->id;
+						}
+						if($field == "assign_to_id"){
+							$emp = $this->add('xepan\hr\Model_Employee')->addCondition('name','like',$value)->tryLoadAny();
+							if(!$emp->loaded())
+								continue;
+							$value = $emp->id;
 						}
 
 						$lead[$field] = $value;
