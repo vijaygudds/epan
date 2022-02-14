@@ -409,12 +409,17 @@ class View_ComposeMessagePopup extends \View{
 				foreach ($attach_m as  $existing_attachment_model) {
 						$upload_images_array [] = $existing_attachment_model['file_id'];
 				}
-							
+				$form_images_array = [];
+				if($f['attachment']){
+					$form_images_array= explode(",",$f['attachment']);
+					foreach ($form_images_array as $file_id) {
+						$send_msg->addAttachment($file_id);
+					}
+				}			
 					// var_dump($upload_images_array);				
 			}else{
 				$upload_images_array = explode(",",$f['attachment']);
 			}
-
 			foreach ($upload_images_array as $file_id) {
 				$send_msg->addAttachment($file_id);
 			}

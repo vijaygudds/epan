@@ -9,9 +9,12 @@ class page_internalmsg extends \xepan\base\Page{
 	public $title = "Internal Message Communication" ; 
 	function init(){
 		parent::init();
-
+		$from_date = $this->app->stickyGET('from_date');
+		$to_date = $this->app->stickyGET('to_date');
 		$search_string = $this->app->stickyGET('search_string');
-			
+		$search_employee = $this->app->stickyGET('search_employee_id');
+		$mod_type = $this->app->stickyGET('mod_type');
+
 		// $emp->addCondition('status','Active');
 		$emp = $this->add('xepan\hr\Model_Employee');
 		$emp->addCondition('status','Active');
@@ -46,7 +49,20 @@ class page_internalmsg extends \xepan\base\Page{
 			);
 			// $msg_m->addCondition([['cc_raw','like','%"'.$emp_id.'"%'],['to_raw','like','%"'.$this->app->employee->id.'"%']]);
 		}
-
+		if($mod_type === 'From' ){
+			$msg_m->addCondition('from_id',$search_employee);
+		}
+		if($mod_type === 'To' )
+			$msg_m->addCondition('to_raw','like','%"'.$search_employee.'"%');
+		if($mod_type === 'Cc' )
+			$msg_m->addCondition('cc_raw','like','%"'.$search_employee.'"%');
+		if($mod_type === 'From' )
+			$msg_m->addCondition('bcc_raw','like','%"'.$this->app->employee->id.'"%');
+		
+		if($from_date)	
+			$msg_m->addCondition('created_at','>=',$_GET['from_date']);
+		if($to_date)	
+			$msg_m->addCondition('created_at','<',$this->api->nextDate($_GET['to_date']));
 			
 		$com_id = $this->app->stickyGET('communication_id');
 		$mode = $this->app->stickyGET('mode');
@@ -103,11 +119,39 @@ class page_internalmsg extends \xepan\base\Page{
 				->reload(['communication_id'=>$this->js()->_selectorThis()->data('id'),'mode'=>'msg-fwd']))->_selector('.do-msg-fwd');
 
 		/*filter Form */
-		$f = $this->add('Form',null,'form',['form\empty']);
-		$f->addField('line','search');
-		$f->addSubmit('Search');
-		if($f->isSubmitted()){
-			$f->js(null,$msg_list->js()->reload(['search_string'=>$f['search']]))->execute();
+		$form = $this->add('Form',null,'form');
+		$form->add('xepan\base\Controller_FLC')
+			->makePanelsCoppalsible(true)
+			->layout([
+				'date_range'=>'Filter~c1~2',
+				'type'=>'c2~2',
+				'employee'=>'c3~2',
+				'search'=>'c5~3',
+				'FormButtons~&nbsp;'=>'c4~3'
+			]);
+		// $f = $this->add('Form',null,'form',['form\empty']);
+		$date = $form->addField('DateRangePicker','date_range');
+		$set_date = $this->app->today." to ".$this->app->today;
+		if($from_date){
+			$set_date = $from_date." to ".$to_date;
+			$date->set($set_date);	
+		}
+		$search__emp = $form->addField('DropDown','employee')->setEmptyText('Please Select');
+		$search__emp->setModel($emp);	
+		$form->addField('DropDown','type')->setValueList(['From'=>'From','To'=>'To','Cc'=>'Cc','Bcc'=>'Bcc'])->setEmptyText('Please Select');	
+		$form->addField('line','search');
+		// $f->addField('line','search');
+		$form->addSubmit('Search');
+		if($form->isSubmitted()){
+			$form->js(null,$msg_list->js()->reload(
+													[
+														'search_string'=>$form['search'],
+														'from_date'=>$date->getStartDate()?:0,
+														'to_date'=>$date->getEndDate()?:0,
+														'mod_type'=>$form['type'],
+														'search_employee_id'=>$form['employee'],
+													]
+												))->execute();
 		}
 
 	}

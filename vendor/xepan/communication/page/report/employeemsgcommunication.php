@@ -90,7 +90,7 @@ class page_report_employeemsgcommunication extends \xepan\base\Page{
 			$employee_id = $this->app->stickyGET('employee_id');
 			$communication = $this->add('xepan\communication\Model_Communication')
 						->addCondition('created_at','>=',$_GET['from_date'])
-						->addCondition('created_at','<',$this->api->nextDate($_GET['from_date']))
+						->addCondition('created_at','<',$this->api->nextDate($_GET['to_date']))
 						->addCondition('created_by_id',$employee_id);
 
 			$msg = $page->add('xepan\base\Model_Contact_CommunicationReadMessage')
