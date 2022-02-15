@@ -11,7 +11,7 @@
 
 namespace xepan\communication;
 
-class Model_Communication_NotCommunicate extends Model_Communication {
+class Model_Communication_NotCommunicated extends Model_Communication {
 	
 	public $status=[''];
 

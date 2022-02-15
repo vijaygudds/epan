@@ -463,7 +463,7 @@ class View_CommunicationNew extends \View {
 
 		$type_field = $form->addField('dropdown','communication_type')->set($m['communication_type']);
 		$type_field->setEmptyText('Please select communication By');
-		$type_field->setValueList([/*'Email'=>'Email',*/'Call'=>'Call','Meeting'=>'Meeting'/*,'TeleMarketing'=>'TeleMarketing','Personal'=>'Personal','Comment'=>'Comment','SMS'=>'SMS'*/]);
+		$type_field->setValueList([/*'Email'=>'Email',*/'Call'=>'Call','Meeting'=>'Meeting','NotCommunicated'=>'Not Communicated'/*,'TeleMarketing'=>'TeleMarketing','Personal'=>'Personal','Comment'=>'Comment','SMS'=>'SMS'*/]);
 
 		$sub_type_field = $form->addField('dropdown','sub_type')->set($m['sub_type'])->validateNotNull();
 		$sub_type_field->setEmptyText('Please Select');
@@ -576,6 +576,7 @@ class View_CommunicationNew extends \View {
 			'Call'=>['sub_type','calling_status','sub_type_3','title','body','from_phone','from_person','called_to','notify_email','notify_email_to','status','calling_status','call_direction','communication_for','communication_sub_for'],
 			'Received'=>['sub_type','calling_status','sub_type_3','title','body','from_phone','from_person','called_to','notify_email','notify_email_to','status','calling_status','call_direction','communication_for','communication_sub_for'],
 			'Meeting'=>['sub_type','meeting_direction','sub_type_3','title','body','from_phone','from_person','called_to','notify_email','notify_email_to','status','calling_status','meeting_direction','communication_for','communication_sub_for'],
+			'NotCommunicated'=>[],
 			'TeleMarketing'=>['sub_type','calling_status','sub_type_3','title','body','from_phone','called_to'],
 			'Personal'=>['sub_type','calling_status','sub_type_3','title','body','from_person'],
 			'Comment'=>['sub_type','calling_status','sub_type_3','title','body','from_person'],
@@ -587,35 +588,39 @@ class View_CommunicationNew extends \View {
 		// $form->layout->add('xepan\projects\View_EmployeeFollowupSchedule',['employee_field'=>$assigned_to,'date_field'=>$followup_on,'follow_type_field'=>$followup_type],'existing_schedule');
 
 		if($form->isSubmitted()){
-			if($form['communication_type']){
-					if(!$form['sub_type']){
-						$form->displayError('sub_type','Sub type must be filled');
+			// throw new \Exception($form['communication_type'], 1);
+			
+			if($form['communication_type'] === "NotCommunicated"){
+				$form['calling_status'] ="EMI ALL READY DEPOSITED";
+			}else{	
+				if(!$form['sub_type']){
+					$form->displayError('sub_type','Sub type must be filled');
+				}
+				if($form['communication_type'] === 'Meeting'){
+					if(!$form['meeting_direction']){
+						$form->displayError('meeting_direction','Meeting Direction must be filled');
 					}
-					if($form['communication_type'] === 'Meeting'){
-						if(!$form['meeting_direction']){
-							$form->displayError('meeting_direction','Meeting Direction must be filled');
-						}
-					}else{
-						if(!$form['call_direction']){
-							$form->displayError('call_direction','Called Direction must be filled');
-						}
+				}else{
+					if(!$form['call_direction']){
+						$form->displayError('call_direction','Called Direction must be filled');
 					}
-					
-					if(!$form['calling_status']){
-							$form->displayError('calling_status','Communication Result must be filled');
-					}
+				}
+				
+				if(!$form['calling_status']){
+						$form->displayError('calling_status','Communication Result must be filled');
+				}
 
-					if($form['calling_status'] === 'PHONE ATTEND'){
-						if(!$form['body']){
-							$form->displayError('body',' Communication Description is Required');
-						}	
-					}
-					
-					$subfor = $this->add('xepan\marketing\Model_Communication_SubFor');
-					if($form['communication_sub_for']){
-						$subfor->load($form['communication_sub_for']);
-					}
-					$form['title'] = $subfor['name']. ' - ' .$form['sub_type']. ' - ' . $form['calling_status'];
+				if($form['calling_status'] === 'PHONE ATTEND'){
+					if(!$form['body']){
+						$form->displayError('body',' Communication Description is Required');
+					}	
+				}
+				
+				$subfor = $this->add('xepan\marketing\Model_Communication_SubFor');
+				if($form['communication_sub_for']){
+					$subfor->load($form['communication_sub_for']);
+				}
+				$form['title'] = $subfor['name']. ' - ' .$form['sub_type']. ' - ' . $form['calling_status'];
 
 
 				// if(!$form['body']) $form->displayError('body','Please specify content');
