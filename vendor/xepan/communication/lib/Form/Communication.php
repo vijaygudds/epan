@@ -20,7 +20,7 @@ class Form_Communication extends \Form {
 		$this->addClass('form-communication');
 		$this->setLayout('view\communicationform');
 		$type_field = $this->addField('dropdown','type');
-		$type_field->setValueList([/*'Email'=>'Email',*/'Call'=>'Call','Meeting'=>'Meeting'/*,'TeleMarketing'=>'TeleMarketing','Personal'=>'Personal','Comment'=>'Comment','SMS'=>'SMS'*/]);
+		$type_field->setValueList([/*'Email'=>'Email',*/'Call'=>'Call','Meeting'=>'Meeting','NotCommunicate'=>'Not Communicated'/*,'TeleMarketing'=>'TeleMarketing','Personal'=>'Personal','Comment'=>'Comment','SMS'=>'SMS'*/]);
 		$type_field->set($edit_model['communication_type']);
 
 		$config_m = $this->add('xepan\communication\Model_Config_SubType');
@@ -190,8 +190,9 @@ class Form_Communication extends \Form {
 
 		$type_field->js(true)->univ()->bindConditionalShow([
 			'Email'=>['from_email','email_to','cc_mails','bcc_mails'],
-			'Call'=>['from_email','from_phone','from_person','called_to','notify_email','notify_email_to','status','calling_status'],
-			'Meeting'=>['from_email','from_phone','from_person','called_to','notify_email','notify_email_to','meeting_direction','calling_status'],
+			'Call'=>['from_email','from_phone','from_person','called_to','notify_email','notify_email_to','status','calling_status','body','sub_type','sub_type_3','communication_for','communication_sub_for'],
+			'Meeting'=>['from_email','from_phone','from_person','called_to','notify_email','notify_email_to','meeting_direction','calling_status','body','sub_type','sub_type_3','communication_for','communication_sub_for'],
+			'NotCommunicate'=>[],
 			'TeleMarketing'=>['from_phone','called_to'],
 			'Personal'=>['from_person'],
 			'Comment'=>['from_person'],
@@ -333,37 +334,42 @@ class Form_Communication extends \Form {
 		if($this->edit_communication_id){
 			$communication->load($this->edit_communication_id);
 		}
+		if($commtype === 'NotCommunicate'){
+			// throw new \Exception("Error Processing Request", 1);
+			
+			$this['calling_status'] = "EMI ALL READY DEPOSITED";	
+		}else{
 
-		if(!$this['title']){
-					if(!$this['calling_status']){
-					$this->displayError('calling_status','Communication Result must be filled');
-					}
-					if(!$this['sub_type']){
-					}
-					// if(!$this['from_number']){
-					// 	$this->displayError('from_number','From Number Must be Filled');
-					// }
-					if($this['calling_status'] === 'PHONE ATTEND'){
-						if(!$this['body']){
-							$this->displayError('body',' Communication Description is Required');
-						}	
-					}
-					if(!$this['sub_type']){
-						$this->displayError('sub_type',' Communication Sub Type is Required');
-
-					}
-					if($this['communication_for']){
-						if(!$this['communication_sub_for'])
-						$this->displayError('communication_sub_for',' Communication Sub For is Required');
-
-					}
-					
-					$subfor = $this->add('xepan\marketing\Model_Communication_SubFor');
-					if($this['communication_sub_for']){
-						$subfor->load($this['communication_sub_for']);
-					}
-					$this['title'] = $subfor['name']. ' - ' .$this['sub_type']. ' - ' . $this['calling_status'];
+			if(!$this['title']){
+				$subfor = $this->add('xepan\marketing\Model_Communication_SubFor');
+				if($this['communication_sub_for']){
+					$subfor->load($this['communication_sub_for']);
 				}
+				$this['title'] = $subfor['name']. ' - ' .$this['sub_type']. ' - ' . $this['calling_status'];
+			}
+			if(!$this['calling_status']){
+			$this->displayError('calling_status','Communication Result must be filled');
+			}
+			// if(!$this['from_number']){
+			// 	$this->displayError('from_number','From Number Must be Filled');
+			// }
+			if($this['calling_status'] === 'PHONE ATTEND'){
+				if(!$this['body']){
+					$this->displayError('body',' Communication Description is Required');
+				}	
+			}
+			if(!$this['sub_type']){
+				$this->displayError('sub_type',' Communication Sub Type is Required');
+
+			}
+			if($this['communication_for']){
+				if(!$this['communication_sub_for'])
+				$this->displayError('communication_sub_for',' Communication Sub For is Required');
+
+			}
+		}
+					
+					
 
 
 		$communication['from_id']=$this['from_person'];
