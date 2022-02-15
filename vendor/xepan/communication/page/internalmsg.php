@@ -50,13 +50,16 @@ class page_internalmsg extends \xepan\base\Page{
 			// $msg_m->addCondition([['cc_raw','like','%"'.$emp_id.'"%'],['to_raw','like','%"'.$this->app->employee->id.'"%']]);
 		}
 		if($mod_type === 'From' ){
+			// throw new \Exception("Error Processing Request", 1);
+			
 			$msg_m->addCondition('from_id',$search_employee);
 		}
+		
 		if($mod_type === 'To' )
 			$msg_m->addCondition('to_raw','like','%"'.$search_employee.'"%');
 		if($mod_type === 'Cc' )
 			$msg_m->addCondition('cc_raw','like','%"'.$search_employee.'"%');
-		if($mod_type === 'From' )
+		if($mod_type === 'Bcc' )
 			$msg_m->addCondition('bcc_raw','like','%"'.$this->app->employee->id.'"%');
 		
 		if($from_date)	
@@ -133,6 +136,7 @@ class page_internalmsg extends \xepan\base\Page{
 			]);
 		// $f = $this->add('Form',null,'form',['form\empty']);
 		$date = $form->addField('DateRangePicker','date_range');
+		$set_date = $this->app->today." to ".$this->app->today;
 		if($from_date){
 			$set_date = $from_date." to ".$to_date;
 			$date->set($set_date);	
