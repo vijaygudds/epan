@@ -42,9 +42,9 @@ class page_internalmsg extends \xepan\base\Page{
 					['to_raw','like','%"'.$emp_id.'"%'],
 					['cc_raw','like','%"'.$emp_id.'"%'],
 					['bcc_raw','like','%"'.$emp_id.'"%'],
-					['to_raw','like','%"'.$this->app->employee->id.'"%'],
-					['cc_raw','like','%"'.$this->app->employee->id.'"%'],
-					['bcc_raw','like','%"'.$this->app->employee->id.'"%']
+					// ['to_raw','like','%"'.$this->app->employee->id.'"%'],
+					// ['cc_raw','like','%"'.$this->app->employee->id.'"%'],
+					// ['bcc_raw','like','%"'.$this->app->employee->id.'"%']
 				]
 			);
 			// $msg_m->addCondition([['cc_raw','like','%"'.$emp_id.'"%'],['to_raw','like','%"'.$this->app->employee->id.'"%']]);
