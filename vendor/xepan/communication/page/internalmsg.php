@@ -68,6 +68,8 @@ class page_internalmsg extends \xepan\base\Page{
 		$mode = $this->app->stickyGET('mode');
 
 		if($search_string){
+			// throw new \Exception($search_string, 1);
+			
 			$msg_m->addExpression('Relevance')->set('MATCH(title,description,communication_type) AGAINST ("'.$search_string.'")');
 			$msg_m->addCondition('Relevance','>',0);
  			$msg_m->setOrder('Relevance','Desc');
@@ -123,7 +125,7 @@ class page_internalmsg extends \xepan\base\Page{
 		$form->add('xepan\base\Controller_FLC')
 			->makePanelsCoppalsible(true)
 			->layout([
-				'date_range'=>'Filter~c1~2',
+				'date_range'=>'Filter~c1~2~closed',
 				'type'=>'c2~2',
 				'employee'=>'c3~2',
 				'search'=>'c5~3',
@@ -131,7 +133,6 @@ class page_internalmsg extends \xepan\base\Page{
 			]);
 		// $f = $this->add('Form',null,'form',['form\empty']);
 		$date = $form->addField('DateRangePicker','date_range');
-		$set_date = $this->app->today." to ".$this->app->today;
 		if($from_date){
 			$set_date = $from_date." to ".$to_date;
 			$date->set($set_date);	
