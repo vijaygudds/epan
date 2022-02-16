@@ -576,7 +576,7 @@ class View_CommunicationNew extends \View {
 			'Call'=>['sub_type','calling_status','sub_type_3','title','body','from_phone','from_person','called_to','notify_email','notify_email_to','status','calling_status','call_direction','communication_for','communication_sub_for'],
 			'Received'=>['sub_type','calling_status','sub_type_3','title','body','from_phone','from_person','called_to','notify_email','notify_email_to','status','calling_status','call_direction','communication_for','communication_sub_for'],
 			'Meeting'=>['sub_type','meeting_direction','sub_type_3','title','body','from_phone','from_person','called_to','notify_email','notify_email_to','status','calling_status','meeting_direction','communication_for','communication_sub_for'],
-			'NotCommunicated'=>[],
+			'NotCommunicated'=>['calling_status'],
 			'TeleMarketing'=>['sub_type','calling_status','sub_type_3','title','body','from_phone','called_to'],
 			'Personal'=>['sub_type','calling_status','sub_type_3','title','body','from_person'],
 			'Comment'=>['sub_type','calling_status','sub_type_3','title','body','from_person'],
@@ -591,7 +591,10 @@ class View_CommunicationNew extends \View {
 			// throw new \Exception($form['communication_type'], 1);
 			
 			if($form['communication_type'] === "NotCommunicated"){
-				$form['calling_status'] ="EMI ALL READY DEPOSITED";
+				// $form['calling_status'] ="EMI ALL READY DEPOSITED";
+				if(!$form['calling_status']){
+						$form->displayError('calling_status','Communication Result must be filled');
+				}
 				$form['communication_for'] = "0";	
 				$form['communication_sub_for'] = "0";
 			}else{	

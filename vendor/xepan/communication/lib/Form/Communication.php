@@ -192,7 +192,7 @@ class Form_Communication extends \Form {
 			'Email'=>['from_email','email_to','cc_mails','bcc_mails'],
 			'Call'=>['from_email','from_phone','from_person','called_to','notify_email','notify_email_to','status','calling_status','body','sub_type','sub_type_3','communication_for','communication_sub_for'],
 			'Meeting'=>['from_email','from_phone','from_person','called_to','notify_email','notify_email_to','meeting_direction','calling_status','body','sub_type','sub_type_3','communication_for','communication_sub_for'],
-			'NotCommunicated'=>[],
+			'NotCommunicated'=>['calling_status'],
 			'TeleMarketing'=>['from_phone','called_to'],
 			'Personal'=>['from_person'],
 			'Comment'=>['from_person'],
@@ -336,8 +336,9 @@ class Form_Communication extends \Form {
 		}
 		if($commtype === 'NotCommunicated'){
 			// throw new \Exception("Error Processing Request", 1);
-			
-			$this['calling_status'] = "EMI ALL READY DEPOSITED";	
+			if(!$this['calling_status']){
+			$this->displayError('calling_status','Communication Result must be filled');
+			}
 			$this['communication_for'] = "0";	
 			$this['communication_sub_for'] = "0";	
 		}else{
