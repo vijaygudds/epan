@@ -592,6 +592,8 @@ class View_CommunicationNew extends \View {
 			
 			if($form['communication_type'] === "NotCommunicated"){
 				$form['calling_status'] ="EMI ALL READY DEPOSITED";
+				$form['communication_for'] = "0";	
+				$form['communication_sub_for'] = "0";
 			}else{	
 				if(!$form['sub_type']){
 					$form->displayError('sub_type','Sub type must be filled');

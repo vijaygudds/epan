@@ -2,7 +2,7 @@
 
 namespace xepan\communication;
 
-class page_report_totalcommunication extends \xepan\base\Page{
+class page_report_emptotalcommunication extends \xepan\base\Page{
 
 	public $title = "Total Communication Reports";
 	public $sub_type_1_fields;
@@ -152,54 +152,55 @@ class page_report_totalcommunication extends \xepan\base\Page{
 		$form->addSubmit('Get Details')->addClass('btn btn-primary');
 		
 		// record model
-		$emp_model = $this->add('xepan\communication\Model_Communication_CommunicationActivity',['from_date'=>$from_date,'to_date'=>$to_date,'contact'=>$emp_id,'communication_type'=>$_GET['communication_type'],'communication_subtype'=>$_GET['communication_sub_type'],'communication_action'=>$_GET['communication_action'],'communication_result'=>$_GET['communication_result'],'communication_for'=>$_GET['communication_for'],'communication_subfor'=>$_GET['communication_sub_for']]);
+		$emp_model = $this->add('xepan\projects\Model_EmployeeCommunicationActivity',['from_date'=>$from_date,'to_date'=>$to_date,'contact'=>$emp_id,'communication_type'=>$_GET['communication_type'],'communication_subtype'=>$_GET['communication_sub_type'],'communication_action'=>$_GET['communication_action'],'communication_result'=>$_GET['communication_result'],'communication_for'=>$_GET['communication_for'],'communication_subfor'=>$_GET['communication_sub_for']]);
+		// $emp_model = $this->add('xepan\communication\Model_Communication_CommunicationActivity',['from_date'=>$from_date,'to_date'=>$to_date,'contact'=>$emp_id,'communication_type'=>$_GET['communication_type'],'communication_subtype'=>$_GET['communication_sub_type'],'communication_action'=>$_GET['communication_action'],'communication_result'=>$_GET['communication_result'],'communication_for'=>$_GET['communication_for'],'communication_subfor'=>$_GET['communication_sub_for']]);
 
+
+		$emp_model->addCondition('total_communication','>',0);
 		if($emp_id){
-			$emp_model->addCondition('created_by_id',$emp_id);
+			$emp_model->addCondition('id',$emp_id);
 		}
-		if($from_date){
-			$emp_model->from_date = $this->from_date;
-			$emp_model->addCondition('created_at','>=',$from_date);
-		}
-		if($to_date){
-			$emp_model->to_date = $this->to_date;
-			$emp_model->addCondition('created_at','<',$this->api->nextDate($to_date));
-		}
-		// if($department){
-		// 	$emp_model->addCondition('department_id',$department);
+		// if($from_date){
+		// 	$emp_model->from_date = $this->from_date;
+		// 	$emp_model->addCondition('created_at','>=',$from_date);
 		// }
-		if($this->api->stickyGET('communication_type')){
-			$emp_model->addCondition('communication_type',$this->api->stickyGET('communication_type'));
+		// if($to_date){
+		// 	$emp_model->to_date = $this->to_date;
+		// 	$emp_model->addCondition('created_at','<',$this->api->nextDate($to_date));
+		// }
+		if($department){
+			$emp_model->addCondition('department_id',$department);
 		}
-		if($this->api->stickyGET('communication_sub_type')){
-			$emp_model->addCondition('sub_type',$this->api->stickyGET('communication_sub_type'));
-		}
-		if($this->api->stickyGET('communication_for')){
-			$emp_model->addCondition('communication_for_id',$this->api->stickyGET('communication_for'));
-		}
-		if($this->api->stickyGET('communication_sub_for')){
-			// throw new \Exception($this->api->stickyGET('communication_sub_for'), 1);
-			
-			$emp_model->addCondition(
-							$emp_model->dsql()->orExpr()
-  								->where('communication_subfor_id',$this->api->stickyGET('communication_sub_for'))
-  								// ->where('communication_subfor_id','<>',0)
-  								// ->where('communication_subfor_id','<>',null)
-  							);
-			// $emp_model->addCondition('communication_subfor_id',$this->api->stickyGET('communication_sub_for'));
-			// $emp_model->addCondition('communication_subfor_id','<>',0);
-		}
-		if($this->api->stickyGET('communication_result')){
-			$emp_model->addCondition('calling_status',$this->api->stickyGET('communication_result'));
-		}
-		if($this->api->stickyGET('communication_action')){
-			$emp_model->addCondition('sub_type_3',$this->api->stickyGET('communication_action'));
-		}
+		// if($this->api->stickyGET('communication_type')){
+		// 	$emp_model->addCondition('communication_type',$this->api->stickyGET('communication_type'));
+		// }
+		// if($this->api->stickyGET('communication_sub_type')){
+		// 	$emp_model->addCondition('sub_type',$this->api->stickyGET('communication_sub_type'));
+		// }
+		// if($this->api->stickyGET('communication_for')){
+		// 	$emp_model->addCondition('communication_for_id',$this->api->stickyGET('communication_for'));
+		// }
+		// if($this->api->stickyGET('communication_sub_for')){
+		// 	$emp_model->addCondition(
+		// 					$emp_model->dsql()->orExpr()
+  // 								->where('communication_subfor_id',$this->api->stickyGET('communication_sub_for'))
+  // 								// ->where('communication_subfor_id','<>',0)
+  // 								// ->where('communication_subfor_id','<>',null)
+  // 							);
+		// 	// $emp_model->addCondition('communication_subfor_id',$this->api->stickyGET('communication_sub_for'));
+		// 	// $emp_model->addCondition('communication_subfor_id','<>',0);
+		// }
+		// if($this->api->stickyGET('communication_result')){
+		// 	$emp_model->addCondition('calling_status',$this->api->stickyGET('communication_result'));
+		// }
+		// if($this->api->stickyGET('communication_action')){
+		// 	$emp_model->addCondition('sub_type_3',$this->api->stickyGET('communication_action'));
+		// }
 
 
 		$this->communication_fields = ['total_email','total_comment','total_meeting','total_sms','total_telemarketing','total_call','dial_call','received_call'];
 		/*Communication Sub Type Form */
-		$model_field_array = ['total_communication'];//,'unique_lead','communication','total_email','total_comment','total_meeting','total_sms','total_telemarketing','total_call','dial_call','received_call','unique_leads_from','unique_leads_to','attended_others_meeting'];
+		$model_field_array = ['name','total_communication'];//,'unique_lead','communication','total_email','total_comment','total_meeting','total_sms','total_telemarketing','total_call','dial_call','received_call','unique_leads_from','unique_leads_to','attended_others_meeting'];
 
 		// sub type 1
 		// $emp_model->addExpression('unique_lead')->set('""')->caption('comm. with unique lead');
@@ -240,6 +241,7 @@ class page_report_totalcommunication extends \xepan\base\Page{
 					// 			->count();
 
 					$ttl_com = $this->add('xepan\communication\Model_Communication',['table_alias'=>'totalcom'])
+						->addCondition('created_by_id',$q->getfield('id'))
 						->addCondition('calling_status',$callingstatus)
 						->addCondition('created_at','>=',$this->from_date)
 						->addCondition('created_at','<',$this->api->nextDate($this->to_date));
@@ -256,8 +258,8 @@ class page_report_totalcommunication extends \xepan\base\Page{
 				if($_GET['communication_sub_for'])		
 						$ttl_com->addCondition('communication_subfor_id',$_GET['communication_sub_for']);
 
-				if($_GET['employee_id'])	
-					$ttl_com->addCondition('created_by_id',$_GET['employee_id']);
+				// if($_GET['employee_id'])	
+				// 	$ttl_com->addCondition('created_by_id',$_GET['employee_id']);
 				return $ttl_com->count();
 				});
 
@@ -275,12 +277,12 @@ class page_report_totalcommunication extends \xepan\base\Page{
 			$this->sub_type_3_fields[] = $subtype_name;
 			$emp_model->addExpression($subtype_name)->set(function($m,$q)use($sub_type_3){
 					// return $m->add('xepan\communication\Model_Communication')
-					// 			->addCondition('created_by_id',$q->getfield('id'))
 					// 			->addCondition('sub_type_3',$sub_type_3)
 					// 			->addCondition('created_at','>=',$this->from_date)
 					// 			->addCondition('created_at','<',$this->api->nextDate($this->to_date))
 					// 			->count();
 					$ttl_com = $this->add('xepan\communication\Model_Communication',['table_alias'=>'totalcom'])
+								->addCondition('created_by_id',$q->getfield('id'))
 						->addCondition('sub_type_3',$sub_type_3)
 						->addCondition('created_at','>=',$this->from_date)
 						->addCondition('created_at','<',$this->api->nextDate($this->to_date));
@@ -297,8 +299,8 @@ class page_report_totalcommunication extends \xepan\base\Page{
 					if($_GET['communication_sub_for'])		
 							$ttl_com->addCondition('communication_subfor_id',$_GET['communication_sub_for']);
 
-					if($_GET['employee_id'])	
-						$ttl_com->addCondition('created_by_id',$_GET['employee_id']);
+					// if($_GET['employee_id'])	
+					// 	$ttl_com->addCondition('created_by_id',$_GET['employee_id']);
 					return $ttl_com->count();
 
 				});
@@ -316,6 +318,7 @@ class page_report_totalcommunication extends \xepan\base\Page{
 				
 				$ttl_com = $this->add('xepan\communication\Model_Communication',['table_alias'=>'totalcom'])
 					/*$ttl_com*/->addCondition('communication_subfor_id',$subfor_id)
+						->addCondition('created_by_id',$q->getfield('id'))
 						->addCondition('created_at','>=',$this->from_date)
 						->addCondition('created_at','<',$this->api->nextDate($this->to_date));
 				if($_GET['communication_type'])		
@@ -332,9 +335,9 @@ class page_report_totalcommunication extends \xepan\base\Page{
 					$ttl_com->addCondition('communication_subfor_id',$_GET['communication_sub_for']);
 					
 
-				if($_GET['employee_id']){
-					$ttl_com->addCondition('created_by_id',$_GET['employee_id']);
-				}	
+				// if($_GET['employee_id']){
+				// 	$ttl_com->addCondition('created_by_id',$_GET['employee_id']);
+				// }	
 			return $ttl_com->count();
 
 
@@ -343,21 +346,21 @@ class page_report_totalcommunication extends \xepan\base\Page{
 				});
 		}
 		// if($_GET['from_date'])
-			$emp_model->_dsql()->group('type');
-		if($_GET['employee_id'])
-			$emp_model->_dsql()->group('created_by_id');
-		if($_GET['communication_type'])
-				$emp_model->_dsql()->group('communication_type');
-		if($_GET['communication_sub_type'])
-				$emp_model->_dsql()->group('sub_type');
-		if($_GET['communication_for'])
-				$emp_model->_dsql()->group('communication_for_id');
-		if($_GET['communication_sub_for'])
-				$emp_model->_dsql()->group('communication_subfor_id');
-		if($_GET['communication_result'])
-				$emp_model->_dsql()->group('calling_status');
-		if($_GET['communication_action'])
-				$emp_model->_dsql()->group('sub_type_3');
+		// 	$emp_model->_dsql()->group('type');
+		// if($_GET['employee_id'])
+			// $emp_model->_dsql()->group('created_by_id');
+		// if($_GET['communication_type'])
+		// 		$emp_model->_dsql()->group('communication_type');
+		// if($_GET['communication_sub_type'])
+		// 		$emp_model->_dsql()->group('sub_type');
+		// if($_GET['communication_for'])
+		// 		$emp_model->_dsql()->group('communication_for_id');
+		// if($_GET['communication_sub_for'])
+		// 		$emp_model->_dsql()->group('communication_subfor_id');
+		// if($_GET['communication_result'])
+		// 		$emp_model->_dsql()->group('calling_status');
+		// if($_GET['communication_action'])
+		// 		$emp_model->_dsql()->group('sub_type_3');
 
 
 

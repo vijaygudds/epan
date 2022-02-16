@@ -338,6 +338,8 @@ class Form_Communication extends \Form {
 			// throw new \Exception("Error Processing Request", 1);
 			
 			$this['calling_status'] = "EMI ALL READY DEPOSITED";	
+			$this['communication_for'] = "0";	
+			$this['communication_sub_for'] = "0";	
 		}else{
 
 			if(!$this['title']){
