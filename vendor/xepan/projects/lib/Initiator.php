@@ -49,7 +49,7 @@ class Initiator extends \Controller_Addon {
 		$this->app->addHook('communication_rendered',[$task,'addFollowups']);
 		$this->app->user_menu->addItem(['My Followups','icon'=>'fa fa-cog'],'xepan_projects_myfollowups');
 		$this->app->user_menu->addItem(['My Timesheet','icon'=>'fa fa-clock-o'],'xepan_projects_todaytimesheet');
-		
+		 $this->app->side_menu->addItem(['Task','icon'=>' fa fa-tasks'],'xepan_projects_mytasks')->setAttr(['title'=>'Task']);
 		// $this->app->report_menu->addItem(['Employee Communication Activity Report','icon'=>'fa fa-users'],$this->app->url('xepan_projects_report_employee'));
 		// $this->app->report_menu->addItem(['Employee Task Report','icon'=>'fa fa-users'],$this->app->url('xepan_projects_report_task'));
 
