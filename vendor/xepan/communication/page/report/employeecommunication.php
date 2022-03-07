@@ -4,7 +4,7 @@ namespace xepan\communication;
 
 class page_report_employeecommunication extends \xepan\base\Page{
 
-	public $title = "Employee Communication Reports";
+	public $title = "Employee Communication Details Reports";
 	public $sub_type_1_fields;
 	public $sub_type_1_norm_unnorm_array=[];
 	public $sub_type_2_fields;

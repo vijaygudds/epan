@@ -4,7 +4,7 @@ namespace xepan\communication;
 
 class page_report_totalcommunication extends \xepan\base\Page{
 
-	public $title = "Total Communication Reports";
+	public $title = "Communication Analysis Reports";
 	public $sub_type_1_fields;
 	public $sub_type_1_norm_unnorm_array=[];
 	public $sub_type_2_fields;
@@ -204,7 +204,7 @@ class page_report_totalcommunication extends \xepan\base\Page{
 		// sub type 1
 		// $emp_model->addExpression('unique_lead')->set('""')->caption('comm. with unique lead');
 		// $emp_model->addExpression('communication')->set('""');
-		// $emp_model->addExpression('subtype_1')->set('""')->caption($config_m['sub_type_1_label_name']?:"Sub Type 1");
+		$emp_model->addExpression('subtype_1')->set('""')->caption($config_m['sub_type_1_label_name']?:"Sub Type 1");
 		$model_field_array[] = "subtype_1";
 		foreach (explode(",", $config_m['sub_type']) as $subtypes) {
 			// $grid->addColumn($this->app->normalizeName($subtypes));
@@ -213,12 +213,32 @@ class page_report_totalcommunication extends \xepan\base\Page{
 			$model_field_array[] = $subtype_name;
 
 			$emp_model->addExpression($subtype_name)->set(function($m,$q)use($subtypes){
-				return $m->add('xepan\communication\Model_Communication')
-							->addCondition('created_by_id',$q->getfield('id'))
-							->addCondition('sub_type',$subtypes)
-							->addCondition('created_at','>=',$this->from_date)
-							->addCondition('created_at','<',$this->api->nextDate($this->to_date))
-							->count();
+				// return $m->add('xepan\communication\Model_Communication')
+				// 			->addCondition('created_by_id',$q->getfield('id'))
+				// 			->addCondition('sub_type',$subtypes)
+				// 			->addCondition('created_at','>=',$this->from_date)
+				// 			->addCondition('created_at','<',$this->api->nextDate($this->to_date))
+				// 			->count();
+				$ttl_com = $this->add('xepan\communication\Model_Communication',['table_alias'=>'totalcom'])
+						->addCondition('sub_type',$subtypes)
+						->addCondition('created_at','>=',$this->from_date)
+						->addCondition('created_at','<',$this->api->nextDate($this->to_date));
+				if($_GET['communication_type'])		
+						$ttl_com->addCondition('communication_type',$_GET['communication_type']);
+				if($_GET['communication_sub_type'])		
+						$ttl_com->addCondition('sub_type',$_GET['communication_sub_type']);
+				if($_GET['communication_result'])		
+						$ttl_com->addCondition('calling_status',$_GET['communication_result']);
+				if($_GET['communication_action'])		
+						$ttl_com->addCondition('sub_type_3',$_GET['communication_action']);
+				if($_GET['communication_for'])		
+						$ttl_com->addCondition('communication_for_id',$_GET['communication_for']);
+				if($_GET['communication_sub_for'])		
+						$ttl_com->addCondition('communication_subfor_id',$_GET['communication_sub_for']);
+
+				if($_GET['employee_id'])	
+					$ttl_com->addCondition('created_by_id',$_GET['employee_id']);
+				return $ttl_com->count();
 			});
 		}
 
@@ -493,12 +513,12 @@ class page_report_totalcommunication extends \xepan\base\Page{
 			
 
 			$g->current_row_html['communication'] = '<div class="row""><div class="col-md-7"> <div data-id="'.$g->model->id.'" sparkType="pie" sparkHeight="70px" class="sparkline communication"></div></div><div class="col-md-5"> <small>'.$comm_label_str."</small></div></div>";
-			$g->current_row_html['subtype_1'] = '<div class="row"><div class="col-md-7"> <div data-id="'.$g->model->id.'" sparkType="pie" sparkHeight="70px" class="sparkline subtype1"></div></div><div class="col-md-5"><small>'.$sub_type_1_label_str."</small></div></div>";
+			$g->current_row_html['subtype_1'] = '<div class="row"><div class="col-md-5"> <div data-id="'.$g->model->id.'" sparkType="pie" sparkHeight="70px" class="sparkline subtype1"></div></div><div class="col-md-7"><small>'.$sub_type_1_label_str."</small></div></div>";
 			$g->current_row_html['subfor'] = '<div class="row"><div class="col-md-4"> <div data-id="'.$g->model->id.'" sparkType="pie" sparkHeight="70px" class="sparkline subfor"></div></div><div class="col-md-4"><small>'.$sub_for_label_str."</small></div></div>";
 
 			$g->current_row_html['subtype_2'] = '<div class="row"><div  class="col-md-4"> <div style="text-align:center" data-id="'.$g->model->id.'" sparkType="pie" sparkHeight="70px" class="sparkline subtype2"></div></div><div class="col-md-4"><small>'.$sub_type_2_label_str."</small></div></div>";
 			
-			$g->current_row_html['subtype_3'] = '<div class="row"><div class="col-md-4"> <div data-id="'.$g->model->id.'" sparkType="pie" sparkHeight="70px" class="sparkline subtype3"></div></div><div class="col-md-5"><small>'.$sub_type_3_label_str."</small></div></div>";
+			$g->current_row_html['subtype_3'] = '<div class="row"><div class="col-md-5"> <div data-id="'.$g->model->id.'" sparkType="pie" sparkHeight="70px" class="sparkline subtype3"></div></div><div class="col-md-7"><small>'.$sub_type_3_label_str."</small></div></div>";
 
 			if(count($communication_graph_data_label)){
 				$g->js(true)->_selector('.sparkline.communication[data-id='.$g->model->id.']')
