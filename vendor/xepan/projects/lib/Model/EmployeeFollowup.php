@@ -5,11 +5,27 @@ namespace xepan\projects;
 class Model_EmployeeFollowup extends \xepan\projects\Model_Employee{
 	public $from_date;
 	public $to_date;
+	public $start_date;
+	public $end_date;
 
 	function init(){
 		parent::init();
 		
-		if(!$this->from_date || !$this->to_date) throw new \Exception("must pass from date and to date");
+		if(!$this->from_date || !$this->to_date AND !$this->start_date || !$this->end_date) throw new \Exception("must pass from date and to date");
+
+		$this->addExpression('upComing_followup')->set(function($m,$q){
+			$ttl_task = $this->add('xepan\projects\Model_FollowUp',['table_alias'=>'upcfollo'])
+						// ->addCondition('assign_to_id',$q->getField('id'))
+						// ->addCondition('created_by_id',$q->getField('id'))
+						->addCondition('starting_date','>=',$this->start_date)
+						->addCondition('starting_date','<',$this->api->nextDate($this->end_date));
+			$ttl_task->addCondition(
+							$this->dsql()->orExpr()
+  								->where('assign_to_id',$q->getField('id'))
+  								->where('created_by_id',$q->getField('id'))
+  							);
+			return $ttl_task->count();
+		})->sortable(true);
 
 		$this->addExpression('total_followup')->set(function($m,$q){
 			$ttl_task = $this->add('xepan\projects\Model_FollowUp',['table_alias'=>'totaltask'])

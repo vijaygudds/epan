@@ -124,6 +124,11 @@ class Initiator extends \Controller_Addon {
 						'name'=>'FollowUp Statistics Report',
 						'icon'=>'fa fa-users',
 						'url'=>'xepan_projects_report_followup'
+					],
+					[
+						'name'=>'Employee UpComing FollowUp',
+						'icon'=>'fa fa-user',
+						'url'=>'xepan_projects_report_followup1'
 					]
 				]
 			];
