@@ -45,7 +45,7 @@ class Initiator extends \Controller_Addon {
 	            $this->populateApplicationMenus();
 
 		
-		$this->app->side_menu->addItem(['TeleMarketing','icon'=>' fa fa-phone'],'xepan_marketing_telemarketinglistview')->setAttr(['title'=>'Task']);
+		$this->app->side_menu->addItem(['TeleMarketing','icon'=>' fa fa-phone'],'xepan_marketing_telemarketinglistview')->setAttr(['title'=>'TeleMarketing']);
 
 		
         $this->app->status_icon["xepan\marketing\Model_Lead"] = ['All'=>'fa fa-globe','Active'=>"fa fa-circle text-success",'InActive'=>'fa fa-circle text-danger'];

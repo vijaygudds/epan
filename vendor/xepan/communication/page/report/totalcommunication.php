@@ -706,7 +706,7 @@ class page_report_totalcommunication extends \xepan\base\Page{
 
 		$grid = $this->add('xepan\base\Grid');
 		$grid->template->tryDel('Pannel');
-		$grid->setModel($comm_model,['title','description','created_at','from','to','created_by','sub_type','calling_status','sub_type_3','status','communication_for','communication_subfor']);
+		$grid->setModel($comm_model,['title','description','created_at','from','to','to_contact_str','created_by','sub_type','calling_status','sub_type_3','status','communication_for','communication_subfor']);
 		$grid->addPaginator(100);
 		$grid->addHook('formatRow',function($g){
 				// $g->current_row_html['message'] = $g->model['message'];

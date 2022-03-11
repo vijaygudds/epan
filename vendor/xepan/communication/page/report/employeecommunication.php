@@ -538,7 +538,7 @@ class page_report_employeecommunication extends \xepan\base\Page{
 
 		$grid = $this->add('xepan\base\Grid');
 		$grid->template->tryDel('Pannel');
-		$grid->setModel($comm_model,['title','description','created_at','from','to','created_by','sub_type','calling_status','sub_type_3','status']);
+		$grid->setModel($comm_model,['title','description','created_at','from','to','to_contact_str','created_by','sub_type','calling_status','sub_type_3','status']);
 		$grid->addPaginator(25);
 
 
