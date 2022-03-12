@@ -116,7 +116,7 @@ class page_report_followup1 extends \xepan\base\Page{
 				->addCondition('starting_date','<',$this->api->nextDate($to_date))
 				;
 		$grid->setModel($model,['task_name','assign_to','created_at','starting_date','status']);
-		$grid->addPaginator($ipp=5);
+		$grid->addPaginator($ipp=25);
 		$grid->addQuickSearch(['task_name']);
 	}
 
