@@ -99,9 +99,12 @@ class page_report_followup1 extends \xepan\base\Page{
 	}
 
 	function page_upComing_followup(){
-		$from_date = $_GET['from_date'];
-		$to_date = $_GET['to_date'];
-		$employee_id = $_GET['employee_id'];		
+		// $from_date = $_GET['from_date'];
+		// $to_date = $_GET['to_date'];
+		// $employee_id = $_GET['employee_id'];	
+		$from_date = $this->app->stickyGET('from_date');
+		$to_date = $this->app->stickyGET('to_date');
+		$employee_id = $this->app->stickyGET('employee_id');	
 
 		$grid = $this->add('xepan\base\Grid');
 		$model = $this->add('xepan\projects\Model_FollowUp',['table_alias'=>'totaltask1']);
@@ -113,7 +116,7 @@ class page_report_followup1 extends \xepan\base\Page{
 				->addCondition('starting_date','<',$this->api->nextDate($to_date))
 				;
 		$grid->setModel($model,['task_name','assign_to','created_at','starting_date','status']);
-		$grid->addPaginator($ipp=25);
+		$grid->addPaginator($ipp=5);
 		$grid->addQuickSearch(['task_name']);
 	}
 
