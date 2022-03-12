@@ -33,6 +33,7 @@ class Model_Lead extends \xepan\base\Model_Contact{
 		$this->addField('village');
 		$this->addField('tehsil')->caption('Tehsil/city');
 		$this->addField('post_office_wardno')->caption('Post Office/Ward No');
+		$this->addField('lead_type')->defaultValue('Manual');
 
 		$this->addExpression('open_count')->set(function($m,$q){
 			return $this->add('xepan\marketing\Model_Opportunity',['table_alias'=>'open_count'])
@@ -708,6 +709,12 @@ class Model_Lead extends \xepan\base\Model_Contact{
 							$value = $state->id;
 						}
 						if($field == "assign_to_id"){
+							$emp = $this->add('xepan\hr\Model_Employee')->addCondition('name','like',$value)->tryLoadAny();
+							if(!$emp->loaded())
+								continue;
+							$value = $emp->id;
+						}
+						if($field == "generated_by_id"){
 							$emp = $this->add('xepan\hr\Model_Employee')->addCondition('name','like',$value)->tryLoadAny();
 							if(!$emp->loaded())
 								continue;
