@@ -261,8 +261,8 @@ class page_report_employeecommunication extends \xepan\base\Page{
 		$grid->setModel($emp_model->setOrder('created_at','desc'),['from','to','title','description','created_at','status','to_contact_str','communication_for','communication_subfor','sub_type','calling_status','sub_type_3']);//,['from','to','communication_for','communication_subfor','to_raw','title','description','communication_sub_type','communication_result','action_on_communication','communication_type','created_at','to_contact_str']);//,$model_field_array);
 
 		$grid->addHook('formatRow',function($g){
-				// $g->current_row_html['message'] = $g->model['message'];
-			$g->current_row_html['description']= '<a href="javascript:void(0)" onclick="'.$g->js()->univ()->newWindow($this->app->url('xepan_communication_report_msg',['communication_id'=>$g->model['id']])).'"><span class="btn btn-success">View Communication</span></a>';
+				$g->current_row_html['description'] = $g->model['description'];
+			// $g->current_row_html['description']= '<a href="javascript:void(0)" onclick="'.$g->js()->univ()->newWindow($this->app->url('xepan_communication_report_msg',['communication_id'=>$g->model['id']])).'"><span class="btn btn-success">View Communication</span></a>';
 			});
 
 
