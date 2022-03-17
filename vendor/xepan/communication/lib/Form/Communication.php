@@ -152,8 +152,8 @@ class Form_Communication extends \Form {
 			// $task_title_field = $this->addField('task_title');
 			$starting_date_field = $this->addField('DateTimePicker','starting_at');
 			$starting_date_field->js(true)->val('');
-			// $assign_to_field = $this->addField('DropDown','assign_to');
-			// $assign_to_field->setModel('xepan\hr\Model_Employee')->addCondition('status','Active');
+			$assign_to_field = $this->addField('DropDown','assign_to');
+			$assign_to_field->setModel('xepan\hr\Model_Employee')->addCondition('status','Active');
 			// $assign_to_field->set($this->app->employee->id);
 			// $assign_to_field->setAttr('disabled');
 			// $description_field = $this->addField('text','description');
@@ -549,7 +549,7 @@ class Form_Communication extends \Form {
 				$model_task['task_name'] = 'Followup '. $this->contact['name_with_type'];
 				$model_task['created_by_id'] = $this->app->employee->id;
 				$model_task['starting_date'] = $this['starting_at'];
-				$model_task['assign_to_id'] = $this->app->employee->id;
+				$model_task['assign_to_id'] = $this['assign_to'];
 				$model_task['description'] = $this['body'];
 				$model_task['related_id'] = $this->contact->id;
 				
