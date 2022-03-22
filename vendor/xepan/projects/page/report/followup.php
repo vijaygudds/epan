@@ -148,9 +148,9 @@ class page_report_followup extends \xepan\base\Page{
 	}
 
 	function page_total_followup(){
-		$from_date = $_GET['from_date'];
-		$to_date = $_GET['to_date'];
-		$employee_id = $_GET['employee_id'];		
+		$from_date = $this->app->stickyGET('from_date');
+		$to_date = $this->app->stickyGET('to_date');
+		$employee_id = $this->app->stickyGET('employee_id');		
 
 		$grid = $this->add('xepan\base\Grid');
 		$model = $this->add('xepan\projects\Model_FollowUp',['table_alias'=>'totaltask1']);
@@ -168,9 +168,9 @@ class page_report_followup extends \xepan\base\Page{
 
 	function page_self_followup(){
 
-		$from_date = $_GET['from_date'];
-		$to_date = $_GET['to_date'];
-		$employee_id = $_GET['employee_id'];		
+		$from_date = $this->app->stickyGET('from_date');
+		$to_date = $this->app->stickyGET('to_date');
+		$employee_id = $this->app->stickyGET('employee_id');		
 
 		$grid = $this->add('xepan\base\Grid');
 		$model = $this->add('xepan\projects\Model_FollowUp',['table_alias'=>'selftask1'])
@@ -185,9 +185,9 @@ class page_report_followup extends \xepan\base\Page{
 	}
 	function page_pending_followup(){
 
-		$from_date = $_GET['from_date'];
-		$to_date = $_GET['to_date'];
-		$employee_id = $_GET['employee_id'];		
+		$from_date = $this->app->stickyGET('from_date');
+		$to_date = $this->app->stickyGET('to_date');
+		$employee_id = $this->app->stickyGET('employee_id');
 
 		$grid = $this->add('xepan\base\Grid');
 		$model = $this->add('xepan\projects\Model_FollowUp',['table_alias'=>'pendingtask1']);
@@ -211,9 +211,9 @@ class page_report_followup extends \xepan\base\Page{
 	}
 	function page_pending_for_receiving(){
 
-		$from_date = $_GET['from_date'];
-		$to_date = $_GET['to_date'];
-		$employee_id = $_GET['employee_id'];		
+	$from_date = $this->app->stickyGET('from_date');
+		$to_date = $this->app->stickyGET('to_date');
+		$employee_id = $this->app->stickyGET('employee_id');
 
 		$grid = $this->add('xepan\base\Grid');
 		$model = $this->add('xepan\projects\Model_FollowUp',['table_alias'=>'pendingtask1']);
@@ -238,9 +238,9 @@ class page_report_followup extends \xepan\base\Page{
 	}
 	function page_inProgress_followup(){
 
-		$from_date = $_GET['from_date'];
-		$to_date = $_GET['to_date'];
-		$employee_id = $_GET['employee_id'];		
+		$from_date = $this->app->stickyGET('from_date');
+		$to_date = $this->app->stickyGET('to_date');
+		$employee_id = $this->app->stickyGET('employee_id');		
 
 		$grid = $this->add('xepan\base\Grid');
 		$model = $this->add('xepan\projects\Model_FollowUp',['table_alias'=>'pendingtask1']);
@@ -263,9 +263,9 @@ class page_report_followup extends \xepan\base\Page{
 		$grid->addQuickSearch(['task_name']);
 	}
 	function page_overdue_followup(){
-		$from_date = $_GET['from_date'];
-		$to_date = $_GET['to_date'];
-		$employee_id = $_GET['employee_id'];		
+		$from_date = $this->app->stickyGET('from_date');
+		$to_date = $this->app->stickyGET('to_date');
+		$employee_id = $this->app->stickyGET('employee_id');		
 
 		$task =  $this->add('xepan\projects\Model_FollowUp',['table_alias'=>'employee_assign_to_assigntask']);
 			$task->addCondition('status',['Pending','Inprogress','Assigned','Submitted']);
@@ -288,9 +288,9 @@ class page_report_followup extends \xepan\base\Page{
 
 	function page_followup_assigned_to_me(){
 
-		$from_date = $_GET['from_date'];
-		$to_date = $_GET['to_date'];
-		$employee_id = $_GET['employee_id'];		
+		$from_date = $this->app->stickyGET('from_date');
+		$to_date = $this->app->stickyGET('to_date');
+		$employee_id = $this->app->stickyGET('employee_id');		
 
 		$grid = $this->add('xepan\base\Grid');
 		$model = $this->add('xepan\projects\Model_FollowUp',['table_alias'=>'taskassigntome1'])
@@ -306,9 +306,9 @@ class page_report_followup extends \xepan\base\Page{
 
 	function page_followup_assigned_by_me(){
 
-		$from_date = $_GET['from_date'];
-		$to_date = $_GET['to_date'];
-		$employee_id = $_GET['employee_id'];		
+		$from_date = $this->app->stickyGET('from_date');
+		$to_date = $this->app->stickyGET('to_date');
+		$employee_id = $this->app->stickyGET('employee_id');		
 
 		$grid = $this->add('xepan\base\Grid');
 		$model = $this->add('xepan\projects\Model_FollowUp',['table_alias'=>'taskassigntome1'])
@@ -323,9 +323,9 @@ class page_report_followup extends \xepan\base\Page{
 	}
 
 	function page_pending_for_approval(){
-		$from_date = $_GET['from_date'];
-		$to_date = $_GET['to_date'];
-		$employee_id = $_GET['employee_id'];		
+		$from_date = $this->app->stickyGET('from_date');
+		$to_date = $this->app->stickyGET('to_date');
+		$employee_id = $this->app->stickyGET('employee_id');		
 
 		$grid = $this->add('xepan\base\Grid');
 		$model = $this->add('xepan\projects\Model_FollowUp',['table_alias'=>'taskassigntome1'])
@@ -340,9 +340,9 @@ class page_report_followup extends \xepan\base\Page{
 	}
 
 	function page_followup_complete_in_deadline(){
-		$from_date = $_GET['from_date'];
-		$to_date = $_GET['to_date'];
-		$employee_id = $_GET['employee_id'];		
+		$from_date = $this->app->stickyGET('from_date');
+		$to_date = $this->app->stickyGET('to_date');
+		$employee_id = $this->app->stickyGET('employee_id');		
 
 		$grid = $this->add('xepan\base\Grid');
 		$model = $this->add('xepan\projects\Model_FollowUp',['table_alias'=>'task_complete_in_deadline1'])
@@ -358,9 +358,9 @@ class page_report_followup extends \xepan\base\Page{
 	}
 
 	function page_followup_complete_after_deadline(){
-		$from_date = $_GET['from_date'];
-		$to_date = $_GET['to_date'];
-		$employee_id = $_GET['employee_id'];
+		$from_date = $this->app->stickyGET('from_date');
+		$to_date = $this->app->stickyGET('to_date');
+		$employee_id = $this->app->stickyGET('employee_id');
 
 		$grid = $this->add('xepan\base\Grid');
 		$model = $this->add('xepan\projects\Model_FollowUp',['table_alias'=>'task_complete_in_deadline1'])
@@ -376,9 +376,9 @@ class page_report_followup extends \xepan\base\Page{
 	}
 
 	function page_submitted_followup(){
-		$from_date = $_GET['from_date'];
-		$to_date = $_GET['to_date'];
-		$employee_id = $_GET['employee_id'];
+		$from_date = $this->app->stickyGET('from_date');
+		$to_date = $this->app->stickyGET('to_date');
+		$employee_id = $this->app->stickyGET('employee_id');
 
 		$grid = $this->add('xepan\base\Grid');
 		$model = $this->add('xepan\projects\Model_FollowUp',['table_alias'=>'task_complete_in_deadline1'])
@@ -392,9 +392,9 @@ class page_report_followup extends \xepan\base\Page{
 	}
 
 	function page_rejected_followup(){
-		$from_date = $_GET['from_date'];
-		$to_date = $_GET['to_date'];
-		$employee_id = $_GET['employee_id'];
+		$from_date = $this->app->stickyGET('from_date');
+		$to_date = $this->app->stickyGET('to_date');
+		$employee_id = $this->app->stickyGET('employee_id');
 
 		$grid = $this->add('xepan\base\Grid');
 		$model = $this->add('xepan\projects\Model_FollowUp',['table_alias'=>'task_complete_in_deadline1'])
