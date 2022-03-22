@@ -98,6 +98,9 @@ class Model_Communication extends \xepan\base\Model_Table{
 		})->type('boolean');
 
 		$this->addExpression('to_contact_str')->set($this->refSQL('to_id')->fieldQuery('contacts_comma_seperated'));
+
+		$this->addExpression('generated_by')->set($this->refSQL('created_by_id')->fieldQuery('generated_by'));
+		
 		$this->addHook('afterInsert',[$this,'throwHookNotification']);
 		$this->addHook('beforeDelete',[$this,'deleteAttachments']);
 		
