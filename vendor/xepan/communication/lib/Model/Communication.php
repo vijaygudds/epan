@@ -98,9 +98,18 @@ class Model_Communication extends \xepan\base\Model_Table{
 		})->type('boolean');
 
 		$this->addExpression('to_contact_str')->set($this->refSQL('to_id')->fieldQuery('contacts_comma_seperated'));
+	
+		$this->addExpression('generated_by')->set(function($m,$q){
+			$lead_contact = $this->add('xepan\marketing\Model_Lead',['table_alias'=>'leadcont']);
+			$lead_contact->addCondition(
+							$this->dsql()->orExpr()
+  								->where('id',$q->getField('from_id'))
+  								->where('id',$q->getField('to_id'))
+  							)->setOrder('id','desc')->setLimit(1);
+			return $lead_contact->fieldQuery('generated_by');
+		})->sortable(true);
 
-		$this->addExpression('generated_by')->set($this->refSQL('created_by_id')->fieldQuery('generated_by'));
-		
+
 		$this->addHook('afterInsert',[$this,'throwHookNotification']);
 		$this->addHook('beforeDelete',[$this,'deleteAttachments']);
 		
