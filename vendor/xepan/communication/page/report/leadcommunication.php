@@ -49,17 +49,17 @@ class page_report_leadcommunication extends \xepan\base\Page{
 			$date->set($set_date);
 		}
 
-		$employee_model = $this->add('xepan\hr\Model_Employee')//,['title_field'=>'name_with_post'])
+		$employee_model = $this->add('xepan\hr\Model_Employee',['title_field'=>'name_with_post'])
 							->addCondition('status','Active');
-		// $employee_model->addExpression('name_with_post')->set(function($m,$q){
-		// 	return $q->expr('CONCAT_WS("::",[name],[post],[code])',
-		// 				[
-		// 					'name'=>$m->getElement('name'),
-		// 					'post'=>$m->getElement('post'),
-		// 					'code'=>$m->getElement('code')
-		// 				]
-		// 			);
-		// });
+		$employee_model->addExpression('name_with_post')->set(function($m,$q){
+			return $q->expr('CONCAT_WS("::",[name],[post],[code])',
+						[
+							'name'=>$m->getElement('name'),
+							'post'=>$m->getElement('post'),
+							'code'=>$m->getElement('code')
+						]
+					);
+		});
 		$emp_field = $form->addField('xepan\base\Basic','employee');
 		// $emp_field->setModel('xepan\hr\Model_Employee')->addCondition('status','Active');
 		// $dept_field = $form->addField('xepan\base\DropDown','department');
@@ -106,6 +106,7 @@ class page_report_leadcommunication extends \xepan\base\Page{
 		// $emp_model->addExpression('emp_department_id')->set(function($m,$q){
 		// 	return $this->add('xepan\hr\Model_Employee')->addCondition('id',$this->app->employee->id)->fieldQuery('department_id');
 		// });
+		$emp_model->addCondition('type','Contact');
 		$emp_model->addCondition('total_communication','>',0);
 		if($emp_id){
 			$emp_model->addCondition('created_by_id',$emp_id);
@@ -130,8 +131,8 @@ class page_report_leadcommunication extends \xepan\base\Page{
 
 
 		$grid->setModel($emp_model,['unique_name','total_communication','last_communication']);
-		// $grid->add('misc/Export',['export_fields'=>['name','total_lead_created','total_lead_assign_to','total_followup','open_opportunity','qualified_opportunity','needs_analysis_opportunity','quoted_opportunity','negotiated_opportunity','win_opportunity','loss_opportunity']]);
-		$grid->addPaginator(1000);
+		$grid->add('misc/Export',['export_fields'=>['name','total_lead_created','total_lead_assign_to','total_followup','open_opportunity','qualified_opportunity','needs_analysis_opportunity','quoted_opportunity','negotiated_opportunity','win_opportunity','loss_opportunity']]);
+		$grid->addPaginator(50);
 
 		// $emp_model->_dsql()->group('type');
 
@@ -174,7 +175,7 @@ class page_report_leadcommunication extends \xepan\base\Page{
 							)
 						->addCondition('created_at','>=',$this->from_date)
 						->addCondition('created_at','<',$this->api->nextDate($this->to_date));
-			$model->addCondition('type','<>','AbstractMessage');
+			$model->addCondition('communication_type','<>','AbstractMessage');
 			// $model->addCondition('id',$_GET['to_contact_id']);
 			// $model->addCondition('id','<>',$this->app->employee->id);
 			$model->setOrder('created_at','desc');
