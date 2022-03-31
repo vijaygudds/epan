@@ -49,7 +49,7 @@ class page_report_leadcommunication extends \xepan\base\Page{
 			$date->set($set_date);
 		}
 
-		$employee_model = $this->add('xepan\hr\Model_Employee',['title_field'=>'name_with_post'])
+		$employee_model = $this->add('xepan\hr\Model_Employee')//,['title_field'=>'name_with_post'])
 							->addCondition('status','Active');
 		// $employee_model->addExpression('name_with_post')->set(function($m,$q){
 		// 	return $q->expr('CONCAT_WS("::",[name],[post],[code])',
