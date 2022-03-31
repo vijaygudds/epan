@@ -106,7 +106,7 @@ class page_report_leadcommunication extends \xepan\base\Page{
 		// $emp_model->addExpression('emp_department_id')->set(function($m,$q){
 		// 	return $this->add('xepan\hr\Model_Employee')->addCondition('id',$this->app->employee->id)->fieldQuery('department_id');
 		// });
-
+		$emp_model->addCondition('total_communication','>',0);
 		if($emp_id){
 			$emp_model->addCondition('created_by_id',$emp_id);
 		}
