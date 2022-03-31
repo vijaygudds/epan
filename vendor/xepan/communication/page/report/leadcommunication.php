@@ -130,8 +130,8 @@ class page_report_leadcommunication extends \xepan\base\Page{
 
 
 		$grid->setModel($emp_model,['unique_name','total_communication','last_communication']);
-		$grid->add('misc/Export',['export_fields'=>['name','total_lead_created','total_lead_assign_to','total_followup','open_opportunity','qualified_opportunity','needs_analysis_opportunity','quoted_opportunity','negotiated_opportunity','win_opportunity','loss_opportunity']]);
-		$grid->addPaginator(50);
+		// $grid->add('misc/Export',['export_fields'=>['name','total_lead_created','total_lead_assign_to','total_followup','open_opportunity','qualified_opportunity','needs_analysis_opportunity','quoted_opportunity','negotiated_opportunity','win_opportunity','loss_opportunity']]);
+		$grid->addPaginator(1000);
 
 		// $emp_model->_dsql()->group('type');
 
