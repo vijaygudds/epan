@@ -86,15 +86,14 @@ class Model_Lead extends \xepan\base\Model_Contact{
 
 		$this->addExpression('total_communication')->set(function($m,$q){
 			$com_m = $m->add('xepan\communication\Model_Communication',['table_alias'=>'totalleads']);
-			$com_m->addCondition('created_at','>=',$this->from_date)
-					->addCondition('created_at','<',$this->api->nextDate($this->to_date))
-					->addCondition('communication_type','<>','AbstractMessage');
-			// $com_m->addCondition(
-			// 					$com_m->dsql()->orExpr()
-			// 						->where('from_id',$q->getField('id'))
-			// 						->where('id',$q->getField('id')))
-			$com_m->setOrder('id','desc')
-			->setLimit(1);
+			$com_m->addCondition($com_m->dsql()->orExpr()
+								->where('from_id',$q->getField('id'))
+								->where('to_id',$q->getField('id'))
+							)
+						->addCondition('created_at','>=',$this->from_date)
+						->addCondition('created_at','<',$this->api->nextDate($this->to_date));
+			// $com_m->setOrder('id','desc');
+			// ->setLimit(1);
 			// $com_m->tryLoadAny();
 			return $com_m->count();								
 		});
