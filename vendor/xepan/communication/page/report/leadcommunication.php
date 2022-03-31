@@ -109,7 +109,7 @@ class page_report_leadcommunication extends \xepan\base\Page{
 		$emp_model->addCondition('type','Contact');
 		$emp_model->addCondition('total_communication','>',0);
 		if($emp_id){
-			$emp_model->addCondition('created_by_id',$emp_id);
+			$emp_model->addCondition('lead_communication_created_by',$emp_id);
 		}
 		// if($from_date){
 		// 	$emp_model->from_date = $from_date;
