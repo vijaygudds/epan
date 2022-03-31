@@ -84,37 +84,37 @@ class Model_Lead extends \xepan\base\Model_Contact{
 		// 		// return $last_commu->count();
 		// })->sortable(true);
 
-		$this->addExpression('total_communication')->set(function($m,$q){
-			$com_m = $m->add('xepan\communication\Model_Communication',['table_alias'=>'totalleads']);
-			$com_m->addCondition($com_m->dsql()->orExpr()
-								->where('from_id',$q->getField('id'))
-								->where('to_id',$q->getField('id'))
-							)
-						->addCondition('communication_type','<>','AbstractMessage')
-						->addCondition('created_at','>=',$this->from_date)
-						->addCondition('created_at','<',$this->api->nextDate($this->to_date));
-			// $com_m->addCondition('type','<>','AbstractMessage');			
-			// $com_m->setOrder('id','desc');
-			// ->setLimit(1);
-			// $com_m->tryLoadAny();
-			return $com_m->count();								
-		});
+		// $this->addExpression('total_communication')->set(function($m,$q){
+		// 	$com_m = $m->add('xepan\communication\Model_Communication',['table_alias'=>'totalleads']);
+		// 	$com_m->addCondition($com_m->dsql()->orExpr()
+		// 						->where('from_id',$q->getField('id'))
+		// 						->where('to_id',$q->getField('id'))
+		// 					)
+		// 				->addCondition('communication_type','<>','AbstractMessage')
+		// 				->addCondition('created_at','>=',$this->from_date)
+		// 				->addCondition('created_at','<',$this->api->nextDate($this->to_date));
+		// 	// $com_m->addCondition('type','<>','AbstractMessage');			
+		// 	// $com_m->setOrder('id','desc');
+		// 	// ->setLimit(1);
+		// 	// $com_m->tryLoadAny();
+		// 	return $com_m->count();								
+		// });
 
-		$this->addExpression('lead_communication_created_by')->set(function($m,$q){
-			$lead_c = $m->add('xepan\communication\Model_Communication',['table_alias'=>'leadscrea']);
-			$lead_c->addCondition($lead_c->dsql()->orExpr()
-								->where('from_id',$q->getField('id'))
-								->where('to_id',$q->getField('id'))
-							)
-						->addCondition('communication_type','<>','AbstractMessage')
-						->addCondition('created_at','>=',$this->from_date)
-						->addCondition('created_at','<',$this->api->nextDate($this->to_date))->setLimit(1);
-			// $com_m->addCondition('type','<>','AbstractMessage');			
-			// $com_m->setOrder('id','desc');
-			// ->setLimit(1);
-			// $com_m->tryLoadAny();
-			return $lead_c->fieldQuery('created_by_id');
-		});
+		// $this->addExpression('lead_communication_created_by')->set(function($m,$q){
+		// 	$lead_c = $m->add('xepan\communication\Model_Communication',['table_alias'=>'leadscrea']);
+		// 	$lead_c->addCondition($lead_c->dsql()->orExpr()
+		// 						->where('from_id',$q->getField('id'))
+		// 						->where('to_id',$q->getField('id'))
+		// 					)
+		// 				->addCondition('communication_type','<>','AbstractMessage')
+		// 				->addCondition('created_at','>=',$this->from_date)
+		// 				->addCondition('created_at','<',$this->api->nextDate($this->to_date))->setLimit(1);
+		// 	// $com_m->addCondition('type','<>','AbstractMessage');			
+		// 	// $com_m->setOrder('id','desc');
+		// 	// ->setLimit(1);
+		// 	// $com_m->tryLoadAny();
+		// 	return $lead_c->fieldQuery('created_by_id');
+		// });
 
 
 		$this->addExpression('last_communication')->set(function($m,$q){

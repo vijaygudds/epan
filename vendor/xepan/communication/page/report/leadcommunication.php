@@ -101,7 +101,7 @@ class page_report_leadcommunication extends \xepan\base\Page{
 
 		$form->addSubmit('Get Details')->addClass('btn btn-primary');
 
-		$emp_model = $this->add('xepan\marketing\Model_Lead',['from_date'=>$from_date,'to_date'=>$to_date/*,'communication_row'=>$row*/]);
+		$emp_model = $this->add('xepan\communication\Model_LeadCommunication',['from_date'=>$from_date,'to_date'=>$to_date/*,'communication_row'=>$row*/]);
 
 		// $emp_model->addExpression('emp_department_id')->set(function($m,$q){
 		// 	return $this->add('xepan\hr\Model_Employee')->addCondition('id',$this->app->employee->id)->fieldQuery('department_id');
