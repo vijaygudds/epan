@@ -51,15 +51,15 @@ class page_report_leadcommunication extends \xepan\base\Page{
 
 		$employee_model = $this->add('xepan\hr\Model_Employee',['title_field'=>'name_with_post'])
 							->addCondition('status','Active');
-		$employee_model->addExpression('name_with_post')->set(function($m,$q){
-			return $q->expr('CONCAT_WS("::",[name],[post],[code])',
-						[
-							'name'=>$m->getElement('name'),
-							'post'=>$m->getElement('post'),
-							'code'=>$m->getElement('code')
-						]
-					);
-		});
+		// $employee_model->addExpression('name_with_post')->set(function($m,$q){
+		// 	return $q->expr('CONCAT_WS("::",[name],[post],[code])',
+		// 				[
+		// 					'name'=>$m->getElement('name'),
+		// 					'post'=>$m->getElement('post'),
+		// 					'code'=>$m->getElement('code')
+		// 				]
+		// 			);
+		// });
 		$emp_field = $form->addField('xepan\base\Basic','employee');
 		// $emp_field->setModel('xepan\hr\Model_Employee')->addCondition('status','Active');
 		// $dept_field = $form->addField('xepan\base\DropDown','department');
@@ -110,14 +110,14 @@ class page_report_leadcommunication extends \xepan\base\Page{
 		if($emp_id){
 			$emp_model->addCondition('created_by_id',$emp_id);
 		}
-		if($from_date){
-			$emp_model->from_date = $from_date;
-			$emp_model->addCondition('created_at','>=',$from_date);
-		}
-		if($to_date){
-			$emp_model->to_date = $to_date;
-			$emp_model->addCondition('created_at','<',$this->api->nextDate($to_date));
-		}
+		// if($from_date){
+		// 	$emp_model->from_date = $from_date;
+		// 	$emp_model->addCondition('created_at','>=',$from_date);
+		// }
+		// if($to_date){
+		// 	$emp_model->to_date = $to_date;
+		// 	$emp_model->addCondition('created_at','<',$this->api->nextDate($to_date));
+		// }
 		// if($department){
 		// 	// throw new \Exception($department, 1);
 			
