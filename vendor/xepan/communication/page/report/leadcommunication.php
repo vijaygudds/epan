@@ -174,7 +174,7 @@ class page_report_leadcommunication extends \xepan\base\Page{
 							)
 						->addCondition('created_at','>=',$this->from_date)
 						->addCondition('created_at','<',$this->api->nextDate($this->to_date));
-			// $model->addCondition('type','<>','AbstractMessage');
+			$model->addCondition('type','<>','AbstractMessage');
 			// $model->addCondition('id',$_GET['to_contact_id']);
 			// $model->addCondition('id','<>',$this->app->employee->id);
 			$model->setOrder('created_at','desc');

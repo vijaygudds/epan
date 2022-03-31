@@ -92,6 +92,7 @@ class Model_Lead extends \xepan\base\Model_Contact{
 							)
 						->addCondition('created_at','>=',$this->from_date)
 						->addCondition('created_at','<',$this->api->nextDate($this->to_date));
+			$com_m->addCondition('type','<>','AbstractMessage');			
 			// $com_m->setOrder('id','desc');
 			// ->setLimit(1);
 			// $com_m->tryLoadAny();
