@@ -11,13 +11,13 @@
 
 namespace xepan\communication;
 
-class Model_Communication_Followup extends Model_Communication {
+class Model_Communication_FollowupCall extends Model_Communication {
 	
 	public $status=['Called','Received'];
 
 	function init(){
 		parent::init();
-		$this->addCondition('communication_type','Followup');	
+		$this->addCondition('communication_type','FollowupCall');	
 		$this->getElement('status')->defaultValue('Called');
 
 	// 	$this->addHook('beforeSave',function($m){
