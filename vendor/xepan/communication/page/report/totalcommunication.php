@@ -98,7 +98,7 @@ class page_report_totalcommunication extends \xepan\base\Page{
 				
 		$dept_field = $form->addField('xepan\base\DropDown','department');
 		$model_department = $this->add('xepan\hr\Model_Department');
-		$type_field = $form->addField('xepan\base\DropDown','communication_type')->setValueList(['Call'=>'Call','Meeting'=>'Meeting','NotCommunicated'=>'Not Communicated'])->setEmptyText('All');
+		$type_field = $form->addField('xepan\base\DropDown','communication_type')->setValueList(['Call'=>'Call','Meeting'=>'Meeting','Followup'=>'Followup','NotCommunicated'=>'Not Communicated'])->setEmptyText('All');
 		$subtype_field = $form->addField('xepan\base\DropDown','communication_sub_type');
 		$subtype_field->setEmptytext('All');
 		$subtype_field->setValueList(array_combine($this->sub_type_1_norm_unnorm_array,$this->sub_type_1_norm_unnorm_array));
