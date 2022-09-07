@@ -463,7 +463,7 @@ class View_CommunicationNew extends \View {
 
 		$type_field = $form->addField('dropdown','communication_type')->set($m['communication_type']);
 		$type_field->setEmptyText('Please select communication By');
-		$type_field->setValueList([/*'Email'=>'Email',*/'Call'=>'Call','Meeting'=>'Meeting','NotCommunicated'=>'Not Communicated'/*,'TeleMarketing'=>'TeleMarketing','Personal'=>'Personal','Comment'=>'Comment','SMS'=>'SMS'*/]);
+		$type_field->setValueList([/*'Email'=>'Email',*/'Call'=>'Call','Meeting'=>'Meeting','FollowupCall'=>'Followup Call','NotCommunicated'=>'Not Communicated'/*,'TeleMarketing'=>'TeleMarketing','Personal'=>'Personal','Comment'=>'Comment','SMS'=>'SMS'*/]);
 
 		$sub_type_field = $form->addField('dropdown','sub_type')->set($m['sub_type'])->validateNotNull();
 		$sub_type_field->setEmptyText('Please Select');
@@ -574,6 +574,7 @@ class View_CommunicationNew extends \View {
 			''=>[],
 			'Email'=>['sub_type','calling_status','sub_type_3','email_to','cc_mails','bcc_mails','title','body','from_email','email_to','cc_mails','bcc_mails'],
 			'Call'=>['sub_type','calling_status','sub_type_3','title','body','from_phone','from_person','called_to','notify_email','notify_email_to','status','calling_status','call_direction','communication_for','communication_sub_for'],
+			'FollowupCall'=>['sub_type','calling_status','sub_type_3','title','body','from_phone','from_person','called_to','notify_email','notify_email_to','status','calling_status','call_direction','communication_for','communication_sub_for'],
 			'Received'=>['sub_type','calling_status','sub_type_3','title','body','from_phone','from_person','called_to','notify_email','notify_email_to','status','calling_status','call_direction','communication_for','communication_sub_for'],
 			'Meeting'=>['sub_type','meeting_direction','sub_type_3','title','body','from_phone','from_person','called_to','notify_email','notify_email_to','status','calling_status','meeting_direction','communication_for','communication_sub_for'],
 			'NotCommunicated'=>['calling_status'],
