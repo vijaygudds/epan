@@ -177,12 +177,21 @@ class Initiator extends \Controller_Addon {
 							'icon'=>'fa fa-users',
 							'url'=>'xepan_marketing_report_employeeleadreport',
 							'skip_default'=>true
+						],
+						[	'name'=>'Lead Communication Reports',
+							'icon'=>'fa fa-users',
+							'url'=>'xepan_marketing_report_leadcommunications',
+							'skip_default'=>true
 						]
 				],
 				'Reports'=>[
 					[	'name'=>'Employee Lead Report',
 						'icon'=>'fa fa-users',
 						'url'=>'xepan_marketing_report_employeeleadreport'
+					],
+					[	'name'=>'Lead Communication Reports',
+						'icon'=>'fa fa-users',
+						'url'=>'xepan_marketing_report_leadcommunications'
 					]
 				]
 			];
