@@ -50,8 +50,8 @@ class page_lead extends \xepan\base\Page{
 		// $lead->getElement('last_communication_date_from_company')->destroy();
 
 
-		if($src = $this->app->stickyGET('source'))
-			$lead->addCondition('source',$src);
+		// if($src = $this->app->stickyGET('source'))
+		// 	$lead->addCondition('source',$src);
 		
 		if($strt = $this->app->stickyGET('start_date'))
 			$lead->addCondition('created_at','>=',$strt);
@@ -82,6 +82,24 @@ class page_lead extends \xepan\base\Page{
 								$lead->getElement('organization')]))
 					->sortable(true);
 
+		$lead->addExpression('total_communication')->set(function($m,$q){
+			$com_m = $m->add('xepan\communication\Model_Communication',['table_alias'=>'totalleads']);
+			$com_m->addCondition($com_m->dsql()->orExpr()
+								->where('from_id',$q->getField('id'))
+								->where('to_id',$q->getField('id'))
+							)
+						->addCondition('communication_type','<>','AbstractMessage')
+						// ->addCondition('created_at','>=',$this->from_date)
+						// ->addCondition('created_at','<',$this->api->nextDate($this->to_date))
+						;
+			// $com_m->addCondition('type','<>','AbstractMessage');			
+			// $com_m->setOrder('id','desc');
+			// ->setLimit(1);
+			// $com_m->tryLoadAny();
+			return $com_m->count();								
+		});			
+
+
 		$lead->add('xepan\base\Controller_TopBarStatusFilter');
 		// $lead->setOrder('total_visitor','desc');
 
@@ -105,7 +123,7 @@ class page_lead extends \xepan\base\Page{
 		}
 		$lead_subcat->setModel($lead_subcat_m);
 
-		$crud->setModel($lead,['first_name','last_name','organization',/*'address',*/'pin_code','landmark','mohla_falla','village','tehsil','post_office_wardno','city','country_id','state_id','remark','source','generated_by_id','assign_to_id','emails_str','contacts_str'],['emails_str','contacts_str','name','organization_name_with_name','source','city','type','score','total_visitor','created_by_id','created_by','generated_by_id','assign_to_id','assign_to','assign_at','effective_name','code','organization','existing_associated_catagories','created_at','priority','branch_id'])->setOrder('created_at','desc');
+		$crud->setModel($lead,['first_name','last_name','organization',/*'address',*/'pin_code','landmark','mohla_falla','village','tehsil','post_office_wardno','city','country_id','state_id','remark','source','total_communication','generated_by_id','assign_to_id','emails_str','contacts_str'],['emails_str','contacts_str','name','organization_name_with_name','source','city','type',/*'score',*/'total_communication'/*,'total_visitor'*/,'created_by_id','created_by','generated_by_id','assign_to_id','assign_to','assign_at','effective_name','code','organization','existing_associated_catagories','created_at','priority','branch_id'])->setOrder('created_at','desc');
 		$export = $crud->grid->add('misc\Export');
 		
 		$crud->grid->addHook('formatRow',function($g){
