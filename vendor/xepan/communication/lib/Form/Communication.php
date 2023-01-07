@@ -144,10 +144,10 @@ class Form_Communication extends \Form {
 		************************************/
 		if($edit_model->loaded()){
 			$this->layout->template->del('score_button_wrapper');
-			$this->layout->template->del('followup_form_wrapper');
+			// $this->layout->template->del('followup_form_wrapper');
 		}
 		$starting_date_field=null;
-		if(!$edit_model->loaded()){
+		// if(!$edit_model->loaded()){
 			$follow_up_field = $this->addField('checkbox','follow_up','Add Followup');
 			// $task_title_field = $this->addField('task_title');
 			$starting_date_field = $this->addField('DateTimePicker','starting_at');
@@ -180,7 +180,7 @@ class Form_Communication extends \Form {
 			$force_remind_field->js(true)->univ()->bindConditionalShow([
 				true=>['snooze_duration','remind_unit']
 			],'div.atk-form-row');
-		}
+		// }
 
 		$this->layout->add('xepan\projects\View_EmployeeFollowupSchedule',[/*'employee_field'=>$assign_to_field,*/'date_field'=>$starting_date_field],'existing_schedule');
 
@@ -193,7 +193,7 @@ class Form_Communication extends \Form {
 			'Call'=>['from_email','from_phone','from_person','called_to','notify_email','notify_email_to','status','calling_status','body','sub_type','sub_type_3','communication_for','communication_sub_for'],
 			'FollowupCall'=>['from_email','from_phone','from_person','called_to','notify_email','notify_email_to','status','calling_status','body','sub_type','sub_type_3','communication_for','communication_sub_for'],
 			'Meeting'=>['from_email','from_phone','from_person','called_to','notify_email','notify_email_to','meeting_direction','calling_status','body','sub_type','sub_type_3','communication_for','communication_sub_for'],
-			'NotCommunicated'=>['calling_status'],
+			'NotCommunicated'=>['calling_status','communication_for','communication_sub_for','sub_type_3','body'],
 			'TeleMarketing'=>['from_phone','called_to'],
 			'Personal'=>['from_person'],
 			'Comment'=>['from_person'],
@@ -340,17 +340,20 @@ class Form_Communication extends \Form {
 			if(!$this['calling_status']){
 			$this->displayError('calling_status','Communication Result must be filled');
 			}
-			$this['communication_for'] = "0";	
-			$this['communication_sub_for'] = "0";	
+			// $this['communication_for'] = "0";	
+			// $this['communication_sub_for'] = "0";	
 		}else{
-
+			if(!$this['sub_type'])
+				$this->displayError('sub_type',' Communication Sub Type is Required');
+		}
 			if(!$this['title']){
 				$subfor = $this->add('xepan\marketing\Model_Communication_SubFor');
 				if($this['communication_sub_for']){
 					$subfor->load($this['communication_sub_for']);
+					
 				}
 				$this['title'] = $subfor['name']. ' - ' .$this['sub_type']. ' - ' . $this['calling_status'];
-			}
+			
 			if(!$this['calling_status']){
 			$this->displayError('calling_status','Communication Result must be filled');
 			}
@@ -362,10 +365,8 @@ class Form_Communication extends \Form {
 					$this->displayError('body',' Communication Description is Required');
 				}	
 			}
-			if(!$this['sub_type']){
-				$this->displayError('sub_type',' Communication Sub Type is Required');
 
-			}
+			// }
 			if($this['communication_for']){
 				if(!$this['communication_sub_for'])
 				$this->displayError('communication_sub_for',' Communication Sub For is Required');
@@ -543,7 +544,7 @@ class Form_Communication extends \Form {
 		/*************************************
 			INSERTING FOLLOWUP BEGIN
 		*************************************/
-		if(!$this->edit_communication_id){
+		// if(!$this->edit_communication_id){
 			if($this['follow_up']){
 				$model_task = $this->add('xepan\projects\Model_Task');
 				$model_task['type'] = 'Followup';
@@ -572,7 +573,7 @@ class Form_Communication extends \Form {
 		/*************************************
 			INSERTING FOLLOWUP END
 		*************************************/	
-		}
+		// }
 
 		return $communication;
     }
