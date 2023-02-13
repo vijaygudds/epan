@@ -122,6 +122,7 @@ class View_Lister_Communication extends \CompleteLister{
 		$attach->setModel('xepan\communication\Communication_Attachment')->addCondition('communication_id',$this->model->id);
 
 		$this->current_row_html['description'] = $this->current_row['description'];
+		$this->current_row_html['related_name'] = $this->model['created_by'];
 		
 		if($this->model['attachment_count'])
 			$this->current_row_html['attachment'] = '<span><i style="color:green" class="fa fa-paperclip"></i></span>';

@@ -700,6 +700,7 @@ class View_CommunicationNew extends \View {
 				case 'Call':
 					$send_settings = $form['from_phone'];
 					if($form['call_direction']=='Received'){
+						$_to_field='from_phone';
 						$communication['from_id']=$this->contact->id;
 						$communication['to_id']=$form['from_person']; // actually this is to person this time
 						$communication['direction']='In';
@@ -712,29 +713,65 @@ class View_CommunicationNew extends \View {
 						$communication['satus']='Called';
 						$employee_name=$this->add('xepan\hr\Model_Employee')->load($form['from_person'])->get('name');
 						$communication->setFrom($form['from_phone'],$employee_name);
+						$_to_field='called_to';
 					}
 					break;
+				case 'FollowupCall':
+				$send_settings = $form['from_phone'];
+				if($form['status']=='Received'){
+						// echo "string". $this->contact->id. "<br/>";
+						// echo "string". $this['from_person']. "<br/>";
+						$communication['from_id']=$this->contact->id;
+						$communication['to_id']=$form['from_person']; // actually this is to person this time
+						$_to_field='from_phone';
+						$communication['direction']='In';
+						$communication['status']='Received';
+						$employee_name=$this->add('xepan\hr\Model_Employee')->load($form['from_person'])->get('name');
+						$communication->setFrom($form['from_phone'],$this->contact['name']);
+						// $communication->addTo($this['from_phone'],$employee_name);
+					}else{					
+						$communication['from_id']=$form['from_person']; // actually this is to person this time
+						$communication['to_id']=$this->contact->id;
+						$communication['direction']='Out';
+						$communication['status']='Called';
+						$employee_name=$this->add('xepan\hr\Model_Employee')->load($form['from_person'])->get('name');
+						$communication->setFrom($form['from_phone'],$employee_name);
+						// $communication->addTo($this['from_phone'],$this->contact['name']);
+					$_to_field='called_to';
+					}
+				// throw new \Exception("Error Processing Request", 1);
+				// $communication['status']=$this['status'];
+
+				// if($this['notify_email']){
+				// 	if(!$this['notify_email_to'])
+				// 		$this->displayError('notify_email_to','Notify Email is required');
+					
+				// 	$send_settings = $this->add('xepan\communication\Model_Communication_EmailSetting');
+				// 	$send_settings->tryLoad($this['from_email']?:-1);
+				// }
+				break;	
 				case 'Meeting':
 					$send_settings = $form['from_phone'];
+					$employee_name=$this->add('xepan\hr\Model_Employee')->load($form['from_person'])->get('name');
+					$_to_field=$this->contact['name'];
 					if($form['meeting_direction']=='Meeting'){
 						
 						$communication['from_id']=$this->contact->id;
 						$communication['to_id']=$form['from_person']; // actually this is to person this time
 						$communication['direction']='Meet';
 						$communication['status']='Meet';
-						$communication->setFrom($form['from_phone'],$this->contact['name']);
+						$communication->setFrom($form['from_phone'],$employee_name);
 					}else{					
 						$communication['from_id']=$form['from_person']; // actually this is to person this time
 						$communication['to_id']=$this->contact->id;
 						$communication['direction']='Not Meet';
 						$communication['status']='Not Meet';
-						$employee_name=$this->add('xepan\hr\Model_Employee')->load($form['from_person'])->get('name');
 						$communication->setFrom($form['from_phone'],$employee_name);
 					}	
 
 					
 					// $communication['status']=$form['status'];
-					$_to_field='called_to';
+					// $_to_field='called_to';
 
 					break;
 			}
@@ -773,8 +810,13 @@ class View_CommunicationNew extends \View {
 				$model_task->save();
 			}
 
-			$communication->setSubject($form['title']);
+		$communication->setSubject($form['title']);
 		$communication->setBody($form['body']);
+		if($_to_field){
+			foreach (explode(',',$form[$_to_field]) as $to) {
+				$communication->addTo($this->contact['name'],trim($to));
+			}			
+		}
 			if($form['bcc_mails']){
 				foreach (explode(',',$form['bcc_mails']) as $bcc) {
 						if( ! filter_var(trim($bcc), FILTER_VALIDATE_EMAIL))

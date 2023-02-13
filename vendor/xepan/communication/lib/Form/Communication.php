@@ -299,6 +299,34 @@ class Form_Communication extends \Form {
 
 				$_to_field='called_to';
 				break;
+
+				case 'FollowupCall':
+				if(!$this['from_phone'])
+					$this->displayError('from_phone','from_phone is required');
+				if(!$this['called_to'])
+					$this->displayError('called_to','called_to is required');
+				if(!$this['status'])
+					$this->displayError('status','Status is required');
+				if(!$this['calling_status'])
+					$this->displayError('calling_status','Communication Result is required');
+				// if(!$this['call_direction'])
+				// 	$this->displayError('call_direction','Called Direction is required');
+				
+				if($this['notify_email']){
+					if(!$this['notify_email_to'])
+						$this->displayError('notify_email_to','Notify Email is required');
+					if(!$this['from_email'])
+						$this->displayError('from_email','From  Email is required to send Email');
+					
+					foreach (explode(',', $this['notify_email_to']) as $value) {
+						if( ! filter_var(trim($value), FILTER_VALIDATE_EMAIL))
+							$this->displayError('notify_email_to',$value.' is not a valid email');
+					}
+					$_to_field='notify_email_to';	
+				}
+
+				$_to_field='called_to';
+				break;
 			case "Meeting":
 						if(!$this['meeting_direction']) $this->displayError('meeting_direction','Please specify "Meeting Direction"');
 				break;	
@@ -385,7 +413,8 @@ class Form_Communication extends \Form {
 		$communication['score']=$this['score'];
 		$communication['communication_for_id'] = $this['communication_for'];
 		$communication['communication_subfor_id'] = $this['communication_sub_for'];
-
+		// throw new \Exception($this['from_person'], 1);
+		
 		switch ($commtype) {
 			case 'Email':
 				$send_settings = $this->add('xepan\communication\Model_Communication_EmailSetting');
@@ -403,12 +432,16 @@ class Form_Communication extends \Form {
 			case 'Call':
 				$send_settings = $this['from_phone'];
 				if($this['status']=='Received'){
+						// echo "string". $this->contact->id. "<br/>";
+						// echo "string". $this['from_person']. "<br/>";
 						$communication['from_id']=$this->contact->id;
 						$communication['to_id']=$this['from_person']; // actually this is to person this time
 						$_to_field='from_phone';
 						$communication['direction']='In';
 						$communication['status']='Received';
+						$employee_name=$this->add('xepan\hr\Model_Employee')->load($this['from_person'])->get('name');
 						$communication->setFrom($this['from_phone'],$this->contact['name']);
+						// $communication->addTo($this['from_phone'],$employee_name);
 					}else{					
 						$communication['from_id']=$this['from_person']; // actually this is to person this time
 						$communication['to_id']=$this->contact->id;
@@ -416,8 +449,44 @@ class Form_Communication extends \Form {
 						$communication['status']='Called';
 						$employee_name=$this->add('xepan\hr\Model_Employee')->load($this['from_person'])->get('name');
 						$communication->setFrom($this['from_phone'],$employee_name);
+						// $communication->addTo($this['from_phone'],$this->contact['name']);
 					$_to_field='called_to';
 					}
+				// throw new \Exception("Error Processing Request", 1);
+				// $communication['status']=$this['status'];
+
+				if($this['notify_email']){
+					if(!$this['notify_email_to'])
+						$this->displayError('notify_email_to','Notify Email is required');
+					
+					$send_settings = $this->add('xepan\communication\Model_Communication_EmailSetting');
+					$send_settings->tryLoad($this['from_email']?:-1);
+				}
+				break;
+				case 'FollowupCall':
+				$send_settings = $this['from_phone'];
+				if($this['status']=='Received'){
+						// echo "string". $this->contact->id. "<br/>";
+						// echo "string". $this['from_person']. "<br/>";
+						$communication['from_id']=$this->contact->id;
+						$communication['to_id']=$this['from_person']; // actually this is to person this time
+						$_to_field='from_phone';
+						$communication['direction']='In';
+						$communication['status']='Received';
+						$employee_name=$this->add('xepan\hr\Model_Employee')->load($this['from_person'])->get('name');
+						$communication->setFrom($this['from_phone'],$this->contact['name']);
+						// $communication->addTo($this['from_phone'],$employee_name);
+					}else{					
+						$communication['from_id']=$this['from_person']; // actually this is to person this time
+						$communication['to_id']=$this->contact->id;
+						$communication['direction']='Out';
+						$communication['status']='Called';
+						$employee_name=$this->add('xepan\hr\Model_Employee')->load($this['from_person'])->get('name');
+						$communication->setFrom($this['from_phone'],$employee_name);
+						// $communication->addTo($this['from_phone'],$this->contact['name']);
+					$_to_field='called_to';
+					}
+				// throw new \Exception("Error Processing Request", 1);
 				// $communication['status']=$this['status'];
 
 				if($this['notify_email']){
@@ -430,19 +499,20 @@ class Form_Communication extends \Form {
 				break;
 				case 'Meeting':
 					$send_settings = $this['from_phone'];
+					$_to_field=$this->contact['name'];
+					$employee_name=$this->add('xepan\hr\Model_Employee')->load($this['from_person'])->get('name');
 					if($this['meeting_direction']=='Meeting'){
 						
 						$communication['from_id']=$this->contact->id;
 						$communication['to_id']=$this['from_person']; // actually this is to person this time
 						$communication['direction']='Meet';
 						$communication['status']='Meet';
-						$communication->setFrom($this['from_phone'],$this->contact['name']);
+						$communication->setFrom($this['from_phone'],$employee_name);
 					}else{					
 						$communication['from_id']=$this['from_person']; // actually this is to person this time
 						$communication['to_id']=$this->contact->id;
 						$communication['direction']='Not Meet';
 						$communication['status']='Not Meet';
-						$employee_name=$this->add('xepan\hr\Model_Employee')->load($this['from_person'])->get('name');
 						$communication->setFrom($this['from_phone'],$employee_name);
 					}	
 
@@ -495,10 +565,11 @@ class Form_Communication extends \Form {
 		
 		$communication->setSubject($this['title']);
 		$communication->setBody($this['body']);
-
+		// throw new \Exception($this[$_to_field], 1);
+		
 		if($_to_field){
 			foreach (explode(',',$this[$_to_field]) as $to) {
-				$communication->addTo(trim($to));
+				$communication->addTo($this->contact['name'],trim($to));
 			}			
 		}
 		
