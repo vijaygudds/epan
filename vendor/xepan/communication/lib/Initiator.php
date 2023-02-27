@@ -65,6 +65,11 @@ class Initiator extends \Controller_Addon {
 								'url'=>'xepan_communication_report_totalcommunication'
 							],
 							[
+								'name'=>'Communication Analysis WithOut Phone Attend',
+								'icon'=>'fa fa-users',
+								'url'=>'xepan_communication_report_totalcommunicationwithcond'
+							],
+							[
 								'name'=>'Employee Wise Reports',
 								'icon'=>'fa fa-users',
 								'url'=>'xepan_communication_report_emptotalcommunication'
