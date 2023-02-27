@@ -31,6 +31,8 @@ class page_report_totalcommunicationwithcond extends \xepan\base\Page{
 			$this->sub_type_1_norm_unnorm_array[$subtype_name] = $subtypes;
 		}
 		$this->config_m['calling_status'] = str_replace("PHONE ATTEND,", "",$this->config_m['calling_status']);
+		$this->config_m['calling_status'] = str_replace("INTERESTED,", "",$this->config_m['calling_status']);
+		// var_dump($this->config_m['calling_status']);
 		foreach(explode(",", $this->config_m['calling_status']) as $subtypes) {
 			$subtype_name = $this->app->normalizeName(trim($subtypes));
 			$this->sub_type_2_norm_unnorm_array[$subtype_name] = $subtypes;
@@ -153,7 +155,7 @@ class page_report_totalcommunicationwithcond extends \xepan\base\Page{
 		
 		// record model
 		$emp_model = $this->add('xepan\communication\Model_Communication_CommunicationActivity',['from_date'=>$from_date,'to_date'=>$to_date,'contact'=>$emp_id,'communication_type'=>$_GET['communication_type'],'communication_subtype'=>$_GET['communication_sub_type'],'communication_action'=>$_GET['communication_action'],'communication_result'=>$_GET['communication_result'],'communication_for'=>$_GET['communication_for'],'communication_subfor'=>$_GET['communication_sub_for']]);
-			$emp_model->addCondition('calling_status','<>','PHONE ATTEND');
+			$emp_model->addCondition('calling_status','<>',['PHONE ATTEND','INTERESTED']);
 		if($emp_id){
 			$emp_model->addCondition('created_by_id',$emp_id);
 		}
@@ -228,7 +230,7 @@ class page_report_totalcommunicationwithcond extends \xepan\base\Page{
 				if($_GET['communication_sub_type'])		
 						$ttl_com->addCondition('sub_type',$_GET['communication_sub_type']);
 				// if($_GET['communication_result'])		
-						$ttl_com->addCondition('calling_status','<>','PHONE ATTEND');
+						$ttl_com->addCondition('calling_status','<>',['PHONE ATTEND','INTERESTED']);
 				if($_GET['communication_action'])		
 						$ttl_com->addCondition('sub_type_3',$_GET['communication_action']);
 				if($_GET['communication_for'])		
@@ -268,7 +270,7 @@ class page_report_totalcommunicationwithcond extends \xepan\base\Page{
 				if($_GET['communication_sub_type'])		
 						$ttl_com->addCondition('sub_type',$_GET['communication_sub_type']);
 				// if($_GET['communication_result'])		
-						$ttl_com->addCondition('calling_status','<>','PHONE ATTEND');
+						$ttl_com->addCondition('calling_status','<>',['PHONE ATTEND','INTERESTED']);
 				if($_GET['communication_action'])		
 						$ttl_com->addCondition('sub_type_3',$_GET['communication_action']);
 				if($_GET['communication_for'])		
@@ -309,7 +311,7 @@ class page_report_totalcommunicationwithcond extends \xepan\base\Page{
 					if($_GET['communication_sub_type'])		
 							$ttl_com->addCondition('sub_type',$_GET['communication_sub_type']);
 					// if($_GET['communication_result'])		
-							$ttl_com->addCondition('calling_status','<>','PHONE ATTEND');
+							$ttl_com->addCondition('calling_status','<>',['PHONE ATTEND','INTERESTED']);
 					if($_GET['communication_action'])		
 							$ttl_com->addCondition('sub_type_3',$_GET['communication_action']);
 					if($_GET['communication_for'])		
@@ -343,7 +345,7 @@ class page_report_totalcommunicationwithcond extends \xepan\base\Page{
 				if($_GET['communication_sub_type'])		
 						$ttl_com->addCondition('sub_type',$_GET['communication_sub_type']);
 				// if($_GET['communication_result'])		
-						$ttl_com->addCondition('calling_status','<>','PHONE ATTEND');
+						$ttl_com->addCondition('calling_status','<>',['PHONE ATTEND','INTERESTED']);
 				if($_GET['communication_action'])		
 						$ttl_com->addCondition('sub_type_3',$_GET['communication_action']);
 				if($_GET['communication_for'])		
@@ -608,7 +610,7 @@ class page_report_totalcommunicationwithcond extends \xepan\base\Page{
 
 		$comm_model = $this->add('xepan\communication\Model_Communication');
 		$comm_model->addCondition('communication_type','<>','AbstractMessage');	
-		$comm_model->addCondition('calling_status','<>','PHONE ATTEND');	
+		$comm_model->addCondition('calling_status','<>',['PHONE ATTEND','INTERESTED']);	
 		if($employee_id)	
 			$comm_model->addCondition('created_by_id',$employee_id);
 
