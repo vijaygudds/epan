@@ -12,12 +12,16 @@ class page_report_leadcommunication extends \xepan\base\Page{
 	public $sub_type_3_fields;
 	public $sub_type_3_norm_unnorm_array=[];
 	public $communication_fields;
+	public $communication_for;
+	public $communication_subfor;
 	public $communication_type_value = ['Call'=>'Call','Meeting'=>'Meeting','TeleMarketing'=>'TeleMarketing'];
 	public $config_m;
 
 	function init(){
 		parent::init();
 		$emp_id = $this->app->stickyGET('employee_id');
+		$this->communication_for = $this->app->stickyGET('for_id');
+		$this->communication_subfor = $this->app->stickyGET('subfor_id');
 		$this->from_date = $from_date  = $this->app->stickyGET('from_date')?:$this->app->today;
 		$this->to_date = $to_date = $this->app->stickyGET('to_date')?:$this->app->today;
 		$department = $this->app->stickyGET('department');
@@ -32,6 +36,8 @@ class page_report_leadcommunication extends \xepan\base\Page{
 			->layout([
 				'date_range'=>'Filter~c1~2',
 				'employee'=>'c2~3',
+				'communication_for'=>'c3~3',
+				'communication_sub_for'=>'c4~3',
 				// 'department'=>'c3~3',
 				// 'lead_category'=>'c4~2',
 				// 'lead_sub_category'=>'c5~2',
@@ -61,6 +67,19 @@ class page_report_leadcommunication extends \xepan\base\Page{
 					);
 		});
 		$emp_field = $form->addField('xepan\base\Basic','employee');
+
+		$for_field = $form->addField('xepan\base\DropDown','communication_for');
+		$for_field->setModel('xepan\marketing\Communication_For');
+		$for_field->setEmptytext('All');
+		$subfor_m = $this->add('xepan\marketing\Model_Communication_SubFor');
+		if($this->app->stickyGET('for_id')){
+				$subfor_m->addCondition('for_id',$this->app->stickyGET('for_id'));
+			}
+		$sub_for_field = $form->addField('xepan\base\DropDown','communication_sub_for');
+		$sub_for_field->setEmptytext('All');
+		$sub_for_field->setModel($subfor_m);
+
+		$for_field->js('change',[$sub_for_field->js(null,[$sub_for_field->js()->select2('destroy')])->reload(null,null,[$this->app->url(null,['cut_object'=>$sub_for_field->name]),'for_id'=>$for_field->js()->val()])]);
 		// $emp_field->setModel('xepan\hr\Model_Employee')->addCondition('status','Active');
 		// $dept_field = $form->addField('xepan\base\DropDown','department');
 		// $model_department = $this->add('xepan\hr\Model_Department');
@@ -101,7 +120,7 @@ class page_report_leadcommunication extends \xepan\base\Page{
 
 		$form->addSubmit('Get Details')->addClass('btn btn-primary');
 
-		$emp_model = $this->add('xepan\communication\Model_LeadCommunication',['from_date'=>$from_date,'to_date'=>$to_date/*,'communication_row'=>$row*/]);
+		$emp_model = $this->add('xepan\communication\Model_LeadCommunication',['from_date'=>$from_date,'to_date'=>$to_date,'communicationfor'=>$this->communication_for,'communicationsubfor'=>$this->communication_subfor/*,'communication_row'=>$row*/]);
 
 		// $emp_model->addExpression('emp_department_id')->set(function($m,$q){
 		// 	return $this->add('xepan\hr\Model_Employee')->addCondition('id',$this->app->employee->id)->fieldQuery('department_id');
@@ -130,7 +149,7 @@ class page_report_leadcommunication extends \xepan\base\Page{
 		
 
 
-		$grid->setModel($emp_model,['unique_name','total_communication'/*,'last_communication'*/]);
+		$grid->setModel($emp_model,['unique_name','total_communication','lead_communication_created_by','lead_communication_for','lead_communication_sub_for'/*,'last_communication'*/]);
 		$grid->add('misc/Export',['export_fields'=>['name','total_lead_created','total_lead_assign_to','total_followup','open_opportunity','qualified_opportunity','needs_analysis_opportunity','quoted_opportunity','negotiated_opportunity','win_opportunity','loss_opportunity']]);
 		$grid->addPaginator(50);
 
@@ -213,6 +232,8 @@ class page_report_leadcommunication extends \xepan\base\Page{
 								'employee_id'=>$form['employee'],
 								'from_date'=>$date->getStartDate()?:0,
 								'to_date'=>$date->getEndDate()?:0,
+								'for_id'=>$form['communication_for'],
+								'subfor_id'=>$form['communication_sub_for'],
 								// 'department'=>$form['department']?:0,
 								'row'=>$form['communication_row']?:0,
 							]
