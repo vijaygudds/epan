@@ -264,8 +264,8 @@ class page_report_employeecommunication1 extends \xepan\base\Page{
 
 
 		$emp_model->_dsql()->group('to_id');
-		$emp_model->setOrder('to_id','desc');
-		$grid->setModel($emp_model->setOrder('created_at','desc'),['from','to','title','description','created_at','status','to_contact_str','communication_for','communication_subfor','sub_type','calling_status','sub_type_3']);//,['from','to','communication_for','communication_subfor','to_raw','title','description','communication_sub_type','communication_result','action_on_communication','communication_type','created_at','to_contact_str']);//,$model_field_array);
+		$emp_model->setOrder('id','desc');
+		$grid->setModel($emp_model,['from','to','title','description','created_at','status','to_contact_str','communication_for','communication_subfor','sub_type','calling_status','sub_type_3']);//,['from','to','communication_for','communication_subfor','to_raw','title','description','communication_sub_type','communication_result','action_on_communication','communication_type','created_at','to_contact_str']);//,$model_field_array);
 
 		$grid->addHook('formatRow',function($g){
 				$g->current_row_html['description'] = $g->model['description'];
