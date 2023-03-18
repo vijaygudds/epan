@@ -72,6 +72,8 @@ class Model_LeadCommunication extends \xepan\marketing\Model_Lead{
 		});
 		$this->addExpression('lead_communication_sub_for')->set(function($m,$q){
 			$lead_c = $m->add('xepan\communication\Model_Communication',['table_alias'=>'leadscrea']);
+			if($this->communicationfor)
+				$lead_c->addCondition('communication_for_id',$this->communicationfor);
 			if($this->communicationsubfor)
 				$lead_c->addCondition('communication_subfor_id',$this->communicationsubfor);
 			$lead_c->addCondition($lead_c->dsql()->orExpr()

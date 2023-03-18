@@ -185,6 +185,8 @@ class page_report_leadcommunication extends \xepan\base\Page{
 		$tl= $this->add('VirtualPage')->set(function($page){
 			$from_id = $this->app->stickyGET('from_contact_id');
 			$to_id = $this->app->stickyGET('to_contact_id');
+			$for = $this->app->stickyGET('com_for');
+			$subfor = $this->app->stickyGET('com_subfor');
 			// throw new \Exception($_GET['from_contact_id'], 1);
 			
 			$model  = $this->add('xepan\communication\Model_Communication');
@@ -195,7 +197,10 @@ class page_report_leadcommunication extends \xepan\base\Page{
 						->addCondition('created_at','>=',$this->from_date)
 						->addCondition('created_at','<',$this->api->nextDate($this->to_date));
 			$model->addCondition('communication_type','<>','AbstractMessage');
-			// $model->addCondition('id',$_GET['to_contact_id']);
+			if($for)
+				$model->addCondition('communication_for_id',$for);
+			if($subfor)
+				$model->addCondition('communication_subfor_id',$subfor);
 			// $model->addCondition('id','<>',$this->app->employee->id);
 			$model->setOrder('created_at','desc');
 			
@@ -211,7 +216,7 @@ class page_report_leadcommunication extends \xepan\base\Page{
 
 		$grid->addMethod('format_total_communication',function($g,$f)use($tl){
 				// VP defined at top of init function
-			$g->current_row_html[$f]= '<a href="javascript:void(0)" onclick="'.$g->js()->univ()->frameURL('Total Lead',$g->api->url($tl->getURL(),array('from_contact_id'=>$g->model['id'],'to_contact_id'=>$g->model['to_id'],'from_date'=>$g->model->from_date,'to_date'=>$g->model->to_date))).'">'.$g->current_row[$f].'</a>';
+			$g->current_row_html[$f]= '<a href="javascript:void(0)" onclick="'.$g->js()->univ()->frameURL('Total Lead',$g->api->url($tl->getURL(),array('from_contact_id'=>$g->model['id'],'to_contact_id'=>$g->model['to_id'],'from_date'=>$g->model->from_date,'to_date'=>$g->model->to_date,'com_for'=>$this->communication_for,'com_subfor'=>$this->communication_subfor))).'">'.$g->current_row[$f].'</a>';
 		});
 
 		$grid->addFormatter('total_communication','total_communication');
