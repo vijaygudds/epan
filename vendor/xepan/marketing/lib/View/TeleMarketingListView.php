@@ -146,7 +146,10 @@ class View_TeleMarketingListView extends \View{
 		// }
 
 		$view_conversation->setModel($model_communication)->setOrder('created_at','desc');
-		$view_conversation->add('Paginator',['ipp'=>10]);
+		// $view_conversation->add('Paginator',['ipp'=>10]);
+		$paginator = $view_conversation->add('xepan\base\Paginator',null,'Paginator');
+		$paginator->setRowsPerPage($rows=10);
+
 
 		// $temp = ['TeleMarketing','Email','Support','Call','Newsletter','SMS','Personal'];
 		// $type_field->set($_GET['comm_type']?explode(",", $_GET['comm_type']):$temp)->js(true)->trigger('changed');

@@ -9,8 +9,11 @@
           <div class="col-md-6"> 
             <div class="btn btn-primary btn-sm create btn-block">Create Communication</div>
           </div>
+          <div class="communication-paginator">{$Paginator} </div>
         </div>{$form}
-      </div></span></div>{rows}{row}
+      </div></span></div>
+
+      {rows}{row}
   <div id="accordion" class="panel-group accordion">
     <div class="panel panel-default">
       <div class="panel-heading">
@@ -58,7 +61,8 @@
       </div>
     </div>
   </div>{/}{/}
-  {$Paginator}
+  
+      
 </div>
 <style>
   .accordion .panel-title > a::after{
